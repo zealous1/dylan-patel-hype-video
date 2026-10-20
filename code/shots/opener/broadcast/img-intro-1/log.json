@@ -1,0 +1,12 @@
+[
+  {
+    "name": "bcintro",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 36.152,
+    "cost": 0.066815,
+    "error": null,
+    "file": "../shots/opener/broadcast/img-intro-1/bcintro-gpt-image-2.5-sunburst.png",
+    "at": "2026-10-17T22:13:24.751Z"
+  }
+]

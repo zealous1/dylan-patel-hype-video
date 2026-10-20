@@ -1,0 +1,82 @@
+{
+ "intro": "<p>Every scene whose picture comes from a 1280x720 Wan generation, upscaled with SeedVR2 and judged against the plain Lanczos resize the reel uses now. Four 1080 variants and one 1440 variant ran on Modal, each over the whole generation in one batch. <b>C (7B sharp at 1440, Lanczos down to 1080) wins every scene.</b> The 1080 runs (A, B, D) all leave a dark line in the bottom row and a bright line above it, because SeedVR2 pads 1080 to 1088 and crops the seam back in. 1440 needs no padding and its edges are clean. Beyond that C has the most detail on fadeout, alleyoop, backdown and fadeaway, and its shimmer per unit of detail is at or below the Lanczos baseline on every shot.</p><p>The rebuilt takes reuse each approved take&#39;s per-frame blur picks (lookmatch <code>--blur-from</code>), so the whips, zoom blurs and flash frames stay exactly as they were. A plain lookmatch rerun re-derives those picks from the sharper source, which dropped the radial whip on rim&#39;s last frame and blurred rim straight back to its old sharpness.</p><p>Shimmer is the mean frame-to-frame change of the high-pass on the 20% stillest 64 px tiles; shimmer per detail divides it by that tile&#39;s detail, so a sharper result with steady texture keeps it level. Laplacian variance and detail skip the bottom 56 rows, where the 1080 runs have their seam.</p>",
+ "scenes": {
+  "rim": {
+   "source": "Take shots/rim/out/look-v1.mp4 (24 frames). It is 24 frame picks from shots/rim/out/wan-3.0-noframes-slow-focus.mp4 (1280x720, 90 frames, a 2x slowed generation sped back up), trimmed to 0.70 s, retimed to 0.80 s and look-matched (grade, gain grid, per-frame blur) by shots/rim/post.sh.",
+   "winner": "C",
+   "why": "All four upscales gain about the same detail here; C has the lowest shimmer per detail (0.81 against 0.83 for B) and the clean bottom edge. After the look-match the take goes from Laplacian 15 to 45.",
+   "takes": [
+    {
+     "old": "shots/rim/out/look-v1.mp4",
+     "new": "shots/rim/out/look-v1-sr.mp4",
+     "note": "Same 24 frames and the same per-frame grade (mean colour within 0.3 levels on every frame)."
+    }
+   ]
+  },
+  "celebrate": {
+   "source": "Take shots/celebrate/out/look-v1.mp4 (36 frames). It is 35 frame picks from shots/celebrate/out/wan-3.0-novideo-min.mp4 (1280x720, 90 frames), retimed to 36 and look-matched by shots/celebrate/post-look.sh.",
+   "winner": "C",
+   "why": "B and D measure a little sharper on the raw generation, but C carries more fine texture (the jersey mesh, skin) with the same shimmer per detail, and no edge seam. The take's own look-match softens it heavily, so the take gains less here (Laplacian 15 to 20).",
+   "takes": [
+    {
+     "old": "shots/celebrate/out/look-v1.mp4",
+     "new": "shots/celebrate/out/look-v1-sr.mp4",
+     "note": "Same 36 frames; mean colour within 0.1 levels on average, 1.7 on the brightest flash frame."
+    }
+   ]
+  },
+  "alleyoop": {
+   "source": "Take shots/alleyoop/out/final-realtime.mp4 (71 frames, 1280x720). It is 71 frame picks from shots/alleyoop/out/wan-3.0-noframes-slow-focus-2.mp4 (1280x720, 150 frames) with no grade or other step; render.py takes the 60 fps frames from that generation itself.",
+   "winner": "C",
+   "why": "The clearest gain of the sweep: Laplacian 39 to 101 on the generation, 34 to 101 on the take, with shimmer per detail below Lanczos (0.98 against 1.10). There is no look-match after it, so the rebuild matches its colour to the 720p generation in the low frequencies only.",
+   "takes": [
+    {
+     "old": "shots/alleyoop/out/final-realtime.mp4",
+     "new": "shots/alleyoop/out/final-realtime-sr.mp4",
+     "note": "Same 71 frame picks, 1920x1080, mean colour within 0.2 levels."
+    },
+    {
+     "old": "shots/alleyoop/out/wan-3.0-noframes-slow-focus-2.mp4",
+     "new": "shots/alleyoop/out/wan-3.0-noframes-slow-focus-2-sr.mp4",
+     "note": "The slowed generation that feeds the 60 fps cut, all 150 frames upscaled the same way."
+    }
+   ]
+  },
+  "fadeout": {
+   "source": "Take shots/fadeout/out/splice-v3.mp4 (68 frames). Its first 28 frames are shots/fadeout/out/wan-3.0-noframes-slow-focus.mp4 (1280x720, 90 frames) retimed 3x by lookmatch into post/head.mp4; the other 40 frames are the original clip, unchanged.",
+   "winner": "C",
+   "why": "A measures sharpest by Laplacian, but C has the most detail (hf 2.30) and the lowest shimmer per detail of the upscales (0.76). Only the 28 Wan frames change, so the scene average moves from 13 to 17.",
+   "takes": [
+    {
+     "old": "shots/fadeout/out/splice-v3.mp4",
+     "new": "shots/fadeout/out/splice-v3-sr.mp4",
+     "note": "Same 68 frames. Frames 28 on come from the original clip as before, within encoder noise of the old take (50 dB or better)."
+    }
+   ]
+  },
+  "backdown": {
+   "source": "Take shots/backdown/out/look-v1.mp4 (69 frames). It is 69 frame picks from shots/backdown/out/wan-3.0-noframes-slow-focus.mp4 (1280x720, 150 frames), look-matched by shots/backdown/post.sh. Not on the soft list (105 in the reel) but a 720p Wan source all the same.",
+   "winner": "C",
+   "why": "Only C was run here, after it won the four soft scenes. Laplacian 47 to 111 on the generation, 102 to 219 on the take, shimmer per detail slightly below Lanczos.",
+   "takes": [
+    {
+     "old": "shots/backdown/out/look-v1.mp4",
+     "new": "shots/backdown/out/look-v1-sr.mp4",
+     "note": "Same 69 frames, mean colour within 0.2 levels."
+    }
+   ]
+  },
+  "fadeaway": {
+   "source": "Take shots/fadeaway/out/wafer-v1.mp4 (43 frames). It is 42 frame picks from shots/fadeaway/out/wan-3.0-noframes-slow-focus.mp4 (1280x720, 90 frames), look-matched to 43 frames, then the burning wafer is composited by shots/fadeaway/wafer.py. Not on the soft list (74) but a 720p Wan source.",
+   "winner": "C",
+   "why": "Only C was run. Laplacian 38 to 118 on the generation, 72 to 189 on the take, shimmer per detail level with Lanczos. wafer.py reads the old post/look.json for its tint, which differs from the new report by fractions of a level.",
+   "takes": [
+    {
+     "old": "shots/fadeaway/out/wafer-v1.mp4",
+     "new": "shots/fadeaway/out/wafer-v1-sr.mp4",
+     "note": "Same 43 frames and the same wafer path (track written to post/track-sr.json)."
+    }
+   ]
+  }
+ }
+}

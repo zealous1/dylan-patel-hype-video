@@ -1,0 +1,13 @@
+# Every script in this folder except the MediaPipe mattes (requirements-matte.in) and Demucs (requirements-stems.in).
+# Python 3.12. Pins are releases at least a week old on 2026-10-17. requirements.txt is the hashed lock made from
+# this file by setup/lock.sh.
+numpy==2.5.3
+opencv-python-headless==4.14.0.94
+pillow==12.3.0
+scipy==1.18.1
+matplotlib==3.11.2
+librosa==1.0.0
+soundfile==0.14.0
+faster-whisper==1.2.1
+modal==1.5.4
+yt-dlp==2026.8.19

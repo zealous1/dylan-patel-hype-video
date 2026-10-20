@@ -1,0 +1,21 @@
+shots/rim/out/look-v1-sr.mp4: 24 frames, mean RGB drift max 0.32 mean 0.06, low-res PSNR min 31.7 (frame 23) mean 34.8
+old                      sharp     15.3  hf  0.955  flicker  0.287  flicker/hf 1.129
+new                      sharp     44.5  hf  1.382  flicker  0.432  flicker/hf 1.187
+shots/celebrate/out/look-v1-sr.mp4: 36 frames, mean RGB drift max 1.71 mean 0.10, low-res PSNR min 29.1 (frame 31) mean 33.9
+old                      sharp     14.8  hf  0.901  flicker  0.522  flicker/hf 1.148
+new                      sharp     20.3  hf  1.013  flicker  0.580  flicker/hf 1.158
+shots/fadeout/out/splice-v3-sr.mp4: 69 frames, mean RGB drift max 0.28 mean 0.03, low-res PSNR min 32.0 (frame 11) mean 50.1
+old                      sharp     13.4  hf  0.724  flicker  0.149  flicker/hf 0.577
+new                      sharp     16.9  hf  0.830  flicker  0.163  flicker/hf 0.585
+shots/alleyoop/out/final-realtime-sr.mp4: 71 frames, mean RGB drift max 0.23 mean 0.08, low-res PSNR min 29.5 (frame 32) mean 33.2
+old                      sharp     33.5  hf  1.545  flicker  0.561  flicker/hf 1.226
+new                      sharp    101.1  hf  2.250  flicker  0.926  flicker/hf 1.308
+shots/alleyoop/out/wan-3.0-noframes-slow-focus-2-sr.mp4: 150 frames, mean RGB drift max 0.34 mean 0.15, low-res PSNR min 29.4 (frame 33) mean 33.6
+old                      sharp     34.6  hf  1.588  flicker  0.516  flicker/hf 1.089
+new                      sharp    100.3  hf  2.253  flicker  0.799  flicker/hf 1.164
+shots/backdown/out/look-v1-sr.mp4: 69 frames, mean RGB drift max 0.19 mean 0.05, low-res PSNR min 29.0 (frame 61) mean 32.5
+old                      sharp    101.8  hf  2.488  flicker  0.936  flicker/hf 1.193
+new                      sharp    218.6  hf  3.324  flicker  1.528  flicker/hf 1.261
+shots/fadeaway/out/wafer-v1-sr.mp4: 43 frames, mean RGB drift max 0.35 mean 0.07, low-res PSNR min 22.8 (frame 0) mean 33.5
+old                      sharp     71.7  hf  1.744  flicker  0.203  flicker/hf 0.827
+new                      sharp    188.9  hf  2.438  flicker  0.294  flicker/hf 0.871

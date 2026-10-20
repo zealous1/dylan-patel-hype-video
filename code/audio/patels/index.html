@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Patel Takes</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}.note{color:var(--muted)}
+.label{font-size:12px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;padding:8px 14px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer}
+button.on{border-color:var(--on);box-shadow:0 0 0 1px var(--on)}
+video{width:100%;background:#000;border-radius:8px;display:block;margin-top:16px}
+.bar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}#t{color:var(--muted);font-variant-numeric:tabular-nums}
+</style></head><body><main>
+<h1>Patel takes</h1>
+<p class="note">The three Final buttons are the full final mix (take 5 blended, with the DYLAN outro) with the Patel line at +4, +2 and +0 dB (+2 is in the masters now) over the original announcer. Below them are memo 3's five takes, each replacing the announcer's whole line: "Patel" lands where "James" was and "he's" where his "he's" was. The original is there to compare. The video is the 60 fps master, muted and locked to the audio. Switching keeps your place. Keys: 1 to 9 pick a take, G steps the gain, H plays the line (1.2 to 3.4 s) on repeat.</p>
+<div class="label">Take</div><div class="picks" id="takes"></div>
+<div class="label">Voice level</div><div class="picks" id="gains"></div>
+<video id="v" muted playsinline></video>
+<div class="bar"><button id="play">Play</button><button id="hook">Loop the line</button><button id="start">From the top</button><span id="t">0.00</span></div>
+<audio id="a"></audio>
+</main><script>
+const a=document.getElementById('a'),v=document.getElementById('v'),cache={};
+const blob=(src)=>cache[src]??=fetch(src).then(r=>r.blob()).then(b=>URL.createObjectURL(b));
+let takes=[],gains=[],take=null,gain='4',hook=false;
+const REFS=[{name:'Final, Patel +4',ref:'out/final-g4.mp3'},{name:'Final, Patel +2 (current)',ref:'out/final-g2.mp3'},{name:'Final, Patel +0',ref:'out/final-g0.mp3'},{name:'Original (James)',ref:'out/original.mp3'}];
+async function set(){const t=a.currentTime,p=!a.paused;const src=take.ref??take.line[gain];a.src=await blob(src);a.onloadedmetadata=()=>{a.currentTime=t;if(p)a.play();};
+ document.querySelectorAll('#takes button').forEach((b,i)=>b.classList.toggle('on',[...takes,...REFS][i]===take));
+ document.querySelectorAll('#gains button').forEach(b=>{b.classList.toggle('on',b.dataset.g===gain);b.disabled=!!take.ref;});}
+fetch('takes.json?'+Date.now()).then(r=>r.json()).then(j=>{takes=j.takes.filter(t=>t.source.includes('inbox/memo3')).map((t,i)=>({...t,name:`Memo 3, take ${i+1}`}));gains=j.gains.line.map(String);
+ [...takes,...REFS].forEach((t)=>{const b=document.createElement('button');b.textContent=t.name;b.onclick=()=>{take=t;set();};document.getElementById('takes').append(b);});
+ gains.forEach(g=>{const b=document.createElement('button');b.dataset.g=g;b.textContent=g==='0'?'Matched to announcer':`+${g} dB`;b.onclick=()=>{gain=g;set();};document.getElementById('gains').append(b);});
+ take=takes[0];set();
+ takes.forEach(t=>gains.forEach(g=>blob(t.line[g])));});
+blob('../../master/out/reel-60-master.mp4').then(u=>v.src=u);
+document.getElementById('play').onclick=()=>a.paused?a.play():a.pause();
+document.getElementById('start').onclick=()=>{a.currentTime=0;a.play();};
+document.getElementById('hook').onclick=(e)=>{hook=!hook;e.target.classList.toggle('on',hook);if(hook){a.currentTime=1.2;a.play();}};
+a.onplay=()=>{v.play();document.getElementById('play').textContent='Pause'};a.onpause=()=>{v.pause();document.getElementById('play').textContent='Play'};
+setInterval(()=>{if(hook&&a.currentTime>3.4)a.currentTime=1.2;if(Math.abs(v.currentTime-a.currentTime)>0.05)v.currentTime=a.currentTime;document.getElementById('t').textContent=a.currentTime.toFixed(2);},50);
+addEventListener('keydown',(e)=>{const all=[...takes,...REFS];if(e.key>='1'&&e.key<='9'&&all[e.key-1]){take=all[e.key-1];set();}
+ if(e.key==='g'){gain=gains[(gains.indexOf(gain)+1)%gains.length];set();} if(e.key==='h')document.getElementById('hook').click(); if(e.key===' '){e.preventDefault();document.getElementById('play').click();}});
+</script></body></html>

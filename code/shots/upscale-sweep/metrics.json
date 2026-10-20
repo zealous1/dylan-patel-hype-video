@@ -1,0 +1,140 @@
+{
+ "rim": {
+  "lanczos": {
+   "sharp": 14.1,
+   "hf": 1.037,
+   "flicker": 0.279,
+   "flicker_per_hf": 0.774
+  },
+  "A": {
+   "sharp": 47.5,
+   "hf": 1.476,
+   "flicker": 0.422,
+   "flicker_per_hf": 0.854
+  },
+  "B": {
+   "sharp": 50.3,
+   "hf": 1.511,
+   "flicker": 0.419,
+   "flicker_per_hf": 0.832
+  },
+  "C": {
+   "sharp": 46.1,
+   "hf": 1.5,
+   "flicker": 0.411,
+   "flicker_per_hf": 0.809
+  }
+ },
+ "celebrate": {
+  "lanczos": {
+   "sharp": 93.2,
+   "hf": 1.925,
+   "flicker": 0.89,
+   "flicker_per_hf": 0.977
+  },
+  "A": {
+   "sharp": 243.2,
+   "hf": 2.357,
+   "flicker": 1.276,
+   "flicker_per_hf": 0.895
+  },
+  "B": {
+   "sharp": 247.7,
+   "hf": 2.419,
+   "flicker": 1.159,
+   "flicker_per_hf": 0.885
+  },
+  "C": {
+   "sharp": 221.4,
+   "hf": 2.405,
+   "flicker": 1.153,
+   "flicker_per_hf": 0.9
+  }
+ },
+ "fadeout": {
+  "lanczos": {
+   "sharp": 30.5,
+   "hf": 1.457,
+   "flicker": 0.308,
+   "flicker_per_hf": 0.733
+  },
+  "A": {
+   "sharp": 130.3,
+   "hf": 2.196,
+   "flicker": 0.481,
+   "flicker_per_hf": 0.793
+  },
+  "B": {
+   "sharp": 117.4,
+   "hf": 2.166,
+   "flicker": 0.474,
+   "flicker_per_hf": 0.779
+  },
+  "C": {
+   "sharp": 117.5,
+   "hf": 2.303,
+   "flicker": 0.479,
+   "flicker_per_hf": 0.758
+  }
+ },
+ "alleyoop": {
+  "lanczos": {
+   "sharp": 38.5,
+   "hf": 1.621,
+   "flicker": 0.551,
+   "flicker_per_hf": 1.102
+  },
+  "A": {
+   "sharp": 92.5,
+   "hf": 2.021,
+   "flicker": 0.605,
+   "flicker_per_hf": 0.973
+  },
+  "B": {
+   "sharp": 91.2,
+   "hf": 2.046,
+   "flicker": 0.619,
+   "flicker_per_hf": 0.967
+  },
+  "C": {
+   "sharp": 101.3,
+   "hf": 2.209,
+   "flicker": 0.651,
+   "flicker_per_hf": 0.982
+  },
+  "D": {
+   "sharp": 88.3,
+   "hf": 2.034,
+   "flicker": 0.618,
+   "flicker_per_hf": 0.968
+  }
+ },
+ "backdown": {
+  "lanczos": {
+   "sharp": 46.7,
+   "hf": 1.852,
+   "flicker": 0.603,
+   "flicker_per_hf": 0.849
+  },
+  "C": {
+   "sharp": 110.9,
+   "hf": 2.522,
+   "flicker": 0.892,
+   "flicker_per_hf": 0.829
+  }
+ },
+ "fadeaway": {
+  "lanczos": {
+   "sharp": 38.4,
+   "hf": 1.604,
+   "flicker": 0.312,
+   "flicker_per_hf": 0.784
+  },
+  "C": {
+   "sharp": 118.3,
+   "hf": 2.297,
+   "flicker": 0.434,
+   "flicker_per_hf": 0.784
+  }
+ }
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "profile",
+    "take": "b",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 36.716,
+    "cost": 0.082787,
+    "error": null,
+    "file": "gen/profile-b.png",
+    "at": "2026-10-17T07:19:53.721Z"
+  },
+  {
+    "name": "profile",
+    "take": "a",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 38.324,
+    "cost": 0.082787,
+    "error": null,
+    "file": "gen/profile-a.png",
+    "at": "2026-10-17T07:19:55.329Z"
+  },
+  {
+    "name": "up",
+    "take": "a",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 38.084,
+    "cost": 0.082917,
+    "error": null,
+    "file": "gen/up-a.png",
+    "at": "2026-10-17T07:28:43.235Z"
+  },
+  {
+    "name": "up",
+    "take": "b",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 38.773,
+    "cost": 0.082917,
+    "error": null,
+    "file": "gen/up-b.png",
+    "at": "2026-10-17T07:28:43.923Z"
+  },
+  {
+    "name": "vid-end",
+    "take": "",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 35.233,
+    "cost": 0.082602,
+    "error": null,
+    "file": "gen/vid-end.png",
+    "at": "2026-10-17T08:18:00.837Z"
+  },
+  {
+    "name": "vid-start",
+    "take": "",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 30.99,
+    "cost": 0.082322,
+    "error": null,
+    "file": "gen/vid-start.png",
+    "at": "2026-10-17T08:18:38.083Z"
+  },
+  {
+    "name": "vid-start-away",
+    "take": "",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 32.297,
+    "cost": 0.082812,
+    "error": null,
+    "file": "gen/vid-start-away.png",
+    "at": "2026-10-17T09:01:34.929Z"
+  },
+  {
+    "name": "vid-end-level",
+    "take": "",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 31.32,
+    "cost": 0.082337,
+    "error": null,
+    "file": "gen/vid-end-level.png",
+    "at": "2026-10-17T09:24:22.889Z"
+  }
+]

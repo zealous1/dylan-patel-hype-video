@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dylan Reel Previews</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}.note{color:var(--muted)}
+.picks{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+button{font:inherit;padding:8px 14px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer;text-align:left}
+button.on{border-color:var(--on);box-shadow:0 0 0 1px var(--on)}button small{display:block;color:var(--muted)}
+video{width:100%;background:#000;border-radius:8px;display:block}
+#desc{margin:8px 0 18px}ul{padding-left:18px}li{margin:4px 0}a{color:var(--on)}
+</style></head><body><main>
+<h1>Dylan reel, full previews</h1>
+<p class="note">Every version is the full 30 s reel with the Patel announcer swap. Switching keeps your place in the reel.</p>
+<div class="picks" id="picks"></div>
+<video id="v" controls playsinline></video>
+<p id="desc"></p>
+<h2>Where it stands</h2>
+<ul>
+<li><b>Final:</b> master/out/final-60-master.mp4 and final-30-master.mp4, with -upload.mp4 for X and Instagram and -master-pcm.mov with lossless audio. Film Match on the ending, the profile v15 ending (earlier, slower face, lingering arcmira line, longer logo fade, face and logo pulsing with the original's flicker, face down to 80% at the end), Patel memo 3 take 5 at +2, DYLAN outro take 3.</li>
+<li><b>Film pick:</b> <a href="../film-pick/index.html">Classic vs Worn side by side</a>, both on the current cut.</li>
+<li><b>Open:</b> the SeedVR2 7B upscale of the soft Wan shots. <a href="../../shots/upscale-test/index.html">Resize vs 3B vs 7B</a>.</li>
+<li><a href="../../index.html">Scene editor</a>, for swapping any take.</li>
+</ul>
+</main><script>
+const P=[
+ ['FINAL 60 fps','../out/final-60-master.mp4','The finished reel at 60 fps with film Match on the ending.'],
+ ['FINAL 30 fps','../out/final-30-master.mp4','The finished reel at 30 fps with film Match on the ending.'],
+ ['60 fps master','../out/reel-60-master.mp4','RIFE in-betweens inside every scene, with the alley-oop rebuilt from its slowed generation. No film look.'],
+ ['30 fps master','../out/reel-30-master.mp4','Frame-exact cut at native speed. No film look.'],
+ ['FINAL Classic 60 fps','../out/final-classic-60-upload.mp4','The current cut with the Classic film pass: Match plus grain, a 1 px frame float, red glow on the highlights and darker corners.'],
+ ['FINAL Worn 60 fps','../out/final-worn-60-upload.mp4','The current cut with the Worn film pass: Classic pushed, with extra flicker, heavier grain and damage, a 2 px float.'],
+ ['FINAL Classic 30 fps','../out/final-classic-30-upload.mp4','Classic at 30 fps.'],
+ ['FINAL Worn 30 fps','../out/final-worn-30-upload.mp4','Worn at 30 fps.'],
+];
+const v=document.getElementById('v'),picks=document.getElementById('picks');
+P.forEach(([name,src,desc],i)=>{const b=document.createElement('button');b.innerHTML=`${name}<small>${src.includes('60')?'60 fps':'30 fps'}</small>`;picks.append(b);
+ b.onclick=()=>{const t=v.currentTime,playing=!v.paused;document.querySelectorAll('.picks button').forEach(x=>x.classList.toggle('on',x===b));document.getElementById('desc').textContent=desc;
+  v.src=src;v.onloadedmetadata=()=>{v.currentTime=t;if(playing)v.play();};};
+ if(i===0)b.click();});
+</script></body></html>

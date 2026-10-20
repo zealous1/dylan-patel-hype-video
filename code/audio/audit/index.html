@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reel Audio Audit</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f5f2; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #8a8984; --line: #e4e3df;
+  --accent: #1baf7a; --warn: #e34948; --chip: #f0efec;
+  --s-original: #2a78d6; --s-current: #eb6834; --s-a: #6250d6; --s-b: #eda100; --s-c: #1baf7a; --s-d: #e87ba4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #8f8e86; --line: #33332f; --chip: #262624;
+    --s-original: #3987e5; --s-current: #d95926; --s-a: #9085e9; --s-b: #c98500; --s-c: #199e70; --s-d: #d55181;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #8f8e86; --line: #33332f; --chip: #262624;
+  --s-original: #3987e5; --s-current: #d95926; --s-a: #9085e9; --s-b: #c98500; --s-c: #199e70; --s-d: #d55181;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; }
+main { max-width: 1180px; margin: 0 auto; padding: 28px 16px 80px; }
+h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 18px; margin: 40px 0 10px; }
+p.lead { color: var(--ink2); margin: 0 0 20px; max-width: 820px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.player { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+video { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; display: block; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+button { font: inherit; font-size: 13px; color: var(--ink); background: var(--chip); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+button[aria-pressed="true"] { border-color: var(--ink); background: var(--surface); box-shadow: inset 0 0 0 1px var(--ink); }
+button .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+button:disabled { opacity: .5; cursor: wait; }
+.label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-right: 4px; }
+#bar { position: relative; height: 34px; background: var(--chip); border-radius: 6px; cursor: pointer; overflow: hidden; touch-action: none; }
+#bar .sec { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--ink2) 14%, transparent); }
+#bar .sec span { position: absolute; left: 4px; top: 2px; font-size: 10px; color: var(--ink2); white-space: nowrap; }
+#bar .loop { position: absolute; top: 0; bottom: 0; border: 2px solid var(--accent); border-radius: 4px; display: none; }
+#bar .head { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); }
+#time { font-variant-numeric: tabular-nums; color: var(--ink2); font-size: 13px; min-width: 120px; }
+.status { font-size: 12px; color: var(--muted); }
+ul.findings { padding-left: 20px; max-width: 900px; }
+ul.findings li { margin: 0 0 10px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { color: var(--ink2); font-weight: 600; vertical-align: bottom; }
+td.good { color: var(--accent); font-weight: 600; }
+td.bad { color: var(--warn); font-weight: 600; }
+tr.rec td:first-child { font-weight: 700; }
+.inv td { white-space: normal; text-align: left; }
+.inv td.num { text-align: right; white-space: nowrap; }
+.kind { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 4px; background: var(--chip); color: var(--ink2); }
+figure { margin: 0 0 22px; }
+figure img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: #fcfcfb; }
+figcaption { font-size: 13px; color: var(--ink2); margin-top: 6px; max-width: 900px; }
+code { font: 12.5px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: 1px 4px; border-radius: 4px; }
+.files li { margin-bottom: 4px; }
+.note { font-size: 13px; color: var(--ink2); }
+@media (max-width: 640px) { h1 { font-size: 22px; } th, td { padding: 5px 6px; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Reel audio audit</h1>
+<p class="lead">The Dylan Patel remake of the LeBron "How it go" edit, measured against the original with the same rulers. They cover loudness, band balance, stereo, the vocal stem's content and the two voice lines. Four candidate fixes are stacked one on another, and each is muxed onto the locked 30 fps master for listening in context.</p>
+
+<section class="card player" aria-label="Synced player">
+  <video id="vid" muted playsinline preload="auto" src="../../master/out/final-worn-30-master.mp4"></video>
+  <div class="row"><span class="label">Sound</span><span id="mixes" class="row"></span></div>
+  <div class="row"><span class="label">Picture</span>
+    <button data-pic="../../master/out/final-worn-30-master.mp4" aria-pressed="true">Remake (locked master)</button>
+    <button data-pic="../../src/clip.mp4" aria-pressed="false">Original LeBron edit</button>
+  </div>
+  <div class="row"><span class="label">Loop</span><span id="loops" class="row"></span><button id="noloop">No loop</button></div>
+  <div id="bar"><div class="loop" id="loopbox"></div><div class="head" id="head"></div></div>
+  <div class="row"><button id="play" disabled>Loading audio</button><span id="time">0.00 / 30.07 s</span><span class="status" id="status"></span></div>
+  <p class="note">All sources start on one Web Audio clock, so switching sound is instant and sample aligned; the picture follows that clock. Levels are as rendered, not normalised, because loudness is part of what is being compared. Keys 1 to 6 pick the sound, space plays and pauses.</p>
+</section>
+
+<h2>Findings</h2>
+<ul class="findings" id="findings">
+  <li><b>The current mix is 0.7 LU quieter than the original overall</b> (integrated -11.05 against -10.37 LUFS) and 0.9 to 2.4 LU quieter in every section measured. Its short-term loudness sits 0.76 LU off the original on average. The loss comes from three places, listed next.</li>
+  <li><b>The bed is four stems summed, and the stems do not add up to the track.</b> Original minus the stem sum leaves a residual 19 dB below the mix that peaks in the low-mids and mids (only 15 dB down between 250 Hz and 2 kHz). It is missing from every second of the current mix, worst in the pre-drop at 9 to 10 s, where the current mix is 3 dB down. This is the main source of lost fullness, and it has nothing to do with the announcer.</li>
+  <li><b>Zeal's suspicion is right. The mute removes far more than the announcer.</b> The vocal stem carries the song's own held note under the intro line, the sung hook under the outro yell, the stereo width and reverb of both, and the edges of the rap after the yell. The mutes run 1.15 to 2.95 s and 23.6 to 26.4 s and take all of it. Under the intro line the music is 3.7 LU quieter than in the original (-17.3 against -13.6 LUFS), partly from the mute and partly from the 2 dB duck.</li>
+  <li><b>The current final goes silent at 28.978 s.</b> The last 1.09 s, where the original still plays the rap at -26 dB, is digital zero. The cause is the ffmpeg graph in blend.sh and the final render. The voice is split into both the sidechain key and the amix, and ffmpeg ends the ducked bed early. It is a race, not a fixed cut. The same command ended at 29.269 s at 48 kHz and ran to the end in two other runs. Padding the graph inputs fixes it.</li>
+  <li><b>The limiter costs loudness exactly where the reel is densest.</b> The original's peaks are clipped flat at +0.9 dBTP. The current limiter (limit 0.84, 40 ms release) pulls the newspaper and fast-cut sections down about 0.8 LU. A 10 ms release at the same -1 dBTP-safe ceiling keeps the original's short-term contour within 0.2 LU and changes the signal less (limiter difference -22.5 dB against -18.2 dB).</li>
+  <li><b>Zeal's intro line sits on top of the music, where the announcer sat inside it.</b> The original announcer runs 6.4 LU under the music around it. The current "Patel" line runs 0.35 LU under it, so it is 6 LU more forward. The outro goes the other way. "DYLAN with the gigawatt" sits 7.4 LU under the music, 1.4 LU further back than the original yell.</li>
+  <li><b>The voice EQ and space do not match the announcer.</b> The broadcast chain low-passes Zeal's voice at 6.8 kHz, so it has 10 dB less air around 8 kHz than the announcer and more 250 Hz and 700 Hz to 1.4 kHz honk. The announcer is dry and choppy (27.6 dB between the loud and quiet 20 ms frames of the line); the 45 and 95 ms slap on Zeal's line smears it to 17.1 dB.</li>
+  <li><b>Candidate C is the closest match.</b> It plays the original's own audio wherever the announcer is silent, takes out only the announcer's words, rebuilds both lines dry and EQ'd to the announcer at the announcer's level against the music, and masters to the original's -10.37 LUFS with a -1.39 dBTP peak. Short-term loudness tracks the original within 0.18 LU on average, every band is within 0.1 dB, and every section within 0.4 LU.</li>
+</ul>
+
+<h2>What the vocal stem holds, and what the current bed drops</h2>
+<div class="card tablewrap"><table class="inv" id="inv"><thead><tr><th>Content</th><th>From</th><th>To</th><th>Kind</th><th>Muted in the current bed</th><th>In A to D</th></tr></thead><tbody></tbody></table></div>
+<p class="note">How the current bed was made (<code>audio/compose.sh</code> v2, <code>no-announcer-v2.wav</code>): drums, bass and other from htdemucs_ft summed with the vocal stem, the vocal stem muted from 1.15 to 2.95 s and 23.6 to 26.4 s with 60 ms linear ramps, both channels. The final (<code>mix-final-patel3-5-outro3.wav</code>) is that bed ducked by a sidechain keyed on the intro line (threshold 0.05, ratio 3, mix 0.6), plus memo 3 take 5 through the broadcast chain at +2 dB with 3 dB off under 300 Hz and 2 dB at 3 kHz, plus outro take 3 placed so "Dylan" lands at 24.16 s. Evidence for each row comes from Whisper medium.en words on the stem's mid and side, L/R correlation, level and spectrogram (<code>vocals.py</code>, <code>vocals.json</code>).</p>
+<figure><img src="plots/vocals.png" alt="Vocal stem spectrogram before and after the announcer was taken out, with the content inventory and the current mute"><figcaption>Top, the vocal stem. Middle, the song-only stem from <code>restore.py</code>, which keeps the side channel everywhere and pulls the song back out of the mid under each line with an NMF dictionary learned just before and after it. Bottom, what is where, and the current mute in grey, including the silent end.</figcaption></figure>
+
+<h2>Original against current against each candidate</h2>
+<div class="card tablewrap"><table id="metrics"></table></div>
+<p class="note">Section columns are loudness differences from the original over the section, in LU. Band columns are each band's energy over the whole reel against the original, in dB. Voice to music is the line's loudness minus the music under it over the line's span. Line choppiness is the 90th minus 10th percentile of the 20 ms envelope over the line. Green marks within 0.3 of the original, red marks more than 1 off. The current audio as encoded in <code>final-worn-30-master.mp4</code> measures <span id="aac"></span>.</p>
+
+<h2>Candidates</h2>
+<ul class="findings">
+  <li><b>A. Full bed.</b> The original's own audio wherever the announcer is silent, so the stem residual is back. Under the words it is the stems with the song-only vocal stem. Voices, duck and limiter as today, with the graph padded so it runs to the end.</li>
+  <li><b>B. A plus matched voices.</b> Both lines rebuilt from the raw memos without the 6.8 kHz low-pass or the slap, EQ'd with a linear-phase filter onto the 1/3-octave spectrum of the announcer each replaces (within 8 dB), and set to that announcer's level against the music, <span id="vmr-i"></span> LU for the intro and <span id="vmr-o"></span> LU for the outro. No duck, because the original bed already carries whatever ducking the editor did. Today's limiter.</li>
+  <li><b>C. B plus matched master.</b> Gain into a 10 ms release limiter, solved so the integrated loudness lands on the original's -10.37 LUFS, ceiling -1 dBTP.</li>
+  <li><b>D. C with both lines 2 dB hotter.</b> For a louder Patel than the original announcer, if C reads too tucked in.</li>
+</ul>
+
+<h2>Plots</h2>
+<figure><img src="plots/loudness.png" alt="Short-term and momentary loudness and per-second RMS"><figcaption>Short-term (3 s) and momentary (400 ms) loudness and RMS per second for the original, the current final and C. The current final's dips at the intro line, the pre-drop at 9 s and the end are the bed losses; C sits on the original line almost everywhere.</figcaption></figure>
+<figure><img src="plots/bands.png" alt="Band energy per second, and each mix minus the original"><figcaption>Band balance per second in sub, low, low-mid, mid, presence and air. Blue cells are energy the mix is missing against the original.</figcaption></figure>
+<figure><img src="plots/spectrograms.png" alt="Spectrograms of original, current and C"><figcaption>Spectrograms on one scale. The current final's last second is empty.</figcaption></figure>
+<figure><img src="plots/waveform.png" alt="Waveform overlay"><figcaption>Peak envelope per 10 ms, with the original filled and the current final and C as outlines.</figcaption></figure>
+<figure><img src="plots/stereo.png" alt="Stereo correlation and width"><figcaption>Stereo correlation and width. The current final is narrower in both mutes (correlation up, width down) because the stem's side channel went with the announcer.</figcaption></figure>
+<figure><img src="plots/voices.png" alt="Voice spectra and envelopes against the announcer"><figcaption>Each line against the announcer it replaces, with spectrum shape on top and the 20 ms envelope below.</figcaption></figure>
+
+<h2>Files</h2>
+<ul class="files note">
+  <li>Candidate audio, limited, 24-bit 48 kHz, is in <code>out/</code> as <code>a-full-bed.wav</code>, <code>b-matched-voices.wav</code>, <code>c-matched-master.wav</code>, <code>d-hotter-voices.wav</code>, each with a float <code>-mix.wav</code> before the limiter.</li>
+  <li>Video-copy remuxes on <code>final-worn-30-master.mp4</code>, AAC 320k, 902 frames each, are <span id="mp4s"></span>.</li>
+  <li>Scripts: <code>restore.py</code> (song-only vocal stem), <code>build.py</code> (beds, voices, candidates, remuxes), <code>vocals.py</code> (stem inventory), <code>measure.py</code> (metrics, plots, <code>data.js</code>), <code>lib.py</code> (loudness and shared measurements). Run them from the reel folder with <code>uv run --no-project --python 3.12 --with-requirements requirements.txt python -I audio/audit/&lt;script&gt;</code>.</li>
+</ul>
+</main>
+
+<script src="data.js"></script>
+<script>
+const A = window.AUDIT;
+const MIXES = [
+  { id: 'original', label: 'Original', src: 'out/original.wav', color: 'var(--s-original)' },
+  { id: 'current', label: 'Current', src: '../../master/work/mix-final-patel3-5-outro3-limited.wav', color: 'var(--s-current)' },
+  { id: 'a-full-bed', label: 'A. Full bed', src: 'out/a-full-bed.wav', color: 'var(--s-a)' },
+  { id: 'b-matched-voices', label: 'B. + voices', src: 'out/b-matched-voices.wav', color: 'var(--s-b)' },
+  { id: 'c-matched-master', label: 'C. + master', src: 'out/c-matched-master.wav', color: 'var(--s-c)' },
+  { id: 'd-hotter-voices', label: 'D. Voices +2 dB', src: 'out/d-hotter-voices.wav', color: 'var(--s-d)' },
+];
+const DUR = 30.07;
+const LOOPS = { 'Intro line': [0.9, 3.2], 'Newspaper': [12.0, 13.833], 'Outro': [22.8, 26.6], 'End': [28.4, 30.07] };
+
+const $ = (s) => document.querySelector(s);
+const vid = $('#vid'), bar = $('#bar'), head = $('#head'), loopbox = $('#loopbox'), playBtn = $('#play');
+let ctx, buffers = {}, gains = {}, sources = [], current = 'c-matched-master', playing = false, startCtx = 0, startPos = 0, pos = 0, loop = null;
+
+for (const [name, [a, b]] of Object.entries(A.sections)) {
+  const d = document.createElement('div');
+  d.className = 'sec'; d.style.left = (a / DUR * 100) + '%'; d.style.width = ((b - a) / DUR * 100) + '%';
+  d.innerHTML = `<span>${name}</span>`; bar.prepend(d);
+}
+MIXES.forEach((m, i) => {
+  const b = document.createElement('button');
+  b.dataset.mix = m.id; b.setAttribute('aria-pressed', m.id === current); b.title = `Key ${i + 1}`;
+  b.innerHTML = `<span class="sw" style="background:${m.color}"></span>${m.label}`;
+  b.onclick = () => pick(m.id);
+  $('#mixes').append(b);
+});
+for (const [name, r] of Object.entries(LOOPS)) {
+  const b = document.createElement('button'); b.textContent = name; b.onclick = () => setLoop(r); $('#loops').append(b);
+}
+$('#noloop').onclick = () => setLoop(null);
+document.querySelectorAll('[data-pic]').forEach((b) => b.onclick = () => {
+  document.querySelectorAll('[data-pic]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+  const t = now(); vid.src = b.dataset.pic; vid.currentTime = t; if (playing) vid.play().catch(() => {});
+});
+
+function now() {
+  if (!playing) return pos;
+  const raw = startPos + Math.max(0, ctx.currentTime - startCtx);
+  return loop && startPos < loop[1] && raw >= loop[1] ? loop[0] + (raw - loop[0]) % (loop[1] - loop[0]) : raw;
+}
+function pick(id) {
+  current = id;
+  document.querySelectorAll('[data-mix]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.mix === id));
+  if (!ctx) return;
+  for (const [k, g] of Object.entries(gains)) g.gain.setTargetAtTime(k === id ? 1 : 0, ctx.currentTime, 0.004);
+}
+function stopSources() { sources.forEach((s) => { try { s.stop(); } catch (e) {} }); sources = []; }
+function start(at) {
+  stopSources();
+  startCtx = ctx.currentTime + 0.05; startPos = at;
+  for (const m of MIXES) {
+    const s = ctx.createBufferSource(); s.buffer = buffers[m.id];
+    // Sample-accurate loops on the audio clock; a timer-driven restart lags when the tab is throttled.
+    if (loop && at < loop[1]) { s.loop = true; s.loopStart = loop[0]; s.loopEnd = loop[1]; }
+    s.connect(gains[m.id]); s.start(startCtx, at); sources.push(s);
+  }
+  vid.currentTime = at; vid.play().catch(() => {});
+  playing = true; playBtn.textContent = 'Pause';
+}
+function pause() { pos = now(); stopSources(); vid.pause(); playing = false; playBtn.textContent = 'Play'; }
+function seek(t) { t = Math.max(0, Math.min(DUR - 0.01, t)); if (playing) start(t); else { pos = t; vid.currentTime = t; } }
+function setLoop(r) {
+  const t = now();
+  loop = r;
+  loopbox.style.display = r ? 'block' : 'none';
+  if (r) { loopbox.style.left = (r[0] / DUR * 100) + '%'; loopbox.style.width = ((r[1] - r[0]) / DUR * 100) + '%'; }
+  if (ctx && (r || playing)) start(r ? r[0] : t);
+}
+playBtn.onclick = () => { if (ctx.state === 'suspended') ctx.resume(); playing ? pause() : start(now() >= DUR - 0.02 ? 0 : now()); };
+bar.addEventListener('pointerdown', (e) => {
+  const r = bar.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * DUR);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); if (ctx) playBtn.click(); }
+  const n = parseInt(e.key, 10); if (n >= 1 && n <= MIXES.length) pick(MIXES[n - 1].id);
+});
+function sync() {
+  let t = now();
+  if (playing && t >= DUR) { pause(); pos = 0; t = 0; }
+  if (playing && Math.abs(vid.currentTime - t) > 0.08) vid.currentTime = t;
+  return t;
+}
+function tick() {
+  const t = sync();
+  head.style.left = (t / DUR * 100) + '%';
+  $('#time').textContent = `${t.toFixed(2)} / ${DUR.toFixed(2)} s`;
+  requestAnimationFrame(tick);
+}
+setInterval(sync, 100);
+async function load() {
+  ctx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000 });
+  let done = 0;
+  await Promise.all(MIXES.map(async (m) => {
+    const r = await fetch(m.src);
+    if (!r.ok) throw new Error(`${m.src}: ${r.status}`);
+    buffers[m.id] = await ctx.decodeAudioData(await r.arrayBuffer());
+    const g = ctx.createGain(); g.gain.value = m.id === current ? 1 : 0; g.connect(ctx.destination); gains[m.id] = g;
+    $('#status').textContent = `decoded ${++done} of ${MIXES.length}`;
+  }));
+  playBtn.disabled = false; playBtn.textContent = 'Play'; $('#status').textContent = 'all six decoded';
+}
+load().catch((e) => { $('#status').textContent = 'audio failed to load: ' + e.message; });
+requestAnimationFrame(tick);
+
+const fmt = (v, d = 2) => (v === null || v === undefined) ? '' : (v > 0 ? '+' : '') + v.toFixed(d);
+function cls(v, ref = 0) { if (v === null || v === undefined) return ''; const d = Math.abs(v - ref); return d <= 0.3 ? 'good' : d > 1 ? 'bad' : ''; }
+const rows = A.rows, secs = Object.keys(A.sections), o = rows[0];
+let h = '<thead><tr><th>Mix</th><th>Integrated LUFS</th><th>True peak dBTP</th><th>LRA LU</th><th>Mean |ΔS| LU</th>';
+h += secs.map((s) => `<th>Δ ${s}</th>`).join('');
+h += A.bands.map((b) => `<th>${b} dB</th>`).join('');
+h += '<th>L/R corr</th><th>Width dB</th><th>Intro voice to music</th><th>Outro voice to music</th><th>Intro choppiness dB</th><th>Last second dBFS</th></tr></thead><tbody>';
+for (const r of rows) {
+  const isO = r.id === 'original';
+  h += `<tr class="${r.id === 'c-matched-master' ? 'rec' : ''}"><td>${r.label}${r.id === 'c-matched-master' ? ' (recommended)' : ''}</td>`;
+  h += `<td class="${isO ? '' : cls(r.integrated, o.integrated)}">${r.integrated.toFixed(2)}</td><td>${r.tp.toFixed(2)}</td><td class="${isO ? '' : cls(r.lra, o.lra)}">${r.lra.toFixed(2)}</td>`;
+  h += `<td class="${isO ? '' : cls(r.mean_abs_ds)}">${r.mean_abs_ds.toFixed(2)}</td>`;
+  h += secs.map((s) => { const v = r.sections[s].d_lufs; return `<td class="${isO ? '' : cls(v)}">${isO ? r.sections[s].lufs.toFixed(2) + ' LUFS' : fmt(v)}</td>`; }).join('');
+  h += A.bands.map((b) => `<td class="${isO ? '' : cls(r.bands_dev[b])}">${isO ? '0' : fmt(r.bands_dev[b])}</td>`).join('');
+  h += `<td>${r.corr.toFixed(3)}</td><td>${r.width_db.toFixed(2)}</td>`;
+  h += ['intro', 'outro'].map((n) => `<td class="${isO ? '' : cls(r.voices[n].vmr, o.voices[n].vmr)}">${fmt(r.voices[n].vmr)}</td>`).join('');
+  h += `<td>${r.voices.intro.envelope_range_db.toFixed(1)}</td><td class="${isO ? '' : cls(A.tail_after_29s_db[r.id], A.tail_after_29s_db.original)}">${A.tail_after_29s_db[r.id] < -150 ? 'silent' : A.tail_after_29s_db[r.id].toFixed(1)}</td></tr>`;
+}
+$('#metrics').innerHTML = h + '</tbody>';
+$('#aac').textContent = `${A.video_current.integrated.toFixed(2)} LUFS integrated, ${A.video_current.tp.toFixed(2)} dBTP, LRA ${A.video_current.lra.toFixed(2)} LU`;
+$('#vmr-i').textContent = fmt(A.build.lines.intro.vmr_target);
+$('#vmr-o').textContent = fmt(A.build.lines.outro.vmr_target);
+$('#mp4s').innerHTML = MIXES.slice(2).map((m) => `<a href="out/${m.id}.mp4">${m.id}.mp4</a>`).join(', ');
+const inv = A.inventory.map((r) => `<tr><td>${r.label}</td><td class="num">${r.start.toFixed(2)}</td><td class="num">${r.end.toFixed(2)}</td><td><span class="kind">${r.kind}</span></td><td class="num">${Math.round(r.muted_today * 100)} %</td><td>${r.kind === 'announcer' ? 'removed' : 'kept'}</td></tr>`);
+$('#inv tbody').innerHTML = inv.join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+{
+ "gains": {
+  "swap": [
+   4,
+   8,
+   12
+  ],
+  "line": [
+   0,
+   4,
+   8
+  ]
+ },
+ "takes": [
+  {
+   "name": "take1",
+   "source": "audio/voice/take1.wav",
+   "words": {
+    "start": 0.14,
+    "patel": [
+     0.86,
+     1.32
+    ],
+    "hes": 1.44,
+    "end": 2.04
+   },
+   "swap": {
+    "4": "out/take1-g4.mp3",
+    "8": "out/take1-g8.mp3",
+    "12": "out/take1-g12.mp3"
+   },
+   "line": {
+    "0": "out/take1-line-g0.mp3",
+    "4": "out/take1-line-g4.mp3",
+    "8": "out/take1-line-g8.mp3"
+   }
+  },
+  {
+   "name": "take2",
+   "source": "audio/voice/take2.wav",
+   "words": {
+    "start": 0.08,
+    "patel": [
+     0.84,
+     1.31
+    ],
+    "hes": 1.4200000000000002,
+    "end": 2.04
+   },
+   "swap": {
+    "4": "out/take2-g4.mp3",
+    "8": "out/take2-g8.mp3",
+    "12": "out/take2-g12.mp3"
+   },
+   "line": {
+    "0": "out/take2-line-g0.mp3",
+    "4": "out/take2-line-g4.mp3",
+    "8": "out/take2-line-g8.mp3"
+   }
+  },
+  {
+   "name": "take3",
+   "source": "audio/voice/take3.wav",
+   "words": {
+    "start": 0.09,
+    "patel": [
+     0.8099999999999999,
+     1.28
+    ],
+    "hes": 1.4300000000000002,
+    "end": 2.05
+   },
+   "swap": {
+    "4": "out/take3-g4.mp3",
+    "8": "out/take3-g8.mp3",
+    "12": "out/take3-g12.mp3"
+   },
+   "line": {
+    "0": "out/take3-line-g0.mp3",
+    "4": "out/take3-line-g4.mp3",
+    "8": "out/take3-line-g8.mp3"
+   }
+  },
+  {
+   "name": "take4",
+   "source": "audio/voice/take4.wav",
+   "words": {
+    "start": 0.13,
+    "patel": [
+     0.81,
+     1.3
+    ],
+    "hes": 1.4700000000000002,
+    "end": 2.13
+   },
+   "swap": {
+    "4": "out/take4-g4.mp3",
+    "8": "out/take4-g8.mp3",
+    "12": "out/take4-g12.mp3"
+   },
+   "line": {
+    "0": "out/take4-line-g0.mp3",
+    "4": "out/take4-line-g4.mp3",
+    "8": "out/take4-line-g8.mp3"
+   }
+  },
+  {
+   "name": "take5",
+   "source": "audio/voice/take5.wav",
+   "words": {
+    "start": 0.19,
+    "patel": [
+     0.8899999999999999,
+     1.3
+    ],
+    "hes": 1.49,
+    "end": 2.11
+   },
+   "swap": {
+    "4": "out/take5-g4.mp3",
+    "8": "out/take5-g8.mp3",
+    "12": "out/take5-g12.mp3"
+   },
+   "line": {
+    "0": "out/take5-line-g0.mp3",
+    "4": "out/take5-line-g4.mp3",
+    "8": "out/take5-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo2",
+   "source": "audio/patels/inbox/memo2.m4a",
+   "words": {
+    "start": 0.97,
+    "patel": [
+     2.01,
+     2.57
+    ],
+    "hes": 2.71,
+    "end": 3.37
+   },
+   "swap": {
+    "4": "out/memo2-g4.mp3",
+    "8": "out/memo2-g8.mp3",
+    "12": "out/memo2-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo2-line-g0.mp3",
+    "4": "out/memo2-line-g4.mp3",
+    "8": "out/memo2-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo2-2",
+   "source": "audio/patels/inbox/memo2.m4a",
+   "words": {
+    "start": 4.8100000000000005,
+    "patel": [
+     5.53,
+     6.01
+    ],
+    "hes": 6.470000000000001,
+    "end": 7.09
+   },
+   "swap": {
+    "4": "out/memo2-2-g4.mp3",
+    "8": "out/memo2-2-g8.mp3",
+    "12": "out/memo2-2-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo2-2-line-g0.mp3",
+    "4": "out/memo2-2-line-g4.mp3",
+    "8": "out/memo2-2-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo2-3",
+   "source": "audio/patels/inbox/memo2.m4a",
+   "words": {
+    "start": 8.77,
+    "patel": [
+     9.49,
+     9.98
+    ],
+    "hes": 10.25,
+    "end": 10.95
+   },
+   "swap": {
+    "4": "out/memo2-3-g4.mp3",
+    "8": "out/memo2-3-g8.mp3",
+    "12": "out/memo2-3-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo2-3-line-g0.mp3",
+    "4": "out/memo2-3-line-g4.mp3",
+    "8": "out/memo2-3-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo2-4",
+   "source": "audio/patels/inbox/memo2.m4a",
+   "words": {
+    "start": 12.42,
+    "patel": [
+     13.12,
+     13.57
+    ],
+    "hes": 13.82,
+    "end": 14.52
+   },
+   "swap": {
+    "4": "out/memo2-4-g4.mp3",
+    "8": "out/memo2-4-g8.mp3",
+    "12": "out/memo2-4-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo2-4-line-g0.mp3",
+    "4": "out/memo2-4-line-g4.mp3",
+    "8": "out/memo2-4-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo2-5",
+   "source": "audio/patels/inbox/memo2.m4a",
+   "words": {
+    "start": 16.16,
+    "patel": [
+     16.88,
+     17.35
+    ],
+    "hes": 17.9,
+    "end": 18.68
+   },
+   "swap": {
+    "4": "out/memo2-5-g4.mp3",
+    "8": "out/memo2-5-g8.mp3",
+    "12": "out/memo2-5-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo2-5-line-g0.mp3",
+    "4": "out/memo2-5-line-g4.mp3",
+    "8": "out/memo2-5-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo3",
+   "source": "audio/patels/inbox/memo3.m4a",
+   "words": {
+    "start": 1.61,
+    "patel": [
+     2.33,
+     2.85
+    ],
+    "hes": 3.0700000000000003,
+    "end": 3.69
+   },
+   "swap": {
+    "4": "out/memo3-g4.mp3",
+    "8": "out/memo3-g8.mp3",
+    "12": "out/memo3-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo3-line-g0.mp3",
+    "4": "out/memo3-line-g4.mp3",
+    "8": "out/memo3-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo3-2",
+   "source": "audio/patels/inbox/memo3.m4a",
+   "words": {
+    "start": 5.18,
+    "patel": [
+     5.8999999999999995,
+     6.36
+    ],
+    "hes": 6.54,
+    "end": 7.16
+   },
+   "swap": {
+    "4": "out/memo3-2-g4.mp3",
+    "8": "out/memo3-2-g8.mp3",
+    "12": "out/memo3-2-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo3-2-line-g0.mp3",
+    "4": "out/memo3-2-line-g4.mp3",
+    "8": "out/memo3-2-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo3-3",
+   "source": "audio/patels/inbox/memo3.m4a",
+   "words": {
+    "start": 9.0,
+    "patel": [
+     9.66,
+     10.1
+    ],
+    "hes": 10.26,
+    "end": 10.8799375
+   },
+   "swap": {
+    "4": "out/memo3-3-g4.mp3",
+    "8": "out/memo3-3-g8.mp3",
+    "12": "out/memo3-3-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo3-3-line-g0.mp3",
+    "4": "out/memo3-3-line-g4.mp3",
+    "8": "out/memo3-3-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo3-4",
+   "source": "audio/patels/inbox/memo3.m4a",
+   "words": {
+    "start": 12.2,
+    "patel": [
+     12.86,
+     13.2999375
+    ],
+    "hes": 13.52,
+    "end": 14.12
+   },
+   "swap": {
+    "4": "out/memo3-4-g4.mp3",
+    "8": "out/memo3-4-g8.mp3",
+    "12": "out/memo3-4-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo3-4-line-g0.mp3",
+    "4": "out/memo3-4-line-g4.mp3",
+    "8": "out/memo3-4-line-g8.mp3"
+   }
+  },
+  {
+   "name": "memo3-5",
+   "source": "audio/patels/inbox/memo3.m4a",
+   "words": {
+    "start": 15.4,
+    "patel": [
+     16.1,
+     16.58
+    ],
+    "hes": 16.8,
+    "end": 17.38
+   },
+   "swap": {
+    "4": "out/memo3-5-g4.mp3",
+    "8": "out/memo3-5-g8.mp3",
+    "12": "out/memo3-5-g12.mp3"
+   },
+   "line": {
+    "0": "out/memo3-5-line-g0.mp3",
+    "4": "out/memo3-5-line-g4.mp3",
+    "8": "out/memo3-5-line-g8.mp3"
+   }
+  }
+ ]
+}

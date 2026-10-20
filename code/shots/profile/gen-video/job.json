@@ -1,0 +1,7 @@
+{
+  "duration": 3,
+  "first": "../gen/vid-start.png",
+  "last": "../gen/vid-end.png",
+  "refs": ["../../../starts/out/sheet-gpt-image-2.5-sunburst.png", "../../../refs/dylan/headshot-suit-768.png"],
+  "prompt": "Locked-off studio shot, the camera does not move. The man in the yellow basketball jersey stands still in strict side profile facing right against a solid flat mid grey background. He breathes slowly: one deep breath in, his chest and shoulders rising slightly. As he breathes in he slowly lifts his chin and raises his gaze upward, ending looking up, with a tough, focused expression. Minimal and natural movement only. His mouth stays closed, he does not talk, blink is fine, no head turn toward the camera, no hand in frame. The light, the background and the jersey stay exactly the same throughout."
+}

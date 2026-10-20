@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>60 fps Routes</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ff8a80}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ff8a80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Helvetica,Arial,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}h2{margin-top:32px}.note,.m{color:var(--muted)}
+img{width:100%;border-radius:6px;display:block;margin:6px 0 2px}figure{margin:16px 0}figcaption{color:var(--muted);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:right;vertical-align:top}
+td:first-child,th:first-child,td.mix{text-align:left}.mix{font-size:12px;color:var(--muted)}.wrap{overflow-x:auto}
+.player{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;margin:12px 0}
+.panes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.panes.one{grid-template-columns:1fr}.panes.one .pane:nth-child(2){display:none}
+.pane video{width:100%;display:block;background:#000;border-radius:4px;aspect-ratio:16/9}
+.pane select{width:100%;margin:0 0 4px;font:inherit;padding:3px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px}
+.pane .how{font-size:13px;color:var(--muted);min-height:1.4em}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.bar button{font:inherit;font-size:13px;padding:3px 9px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg);cursor:pointer}
+.bar button.on{border-color:var(--on);color:var(--on)}.bar input[type=range]{flex:1;min-width:160px}
+.frame{font-variant-numeric:tabular-nums;min-width:15ch}kbd{border:1px solid var(--line);border-radius:3px;padding:0 4px;font-size:12px}
+@media (max-width:700px){.panes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>60 fps routes for the LeBron reel</h1>
+<p class="note">Every route is the full reel at 60 fps before the film pass, 1804 frames. The players stay on the same frame when you switch routes. Keys: <kbd>←</kbd> <kbd>→</kbd> step one frame, with <kbd>Shift</kbd> ten, <kbd>Space</kbd> plays or pauses, <kbd>F</kbd> swaps the two panes in place, <kbd>1</kbd> shows one pane or two.</p>
+
+<h2>Compare</h2>
+<div class="player" id="reel"></div>
+
+<h2>Measures</h2>
+<p class="note">Measured on every in-between frame (the odd 60 fps frames). Sharpness is the variance of the Laplacian. <b>Ratio</b> is an in-between's sharpness over the geometric mean of its two neighbours, so 1.00 means as sharp as the real frames; <b>Text</b> is the newspaper and the podcast cut, <b>Rest</b> everything else. <b>Soft</b> counts in-betweens under 0.70. <b>Judder</b> is the mean size of that ratio's log2, so it counts frames that are softer and frames that are crisper than their neighbours alike, which is what reads as flicker. <b>Cadence</b> is how unevenly a frame splits the motion between its neighbours, 0 for an even split and 1 for a held frame, over in-betweens with motion.</p>
+<div class="wrap"><table>
+<tr><th>Route</th><th>Ratio</th><th>Text</th><th>Rest</th><th>Worst</th><th>Soft</th><th>Judder</th><th>Cadence</th><th>In-betweens</th></tr>
+<tr><td>Current 60 (v4.6 everywhere but cuts)</td><td>1.12</td><td>0.96</td><td>1.18</td><td>0.16 <span class=m>@927</span></td><td>67</td><td>0.36</td><td>0.05</td><td class=mix>hold 1, rife 889</td></tr>
+<tr><td>1 No interpolation</td><td>1.02</td><td>1.07</td><td>1.00</td><td>0.13 <span class=m>@787</span></td><td>25</td><td>0.15</td><td>1.00</td><td class=mix>hold 890</td></tr>
+<tr><td>2 Rule, v4.6</td><td>1.01</td><td>0.94</td><td>1.04</td><td>0.13 <span class=m>@787</span></td><td>28</td><td>0.20</td><td>0.29</td><td class=mix>blend 23, hold 139, rife 728</td></tr>
+<tr><td>2b Rule, v4.6, whips blended</td><td>0.99</td><td>0.88</td><td>1.04</td><td>0.13 <span class=m>@787</span></td><td>43</td><td>0.21</td><td>0.27</td><td class=mix>blend 53, hold 109, rife 728</td></tr>
+<tr><td>4 Rule, Practical-RIFE 4.25</td><td>0.91</td><td>0.89</td><td>0.91</td><td>0.13 <span class=m>@787</span></td><td>32</td><td>0.20</td><td>0.17</td><td class=mix>blend 23, hold 63, rife 804</td></tr>
+<tr><td>4 Rule, Practical-RIFE 4.26</td><td>0.91</td><td>0.89</td><td>0.91</td><td>0.13 <span class=m>@787</span></td><td>32</td><td>0.20</td><td>0.17</td><td class=mix>blend 23, hold 63, rife 804</td></tr>
+<tr><td>Native: text scenes rendered at 60, rest rule v4.6</td><td>1.04</td><td>1.04</td><td>1.04</td><td>0.22 <span class=m>@777</span></td><td>12</td><td>0.16</td><td>0.18</td><td class=mix>blend 3, hold 58, native 264, rife 567</td></tr>
+<tr><td>Hybrid: text scenes doubled, rest rule v4.6</td><td>1.05</td><td>1.07</td><td>1.04</td><td>0.13 <span class=m>@787</span></td><td>19</td><td>0.18</td><td>0.55</td><td class=mix>blend 3, hold 320, rife 567</td></tr>
+</table></div>
+
+
+
+<h2>Strips</h2>
+<p class="note">Each strip is the frame before, the frame and the frame after, on every route. The fastcuts strips sit on the in-between just before each cut.</p>
+<figure><img loading=lazy src="strips/f745.jpg" alt="Frames 744, 745 and 746 on every route"><figcaption>60 fps frames 744, 745, 746 (newspaper). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1069.jpg" alt="Frames 1068, 1069 and 1070 on every route"><figcaption>60 fps frames 1068, 1069, 1070 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f515.jpg" alt="Frames 514, 515 and 516 on every route"><figcaption>60 fps frames 514, 515, 516 (fadeaway). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f493.jpg" alt="Frames 492, 493 and 494 on every route"><figcaption>60 fps frames 492, 493, 494 (backdown). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f853.jpg" alt="Frames 852, 853 and 854 on every route"><figcaption>60 fps frames 852, 853, 854 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f877.jpg" alt="Frames 876, 877 and 878 on every route"><figcaption>60 fps frames 876, 877, 878 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f903.jpg" alt="Frames 902, 903 and 904 on every route"><figcaption>60 fps frames 902, 903, 904 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f927.jpg" alt="Frames 926, 927 and 928 on every route"><figcaption>60 fps frames 926, 927, 928 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1001.jpg" alt="Frames 1000, 1001 and 1002 on every route"><figcaption>60 fps frames 1000, 1001, 1002 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1027.jpg" alt="Frames 1026, 1027 and 1028 on every route"><figcaption>60 fps frames 1026, 1027, 1028 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1051.jpg" alt="Frames 1050, 1051 and 1052 on every route"><figcaption>60 fps frames 1050, 1051, 1052 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1075.jpg" alt="Frames 1074, 1075 and 1076 on every route"><figcaption>60 fps frames 1074, 1075, 1076 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1125.jpg" alt="Frames 1124, 1125 and 1126 on every route"><figcaption>60 fps frames 1124, 1125, 1126 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+<figure><img loading=lazy src="strips/f1149.jpg" alt="Frames 1148, 1149 and 1150 on every route"><figcaption>60 fps frames 1148, 1149, 1150 (fastcuts). Rows top to bottom follow the table.</figcaption></figure>
+
+<h2>The alley-oop</h2>
+<p class="note">The scene plays a slowed Wan generation sped up, so its 60 fps frames can come from that generation or from the realtime take. Mean and min are absolute sharpness over all 142 frames.</p>
+<div class="wrap"><table>
+<tr><th>Way</th><th>Mean</th><th>Min</th><th>Ratio</th><th>Judder</th><th>Cadence</th></tr>
+<tr><td>Rule on the realtime take (v4.6)</td><td>37.6</td><td>2.5</td><td>1.21</td><td>0.29</td><td>0.04</td></tr>
+<tr><td>Slowed generation, v4.6 batch resample (render.py)</td><td>40.3</td><td>2.9</td><td>1.06</td><td>0.15</td><td>0.23</td></tr>
+<tr><td>Slowed generation, Practical-RIFE 4.26 resample</td><td>33.0</td><td>2.9</td><td>0.98</td><td>0.09</td><td>0.23</td></tr>
+<tr><td>Slowed generation, per-pair rule at each position (v4.6)</td><td>39.5</td><td>2.9</td><td>1.03</td><td>0.12</td><td>0.24</td></tr>
+<tr><td>Slowed generation, nearest real frame</td><td>35.5</td><td>2.9</td><td>1.03</td><td>0.13</td><td>0.30</td></tr>
+</table></div>
+<div class="player" id="ally"></div>
+</main>
+<script>
+const DATA = {"reel": {"n": 1804, "sources": [{"name": "r0-current", "label": "Current 60 (v4.6 everywhere but cuts)", "src": "routes/r0-current.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}, {"name": "r1-double", "label": "1 No interpolation", "src": "routes/r1-double.mp4", "how": "rhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrr"}, {"name": "r2-v46", "label": "2 Rule, v4.6", "src": "routes/r2-v46.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrhrhrhrerbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrerhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrRrbrbrerhrRrhrhrRrhrRrhrRrhrRrRrhrhrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrhrerbrRrRrRrRrRrhrhrRrhrhrhrhrhrhrhrhrRrhrbrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrRrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrbrhrbrerRrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrhrhrbrRrRrRrRrRrRrRrRrRrhrhrbrRrRrRrRrRrRrRrRrRrRrRrhrbrbrbrbrRrRrRrRrRrRrRrRrbrbrRrhrhrhrhrhrhrRrhrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrRrRrRrRrRrRrRrRrRrbrbrhrbrbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrbrhrRrRrRrRrRrRrRrRrhrhrbrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrerhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrhrhrRrRrRrhrRrhrRrRrRrRrRrRrRrhrRrhrhrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrerRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}, {"name": "r2-v46-blendwhip", "label": "2b Rule, v4.6, whips blended", "src": "routes/r2-v46-blendwhip.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrRrhrhrhrerbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrerhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrRrbrbrerhrRrhrhrRrhrRrhrRrhrRrRrbrbrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrhrerbrRrRrRrRrRrhrhrRrhrhrhrbrhrhrhrhrRrhrbrhrhrhrhrhrhrhrhrbrbrbrhrhrhrhrRrhrhrhrhrhrhrhrhrhrhrhrhrhrhrbrbrhrbrerRrRrRrRrRrRrRrRrRrbrhrhrbrRrRrRrRrRrRrRrRrbrhrhrhrRrRrRrRrRrRrRrRrRrbrhrbrRrRrRrRrRrRrRrRrRrbrbrbrRrRrRrRrRrRrRrRrRrRrRrbrbrbrbrbrRrRrRrRrRrRrRrRrbrbrRrhrhrhrhrhrhrRrhrhrhrbrbrRrRrRrRrRrRrRrRrbrbrhrbrRrRrRrRrRrRrRrRrbrbrhrRrRrRrRrRrRrRrRrRrbrbrhrbrbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrbrbrRrRrRrRrRrRrRrRrbrbrbrbrbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrerbrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrhrhrRrRrRrhrRrhrRrRrRrRrRrRrRrhrRrhrhrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrerRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}, {"name": "r4-p425", "label": "4 Rule, Practical-RIFE 4.25", "src": "routes/r4-p425.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrerbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrerRrRrRrRrRrRrRrRrRrRrRrhrhrhrRrRrRrRrRrRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerbrRrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrhrbrRrRrRrRrRrhrhrhrhrhrhrhrhrhrRrRrRrRrRrhrhrRrRrRrRrRrhrRrRrRrhrbrhrbrerRrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrhrhrbrRrRrRrRrRrRrRrRrRrhrhrbrRrRrRrRrRrRrRrRrRrRrhrhrbrbrbrbrRrRrRrRrRrRrRrRrbrbrRrRrRrRrRrRrRrRrhrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrRrRrRrRrRrRrRrRrRrbrbrhrbrbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrbrhrRrRrRrRrRrRrRrRrhrhrbrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrerhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}, {"name": "r4-p426", "label": "4 Rule, Practical-RIFE 4.26", "src": "routes/r4-p426.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrerbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrerRrRrRrRrRrRrRrRrRrRrRrhrhrhrRrRrRrRrRrRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerbrRrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrhrbrRrRrRrRrRrhrhrhrhrhrhrhrhrhrRrRrRrRrRrhrhrRrRrRrRrRrhrRrRrRrhrbrhrbrerRrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrhrhrbrRrRrRrRrRrRrRrRrRrhrhrbrRrRrRrRrRrRrRrRrRrRrhrhrbrbrbrbrRrRrRrRrRrRrRrRrbrbrRrRrRrRrRrRrRrRrhrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrhrRrRrRrRrRrRrRrRrhrhrhrRrRrRrRrRrRrRrRrRrbrbrhrbrbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrbrhrRrRrRrRrRrRrRrRrhrhrbrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrbrbrerhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}, {"name": "r5-native", "label": "Native: text scenes rendered at 60, rest rule v4.6", "src": "routes/r5-native.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrhrhrhrerbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrerhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrRrbrbrerhrRrhrhrRrhrRrhrRrhrRrRrhrhrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrhrennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrhrhrRrRrRrhrRrhrRrRrRrRrRrRrRrhrRrhrhrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrerRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}, {"name": "r6-hybrid", "label": "Hybrid: text scenes doubled, rest rule v4.6", "src": "routes/r6-hybrid.mp4", "how": "rRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrhrhrhrerbrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrRrRrRrRrerhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrRrbrbrerhrRrhrhrRrhrRrhrRrhrRrRrhrhrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrhrerhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrhrhrRrRrRrhrRrhrRrRrRrRrRrRrRrhrRrhrhrRrRrhrhrhrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrhrhrhrhrhrhrhrhrhrhrhrhrerRrhrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrerRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrRrr"}], "marks": [745, 1069, 515, 493, 853, 877, 903, 927, 1001, 1027, 1051, 1075, 1125, 1149], "scenes": [["fadein", 0], ["intro", 60], ["backdown", 376], ["fadeaway", 514], ["rim", 600], ["celebrate", 648], ["newspaper", 720], ["fastcuts", 830], ["alleyoop", 1248], ["fadeout", 1390], ["jersey", 1526], ["profile", 1568]]}, "ally": {"n": 142, "sources": [{"name": "realtime-rule", "label": "Rule on the realtime take (v4.6)", "src": "routes/alleyoop-realtime-rule.mp4", "how": ""}, {"name": "slow-ncnn", "label": "Slowed generation, v4.6 batch resample (render.py)", "src": "routes/alleyoop-slow-ncnn.mp4", "how": ""}, {"name": "slow-p426", "label": "Slowed generation, Practical-RIFE 4.26 resample", "src": "routes/alleyoop-slow-p426.mp4", "how": ""}, {"name": "slow-rule", "label": "Slowed generation, per-pair rule at each position (v4.6)", "src": "routes/alleyoop-slow-rule.mp4", "how": ""}, {"name": "slow-nearest", "label": "Slowed generation, nearest real frame", "src": "routes/alleyoop-slow-nearest.mp4", "how": ""}], "marks": [], "scenes": []}, "names": {"r": "real 30 fps frame", "R": "RIFE in-between", "h": "held frame", "b": "50/50 blend", "n": "native 60 fps frame", "e": "scene end hold"}};
+let active = null;
+function player(el, cfg) {
+  const fps = 60, n = cfg.n;
+  el.innerHTML = `<div class="panes"></div><div class="bar"><button data-a=play>Play</button><button data-a=prev>&larr;</button><button data-a=next>&rarr;</button>
+    <span class="frame"></span><input type=range min=0 max=${n - 1} value=0></div><div class="bar marks"></div>`;
+  const panes = el.querySelector('.panes'), frameEl = el.querySelector('.frame'), range = el.querySelector('input');
+  const vids = [];
+  let frame = 0, playing = false;
+  [0, 1].forEach(p => {
+    const d = document.createElement('div'); d.className = 'pane';
+    const sel = document.createElement('select');
+    cfg.sources.forEach((s, i) => sel.add(new Option(s.label, i)));
+    sel.value = String(Math.min(p, cfg.sources.length - 1));
+    const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.preload = 'auto';
+    const how = document.createElement('div'); how.className = 'how';
+    d.append(sel, v, how); panes.append(d);
+    const o = { sel, v, how };
+    sel.onchange = () => load(o);
+    vids.push(o); load(o);
+  });
+  function load(o) {
+    o.v.src = cfg.sources[+o.sel.value].src;
+    o.v.addEventListener('loadedmetadata', () => { o.v.currentTime = (frame + 0.5) / fps; if (playing) o.v.play(); }, { once: true });
+    label();
+  }
+  function label() {
+    frameEl.textContent = `frame ${frame} · ${(frame / fps).toFixed(3)} s` + (cfg.scenes.length ? ' · ' + cfg.scenes.filter(s => s[1] <= frame).pop()[0] : '');
+    range.value = frame;
+    vids.forEach(o => { const h = cfg.sources[+o.sel.value].how[frame]; o.how.textContent = h ? DATA.names[h] : ''; });
+  }
+  function seek(f) {
+    playing && toggle();
+    frame = Math.max(0, Math.min(n - 1, f));
+    vids.forEach(o => { o.v.currentTime = (frame + 0.5) / fps; });
+    label();
+  }
+  function toggle() {
+    playing = !playing;
+    el.querySelector('[data-a=play]').textContent = playing ? 'Pause' : 'Play';
+    if (playing) { const t = (frame + 0.5) / fps; vids.forEach(o => { o.v.currentTime = t; o.v.play(); }); tick(); }
+    else { vids.forEach(o => o.v.pause()); frame = Math.min(n - 1, Math.floor(vids[0].v.currentTime * fps)); seek(frame); }
+  }
+  function tick() {
+    if (!playing) return;
+    const lead = vids[0].v;
+    frame = Math.min(n - 1, Math.floor(lead.currentTime * fps));
+    if (Math.abs(vids[1].v.currentTime - lead.currentTime) > 0.04) vids[1].v.currentTime = lead.currentTime;
+    if (lead.ended) toggle(); else label();
+    requestAnimationFrame(tick);
+  }
+  el.querySelector('[data-a=play]').onclick = () => { active = api; toggle(); };
+  el.querySelector('[data-a=prev]').onclick = () => { active = api; seek(frame - 1); };
+  el.querySelector('[data-a=next]').onclick = () => { active = api; seek(frame + 1); };
+  range.oninput = () => { active = api; seek(+range.value); };
+  const marks = el.querySelector('.marks');
+  cfg.marks.forEach(m => { const b = document.createElement('button'); b.textContent = m; b.onclick = () => { active = api; seek(m); }; marks.append(b); });
+  el.addEventListener('pointerdown', () => { active = api; });
+  const api = {
+    get frame() { return frame; }, seek, toggle,
+    swap() { const a = vids[0].sel.value; vids[0].sel.value = vids[1].sel.value; vids[1].sel.value = a; vids.forEach(load); },
+    single() { panes.classList.toggle('one'); },
+  };
+  return api;
+}
+const reel = player(document.getElementById('reel'), DATA.reel);
+const ally = DATA.ally.sources.length ? player(document.getElementById('ally'), DATA.ally) : null;
+active = reel;
+window.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' && e.target.type !== 'range') return;
+  const step = e.shiftKey ? 10 : 1;
+  if (e.key === 'ArrowRight') { active.seek(active.frame + step); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { active.seek(active.frame - step); e.preventDefault(); }
+  else if (e.key === ' ') { active.toggle(); e.preventDefault(); }
+  else if (e.key === 'f' || e.key === 'F') active.swap();
+  else if (e.key === '1') active.single();
+});
+window.__players = { reel, ally };
+</script>
+</body>
+</html>

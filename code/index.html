@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeBron Reel Breakdown</title>
+<style>
+:root { --bg:#fbfaf7; --fg:#1d1c1a; --mut:#6b6862; --line:#e4e1da; --acc:#b4530a; --keep:#1f7a3a; --swap:#9a3412; --new:#1d4ed8; --card:#fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#141413; --fg:#ecebe7; --mut:#a3a09a; --line:#2f2e2b; --acc:#f59e0b; --keep:#4ade80; --swap:#fb923c; --new:#93c5fd; --card:#1c1b19; } }
+:root[data-theme="dark"] { --bg:#141413; --fg:#ecebe7; --mut:#a3a09a; --line:#2f2e2b; --acc:#f59e0b; --keep:#4ade80; --swap:#fb923c; --new:#93c5fd; --card:#1c1b19; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system, "Helvetica Neue", Arial, sans-serif; }
+main { max-width:1180px; margin:0 auto; padding:32px 16px 80px; }
+h1 { font-size:30px; margin:0 0 6px; } h2 { font-size:21px; margin:44px 0 10px; border-top:1px solid var(--line); padding-top:22px; }
+p.lede { color:var(--mut); margin:0 0 18px; max-width:820px; }
+table { width:100%; border-collapse:collapse; font-size:14px; background:var(--card); }
+th, td { text-align:left; vertical-align:top; padding:8px 10px; border-bottom:1px solid var(--line); }
+th { color:var(--mut); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+td.d { font-size:12px; color:var(--mut); min-width:70px; max-width:120px; }
+td.t { white-space:nowrap; font-variant-numeric:tabular-nums; color:var(--mut); }
+.wrap { overflow-x:auto; }
+.tag { display:inline-block; font-size:11px; font-weight:700; padding:1px 6px; border-radius:4px; border:1px solid currentColor; margin-right:4px; }
+.keep { color:var(--keep); } .swap { color:var(--swap); } .new { color:var(--new); }
+img { width:100%; height:auto; border:1px solid var(--line); border-radius:6px; margin:8px 0; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:760px) { .grid { grid-template-columns:1fr; } }
+ul { padding-left:20px; } li { margin:4px 0; }
+code { font-size:13px; background:var(--card); border:1px solid var(--line); border-radius:4px; padding:0 4px; }
+video { width:100%; max-width:720px; border-radius:6px; }
+.note { color:var(--mut); font-size:14px; }
+
+.paper { aspect-ratio:16/9; max-width:960px; background:#fbfbf9; color:#111; padding:2% 2.4%; font-family:"Times New Roman", Georgia, serif; border:1px solid var(--line); border-radius:4px; display:grid; grid-template-rows:auto auto 1fr; overflow:hidden; container-type:inline-size; }
+.paper .mast { text-align:center; font-family:"UnifrakturMaguntia","Old English Text MT",serif; font-size:5.3cqw; line-height:1; border-bottom:2px solid #111; padding-bottom:.6cqw; }
+.paper .dateline { display:flex; justify-content:space-between; font-size:1.15cqw; letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid #111; padding:.4cqw 0; margin-bottom:1cqw; }
+.paper .cols { display:grid; grid-template-columns:1fr 3.6fr 1fr; gap:1.3cqw; min-height:0; }
+.paper .col { border-right:1px solid #999; padding-right:1.1cqw; font-size:.97cqw; line-height:1.26; overflow:hidden; display:flex; flex-direction:column; gap:.7cqw; } .paper .col:last-child { border:0; padding:0; } .paper .col:first-child { }
+.paper .cols > .col:nth-child(2) { border-right:1px solid #999; padding-right:1.1cqw; }
+.paper h4 { font-size:2.05cqw; line-height:1.02; text-align:left; margin:0 0 .5cqw; } .paper .col p { margin:0 0 .4cqw; }
+.paper .kicker { font-size:1.3cqw; letter-spacing:.12em; text-transform:uppercase; text-align:center; color:#7a1c12; }
+.paper .banner { font-size:3.85cqw; line-height:1; text-align:center; margin:.3cqw 0 .5cqw; font-weight:700; white-space:nowrap; }
+.paper .deck { text-align:center; font-size:1.5cqw; font-style:italic; margin-bottom:.7cqw; }
+.paper .photo { background:#222 center/cover; aspect-ratio:16/8.6; }
+.paper .ad { border:1.5px dashed #111; padding:.7cqw; text-align:center; margin-top:auto; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px; }
+.card img { margin:4px 0; } .card .pend { aspect-ratio:16/9; display:grid; place-items:center; border:1px dashed var(--line); border-radius:6px; color:var(--mut); font-size:13px; text-align:center; padding:8px; margin:4px 0; }
+.card textarea { width:100%; min-height:54px; font:13px/1.4 inherit; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:6px; }
+.sb.vids { grid-template-columns:1fr; } .sb.vids video { width:100%; border-radius:6px; background:#000; cursor:zoom-in; }
+.zoom { position:fixed; inset:0; z-index:50; background:rgba(0,0,0,.92); display:grid; place-items:center; padding:12px; cursor:zoom-out; }
+.zoom > * { max-width:100%; max-height:100%; object-fit:contain; }
+.card img { cursor:zoom-in; }
+.card label { font-size:13px; } .sb { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+.banner-warn { border:2px solid var(--swap); color:var(--fg); background:var(--card); padding:10px 14px; border-radius:8px; margin:12px 0; }
+.cut { margin:18px 0 8px; } #cut-stage { position:relative; aspect-ratio:16/9; width:min(100%, calc(62vh * 16 / 9)); margin:0 auto; background:#000; border-radius:8px; overflow:hidden; }
+#cut-stage video { position:absolute; inset:0; width:100%; height:100%; max-width:none; object-fit:contain; opacity:0; border-radius:0; }
+#cut-stage video.on { opacity:1; }
+.cut .tr { display:flex; gap:10px; align-items:center; margin:8px 0; font-size:14px; flex-wrap:wrap; } .cut .tr button { font:inherit; padding:4px 14px; border-radius:6px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; }
+#cut-time { font-variant-numeric:tabular-nums; color:var(--mut); }
+#cut-bar { position:relative; display:flex; height:34px; border-radius:6px; overflow:hidden; cursor:pointer; }
+#cut-bar .seg { border:0; border-right:1px solid var(--bg); font:11px/1.1 inherit; color:#fff; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; padding:0 3px; cursor:pointer; min-width:0; }
+.seg.keep { background:#6b7280; } .seg.done { background:#15803d; } .seg.work { background:#c2410c; } .seg.todo { background:#1e3a8a; } .seg.cur { outline:2px solid var(--fg); outline-offset:-2px; }
+#cut-head { position:absolute; top:0; bottom:0; width:2px; background:#facc15; pointer-events:none; }
+#cut-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:8px; margin-top:10px; }
+.scene { background:var(--card); border:1px solid var(--line); border-left:4px solid; border-radius:6px; padding:8px; font-size:13px; }
+.scene.keep { border-left-color:#6b7280; } .scene.done { border-left-color:#15803d; } .scene.work { border-left-color:#c2410c; } .scene.todo { border-left-color:#1e3a8a; } .scene.cur { box-shadow:0 0 0 2px var(--acc); }
+.scene .sh { display:flex; justify-content:space-between; gap:6px; } .scene .go { font:600 13px inherit; background:none; border:0; color:var(--fg); padding:0; cursor:pointer; text-align:left; } .scene .st { color:var(--mut); font-size:12px; }
+.scene .takes { display:flex; flex-wrap:wrap; gap:4px; margin:6px 0 4px; } .scene .takes button { font:12px inherit; padding:2px 8px; border-radius:12px; border:1px solid var(--line); background:var(--bg); color:var(--fg); cursor:pointer; }
+.scene .takes button.on { background:var(--acc); border-color:var(--acc); color:#fff; } .scene .takes button:disabled { opacity:.45; cursor:default; }
+.scene .note { font-size:12px; }
+</style>
+</head>
+<body>
+<main>
+<h1>LeBron "How it go" reel: breakdown and SemiAnalysis remake</h1>
+<section id="finals" style="margin:18px 0 8px">
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px" id="finals-picks"></div>
+<video id="finals-v" controls playsinline preload="metadata" style="max-width:100%;width:100%;background:#000"></video>
+<p class="note" id="finals-desc"></p>
+<p class="note">More: <a href="shots/fastcuts/lab/index.html">Podcast lab</a> · <a href="master/fps-pick/index.html">Worn 30 vs 60 side by side</a> · <a href="master/film-pick/index.html">Classic vs Worn side by side</a> · <a href="master/previews/index.html">all previews</a> · <a href="audio/patels/index.html">Patel takes</a> · <a href="audio/outro/index.html">DYLAN outro takes</a> · <a href="shots/film/index.html">film look vs the original</a> · <a href="shots/upscale-test/index.html">SeedVR2 upscale test</a> · the scene editor is below.</p>
+</section>
+<script>
+(() => {
+  const P = [
+    ['v2 Worn 30 (audio C)', 'master/out/final-v2-worn-30-master.mp4', 'Candidate: upscaled soft shots (SeedVR2 7B sharp), short-shutter newspaper, Worn film, audio audit candidate C (full bed restored, voices matched to the announcer, mastered to the original loudness, no silent tail).'],
+    ['FINAL 60 fps', 'master/out/final-60-master.mp4', 'The finished reel at 60 fps: film Match on the ending, Patel memo 3 take 5 at +2, DYLAN outro take 3. The upload version is final-60-upload.mp4.'],
+    ['FINAL 30 fps', 'master/out/final-30-master.mp4', 'The finished reel at 30 fps, same as the 60 fps final.'],
+    ['60 fps master', 'master/out/reel-60-master.mp4', 'The 60 fps master before the film pass.'],
+    ['30 fps master', 'master/out/reel-30-master.mp4', 'The 30 fps master before the film pass.'],
+    ['Film: Match', 'master/previews/reel-30-film-match.mp4', "The original's own flicker, contrast, scratches and dust from 23.50 on."],
+    ['FINAL Classic 60', 'master/out/final-classic-60-upload.mp4', 'The current cut with the Classic film pass: Match plus grain, gate float, red halation and a vignette.'],
+    ['FINAL Worn 60', 'master/out/final-worn-60-upload.mp4', 'The current cut with the Worn film pass: Classic pushed harder.'],
+  ];
+  const v = document.getElementById('finals-v'), box = document.getElementById('finals-picks');
+  P.forEach(([name, src, desc], i) => {
+    const b = document.createElement('button'); b.textContent = name;
+    b.style.cssText = 'font:inherit;padding:6px 12px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px;cursor:pointer';
+    b.onclick = () => {
+      const t = v.currentTime, playing = !v.paused;
+      box.querySelectorAll('button').forEach((x) => (x.style.borderColor = x === b ? 'var(--acc)' : 'var(--line)'));
+      document.getElementById('finals-desc').textContent = desc;
+      v.src = `${src}?v=${Date.now()}`; v.onloadedmetadata = () => { v.currentTime = t; if (playing) v.play(); };
+    };
+    box.append(b); if (i === 0) b.click();
+  });
+})();
+</script>
+<p class="lede">Source: <a href="https://www.youtube.com/watch?v=_g0Bx6o58aE">LeBron James - How it go 👑 (NBA EDIT) 4k</a> by Zweng, 30.07 s, 1920x1080 at 30 fps. The goal is a hype reel for Dylan Patel and SemiAnalysis that keeps most of the basketball with Dylan swapped in. It adds fast cuts of his biggest podcast appearances and SemiAnalysis's greatest hits after the newspaper transition, and ends with Dylan on the alley-oop, the jersey and the profile, with the SemiAnalysis logo where Nike was. Analysed 2026-10-16.</p>
+
+<h2 id="cut">The cut so far</h2>
+<p class="note">Our best take in every spot, on the original timing. The audio is the song with the announcer removed and Zeal's "Looking for Patel, he's got it!" (voice memo take 4) laid over the intro line, built by audio/patel-voice.sh, or the original announcer with only "James" swapped for Zeal's "Patel" (audio/patel-swap.sh). Pick the mix in the menu. Click the bar or a scene to jump there, and pick a take on any scene. Keys: space plays and pauses, the left and right arrows step through scenes, and 1 to 9 pick a take. Green is generated, orange needs work, blue is still to build, grey is the original kept as is. Generated takes are stretched to fit their slot. Picks are saved in this browser.</p>
+<div class="cut"><div id="cut-stage"></div>
+<div class="tr"><button id="cut-play">Play</button><label><input type="checkbox" id="cut-loop"> Loop this scene</label><select id="cut-mix"><option value="audio/mix-final-patel3-5-outro3.wav">Final: Patel memo 3 take 5 blended at +2 + DYLAN outro take 3</option><option value="audio/mix-patel-memo3-5-blend.wav">Zeal full line, memo 3 take 5, blended</option><option value="audio/mix-patel-memo3-5.wav">Zeal full line, memo 3 take 5, +4 dB</option><option value="audio/mix-patel-swap.wav">Announcer, James swapped for Patel</option><option value="audio/mix-patel-v2.wav">Zeal full line, +8 dB</option><option value="audio/mix-patel-v1.wav">Zeal full line</option><option value="audio/no-announcer-v2.wav">No announcer</option></select><span id="cut-time"></span></div>
+<div id="cut-bar"></div><audio id="cut-audio" data-src="audio/mix-final-patel3-5-outro3.wav" preload="auto"></audio>
+<div id="cut-list"></div></div>
+<script type="module">import(`./player.js?${Date.now()}`);</script>
+
+<video src="src/clip.mp4" controls preload="metadata"></video>
+
+<h2>How the analysis ran</h2>
+<ul>
+<li><strong>Every frame scored (900 frames, about 20 s).</strong> ffmpeg's <code>scdet</code> gives a cut score per frame and <code>signalstats</code> gives brightness and saturation, which flag hard cuts, white flashes and grayscale grades.</li>
+<li><strong>The model looks only where it matters.</strong> First a 2 fps overview (60 frames), then 10 fps sheets around each event the scores flagged. That's 0.1 s resolution on about 12 s of the reel and 10 images in total, not 300.</li>
+<li><strong>Audio:</strong>
+  <ul>
+  <li>Demucs (open, from Meta) split the voice from the music in 4 s after a one-time install.</li>
+  <li>librosa (open) mapped the tempo, beats, hits and loudness per 0.1 s.</li>
+  <li>shazamio named the song.</li>
+  <li>Three transcribers ran on the mix and on the voice stem.</li>
+  </ul>
+</li>
+</ul>
+
+<h2>Shot list</h2>
+<div class="wrap"><table>
+<tr><th>Time</th><th>What's on screen</th><th>Effects</th><th>Audio</th><th>Remake</th></tr>
+<tr><td class="t">0.00–6.27</td><td>Broadcast wide shot of the record night (OKC vs LAL), LeBron isolated at the top. Scorebug banner "LeBron James pts to break scoring record".</td><td>Fade in from black. One long take.</td><td>Intro bars. Announcer at 1.3–2.8: "Looking for James, he's got it."</td><td><span class="tag swap">V2V</span>Dylan in the jersey. The figure is small, so identity matters little and this is a cheap swap. Rewrite the banner, for example "DYLAN PATEL · GW TO BREAK COMPUTE RECORD".</td></tr>
+<tr><td class="t">6.27–8.57</td><td>A closer angle: he backs down a defender and sets up the fadeaway.</td><td>White flash on the cut.</td><td>On the beat.</td><td><span class="tag swap">V2V</span>A medium shot where the face is partly visible. Needs the character sheet.</td></tr>
+<tr><td class="t">8.57–10.00</td><td>The record fadeaway, wide. The ball is replaced by a fireball that tracks its arc to the rim.</td><td>Flash cut, fireball VFX.</td><td><strong>The music drops out from 9.0 to 10.0</strong> while the ball is in the air.</td><td><span class="tag swap">V2V</span>Dylan shooting. <span class="tag new">NEW</span>Fireball becomes a burning wafer or GPU die. Put a Dylan line in the silence, such as "3.5 EUV tools satisfies a gigawatt."</td></tr>
+<tr><td class="t">10.00–10.80</td><td>Ball hits the net, explosion on the rim.</td><td>Rim flare, radial zoom-blur whips at 10.0 and 10.7.</td><td>The beat comes back at 10.0.</td><td><span class="tag keep">KEEP</span>As is, with Dylan from the shot before.</td></tr>
+<tr><td class="t">10.80–12.00</td><td>Celebration, arms out. Gold 3D digits "38,388" fly in behind him, everything tinted gold.</td><td>3D number assembly, gold grade.</td><td>Hit at 10.8.</td><td><span class="tag swap">V2V</span>The hardest swap: a close-up of the face. <span class="tag new">NEW</span>The number becomes a SemiAnalysis figure, such as "$11 TRILLION" or "1,000+ DATACENTERS".</td></tr>
+<tr><td class="t">12.00–13.20</td><td>Newspaper transition. The celebration freeze becomes the New York Times front-page photo, "LeBron Breaks Kareem's Scoring Record". Pushes in to halftone, then a paper collage (Plain Dealer "…IT!") and the creator tag "EDITED BY ZWENG".</td><td>Sepia, halftone push-in, collage, whip out at 13.2.</td><td>Downbeat at 12.0.</td><td><span class="tag new">NEW</span>"Niche San Francisco Technology Times" with a SemiAnalysis company milestone as the banner (pick one below), then the famous calls as the collage pages. Built in our engine, no AI needed.</td></tr>
+<tr><td class="t">13.20–15.40</td><td>Dunk montage, grayscale. LAKERS.COM backboard.</td><td>Whip at 13.4, desaturated grade.</td><td>Full beat, vocals in.</td><td><span class="tag new">NEW</span>The fast-cut segment. Dylan from his biggest appearances, one clip per beat (0.42 s), mixed with EUV, cleanroom and wafer B-roll and headline stamps. See the cut list below.</td></tr>
+<tr><td class="t">15.40–16.50</td><td>2022 All-Star game, shot setup.</td><td>Teal-desaturated grade.</td><td></td><td><span class="tag new">NEW</span>Fast cuts continue.</td></tr>
+<tr><td class="t">16.50–18.60</td><td>Flash, then the ball floats up in darkness in slow motion and drops through a glowing rim. Scoreboard "TARGET SCORE 161/160".</td><td>Slow-mo float, blacked-out background, glowing backboard.</td><td>Hit at 15.9.</td><td><span class="tag keep">KEEP</span>Ball in the dark. <span class="tag new">NEW</span>The ball becomes a wafer, the scoreboard reads "TARGET: 1 GW". Cheap: no face.</td></tr>
+<tr><td class="t">19.00–20.70</td><td>Lakers game, a shot from distance.</td><td>Whip and flash at 20.73.</td><td></td><td><span class="tag new">NEW</span>Fast cuts, the last burst before the ending.</td></tr>
+<tr><td class="t">20.80–23.20</td><td>Overhead camera (Charlotte court). Fast break, the lob at 22.7, the alley-oop dunk at 23.1.</td><td>White flash at 23.2.</td><td>Last full bars.</td><td><span class="tag swap">V2V</span>The alley-oop to Dylan, as you asked. Overhead and small, so identity is easy to sell.</td></tr>
+<tr><td class="t">23.30–25.40</td><td>Overhead after the dunk, slow fade to black.</td><td>Fade.</td><td>Music fades from 23.5.</td><td><span class="tag keep">KEEP</span></td></tr>
+<tr><td class="t">25.60–28.40</td><td>Back of the jersey "JAMES 6", posterized high contrast, a light streak sweeps across, colour shifts from teal to yellow.</td><td>Posterize, duotone, light streaks.</td><td>Outro.</td><td><span class="tag swap">EDIT</span>Jersey reads "PATEL". There's no face, so a prompt-only video edit works here (FLUX Video Edit, $0.03/s).</td></tr>
+<tr><td class="t">28.40–30.07</td><td>Side profile close-up, posterized, the Nike swoosh wipes in.</td><td>Same grade, logo reveal.</td><td>Tail.</td><td><span class="tag new">NEW</span>Real footage of Dylan in profile from a podcast, given the same posterize grade, so no V2V is needed. The SemiAnalysis logo replaces the swoosh, composited in our engine.</td></tr>
+</table></div>
+
+<div class="grid">
+<img src="frames/overview-1.jpg" alt="Overview 0 to 14.5 s at 2 fps">
+<img src="frames/overview-2.jpg" alt="Overview 15 to 29.5 s at 2 fps">
+<img src="frames/dense-a.jpg" alt="8.3 to 10.6 s at 10 fps: fireball and rim flare">
+<img src="frames/dense-b.jpg" alt="12.0 to 14.3 s at 10 fps: newspaper transition">
+<img src="frames/dense-c.jpg" alt="16.3 to 18.6 s at 10 fps: ball in the dark and glowing rim">
+<img src="frames/dense-d.jpg" alt="22.7 to 25.0 s at 10 fps: alley-oop from overhead">
+</div>
+<img src="frames/dense-e.jpg" alt="25 to 30 s at 5 fps: jersey and profile with the swoosh">
+
+<h2>Audio: what to keep and what to change</h2>
+<ul>
+<li><strong>The song is "How it go" by Yeat.</strong> shazamio named it the same in all three 10 s windows. It's free, but it's an unofficial client of Shazam's servers and could break.</li>
+<li><strong>Grid:</strong> 143.6 BPM, 0.418 s a beat, 67 beats. The big hits are at 0.09, 1.88 and 15.88. There are three section changes: the music drops 6 dB or more at 9.0, comes back at 10.0, and fades from 23.5.</li>
+<li><span class="tag keep">KEEP</span>The song bed, the one-second dropout before the make, and the outro fade. The dropout is the best moment in the reel and the edit is built around it.</li>
+<li><span class="tag swap">CHANGE</span>The announcer at 1.3–2.8 ("Looking for James, he's got it"). Replace it with a host introducing Dylan, which Arcmira can find by searching hosts' lines for his name. Or use a Dylan one-liner like the Asianometry "Huawei is so cracked" quote.</li>
+<li><span class="tag new">ADD</span>One Dylan line in the 9.0–10.0 silence, and optionally a short bite under the fast cuts, ducked under the music.</li>
+<li><strong>Rights:</strong> the Yeat track is commercial. Posting with TikTok or Instagram's in-app sound is the safe route; uploading the mixed file to X or YouTube risks a claim.</li>
+</ul>
+
+<h3>Announcer removed, everything else kept</h3>
+<p class="note">htdemucs_ft split the audio into four stems: drums, bass, other and vocals. The announcer sits in the vocal stem, along with the song's own vocal. Each variant below adds all four stems back together, with only the vocal stem muted from 1.15 to 2.95 s and 60 ms fades at the edges. Squeaks, crowd and the song's low end come from the other stems, so they stay. Nova-3 hears no words in either variant. Rebuild with <code>audio/compose.sh [start] [end]</code> to move the window.</p>
+<div class="grid">
+<div><strong>Original, first 5 s</strong><video src="audio/original-first5.mp4" controls preload="metadata"></video></div>
+<div><strong>The part that was removed</strong> (vocal stem, 0.85 to 3.25 s)<br><audio src="audio/announcer-only.wav" controls preload="metadata"></audio></div>
+<div><strong>A. Announcer muted</strong><video src="audio/no-announcer.mp4" controls preload="metadata"></video></div>
+<div><strong>B. Muted, but the vocal stem's top end kept</strong> (squeak and crowd hiss above 4.5 kHz, at -6 dB)<video src="audio/no-announcer-keep-highs.mp4" controls preload="metadata"></video></div>
+</div>
+<img src="audio/spec-stack.png" alt="Spectrograms of the first 4 s for the mix and each stem" style="max-width:720px">
+<p class="note">The spectrograms run from the top: mix, vocals, drums, other, bass, over 0 to 4 s. In the vocal stem the announcer shows as the broad vertical bursts from 1.4 to 2.8 s. The flat lines either side are the song's vocal, which stays.</p>
+
+<h3>Transcription comparison (same 30 s clip)</h3>
+<div class="wrap"><table>
+<tr><th>Engine</th><th>Where it runs</th><th>Time</th><th>Mix</th><th>Voice stem</th></tr>
+<tr><td>Whisper large-v3 turbo</td><td>Workers AI <code>@cf/openai/whisper-large-v3-turbo</code></td><td class="t">5.9 s</td><td>"Looking for James, he's got it. He's got it."</td><td>Same line. Adds a phantom "He's got it." at 30.0 s.</td></tr>
+<tr><td>Deepgram Nova-3</td><td>Workers AI <code>@cf/deepgram/nova-3</code></td><td class="t">1.2 s</td><td>"Looking for James. He's got it."</td><td>Same, with word times (looking 1.36, james 1.84, it 2.72).</td></tr>
+<tr><td>faster-whisper small.en</td><td>Local CPU, int8</td><td class="t">2.4 s</td><td>"Looking for James, he's got it."</td><td>Same line, then the classic Whisper hallucination "Thanks for watching!" at the end.</td></tr>
+</table></div>
+<p class="note">All three caught the announcer and none transcribed Yeat's vocals, which are heavily processed. That's fine: the song name covers the lyrics, and what a remake needs from transcription is the spoken lines laid over the music. Nova-3 was fastest and gave clean word timings. Whisper on any platform makes up text in silence, so the skill should drop segments that fall in quiet stretches of the stem.</p>
+
+<h3>Other Workers AI models we could use (listed 2026-10-16)</h3>
+<ul>
+<li><strong>Text to image:</strong> FLUX.2 dev, FLUX.2 klein 4B and 9B, FLUX.1 schnell, Leonardo Phoenix 1.0 and Lucid Origin, SDXL and SDXL Lightning, Dreamshaper, and SD 1.5 inpainting. Character sheets and keyframes could start here cheaply. I haven't checked whether Workers AI's FLUX.2 takes reference images for edits.</li>
+<li><strong>Image understanding:</strong> Moondream 3.1, LLaVA 1.5, plus vision-capable LLMs (Llama 3.2 11B Vision, Llama 4 Scout, Gemma 4).</li>
+<li><strong>Speech:</strong> Whisper, Whisper turbo, Whisper tiny-en, Deepgram Nova-3 and Flux; text to speech with Deepgram Aura and MeloTTS.</li>
+<li><strong>No video generation and no video understanding.</strong> V2V and image-to-video still go through OpenRouter.</li>
+</ul>
+
+<h2>Niche San Francisco Technology Times: pick the front page</h2>
+<p class="note">Here are 38 SemiAnalysis company moments with a Moment Score out of 100. The score is company impact 40, public reach 30, how personal it is to SemiAnalysis or Dylan 20, and recency 10. Research ran 2026-10-16 across Exa, Google News, the full Substack archive (340 posts) and the press. Each row links its source. The run's fuller research notes are not in this repo. The status column reads V for verified first-hand, P for press only and U for unverified. X posts are not in this table.</p>
+<div class="wrap"><table><tr><th>#</th><th>Score</th><th>Date</th><th>Moment</th><th>Source</th><th>Status</th></tr><tr><td class="t">1</td><td class="t"><strong>91</strong></td><td class="d">2026-04-18 / 09-18</td><td><strong>SemiAnalysis crosses $100M a year in revenue</strong>, about 5x the year before</td><td><a href="https://www.theinformation.com/briefings/dylan-patels-semianalysis-projects-100-million-2026-revenue">source</a></td><td class="d">[V]</td></tr><tr><td class="t">2</td><td class="t"><strong>90</strong></td><td class="d">2026-07-31 to 09-18</td><td><strong>SemiAnalysis Capital Fund I closes at $500M</strong> (target was $400M)</td><td><a href="https://www.theinformation.com/briefings/exclusive-semianalysis-dylan-patel-targets-400-million-venture-capital-fund">source</a></td><td class="d">[V]</td></tr><tr><td class="t">3</td><td class="t"><strong>89</strong></td><td class="d">2026-09-11</td><td><strong>SemiAnalysis acquires Citrini Research.</strong> Founder James van Geelen stays on as CEO. Price not disclosed</td><td><a href="https://www.bloomberg.com/news/articles/2026-09-11/citrini-founder-who-shook-markets-sells-firm-plans-new-fund">source</a></td><td class="d">[V] (Citrini&#x27;s own note)</td></tr><tr><td class="t">4</td><td class="t"><strong>88</strong></td><td class="d">2026-03-16</td><td><strong>Jensen Huang puts SemiAnalysis InferenceX on the GTC 2026 keynote screen</strong>, calls it the largest, most comprehensive inference sweep ever done</td><td><a href="https://substratemag.com/dylanpatel/">source</a></td><td class="d">[V] (Substrate)</td></tr><tr><td class="t">5</td><td class="t"><strong>82</strong></td><td class="d">2025-10-09</td><td><strong>InferenceMAX launches</strong>: open-source, nightly-run inference benchmark across Nvidia and AMD</td><td><a href="https://newsletter.semianalysis.com/p/inferencemax-open-source-inference">source</a></td><td class="d">[V]</td></tr><tr><td class="t">6</td><td class="t"><strong>80</strong></td><td class="d">2026-09-18</td><td><strong>Substrate cover profile</strong>, &quot;Dylan Patel&#x27;s Information Machine&quot; (Cat Tang, 15-minute read, photo shoot)</td><td><a href="https://substratemag.com/dylanpatel/">source</a></td><td class="d">[V]</td></tr><tr><td class="t">7</td><td class="t"><strong>79</strong></td><td class="d">2026-09-10</td><td><strong>SemiAnalysis Capital co-leads Positron&#x27;s $875M Series C at a $5B valuation.</strong> Dylan joins the board</td><td><a href="https://www.prnewswire.com/news-releases/positron-ai-raises-875-million-at-a-5-billion-valuation-to-bring-its-next-generation-inference-silicon-to-market-302874601.html">source</a></td><td class="d">[V] co-lead; board seat [P]</td></tr><tr><td class="t">8</td><td class="t"><strong>78</strong></td><td class="d">2026-06-29 / 06-30</td><td><strong>Tema ETFs exclusive partnership; memory ETF (DISK) and photonics ETF (LAZR) launch the next day.</strong> Power-semis ETF (PSOX) followed on 09-17</td><td><a href="https://temaetfs.com/press/tema-etfs-and-semianalysis-launch-exclusive-semiconductor-etf-partnership">source</a></td><td class="d">[V]</td></tr><tr><td class="t">9</td><td class="t"><strong>77</strong></td><td class="d">2025-02-03</td><td><strong>Lex Fridman #459</strong> (with Nathan Lambert), five hours on DeepSeek and megaclusters</td><td><a href="https://www.youtube.com/watch?v=_1f-o0nqpEI">source</a></td><td class="d">[V]</td></tr><tr><td class="t">10</td><td class="t"><strong>76</strong></td><td class="d">2025-01-31</td><td><strong>&quot;DeepSeek Debates&quot;</strong>: SemiAnalysis estimates DeepSeek holds about 50,000 Hopper GPUs and spent about $1.6B, versus the &quot;$6M&quot; headline figure</td><td><a href="https://newsletter.semianalysis.com/p/deepseek-debates">source</a></td><td class="d">[V] (only 11 likes: the post was moved from semianalysis.com, see note in §4)</td></tr><tr><td class="t">11</td><td class="t"><strong>76</strong></td><td class="d">2026-01 to 2026-10</td><td><strong>Team grows from 32 to about 100</strong></td><td><a href="https://substratemag.com/dylanpatel/">source</a></td><td class="d">[V]</td></tr><tr><td class="t">12</td><td class="t"><strong>75</strong></td><td class="d">2026-10-16</td><td><strong>318,000+ newsletter subscribers</strong> (200k in mid-2025)</td><td><a href="https://semianalysis.com/about/">source</a></td><td class="d">[V] (self-claim)</td></tr><tr><td class="t">13</td><td class="t"><strong>75</strong></td><td class="d">2023-05-04</td><td><strong>&quot;Google: We Have No Moat, And Neither Does OpenAI&quot;</strong>: SemiAnalysis publishes the leaked Google memo</td><td><a href="https://newsletter.semianalysis.com/p/google-we-have-no-moat-and-neither">source</a></td><td class="d">[V]</td></tr><tr><td class="t">14</td><td class="t"><strong>74</strong></td><td class="d">2023-08-28</td><td><strong>&quot;GPU Rich vs GPU Poor&quot;</strong> (Gemini eats the world). Coins the phrase; OpenAI pushes back</td><td><a href="https://newsletter.semianalysis.com/p/google-gemini-eats-the-world-gemini">source</a></td><td class="d">[V]</td></tr><tr><td class="t">15</td><td class="t"><strong>73</strong></td><td class="d">2025-03-26 to 2026-09-23</td><td><strong>ClusterMAX becomes the GPU-cloud rating standard</strong>: v1 rated 131 clouds, v2 tracked 209 providers and rated 84, v3 in September 2026</td><td><a href="https://newsletter.semianalysis.com/p/clustermax-20-the-industry-standard">source</a></td><td class="d">[V]</td></tr><tr><td class="t">16</td><td class="t"><strong>73</strong></td><td class="d">2026-07-05</td><td><strong>Kyber NVL144 delay report</strong>: SemiAnalysis says Nvidia&#x27;s next rack slips to 2028. Nvidia denies it</td><td><a href="https://www.cnbc.com/2026/07/06/nvidia-kyber-rack-system-delays-manufacturing-taiwan-rubin-chips-.html">source</a></td><td class="d">[P]</td></tr><tr><td class="t">17</td><td class="t"><strong>72</strong></td><td class="d">2026-09-30 to 10-05</td><td><strong>One SemiAnalysis post drops Cerebras about 16% in a day; Sam Altman replies on X</strong></td><td><a href="https://finance.yahoo.com/markets/stocks/articles/semianalysis-sank-cerebras-tweet-altman-211531052.html">source</a></td><td class="d">[P]</td></tr><tr><td class="t">18</td><td class="t"><strong>71</strong></td><td class="d">2026-06-09 / 10</td><td><strong>CPO and 800VDC timing report knocks optical stocks</strong> (AAOI -17%, Lumentum -8%, Taiwan names limit-down)</td><td><a href="https://www.kucoin.com/news/flash/semianalysis-report-sparks-debate-on-cpo-timeline-optical-stocks-drop">source</a></td><td class="d">[P]</td></tr><tr><td class="t">19</td><td class="t"><strong>70</strong></td><td class="d">2026-06-05</td><td><strong>Micron falls 13%</strong>, its largest one-day drop since April 2025, after a SemiAnalysis report on Vera Rubin memory</td><td><a href="https://www.kucoin.com/news/flash/micron-stock-plummets-13-as-semianalysis-report-sparks-market-fears">source</a></td><td class="d">[P]</td></tr><tr><td class="t">20</td><td class="t"><strong>70</strong></td><td class="d">2026-04-17</td><td><strong>The Information profiles the firm</strong>: &quot;How Dylan Patel and SemiAnalysis Grabbed Sway in Silicon Valley&quot;</td><td><a href="https://www.theinformation.com/articles/dylan-patel-semianalysis-grabbed-sway-silicon-valley">source</a></td><td class="d">[V] headline</td></tr><tr><td class="t">21</td><td class="t"><strong>69</strong></td><td class="d">2026-02-16 / 08-24</td><td><strong>InferenceX v2, then AgentX (InferenceX v3)</strong>, the first open-source agentic-inference benchmark, built from 393 Claude Code sessions</td><td><a href="https://newsletter.semianalysis.com/p/inferencex-v2-nvidia-blackwell-vs">source</a></td><td class="d">[V]</td></tr><tr><td class="t">22</td><td class="t"><strong>68</strong></td><td class="d">2025-11-12</td><td><strong>Dylan co-interviews Satya Nadella</strong> with Dwarkesh, including a Fairwater 2 datacenter tour</td><td><a href="https://www.youtube.com/watch?v=8-boBsWcr5A">source</a></td><td class="d">[V]</td></tr><tr><td class="t">23</td><td class="t"><strong>68</strong></td><td class="d">2026-08-25 to 08-31</td><td><strong>Dwarkesh six-part series</strong> (&quot;Two labs will soon control most of the world&#x27;s workforce&quot;)</td><td><a href="https://www.dwarkesh.com/p/dylan-patel-3">source</a></td><td class="d">[V]</td></tr><tr><td class="t">24</td><td class="t"><strong>67</strong></td><td class="d">2024-11-14</td><td><strong>SemiAnalysis merges with Fabricated Knowledge.</strong> Doug O&#x27;Laughlin becomes President. Announced on Stratechery</td><td><a href="https://stratechery.com/2024/an-interview-with-dylan-patel-and-doug-olaughlin-about-the-current-state-of-semiconductors-and-semianalysis/">source</a></td><td class="d">[P]</td></tr><tr><td class="t">25</td><td class="t"><strong>66</strong></td><td class="d">2026-04-02</td><td><strong>H100 1-Year Rental Price Index launches</strong>, plus a GPU pricing dashboard and API. Rents up about 40%</td><td><a href="https://newsletter.semianalysis.com/p/the-great-gpu-shortage-rental-capacity">source</a></td><td class="d">[V]</td></tr><tr><td class="t">26</td><td class="t"><strong>65</strong></td><td class="d">2026-07-08</td><td><strong>&quot;Anthropic 3Q26 profit over $1B&quot;</strong> IPO financials preview</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-3q26-profit-over-1b-the">source</a></td><td class="d">[V]</td></tr><tr><td class="t">27</td><td class="t"><strong>64</strong></td><td class="d">2026-09-25</td><td><strong>China Datacenter Model launches</strong>: 1,000+ facilities, puts China at 24 GW</td><td><a href="https://newsletter.semianalysis.com/p/the-chinese-ai-infrastructure-boom">source</a></td><td class="d">[V]</td></tr><tr><td class="t">28</td><td class="t"><strong>63</strong></td><td class="d">2026-02-05</td><td><strong>&quot;Claude Code is the Inflection Point&quot;</strong>: #2 most-liked post ever</td><td><a href="https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point">source</a></td><td class="d">[V]</td></tr><tr><td class="t">29</td><td class="t"><strong>62</strong></td><td class="d">2026-06-14</td><td><strong>STEEL teardown lab opens</strong>: SMIC N+3 die shots compared against Intel 18A</td><td><a href="https://newsletter.semianalysis.com/p/steel-smic-n3-teardown">source</a></td><td class="d">[V]</td></tr><tr><td class="t">30</td><td class="t"><strong>61</strong></td><td class="d">2026-10-07 / 10-16</td><td><strong>Still moving stocks this month</strong>: IREN -6% (10-07) on datacenter reliability; Besi -2.3% today on &quot;ASML Is Building a Hybrid Bonder&quot;</td><td><a href="https://www.investing.com/news/stock-market-news/why-is-be-semiconductor-industries-stock-sliding-today-93CH-4954216">source</a></td><td class="d">[P]</td></tr><tr><td class="t">31</td><td class="t"><strong>60</strong></td><td class="d">2025-11-28</td><td><strong>TPUv7 &quot;900lb gorilla&quot;</strong> report on Google selling TPUs outside Google</td><td><a href="https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the">source</a></td><td class="d">[V]</td></tr><tr><td class="t">32</td><td class="t"><strong>60</strong></td><td class="d">2026-03-15</td><td><strong>SemiAnalysis x Fluidstack 48-hour GTC hackathon</strong> in San Jose</td><td><a href="https://luma.com/SAxFSHack">source</a></td><td class="d">[V]</td></tr><tr><td class="t">33</td><td class="t"><strong>58</strong></td><td class="d">2025-05-22</td><td><strong>Five-year anniversary.</strong> Dylan posted his first blog on his 24th birthday; the team was 32 people by his 29th</td><td><a href="https://www.linkedin.com/posts/dylanpatelsa_5-years-ago-on-may-22nd-my-24th-birthday-activity-7331498459138543616-zqnm">source</a></td><td class="d">[V]</td></tr><tr><td class="t">34</td><td class="t"><strong>57</strong></td><td class="d">2026-04-01</td><td><strong>Dylan on CNBC Mad Money with Jim Cramer</strong> (one-on-one)</td><td><a href="https://www.cnbc.com/video/2026/04/01/semianalysis-ceo-dylan-patel-goes-one-on-one-with-jim-cramer.html">source</a></td><td class="d">[V]</td></tr><tr><td class="t">35</td><td class="t"><strong>56</strong></td><td class="d">2023-07-10</td><td><strong>GPT-4 architecture leak</strong> (1.8T parameters, MoE)</td><td><a href="https://newsletter.semianalysis.com/p/gpt-4-architecture-infrastructure">source</a></td><td class="d">[V]</td></tr><tr><td class="t">36</td><td class="t"><strong>55</strong></td><td class="d">2026-02</td><td><strong>SemiAnalysis Weekly podcast launches</strong> (Jordan Nanos, Doug O&#x27;Laughlin); Ep. 037 by 10-09</td><td><a href="https://semianalysis.com/weekly/episodes/">source</a></td><td class="d">[V]</td></tr><tr><td class="t">37</td><td class="t"><strong>54</strong></td><td class="d">2025-09-16</td><td><strong>xAI Colossus 2, &quot;first gigawatt datacenter in the world&quot;</strong></td><td><a href="https://newsletter.semianalysis.com/p/xais-colossus-2-first-gigawatt-datacenter">source</a></td><td class="d">[V]</td></tr><tr><td class="t">38</td><td class="t"><strong>50</strong></td><td class="d">2026-05-20</td><td><strong>SpaceX S-1 cites SemiAnalysis research</strong></td><td><a href="https://www.linkedin.com/posts/semianalysis_spacex-just-file">source</a></td><td class="d">[U] (self-claim; I did not check the S-1)</td></tr></table></div>
+<p class="note">Searched for and not found: Dylan on the TIME100 (it was Dwarkesh in 2024), Dylan testifying to Congress (every hit was Kash Patel), and an outside funding round for SemiAnalysis itself. Kept out of a celebratory reel: the 2026 lawsuits with a former employee and the conflict-of-interest critiques.</p>
+<h3>40 headlines</h3>
+<p class="note">Suggested front page: <strong>"Half-Billion-Dollar Fund Closes for Dylan Patel"</strong> or <strong>"Blog Becomes $100 Million Empire"</strong> as the banner, <strong>"GPU Rich vs GPU Poor"</strong> as the kicker, and <strong>"Compute Capacity Demand Reaches All-Time Highs"</strong> as the second lead.</p>
+<p><strong>Zeal&#x27;s seeds and riffs</strong></p><ol><li>GPU Rich vs GPU Poor <span class='note'>(#14)</span></li><li>GPU Rich vs GPU Poor: The Rich Got Richer <span class='note'>(#14, #1)</span></li><li>Superintelligence Demand at an All-Time High <span class='note'>(theme: two-labs series #23, Meta Superintelligence post)</span></li><li>Datacenter Demand at an All-Time High <span class='note'>(theme: #27, #37, gigawatt posts)</span></li><li>Compute Capacity Demand Reaches All-Time Highs <span class='note'>(theme: #25 rents up 40%)</span></li><li>Compute Demand Hits Record; Supply Still Sold Out <span class='note'>(theme)</span></li><li>Superintelligence Demand Soars; Gigawatts Sold Before Built <span class='note'>(theme)</span></li><li>Every Watt Spoken For <span class='note'>(theme: power posts)</span></li><li>GPU Poor No More: Rents Up Forty Percent <span class='note'>(#25)</span></li></ol><p><strong>Money and size</strong></p><ol><li>Blog Becomes $100 Million Empire <span class='note'>(#1)</span></li><li>SemiAnalysis Crosses $100 Million, Fivefold in a Year <span class='note'>(#1)</span></li><li>Half-Billion-Dollar Fund Closes for Dylan Patel <span class='note'>(#2)</span></li><li>Target Was $400 Million. They Raised $500 Million. <span class='note'>(#2)</span></li><li>SemiAnalysis Buys Citrini; Wall Street Takes Notes <span class='note'>(#3)</span></li><li>Research Giants Merge: SemiAnalysis Acquires Citrini <span class='note'>(#3)</span></li><li>From Reddit Threads to 100 Full-Time Staff <span class='note'>(#11)</span></li><li>318,000 Readers and Counting <span class='note'>(#12)</span></li><li>Nine of Ten Largest Companies Are Clients <span class='note'>(Substrate customer quote, [U])</span></li><li>Positron Hits $5 Billion; Patel Takes Board Seat <span class='note'>(#7)</span></li><li>SemiAnalysis Goes to Wall Street: Three ETFs Launch <span class='note'>(#8)</span></li></ol><p><strong>Influence</strong></p><ol><li>Jensen Puts SemiAnalysis on the Big Screen <span class='note'>(#4)</span></li><li>Nvidia&#x27;s Keynote, SemiAnalysis&#x27;s Chart <span class='note'>(#4)</span></li><li>Benchmark Wars Over: InferenceMAX Named Referee <span class='note'>(#5)</span></li><li>Neoclouds Await Their ClusterMAX Report Cards <span class='note'>(#15)</span></li><li>One Tweet, One Stock, One Altman Reply <span class='note'>(#17)</span></li><li>Nvidia Denies; Market Believes SemiAnalysis Anyway <span class='note'>(#16)</span></li><li>Local Newsletter Moves Markets Again <span class='note'>(#18, #19, #30)</span></li><li>Micron Sinks 13% on a Single Report <span class='note'>(#19)</span></li><li>Besi Slides as SemiAnalysis Spots ASML Bonder <span class='note'>(#30, today)</span></li></ol><p><strong>The famous calls</strong></p><ol><li>Leaked: Google Has No Moat <span class='note'>(#13)</span></li><li>DeepSeek&#x27;s &quot;$6 Million&quot; Was $1.6 Billion <span class='note'>(#10)</span></li><li>GPT-4 Secrets Spilled <span class='note'>(#35)</span></li><li>Claude Code Is the Inflection Point <span class='note'>(#28)</span></li><li>Google Swings at Nvidia&#x27;s Crown <span class='note'>(#31)</span></li><li>World&#x27;s First Gigawatt Datacenter Rises in Memphis <span class='note'>(#37)</span></li><li>Teardown Lab Opens; Die Shots Don&#x27;t Lie <span class='note'>(#29)</span></li></ol><p><strong>Founder story</strong></p><ol><li>Five Years, One Blog, Trillion-Dollar Buildout <span class='note'>(#33)</span></li><li>Birthday Blog Turns Into Industry Oracle <span class='note'>(#33)</span></li><li>Supply Chain Sleuths Outrun Wall Street <span class='note'>(#6, #20)</span></li><li>Two Patels, One Floor, Zero Relation <span class='note'>(Substrate office detail)</span></li></ol>
+<h2>Front page concept</h2>
+<p class="note">A layout concept for the 12.0–13.2 newspaper beat, drawn at 16:9 so it drops into the same push-in the original uses: it pushes into the photo, then the halftone, then the collage. The banner and photo get read. Everything else just has to look like a real paper on a 0.3 s glance. Numbers come from milestones.md; the growth rates are worked out from its dated figures.</p>
+<div class="paper">
+  <div class="mast">Niche San Francisco Technology Times</div>
+  <div class="dateline"><span>Friday, October 16, 2026</span><span>"All the Singularity That's Fit to Print"</span><span>Demon Edition</span></div>
+  <div class="cols">
+    <div class="col">
+      <div><h4>Blitzscaling Past 318,000 Subs</h4>
+      <p>SemiAnalysis had 32 people at its five-year mark in May 2025 and is on track for about 100 by the end of 2026, roughly 3.1x in a year and a half. The hires are analysts in San Francisco, Seoul, Singapore and Chicago.</p>
+      <p>Subscribers kept pace, from about 200,000 in June 2025 to 318,000 this week. The firm now counts more wafers per employee than most fabs make. New hires reportedly get a 40-page note on CoWoS capacity in place of a welcome packet.</p></div>
+      <div><h4>Half a Billy CLOSED</h4>
+      <p>SemiAnalysis Capital Fund I closes at $500 million against a $400 million target, a 25% overshoot. Limited partners were reportedly told the diligence process is reading the newsletter before everyone else does.</p>
+      <p>The GPU poor are advised to apply within.</p></div>
+    </div>
+    <div class="col" style="display:block">
+      <div class="kicker">GPU Rich Getting Richer</div>
+      <div class="banner">SemiAnalysis Prints $100 Million</div>
+      <div class="deck">5x Revenue in a Year; Looking Good Here</div>
+      <div class="photo" style="background-image:url(starts/src/lebron-11.6.png)"></div>
+    </div>
+    <div class="col">
+      <div><h4>Compute Demand at All-Time Highs</h4>
+      <p>One-year H100 rents are up about 40%, per the SemiAnalysis rental index. China is tracked at 24 gigawatts, and Memphis is home to the first gigawatt datacenter. Every watt is spoken for and every transformer is back-ordered.</p>
+      <p>Jensen Huang put SemiAnalysis's InferenceX on the GTC keynote screen. Analysts call it the chart about the chart.</p></div>
+      <div><h4>Dingboard Ad Still Up, Still Says 80,000 Subscribers</h4>
+      <p>SemiAnalysis sponsored yacine's Dingboard in March 2024. Thirty-one months later the cartoon money bag is still waving and the banner still reads "Over 80,000 subscribers!" against 318,000 today.</p>
+      <p>Historians are calling it the longest running ad in meme history, and the only number SemiAnalysis has ever lowballed.</p></div>
+    </div>
+  </div>
+</div>
+<ul class="note">
+<li><strong>Banner:</strong> SemiAnalysis Prints $100 Million, one line. <strong>Kicker:</strong> GPU Rich Getting Richer. No photo caption, matching the original.</li>
+<li><strong>Left:</strong> Blitzscaling Past 318,000 Subs (headcount 32 to about 100, May 2025 to end of 2026) on top, Half a Billy below. <strong>Right:</strong> Compute Demand on top, the Dingboard story below (an article, not an ad box). ETFs and Positron are cut.</li>
+<li><strong>Paper:</strong> plain white. In the reel it gets the original's heavy motion blur and the swipe left, so only the banner and photo read.</li>
+<li><strong>Two numbers to check before print:</strong> the $20M base behind "fivefold" is press-only, and "about 100" staff is the year-end projection.</li>
+</ul>
+<h2>All shots with the back-down recipe (2026-10-16)</h2>
+<p class="note">Each shot ran on Wan 3.0 with its source clip slowed, the sheet and both headshots, its two Sunburst frames as references and the face-and-beard prompt, then sped back to real time. Every short shot cost $0.50.</p>
+<div class="sb vids" id="all-vids">
+<div class="card"><strong>Fadeaway (8.60 to 10.00). Good</strong><div class="note">Dylan's face holds and the move matches. PATEL on the back reads more like PATTI, a fix for post.</div><video src="shots/fadeaway/out/final-realtime.mp4" controls muted loop playsinline></video><video src="shots/fadeaway/src-720.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Celebrate (10.80 to 12.00), take 2. Needs take 3</strong><div class="note">Dylan's face and SemiAnalysis 67 are there. The gold numbers read 388 for most of the clip and only become $100,000,000 at the very end. The Nike, bibigo and 6 patches are still on, and he grins at the end where he should look up.</div><video src="shots/celebrate/out/final-realtime.mp4" controls muted loop playsinline></video><video src="shots/celebrate/src-720.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Darkball (16.53 to 17.97). Good</strong><div class="note">The wafer runs through the middle. A basketball shows on the first frame and comes back for the last 0.3 s, so trim both ends in the edit.</div><video src="shots/darkball/out/final-realtime.mp4" controls muted loop playsinline></video><video src="shots/darkball/src-720.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Alley-oop (20.80 to 23.17). First run</strong><div class="note">The first run went out with a placeholder prompt and kept LeBron.</div><video src="shots/alleyoop/src-720.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Jersey (25.60 to 27.13). Good</strong><div class="note">PATEL 67 reads clearly. The last 0.5 s tints the 67 purple and gold and goes a little soft, so cut before it.</div><video src="shots/jersey/out/final-realtime.mp4" controls muted loop playsinline></video><video src="shots/jersey/src-720.mp4" controls muted loop playsinline></video></div>
+</div>
+<h2>Video test 2: the back-down (6.27 to 8.57)</h2>
+<p class="note"><strong>Verdict:</strong> slow the source 2x, generate 5 s, and speed it back up. That becomes the recipe for every short shot.</p>
+<p class="note">One camera, panning with him, his back to us for most of it. The setup is the winner from test 1: Wan 3.0, the source clip as motion, and the sheet plus two Sunburst frames as references. Two variants: the clip as is (2.3 s in, 3 s out), and the clip slowed 2x (4.6 s in, 5 s out) to be sped back up in the edit, so the model gets more frames per move. Click any video or image to enlarge it, and press Esc to close.</p>
+<div class="sb">
+<div class="card"><strong>Source frames with the box</strong><img src="shots/backdown/start-box.png" alt="back-down start source"><img src="shots/backdown/end-box.png" alt="back-down end source"></div>
+<div class="card"><strong>Start frame (6.3 s)</strong><img src="starts/out/bdstart-gpt-image-2.5-sunburst.png" alt="back-down start"></div>
+<div class="card"><strong>End frame (8.5 s)</strong><img src="starts/out/bdend-gpt-image-2.5-sunburst.png" alt="back-down end"></div>
+</div>
+<div class="sb vids" id="bd-vids">
+<div class="card"><strong>Original</strong><video src="shots/backdown/src-720.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Wan 3.0, clip as is ($0.45)</strong><div class="note">Good swap and a clean 67. But the 3 s output runs past the 2.3 s source, so it invents a camera swing to the basket at the end.</div><video src="shots/backdown/out/wan-3.0-noframes.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Wan 3.0, clip slowed 2x, sped back to real time ($0.81). Best</strong><div class="note">Follows the original through the spin and the jump shot. Dylan holds up close (head, beard, build, 67). PATEL smears slightly, which doesn't read at speed and can be patched in post. Below it is the raw 5 s slow output.</div><video src="shots/backdown/out/wan-3.0-slow-realtime.mp4" controls muted loop playsinline></video><video src="shots/backdown/out/wan-3.0-noframes-slow.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Wan 3.0, slowed, face-and-beard prompt, both headshots ($0.81). Beard fixed</strong><div class="note">Same motion as the best take. On the final turn the beard now stays short and trimmed instead of going full.</div><video src="shots/backdown/out/focus-realtime.mp4" controls muted loop playsinline></video></div>
+<div class="card"><strong>Wan 3.0, pinned start and end frames + sheet + headshots, no clip, short prompt ($0.43)</strong><div class="note">The face is the closest to Dylan so far, with a light beard and PATEL readable. But with no clip it makes up its own play: the camera drifts wide, the spin and the jump shot are gone, and it only lands on the end frame. Good enough for a shot that is ours, too loose for one that has to match the original.</div><video src="shots/backdown/out/wan-3.0-novideo-min.mp4" controls muted loop playsinline></video></div>
+</div>
+<h2>Video test 1: the intro wide shot (1.0 to 6.27)</h2>
+<p class="note">One camera take, cut on the scene change at 6.27. The fade from black (0 to 1.0) comes back in the edit. A red box on the source frames shows the edit model which player to swap. Sunburst then made the pinned start and end frames, and the broadcast graphic was changed to DYLAN PATEL. Sunburst's safety filter refuses about half of these requests at random, so <code>starts/gen.mjs</code> retries up to 4 times. Frames are now 1792x1008 (true 16:9); the earlier celebration frames came back at 3:2 and need a re-run at that size.</p>
+<div class="sb">
+<div class="card"><strong>Source frames with the box</strong><img src="shots/intro/start-box.png" alt="start source"><img src="shots/intro/end-box.png" alt="end source"></div>
+<div class="card"><strong>Pinned start frame (1.0 s)</strong><img src="starts/out/introstart-gpt-image-2.5-sunburst.png" alt="intro start"></div>
+<div class="card"><strong>Pinned end frame (6.2 s)</strong><img src="starts/out/introend-gpt-image-2.5-sunburst.png" alt="intro end"></div>
+</div>
+<p class="note">Three runs, each 5 s, with a prompt that describes only the swap (<code>shots/intro/job.json</code>). Seedance 2.5 gets everything: the source clip, the sheet, and the start and end frames. Wan 3.0 gets the clip and the sheet, since it can't take frames as well. Hailuo 3 can't mix frames and references, so it gets only the start and end frames, as the no-source-video control.</p>
+<p class="note"><strong>Verdict for shot 1:</strong> Wan 3.0 with the source clip as the motion and the sheet plus our two Sunburst frames as reference images. Pinning frames on Wan makes it drop the clip. Seedance 2.5 refuses NBA footage outright.</p>
+<div class="sb vids" id="intro-vids">
+<div class="card"><strong>Original</strong><video src="shots/intro/src-720.mp4" controls muted loop playsinline style="width:100%"></video></div>
+<div class="card"><strong>Seedance 2.5</strong><div class="pend">Refused three times: with the clip, without the clip, and with the scorebugs blurred. ByteDance checks the output video, and every attempt failed with "the output video may be related to copyright restrictions". Most likely the NBA arena itself (court, jerseys, broadcast look). Failed runs were not billed.</div></div>
+<div class="card"><strong>Wan 3.0 (clip + sheet), $0.88</strong><div class="note">Follows the original motion and camera almost exactly, and the graphic reads DYLAN PATEL. But the swap barely happened: the ball-handler still has LeBron's headband and build.</div><video src="shots/intro/out/wan-3.0-noframes.mp4" controls muted loop playsinline style="width:100%"></video></div>
+<div class="card"><strong>Hailuo 3 (frames only), $0.65, 2K</strong><div class="note">Dylan's face and the SemiAnalysis jersey come through, but the number drifts toward 97, and the motion is its own: it reaches the end pose early and holds it.</div><video src="shots/intro/out/hailuo-3-framesonly.mp4" controls muted loop playsinline style="width:100%"></video></div>
+<div class="card"><strong>Wan 3.0, clip + sheet + edited frames as references, stronger prompt ($0.88). Best so far</strong><div class="note">Keeps the original motion and camera, and the ball-handler is now Dylan: no headband, his face and beard. The number is hard to read at this size, so the scorebug and number may get a cleanup pass in post.</div><video src="shots/intro/out/wan-3.0-noframes-strong.mp4" controls muted loop playsinline style="width:100%"></video></div>
+<div class="card"><strong>Wan 3.0, clip + sheet + pinned frames ($0.43)</strong><div class="note">The cleanest Dylan and 67, but it ignored the clip (hence the lower price) and invented its own play, with the game clock frozen at 14.5.</div><video src="shots/intro/out/wan-3.0.mp4" controls muted loop playsinline style="width:100%"></video></div>
+<div class="card"><strong>Wan 3.0, face-and-beard prompt, real time and slowed</strong><div class="note">Wan varies from run to run. The real-time focus take slid back toward LeBron, and the slowed one (below) is Dylan but softer. The stronger-prompt take above stays the pick.</div><video src="shots/intro/out/wan-3.0-noframes-focus.mp4" controls muted loop playsinline style="width:100%"></video><video src="shots/intro/out/focus-slow-realtime.mp4" controls muted loop playsinline style="width:100%"></video></div>
+</div>
+<h2>Video options (researched 2026-10-16)</h2>
+<p class="note">Two public human-preference boards are the closest thing to a V2V benchmark. <a href="https://artificialanalysis.ai/video/leaderboard/video-editing">Artificial Analysis video editing</a> scores editing a clip from a text instruction. <a href="https://artificialanalysis.ai/video/leaderboard/image-to-video">Artificial Analysis image-to-video</a> scores animating a start frame. No board tests our exact job, which is a clip plus a character sheet plus pinned frames, so the last column is judgement.</p>
+<div class="wrap"><table><tr><th>Model</th><th>Edit board (Elo)</th><th>I2V board (Elo)</th><th>On OpenRouter</th><th>Inputs for our job</th></tr>
+<tr><td><strong>Wan 3.0</strong> (Alibaba)</td><td class="t">#1, 1200</td><td class="t">#4, 1127</td><td>Yes</td><td>Video + reference images, or first/last frames, but reportedly <em>not both in one request</em>. Best for "re-skin this clip with Dylan from the sheet".</td></tr>
+<tr><td><strong>Seedance 2.5</strong> (ByteDance)</td><td class="t">#2–3, 1155</td><td class="t">#2, 1138</td><td>Yes</td><td>Video + images + first/last frame together. The only top model that can pin our step 4 end frame while copying the original motion. The most used model in the AIMV catalog. ByteDance has refused realistic faces in references before, so it may balk.</td></tr>
+<tr><td><strong>Gemini Omni Flash 1.1</strong> (Google)</td><td class="t">#2–3, 1149</td><td class="t">#3, 1132</td><td>No (and OpenRouter blocks Gemini for us)</td><td>Would need AI Studio direct. A third option if the other two fail.</td></tr>
+<tr><td><strong>MiniMax H3</strong></td><td class="t">#4, 1125</td><td class="t">#1, 1140</td><td>Yes (Hailuo 3)</td><td>Reference images + first/last frames. Strongest pure i2v, so best for B-roll and the gold-numbers beat.</td></tr>
+<tr><td>Runway Aleph 2</td><td class="t">#8, 1014</td><td>n/a</td><td>Yes</td><td>Dropped. Well behind the leaders on editing.</td></tr>
+<tr><td>Veo 3.1</td><td>n/a</td><td class="t">#13, 1028</td><td>Yes</td><td>Dropped. Outranked on i2v by cheaper models.</td></tr></table></div>
+<p class="note"><strong>What the AIMV catalog says (338 music videos, read 2026-10-16):</strong> almost nobody does true V2V. The standard is a character sheet plus keyframes, then image to video. By entry count: Seedance 2.5 (30, plus Seedance 2.0 in 6), MiniMax Hailuo 3 (28, plus H3 Max in 3, and the model inside Slop Cannon), Grok Imagine (9), Wan 3.0 (3), Veo (3). Keyframe stills mostly come from GPT Image 2/2.5 and Midjourney. No entry uses Aleph, Wan Animate or Act-Two. The closest to V2V masks the person and swaps in a character (manaimovie--a-ma-i-ai-nike-chan-mv). So every V2V shot gets a keyframe i2v fallback built from our approved start and end frames, with the camera move written into the prompt.</p>
+<p class="note"><strong>Tricks to reuse:</strong> the same sheet goes into every generation. Generate slightly long and cut on the beat in code. One generation can carry several shots if the prompt lists "camera cuts at timestamps". Re-cut after generating, adding impact frames and grade (aimikoda--seedance-clip-recut-as-anime-opening-by). Character cutout over real footage via pose stills, then Wan 3.0, then chroma key (aiehon_aya--fully-automatic-anime-dance-mv-claude). Expect late-shot identity drift, and re-roll by hand. Read first: makevoid--programming-is-dead (sheet, GPT Image 2.5 keyframes, H3 Max, as a Claude Code skill) and anabology--suno-song-12-hour-opus-5-5-run-with-a (141-shot storyboard into Seedance 2.5).</p>
+<p class="note"><strong>Bakeoff for the celebration shot (10.8–12.0):</strong> (A) Seedance 2.5 with the original clip + the sheet + the step 4 frame as last frame. (B) Wan 3.0 with the original clip + the sheet, prompt describing only the swap, then cut to the step 4 frame on the freeze. (C) MiniMax H3 i2v between a new 10.8 start frame and the step 4 end frame, as the no-source-video control. The prompt in every case describes only what changes: the man, the jersey, the numbers.</p>
+<p class="note"><strong>Two risks.</strong> The source clip still shows LeBron's face, and providers that refused his still frame may refuse the clip too. If so, a tracked grey box over his head (the same trick as the stills) goes in. Most models also want at least 4 s, so each 1.2 to 2.8 s shot is slowed to 4 s going in and sped back up after.</p>
+<h2>Round 2: GPT Image 2.5 Sunburst</h2>
+<p class="note">Sunburst runs through OpenRouter's images endpoint. A sheet costs about $0.07 and an edit about $0.06, each in about 30 s. OpenAI's safety system refuses any edit of the untouched LeBron frame. With his head greyed out (<code>src/lebron-11.6-nohead.png</code>) every request went through, and the grey box tells the model where Dylan's head goes. Nano Banana 2.1 was not available through OpenRouter for this run, so GPT Image 2 is the comparison.</p>
+<div class="sb">
+<div class="card"><strong>Character sheet v2 (Sunburst)</strong><img src="starts/out/sheet-gpt-image-2.5-sunburst.png" alt="Character sheet v2 (Sunburst)"><div class="note">Six views: front face, full profile with room in front of the nose, back of head, three-quarter, full body front, and full body from behind with PATEL 67. This is the sheet every frame now uses.</div></div>
+<div class="card"><strong>Character sheet v1 (Sunburst)</strong><img src="starts/out/sheet-v1-gpt-image-2.5-sunburst.png" alt="Character sheet v1 (Sunburst)"><div class="note">Five views. The profile clipped his nose and there was no shot from behind, which v2 fixes.</div></div>
+<div class="card"><strong>Character sheet (GPT Image 2)</strong><img src="starts/out/sheet-gpt-image-2.png" alt="Character sheet (GPT Image 2)"><div class="note">Comparison: 70 s and $0.20, against Sunburst at 33 s and $0.07.</div></div>
+<div class="card"><strong>Celebration, one prompt</strong><img src="starts/out/celebrate-gpt-image-2.5-sunburst.png" alt="Celebration, one prompt"><div class="note">The real SemiAnalysis wordmark in its own colours and the numbers land, but it reframes tighter and slims his build.</div></div>
+<div class="card"><strong>Celebration step 1: jersey</strong><img src="starts/out/cel1jersey-gpt-image-2.5-sunburst.png" alt="Celebration step 1: jersey"><div class="note">semiANALYSIS in Lakers-style purple lettering and 67. Framing untouched.</div></div>
+<div class="card"><strong>Step 2: gold numbers</strong><img src="starts/out/cel2money-gpt-image-2.5-sunburst.png" alt="Step 2: gold numbers"><div class="note">$100,000,000 in gold blocks, the middle digits behind the head box.</div></div>
+<div class="card"><strong>Step 3: Dylan from the sheet</strong><img src="starts/out/cel3face-gpt-image-2.5-sunburst.png" alt="Step 3: Dylan from the sheet"><div class="note">The best so far: his face, LeBron's size, arms up, numbers partly behind his head. The arms may need one more pass to match his skin tone.</div></div>
+<div class="card"><strong>Step 4: jersey and arms from the sheet</strong><img src="starts/out/cel4jersey-gpt-image-2.5-sunburst.png" alt="Step 4: jersey and arms from the sheet"><div class="note">The approved end frame. The jersey matches the sheet exactly, and the arms now match his face.</div></div>
+</div>
+<p class="note"><strong>Pick:</strong> the step-by-step chain for any frame where the framing has to match the original shot exactly. The one-prompt version is the fallback when the real logo colours matter more than the framing.</p>
+<h2>Round 1 (rejected): Workers AI FLUX.2</h2>
+<p class="note">Target: Dylan at LeBron's size with his arms up, the jersey showing the SemiAnalysis wordmark and 67, and "$100,000,000" in gold 3D blocks partly behind him. Round 1 ran on Workers AI FLUX.2 [dev] (about 10 to 20 s and a few cents a frame) with the LeBron frame, two Dylan headshots and the real SemiAnalysis wordmark as references. Inputs are capped at 512 px. The runner is <code>starts/wai.mjs</code> and every prompt is in <code>starts/out/i2i/log.json</code>. FLUX.2 klein flagged every input containing LeBron, and a face-only edit on dev was flagged too.</p>
+<div class="sb">
+<div class="card"><strong>A. All edits in one prompt</strong><img src="starts/out/i2i/all-dev.png" alt="A. All edits in one prompt"><div class="note">Jersey, 67 and the numbers land. The camera reframes wider, the pose flattens to a T, and the face is a generic man, not Dylan.</div></div><div class="card"><strong>B1. Jersey only</strong><img src="starts/out/i2i/s1jersey-dev.png" alt="B1. Jersey only"><div class="note">Keeper. SemiAnalysis wordmark with its slashes, 67 in purple, pose and grade untouched.</div></div><div class="card"><strong>B2. + gold numbers</strong><img src="starts/out/i2i/s2money-dev.png" alt="B2. + gold numbers"><div class="note">Keeper. $100,000,000 in gold blocks, the middle digits tucked behind his head. This is the base for the face pass.</div></div><div class="card"><strong>B3. + face swap</strong><img src="starts/out/i2i/s3face-dev.png" alt="B3. + face swap"><div class="note">Fails. Generic face, lighter skin, slimmer arms.</div></div><div class="card"><strong>B3b. Face swap, stronger prompt, three headshots</strong><img src="starts/out/i2i/s3face3-dev.png" alt="B3b. Face swap, stronger prompt, three headshots"><div class="note">Worse. The head looks pasted on and the gold grade is lost.</div></div>
+</div>
+<p class="note"><strong>Verdict:</strong> Workers AI is dropped for these frames. Its only lesson that carries over is that step by step keeps the framing. Round 2 runs the same three steps (jersey, then numbers, then face from the new character sheet) on GPT Image 2.5 Sunburst and Nano Banana 2.1 through <code>starts/gen.mjs</code>. That needs an OpenRouter key in <code>OPENROUTER_API_KEY</code>. Next tests once it is there: B2 + face on GPT Image 2, B2 + face on Nano Banana, and the one-prompt version on both for comparison.</p>
+<h2>Storyboard: start frames for approval</h2><p class="note">Each card shows the original frame and the edited start frame, which <code>starts/gen.mjs</code> (GPT Image 2.5 Sunburst on OpenRouter, Nano Banana 2.1 as the comparison) fills in as frames are generated. A video model then animates each approved frame into its shot. Approvals and notes save in this browser. "Copy notes" puts them all on the clipboard to paste to me.</p><div class="sb">
+<div class="card" data-k="sheet"><strong>Character sheet</strong><div class="note">Five views of Dylan: front face, side face, back of head, three-quarter and full body, in the yellow SemiAnalysis 67 jersey. Built from his headshots. Every other frame uses this sheet, so it gets approved first.</div><img src="refs/dylan/contact.jpg" alt="original Character sheet"><img class="gen" src="starts/out/sheet-gpt-image-2.5-sunburst.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="wide"><strong>0.0–6.3 wide</strong><div class="note">Dylan at the top of the key. Scorebug reads DYLAN PATEL · GW TO BREAK COMPUTE RECORD.</div><img src="starts/src/lebron-3.0.png" alt="original 0.0–6.3 wide"><img class="gen" src="starts/out/wide.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="backdown"><strong>6.3–8.6 back-down</strong><div class="note">Dylan backs down the defender. Medium shot, face partly visible.</div><img src="starts/src/lebron-7.0.png" alt="original 6.3–8.6 back-down"><img class="gen" src="starts/out/backdown.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="fadeaway"><strong>8.6–10.0 fadeaway</strong><div class="note">Dylan's fadeaway; the fireball becomes a burning wafer.</div><img src="starts/src/lebron-8.7.png" alt="original 8.6–10.0 fadeaway"><img class="gen" src="starts/out/fadeaway.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="celebrate"><strong>10.8–12.0 celebration</strong><div class="note">Arms out, $100,000,000 in gold 3D blocks arcing around his head. The hardest swap: a face close-up.</div><img src="starts/src/lebron-11.6.png" alt="original 10.8–12.0 celebration"><img class="gen" src="starts/out/cel4jersey-gpt-image-2.5-sunburst.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="alleyoop"><strong>20.8–23.2 alley-oop</strong><div class="note">Overhead: Dylan on the alley-oop.</div><img src="starts/src/lebron-22.95.png" alt="original 20.8–23.2 alley-oop"><img class="gen" src="starts/out/alleyoop.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="jersey"><strong>25.6–28.4 jersey</strong><div class="note">PATEL 67 on the back. No face, so a text-only edit.</div><img src="starts/src/lebron-26.0.png" alt="original 25.6–28.4 jersey"><img class="gen" src="starts/out/jersey.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+<div class="card" data-k="profile"><strong>28.4–30.0 profile + logo</strong><div class="note">Dylan's side profile in the same grade. The end card uses the Dingboard-era SemiAnalysis logo, money bag included: <img src="refs/logo/end-logo.png" alt="end-card logo" style="background:#111;padding:6px;margin-top:4px"> Option: real podcast profile footage instead.</div><img src="starts/src/lebron-29.0.png" alt="original 28.4–30.0 profile + logo"><img class="gen" src="starts/out/profile.png" alt="" onerror="this.outerHTML='<div class=pend>Start frame not generated yet</div>'"><label><input type="checkbox" class="ok"> Approve</label><textarea placeholder="Notes for this shot"></textarea></div>
+</div><p><button id="copy">Copy notes</button> <span id="copied" class="note"></span></p>
+<script>
+const K = 'lebron-storyboard';
+let st = {}; try { st = JSON.parse(localStorage.getItem(K) || '{}'); } catch {}
+document.querySelectorAll('.card[data-k]').forEach(c => {
+  const k = c.dataset.k, s = st[k] || {}, ok = c.querySelector('.ok'), ta = c.querySelector('textarea');
+  ok.checked = !!s.ok; ta.value = s.notes || '';
+  const save = () => { st[k] = { ok: ok.checked, notes: ta.value }; try { localStorage.setItem(K, JSON.stringify(st)); } catch {} };
+  ok.onchange = save; ta.oninput = save;
+});
+document.getElementById('copy').onclick = async () => {
+  const t = Object.entries(st).map(([k, v]) => `${k}: ${v.ok ? 'APPROVED' : 'not approved'}${v.notes ? ' - ' + v.notes : ''}`).join('\n') || 'no notes yet';
+  try { await navigator.clipboard.writeText(t); document.getElementById('copied').textContent = 'Copied.'; } catch { document.getElementById('copied').textContent = t; }
+};
+</script>
+<h2>Fast-cut list for 13.2–20.7 (about 18 beats)</h2>
+<p class="note">Picked from the run's source pack (not in this repo), ranked by YouTube views and checked with yt-dlp. Each cut is about 0.4 s, alternating Dylan and B-roll, with a headline stamped on every fourth beat.</p>
+<ul>
+<li><strong>Dylan, by audience:</strong>
+  <ul>
+  <li>Lex Fridman #459 (2.1M views)</li>
+  <li>Dwarkesh: with Asianometry (376K), "Two labs" (362K), co-interviewing Satya Nadella (357K), and "Biggest bottleneck" (328K)</li>
+  <li>Matthew Berman (255K)</li>
+  <li>Invest Like the Best (158K)</li>
+  <li>BG2 (141K)</li>
+  </ul>
+  Pull 1 s spans where he's gesturing, and use the sheets to reject any where the camera is on the host.</li>
+<li><strong>B-roll:</strong> ASML's High-NA EUV reveal, Intel's High-NA arrival, Intel cleanroom bunny suits and wafer transport, a TSMC fab tour, and the Microsoft Fairwater datacenter clip. All are official channels, apart from the datacenter tours.</li>
+<li><strong>Headline stamps:</strong> "Google: We Have No Moat", "GPU Rich vs GPU Poor", "Vera Rubin: 67x Better per Dollar", "Mapping China's AI Datacenter Boom", "Anthropic Plans: 5x OpenAI's Value".</li>
+<li><strong>Missing:</strong> the most-liked X posts. X data was not available for this pass, so the Substack like counts stand in.</li>
+</ul>
+
+<h2>What generation this needs</h2>
+<ul>
+<li><strong>Face swaps (V2V with a Dylan character sheet):</strong> the 6.27 medium shot, the 8.57 fadeaway, and the 10.8 celebration close-up (the hardest). That's about 4.5 s, roughly $0.60 to $1.30 on Seedance 2.5 or Aleph 2, plus rerolls.</li>
+<li><strong>Swaps where the face is small or hidden:</strong> the 0–6.27 wide shot and the 20.8–23.2 overhead alley-oop, about 8.7 s.</li>
+<li><strong>Prompt-only edits:</strong> the jersey reading "PATEL" (about 2.8 s at $0.03/s) and the wafer for the ball.</li>
+<li><strong>No AI at all:</strong> the newspaper front pages, the number swap, the logo, the grades, the whips and the flashes. Our engine already does these.</li>
+<li><strong>Blockers:</strong>
+  <ul>
+  <li>An OpenRouter key whose privacy settings allow the video models.</li>
+  <li>Dylan's OK on his character sheet before any face swap.</li>
+  </ul>
+</li>
+</ul>
+</main>
+<script>
+document.addEventListener('click', (e) => {
+  const z = document.querySelector('.zoom');
+  if (z) { if (e.target === z) z.remove(); return; }
+  const el = e.target.closest('.card img, .sb.vids video');
+  if (!el || (el.tagName === 'VIDEO' && e.offsetY > el.clientHeight - 48)) return;
+  e.preventDefault();
+  const big = el.cloneNode(true);
+  if (big.tagName === 'VIDEO') { big.controls = true; big.autoplay = true; big.currentTime = el.currentTime; }
+  const wrap = document.createElement('div'); wrap.className = 'zoom'; wrap.appendChild(big); document.body.appendChild(wrap);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelector('.zoom')?.remove(); });
+</script>
+</body>
+</html>

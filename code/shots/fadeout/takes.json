@@ -1,0 +1,20 @@
+{
+  "status": "done",
+  "takes": [
+    {
+      "label": "Dylan splice v3",
+      "src": "shots/fadeout/out/splice-v3.mp4",
+      "note": "v2 without the one-frame flash before 24.18: the V2V head's last two frames were a Wan hallucination of another angle (a court logo from above), not in the original. The head now ends at frame 27 and the original takes over from 24.10. Built by the v3 block in post.sh."
+    },
+    {
+      "label": "Dylan splice v2",
+      "src": "shots/fadeout/out/splice-v2.mp4",
+      "note": "Ends at 25.43, before the original fades in its JAMES 6 jersey shot."
+    },
+    {
+      "label": "Dylan splice",
+      "src": "shots/fadeout/out/splice-v1.mp4",
+      "note": "The first second, where the dunker hangs on the rim, is Dylan V2V look-matched to the original. The rest is the original fade, after he has left the frame."
+    }
+  ]
+}

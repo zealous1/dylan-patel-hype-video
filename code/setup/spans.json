@@ -1,0 +1,57 @@
+{
+  "note": "Each swapped shot's span of src/clip.mp4 at 30 fps: the first frame, the frame count, the slowdown and the frame count of the slowed copy sent to video-to-video. Measured by matching the original cuts frame by frame against the reference; the slowed copies are frame blends at slow_factor.",
+  "intro": {
+    "start": 30,
+    "frames": 159,
+    "slow_factor": 1.9,
+    "slow_frames": 298
+  },
+  "backdown": {
+    "start": 189,
+    "frames": 69,
+    "slow_factor": 2.0,
+    "slow_frames": 135
+  },
+  "fadeaway": {
+    "start": 258,
+    "frames": 42,
+    "slow_factor": 2.145,
+    "slow_frames": 86
+  },
+  "rim": {
+    "start": 300,
+    "frames": 23,
+    "slow_factor": 3.75,
+    "slow_frames": 79
+  },
+  "celebrate": {
+    "start": 324,
+    "frames": 36,
+    "slow_factor": 2.5,
+    "slow_frames": 86
+  },
+  "darkball": {
+    "start": 496,
+    "frames": 44,
+    "slow_factor": 2.085,
+    "slow_frames": 88
+  },
+  "alleyoop": {
+    "start": 624,
+    "frames": 72,
+    "slow_factor": 2.11,
+    "slow_frames": 148
+  },
+  "fadeout": {
+    "start": 696,
+    "frames": 29,
+    "slow_factor": 3.0,
+    "slow_frames": 82
+  },
+  "jersey": {
+    "start": 768,
+    "frames": 46,
+    "slow_factor": 1.96,
+    "slow_frames": 87
+  }
+}

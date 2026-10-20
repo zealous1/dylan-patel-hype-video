@@ -1,0 +1,75 @@
+{
+  "status": "done",
+  "takes": [
+    {
+      "label": "podcast hype v14 right-aligned",
+      "src": "shots/fastcuts/out/fastcuts-v14.mp4",
+      "note": "v13 with the block moved bottom right: the channel name raised, the exact query right-aligned under it, both one white at 85% with a soft black shadow (8 px blur, 70%). Pinned into each shot, wiped in, and taking the pans and flashes."
+    },
+    {
+      "label": "podcast hype v13 query + channel",
+      "src": "shots/fastcuts/out/fastcuts-v13.mp4",
+      "note": "Split tag in one white at 85%: the exact query small bottom left (query in bold), the result's channel name big bottom right in Inter Display ExtraBold caps. The channel name is the result, and it shows index coverage. Both are pinned into the shot, wipe in, and take the pans and flashes."
+    },
+    {
+      "label": "podcast hype v11 clean",
+      "src": "shots/fastcuts/out/fastcuts-v11.mp4",
+      "note": "v10 with no source tags: the eased pans, punches and grade only. For judging the hype section without reading load; the sourcing can move to the outro or the post."
+    },
+    {
+      "label": "podcast hype v10 SA colours",
+      "src": "shots/fastcuts/out/fastcuts-v10.mp4",
+      "note": "v9 with the query line in SemiAnalysis colours: \"Dylan Patel\" in the mark's orange (#F7B041) and the query in its blue (#0B86D1). The Lex beat's channel name stays white, since it is not his name."
+    },
+    {
+      "label": "podcast hype v9 eased pans",
+      "src": "shots/fastcuts/out/fastcuts-v9.mp4",
+      "note": "Transitions rebuilt from a frame-by-frame measure of the original (analysis/transitions): each cut is a pan that speeds up over 3 frames and settles over 4, with blur that follows the speed and a punch and shake on landing, in place of the old two-frame whips. Heavily blurred frames: 71 here vs 59 in the original (the old whips had far fewer). The query line (filter first) is now static inside each shot, bottom left, wiped in, and smears with the pans and flashes."
+    },
+    {
+      "label": "podcast hype v8 filter first",
+      "src": "shots/fastcuts/out/fastcuts-v8.mp4",
+      "note": "v7 with the filter first: arcmira.search(speaker: \"Dylan Patel\", query: \"NVIDIA\"). A new query backspaces only the green keyword at the end of the line and types the next one. The Lex beat still retypes from the filter, since it swaps speaker for channel: \"Lex Fridman\"."
+    },
+    {
+      "label": "podcast hype v7 query",
+      "src": "shots/fastcuts/out/fastcuts-v7.mp4",
+      "note": "v6 with the result row gone: just the Arcmira query line, held bottom left in one spot. It types in on the first NVIDIA beat, holds through the four NVIDIA beats into Jensen, then backspaces and retypes the keyword each time the query changes. Off for Jensen and the hero beat."
+    },
+    {
+      "label": "podcast hype v6 HUD",
+      "src": "shots/fastcuts/out/fastcuts-v6.mp4",
+      "note": "The search held still top left as a HUD over the cuts. The four NVIDIA beats now run back to back into Jensen, so the query line stays and only the result row rolls up out and the next rolls in. When the query changes (trillion, Stargate with the Lex channel filter, Huawei, insane) the keyword backspaces and retypes in place. A soft dark corner keeps it readable on the bright Berman set. Off for Jensen and the hero beat."
+    },
+    {
+      "label": "podcast hype v5",
+      "src": "shots/fastcuts/out/fastcuts-v5.mp4",
+      "note": "v4 with the typed query tag. Each beat types its Arcmira MCP search top left (keyword and cursor in matrix green), then the result row lands: channel, the passage start time, and a verbatim line from the returned passage with the keyword in green. The tag rides the push-in, whips and flashes. Lex shows its channel filter, since that search had no speaker filter. Rebuild with edl.json; edl-v4.json rebuilds v4."
+    },
+    {
+      "label": "podcast hype v4",
+      "src": "shots/fastcuts/out/fastcuts-v4.mp4",
+      "note": "13.84 to 20.80 (6.96 s). Nine podcast beats, each from a different episode, each with a source tag from a real Arcmira MCP search (five from \"NVIDIA\" with Dylan as speaker). The Asianometry beat is held for two beats because only nine indexed episodes had a usable moment. Jensen still hits 15.88 and the hero beat still ends at 20.80. Still wrong: TBPN's emoji is left out of its drawn title, and the hero clip is softer than the rest."
+    },
+    {
+      "label": "podcast hype v3",
+      "src": "shots/fastcuts/out/fastcuts-v3.mp4",
+      "note": "13.40 to 20.80 (7.40 s). Opens on a hard cut on the 13.42 beat, with the first Lex beat trimmed to 0.44 s. The Jensen hit stays at 15.88 and the hero beat still ends at 20.80, now on the clean clip with the sign painted out. Still wrong: the hero clip is 720p pushed in to 1.4x, so it is softer than the podcast cuts. Rebuild with edl-v3.json."
+    },
+    {
+      "label": "podcast hype v2",
+      "src": "shots/fastcuts/out/fastcuts-v2.mp4",
+      "note": "v1 with the datacenter hero beat as the last 1.62 s (three beats). Dylan in the 67 jersey lifts his head on 19.57 and is smiling by 19.99, then goes into the white ramp to the alley-oop. The jersey yellow and purple pop out of the gray grade. Still wrong: the hero clip is 720p pushed in to 1.4x, so it is softer than the podcast cuts. Rebuild with edl-v2.json."
+    },
+    {
+      "label": "podcast hype v1",
+      "src": "shots/fastcuts/out/fastcuts.mp4",
+      "note": "Fifteen Dylan podcast cuts on the beats (Lex, Dwarkesh x3, Invest Like The Best, BG2, Berman) plus the Jensen belt punch-in landing on the 15.88 hit with a flash and shake. The grade, whips and flashes follow the original. Still wrong: only seven sets, so Lex and the Dwarkesh sets each repeat, and the cuts are picked for gestures, not for what he is saying. Rebuild with edl-v1.json."
+    },
+    {
+      "label": "jensen zoom alone",
+      "src": "shots/fastcuts/out/jensen-zoom.mp4",
+      "note": "The 1.27 s Jensen slot on its own, for reuse. It is not the slot length, so the player stretches it."
+    }
+  ]
+}

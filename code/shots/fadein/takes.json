@@ -1,0 +1,20 @@
+{
+  "status": "done",
+  "takes": [
+    {
+      "label": "Fade v3 (RIFE)",
+      "src": "shots/fadein/out/fadein-v3.mp4",
+      "note": "Fade v2 with the half-speed slow-down made by RIFE v4.6 in-between frames instead of frame blending, so the motion stays crisp as it fades up. Built by v3.sh."
+    },
+    {
+      "label": "Fade v2",
+      "src": "shots/fadein/out/fadein-v2.mp4",
+      "note": "The intro take first 0.5 s at half speed, faded up from black on our own ease-in. The intro slot continues from 0.5 s, so nothing repeats."
+    },
+    {
+      "label": "Fade v1",
+      "src": "shots/fadein/out/fadein-v1.mp4",
+      "note": "The intro take's first graded frame, panned with the original's camera and faded from black by the original's own gain per frame, with the same SA scorebug and banner as Overlay v2. It cuts into the intro at 1.00 with the same brightness step and pan speed as the original. The players hold still for this second, while the original's move; the picture is dark for most of it."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+ "backdown": "shots/backdown/out/look-v1.mp4",
+ "fadeaway": "shots/fadeaway/out/wafer-v1.mp4",
+ "rim": "shots/upscale-sweep/takes/B/rim-look-v1.mp4",
+ "celebrate": "shots/upscale-sweep/takes/B/celebrate-look-v1.mp4",
+ "newspaper": "shots/newspaper/out/paper-v5-sr-30.mp4",
+ "alleyoop": [
+  "shots/upscale-sweep/takes/B/alleyoop-final-realtime.mp4",
+  "shots/upscale-sweep/takes/B/alleyoop-wan-3.0-noframes-slow-focus-2.mp4"
+ ],
+ "fadeout": "shots/upscale-sweep/takes/B/fadeout-splice-v3.mp4"
+}

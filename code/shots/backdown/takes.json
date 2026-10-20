@@ -1,0 +1,10 @@
+{
+  "status": "work",
+  "takes": [
+    {
+      "label": "Look-matched",
+      "src": "shots/backdown/out/look-v1.mp4",
+      "note": "Focus take with the original's grade and blur applied per frame. No white flash added, since the original cuts in hard at 6.27. PATEL on the back is small but readable, so it is not patched."
+    }
+  ]
+}

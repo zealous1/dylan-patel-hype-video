@@ -1,0 +1,24 @@
+{
+  "video": "src-720.mp4",
+  "video_url_slow": "${SOURCE_BASE_URL}/alleyoop/src-720-slow.mp4",
+  "duration_slow": 5,
+  "duration": 5,
+  "first": "../../starts/out/alleyoop-start-gpt-image-2.5-sunburst.png",
+  "last": "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png",
+  "refs_focus": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/alleyoop-start-gpt-image-2.5-sunburst.png",
+    "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png"
+  ],
+  "refs": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/alleyoop-start-gpt-image-2.5-sunburst.png",
+    "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt_focus": "Edit the reference video. Keep the camera, the opening whip blur, every other player and every move exactly as they are. Replace the Lakers player wearing number 6 for the whole clip with the man from the character sheet (first reference image): his face exactly as in the two close-up headshots (second and third reference images): a long narrow face, dark eyebrows, short dark hair with no headband, and a short, neatly trimmed beard, never a full or bushy beard; medium-brown skin; a slimmer build than the original player. He wears the yellow jersey with SemiAnalysis and 67 on the front and PATEL above 67 on the back, in purple. The fourth and fifth reference images show exactly how he looks at the start and the end of the clip. Whenever his face turns toward the camera it must be this man's face and beard, not the original player's. On the fast break he sprints up the right wing past the BUZZ CITY logo while number 15 dribbles up the left, the camera moves forward and tilts down until it looks straight down on the teal and black paint from above the rim, number 15 throws the lob, and he catches it in the air and dunks the alley-oop move for move with the number 6. Photoreal NBA broadcast footage, no new cuts.",
+  "prompt": "Edit the reference video. Keep the camera, the opening whip blur, every other player and every move exactly as they are. Replace the Lakers player wearing number 6 for the whole clip with the man from the character sheet (first reference image): his face exactly as in the two close-up headshots (second and third reference images): a long narrow face, dark eyebrows, short dark hair with no headband, and a short, neatly trimmed beard, never a full or bushy beard; medium-brown skin; a slimmer build than the original player. He wears the yellow jersey with SemiAnalysis and 67 on the front and PATEL above 67 on the back, in purple. The fourth and fifth reference images show exactly how he looks at the start and the end of the clip. Whenever his face turns toward the camera it must be this man's face and beard, not the original player's. On the fast break he sprints up the right wing past the BUZZ CITY logo while number 15 dribbles up the left, the camera moves forward and tilts down until it looks straight down on the teal and black paint from above the rim, number 15 throws the lob, and he catches it in the air and dunks the alley-oop move for move with the number 6. Photoreal NBA broadcast footage, no new cuts."
+}

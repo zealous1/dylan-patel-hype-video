@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SeedVR2 Upscale Test</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111114;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36}}
+:root[data-theme="dark"]{--bg:#111114;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1500px;margin:0 auto;padding:24px 16px 60px}h2{font-size:18px;margin:28px 0 8px}.note{color:var(--muted)}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}@media (max-width:720px){.row{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px}video,img{width:100%;display:block;border-radius:4px;background:#000}
+button{font:inherit;padding:6px 12px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px}
+</style></head><body><main>
+<h1>SeedVR2 upscale test</h1>
+<p class="note">Wan's 1280x720 output taken to 1080p three ways: a plain Lanczos resize, SeedVR2 3B and SeedVR2 7B, on one Modal H100. GPU time: 3B 109 s, 132 s and 120 s; 7B 201 s, 283 s and 236 s. Each row plays in sync. Crops are 1:1 at 1080p.</p>
+<div id="rows"></div>
+</main><script>
+const SHOTS=['datacenter','alleyoop','celebrate'];
+const rows=document.getElementById('rows');
+SHOTS.forEach(s=>{const h=document.createElement('section');h.innerHTML=`<h2>${s}</h2><img src="crops/u-${s}-crop.png" alt="${s} crops"><p><button>Play row</button></p><div class="row">${['resize','seedvr2-3b','seedvr2-7b'].map(k=>`<div class="card"><strong>${k}</strong><video muted loop playsinline data-src="out/${s}-${k}.mp4"></video></div>`).join('')}</div>`;rows.append(h);
+const vs=[...h.querySelectorAll('video')];vs.forEach(v=>fetch(v.dataset.src).then(r=>r.blob()).then(b=>v.src=URL.createObjectURL(b)));
+h.querySelector('button').onclick=()=>{vs.forEach(v=>{v.currentTime=0;v.play()})};});
+</script></body></html>

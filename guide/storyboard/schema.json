@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reel-storyboard/1",
+  "title": "Reel storyboard",
+  "description": "A reel as a clock, slots on that clock, every take made for each slot, and the picks at each checkpoint. Paths that start with media/ point into a folder that is not shipped; the page plays them only when the viewer supplies that folder. Any other relative path ships beside the page.",
+  "type": "object",
+  "required": ["schema", "title", "clock", "slots", "checkpoints"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "reel-storyboard/1" },
+    "title": { "type": "string" },
+    "summary": { "type": "string" },
+    "aspect": { "type": "string", "pattern": "^\\d+:\\d+$", "description": "Frame shape of the reel, such as 16:9 or 9:16." },
+    "clock": { "$ref": "#/$defs/clock" },
+    "slots": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/slot" } },
+    "assets": {
+      "description": "Takes that sit off the clock: character sheets, start frames, ranked candidates, stills that feed a slot.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/take" }
+    },
+    "checkpoints": {
+      "description": "Oldest first. The last one is the shipped cut, and take status follows from it.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/checkpoint" }
+    }
+  },
+  "$defs": {
+    "seconds": { "type": "number", "minimum": 0 },
+    "mediaPath": {
+      "description": "media/<path> is private and resolves against the viewer's media folder or the ?media= base. Any other relative path ships beside the page.",
+      "type": "string",
+      "pattern": "^(?![/~])(?!.*\\.\\.)[^:\\\\]+$"
+    },
+    "url": { "type": "string", "pattern": "^https://" },
+    "source": {
+      "description": "A public place to watch the material: a URL and the second it starts at.",
+      "type": "object",
+      "required": ["url"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "$ref": "#/$defs/url" },
+        "t": { "$ref": "#/$defs/seconds" },
+        "title": { "type": "string" }
+      }
+    },
+    "span": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/seconds" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "clock": {
+      "type": "object",
+      "required": ["kind", "duration_s", "fps"],
+      "if": { "properties": { "kind": { "const": "reference" } } },
+      "then": { "required": ["reference"] },
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": ["reference", "song", "voiceover"],
+          "description": "reference: a remade edit's own audio is the clock. song: a song's beat grid is. voiceover: a spoken track is, and its lines are the landmarks."
+        },
+        "duration_s": { "type": "number", "exclusiveMinimum": 0 },
+        "fps": { "type": "number", "exclusiveMinimum": 0 },
+        "bpm": { "type": "number", "exclusiveMinimum": 0 },
+        "beat_offset_s": { "type": "number", "description": "Clock time of beat 0." },
+        "beats_per_bar": { "type": "integer", "minimum": 1, "description": "Default 4." },
+        "reference": {
+          "description": "What the clock follows: the remade edit, the song, or the voiceover. Required when kind is reference.",
+          "type": "object",
+          "required": ["title"],
+          "additionalProperties": false,
+          "properties": {
+            "title": { "type": "string" },
+            "artist": { "type": "string" },
+            "url": { "$ref": "#/$defs/url" },
+            "offset_s": { "type": "number", "description": "Reference time at clock 0. A timestamp link for clock time t points at offset_s + t." },
+            "media": { "$ref": "#/$defs/mediaPath", "description": "The reference video inside the media folder, played by takes with plays_reference." }
+          }
+        },
+        "audio": {
+          "description": "Audio files that can drive the clock, best first. With none available the page runs a silent clock.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/audio" }
+        },
+        "landmarks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["t", "label"],
+            "additionalProperties": false,
+            "properties": { "t": { "$ref": "#/$defs/seconds" }, "label": { "type": "string" } }
+          }
+        },
+        "sections": {
+          "description": "Named stretches of the clock: song sections, acts, chapters.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/section" }
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "required": ["id", "label", "media"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "media": { "$ref": "#/$defs/mediaPath" }
+      }
+    },
+    "section": {
+      "type": "object",
+      "required": ["t0", "t1", "label"],
+      "additionalProperties": false,
+      "properties": {
+        "t0": { "$ref": "#/$defs/seconds" },
+        "t1": { "$ref": "#/$defs/seconds" },
+        "label": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "required": ["id", "label", "t0", "t1", "verdict", "takes"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "label": { "type": "string" },
+        "t0": { "$ref": "#/$defs/seconds", "description": "Edges on the last checkpoint that holds the slot. Other checkpoints move them with bounds." },
+        "t1": { "$ref": "#/$defs/seconds" },
+        "section": { "type": "string", "description": "Label of the clock section the slot sits in." },
+        "verdict": {
+          "enum": ["keep", "overlay", "swap", "render", "replace", "found", "filmed"],
+          "description": "keep: copy the reference span. overlay: draw text or graphics over it. swap: video-to-video with a new subject. render: a code-rendered insert. replace: new footage in place of the reference's. found: footage from elsewhere cut to the clock with no reference shot behind it. filmed: the maker's own camera footage."
+        },
+        "source": { "$ref": "#/$defs/source", "description": "Where the reference's version of this slot can be watched." },
+        "note": { "type": "string" },
+        "takes": {
+          "description": "Every attempt, newest first.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/take" }
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "required": ["label", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": ["number", "string"] },
+        "unit": { "type": "string" },
+        "note": { "type": "string" },
+        "series": {
+          "description": "A measured strip over the take's own time, drawn as a sparkline in place of pixels.",
+          "type": "object",
+          "required": ["dt", "values"],
+          "additionalProperties": false,
+          "properties": {
+            "t0": { "type": "number", "description": "Seconds into the take of the first value. Default 0." },
+            "dt": { "type": "number", "exclusiveMinimum": 0 },
+            "values": { "type": "array", "minItems": 2, "items": { "type": "number" } },
+            "threshold": { "type": "number", "description": "A line drawn across the strip, such as a cut score limit." }
+          }
+        }
+      }
+    },
+    "take": {
+      "type": "object",
+      "required": ["id", "label", "made_with", "status", "media", "public", "public_reason"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "Unique within its slot, or among assets." },
+        "label": { "type": "string" },
+        "made_with": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "model": { "type": "string" }, "tool": { "type": "string" } }
+        },
+        "cost_usd": { "type": ["number", "null"], "minimum": 0, "description": "Billed generation cost. null when the take ran locally or the cost was not logged." },
+        "status": {
+          "enum": ["picked", "superseded", "rejected", "lab", "failed"],
+          "description": "picked: in the last checkpoint. superseded: picked at an earlier checkpoint only. rejected: made or found for the cut, never picked. lab: an experiment off the cut's path. failed: the request returned no output."
+        },
+        "why": { "type": "string" },
+        "prompt": { "type": "string" },
+        "prompt_file": { "$ref": "#/$defs/mediaPath", "description": "A shipped prompt or recipe file, relative to the page." },
+        "made_at": { "type": "string", "description": "ISO 8601 date or date-time, UTC." },
+        "plays_reference": { "type": "boolean", "description": "The take is the reference itself: play clock.reference.media at clock time." },
+        "source": { "$ref": "#/$defs/source", "description": "A public link to the material the take is cut from, at the second it starts." },
+        "media": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "still": { "$ref": "#/$defs/mediaPath" },
+            "video": { "$ref": "#/$defs/mediaPath" },
+            "span": { "$ref": "#/$defs/span", "description": "The part of the video that fills the slot, in seconds of the file. Default: the whole file, stretched to the slot." },
+            "link": { "$ref": "#/$defs/url" }
+          }
+        },
+        "frames": {
+          "description": "Frame facts: how many frames the take fills on the clock, and the first and last frames a generator was given.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "count": { "type": "integer", "minimum": 0 },
+            "first": { "$ref": "#/$defs/mediaPath" },
+            "last": { "$ref": "#/$defs/mediaPath" }
+          }
+        },
+        "measurements": { "type": "array", "items": { "$ref": "#/$defs/measurement" } },
+        "cuts": {
+          "description": "Shots inside the take, on slot time (seconds from the slot's t0). With span set, the page plays that part of the take's video for the cut.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["t0", "t1", "label"],
+            "additionalProperties": false,
+            "properties": {
+              "t0": { "$ref": "#/$defs/seconds" },
+              "t1": { "$ref": "#/$defs/seconds" },
+              "label": { "type": "string" },
+              "span": { "$ref": "#/$defs/span" },
+              "source": { "$ref": "#/$defs/source" }
+            }
+          }
+        },
+        "public": { "type": "boolean", "description": "true only when the take's media may ship. Metadata always ships." },
+        "public_reason": { "type": "string" },
+        "used_by": { "description": "Assets only: the slots this asset feeds.", "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": ["id", "label", "note"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
+        "label": { "type": "string" },
+        "at": { "type": "string", "description": "ISO 8601 date or date-time, UTC." },
+        "picks": {
+          "description": "slot id to take id. A slot left out is not in this checkpoint. Leave picks out entirely when the checkpoint's per-slot record was not kept.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "bounds": {
+          "description": "slot id to [t0, t1] where this checkpoint's slot edges differ from the slot's own.",
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/span" }
+        },
+        "duration_s": { "type": "number", "exclusiveMinimum": 0, "description": "This checkpoint's length when it differs from the clock's." },
+        "sections": {
+          "description": "This checkpoint's own sections, when the clock was rebuilt for it (an original edit re-cuts its song).",
+          "type": "array",
+          "items": { "$ref": "#/$defs/section" }
+        },
+        "audio": { "$ref": "#/$defs/audio", "description": "This checkpoint's own mix, when the clock was rebuilt for it." },
+        "render": {
+          "type": "object",
+          "required": ["media"],
+          "additionalProperties": false,
+          "properties": {
+            "media": { "$ref": "#/$defs/mediaPath" },
+            "label": { "type": "string" },
+            "link": { "$ref": "#/$defs/url" }
+          }
+        },
+        "measurements": { "type": "array", "items": { "$ref": "#/$defs/measurement" } },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

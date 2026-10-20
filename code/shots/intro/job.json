@@ -1,0 +1,33 @@
+{
+  "video": "src-720.mp4",
+  "first": "../../starts/out/introstart-gpt-image-2.5-sunburst.png",
+  "last": "../../starts/out/introend-gpt-image-2.5-sunburst.png",
+  "refs": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png"
+  ],
+  "duration": 5,
+  "resolution": {
+    "minimax/hailuo-3": "2K"
+  },
+  "prompt": "Recreate the reference video shot for shot: the same broadcast wide camera, the same slow push-in, the same players and the same moves, beat for beat. The only change is the Lakers ball-handler wearing number 6: he is now the man from the character sheet, in the yellow jersey with SemiAnalysis and 67 in purple, and he dribbles, jabs and drives exactly as the number 6 does in the reference video. The broadcast graphic at the top right reads DYLAN PATEL. Start on the first frame and end on the last frame. Photoreal NBA broadcast footage, no new cuts.",
+  "video_url": "${SOURCE_BASE_URL}/intro/src-720.mp4",
+  "first_clean": "clean-start.png",
+  "last_clean": "clean-end.png",
+  "prompt_clean": "Recreate the reference video shot for shot: the same broadcast wide camera, the same slow push-in, the same players and the same moves, beat for beat. The only change is the Lakers ball-handler wearing number 6: he is now the man from the character sheet, in the yellow jersey with SemiAnalysis and 67 in purple, and he dribbles, jabs and drives exactly as the number 6 does in the reference video. Start on the first frame and end on the last frame. Photoreal NBA broadcast footage, no new cuts.",
+  "refs_strong": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../starts/out/introstart-gpt-image-2.5-sunburst.png",
+    "../../starts/out/introend-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt_strong": "Edit the reference video. Keep the camera, the push-in, every other player and every move exactly as they are. Replace the Lakers ball-handler wearing number 6 for the whole clip with the man from the character sheet (first reference image): his face, short dark hair without a headband, trimmed beard, medium-brown skin and slimmer build, in the yellow jersey reading SemiAnalysis with the number 67 in purple. The second and third reference images show exactly how he must look at the start and at the end of the clip. There is never a headband on him at any moment, and never the number 6; his head stays the same short dark hair in every frame. He performs the number 6's dribble, jab and drive move for move. The broadcast graphic at the top right reads DYLAN PATEL. Photoreal NBA broadcast footage, no new cuts.",
+  "video_url_slow": "${SOURCE_BASE_URL}/intro/src-720-slow.mp4",
+  "duration_slow": 10,
+  "refs_focus": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/introstart-gpt-image-2.5-sunburst.png",
+    "../../starts/out/introend-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt_focus": "Edit the reference video. Keep the camera, every other player and every move exactly as they are. Replace the Lakers player wearing number 6 for the whole clip with the man from the character sheet (first reference image): his face exactly as in the two close-up headshots (second and third reference images): a long narrow face, dark eyebrows, short dark hair with no headband, and a short, neatly trimmed beard, never a full or bushy beard; medium-brown skin; a slimmer build than the original player. He wears the yellow jersey with SemiAnalysis and 67 on the front and PATEL above 67 on the back, in purple. The fourth and fifth reference images show exactly how he looks at the start and the end of the clip. Whenever his face turns toward the camera it must be this man's face and beard, not the original player's. He dribbles, jabs and drives move for move with the number 6. The broadcast graphics stay exactly as in the reference video. Photoreal NBA broadcast footage, no new cuts."
+}

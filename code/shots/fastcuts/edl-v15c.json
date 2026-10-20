@@ -1,0 +1,535 @@
+{
+  "section": {
+    "t0": 13.84,
+    "t1": 20.8,
+    "fps": 30,
+    "frames": 209,
+    "output": "fastcuts-v15c.mp4",
+    "open": "hard",
+    "tag_style": "pinned-query",
+    "hud": {
+      "filter_first": true,
+      "mono": true,
+      "split": true,
+      "name_size": 88,
+      "query_bottom": 72,
+      "name_gap": 46
+    },
+    "whip": "eased",
+    "lab": {
+      "camera": {
+        "mode": "land",
+        "h": 0.28,
+        "anchor": [
+          0.46,
+          0.4
+        ]
+      },
+      "moves": [
+        "left",
+        "up",
+        "left",
+        "down",
+        "left",
+        "up",
+        "left",
+        "down",
+        "left",
+        "up"
+      ],
+      "hero": {
+        "h": 0.28,
+        "at": [
+          0.46,
+          0.4
+        ],
+        "tau": 0.15
+      },
+      "colour": {
+        "contrast": 1.15,
+        "face_L": 55,
+        "room": 0.5,
+        "room_min": 0.66,
+        "neutral_a": 0.0,
+        "neutral_b": 3.0,
+        "subject_C": 21,
+        "room_C": 15,
+        "skin_C": 23
+      },
+      "jensen_k": 0.95,
+      "punch": [
+        4.5,
+        5.73,
+        6.15
+      ]
+    }
+  },
+  "note": "slot_in and slot_out are seconds from the section start (13.84 s on the reel in v4). src_in is seconds into the local file; the YouTube time is source_offset + src_in. cx, cy, zoom frame the punch-in. tag is the three-line source overlay. provenance is the Arcmira MCP search that returned the passage: the exact input and the matching result, with the passage text trimmed to its first lines. A hero clip maps slot time to source time through the ramp knots [slot seconds, source seconds]. v4 rule: every podcast beat is a different video. Only 9 distinct indexed episodes had a clear animated face, so the Asianometry beat is held for two beats. v5 tag_style query: each beat types its search top left (arcmira.search with the query and the speaker filter, or the channel filter where no speaker filter was used), then shows the result row: channel, the passage's start time and quote, a verbatim line from the returned passage. v6 tag_style hud: the four NVIDIA beats run back to back into Jensen, and the search sits still top left as a HUD over the motion. The query line stays while it is the same, the result row rolls up out and the next rolls in on each cut, and a changed query backspaces to the shared prefix and retypes. The HUD is off for Jensen and the hero beat. v7: the HUD is the query line alone, bottom left. v8: the filter comes first and the query last, so a new query backspaces only the keyword at the end of the line. v9: tag_style pinned-query puts the query line (filter first) bottom left inside each shot, wiped in, so it takes the shot's push-in, pans and flashes. whip eased replaces the two-frame whips with pans that speed up over 4 frames into a cut and settle over 5 after, blur proportional to speed and a punch and shake on landing. v10: the speaker name is SemiAnalysis orange and the query SemiAnalysis blue (sampled from the mark); the Lex channel name stays white. v11: tag_style none, the v10 cut with no source tags, for a clean hype section. v12: the query line in one light grey with the query in bold white, pinned into each shot at its quietest anchor (out/fastcuts-v12-tags.json lists each choice; a clip's tag_at overrides it). v13: split tag. The query sits small in light grey bottom left (query in bold white), the channel name of the result runs big bottom right in Inter Display ExtraBold caps, both pinned into the shot and wiped in. v14: the channel name sits higher and the query is right-aligned under it, both bottom right. v15c: C, hybrid. Each clip lands with his face on one screen point at one size, then v14's push about the face; eased pans kept, only left, up or down.",
+  "sources": {
+    "lex-schizo": {
+      "url": "https://www.youtube.com/watch?v=_1f-o0nqpEI",
+      "file": "footage/_1f-o0nqpEI/lex-schizo.mp4",
+      "source_offset": 17270,
+      "title": "Lex Fridman #459"
+    },
+    "labs-credit": {
+      "url": "https://www.youtube.com/watch?v=aV26V1UvkJw",
+      "file": "footage/aV26V1UvkJw/labs-credit.mp4",
+      "source_offset": 3276,
+      "title": "Dwarkesh, Two labs will soon control most of the world's workforce"
+    },
+    "labs-compute": {
+      "url": "https://www.youtube.com/watch?v=aV26V1UvkJw",
+      "file": "footage/aV26V1UvkJw/labs-compute.mp4",
+      "source_offset": 240,
+      "title": "Dwarkesh, Two labs will soon control most of the world's workforce"
+    },
+    "asia-huawei": {
+      "url": "https://www.youtube.com/watch?v=pE3KKUKXcTM",
+      "file": "footage/pE3KKUKXcTM/asia-huawei.mp4",
+      "source_offset": 2030,
+      "title": "Dwarkesh, Asianometry and Dylan Patel"
+    },
+    "bneck-huawei": {
+      "url": "https://www.youtube.com/watch?v=mDG_Hx3BSUE",
+      "file": "footage/mDG_Hx3BSUE/bneck-huawei.mp4",
+      "source_offset": 8576,
+      "title": "Dwarkesh, The single biggest bottleneck to scaling AI compute"
+    },
+    "gtc": {
+      "url": "https://www.youtube.com/watch?v=jw_o0xr8MWU",
+      "file": "footage/jw_o0xr8MWU/gtc-3900-3922.mp4",
+      "source_offset": 3900,
+      "title": "NVIDIA GTC 2026 keynote"
+    },
+    "datacenter": {
+      "url": null,
+      "file": "shots/datacenter/out/clean-v1.mp4",
+      "source_offset": 0,
+      "title": "Generated: Dylan in the 67 jersey in a GPU rack aisle, sign painted out (Wan 3.0, clean-v1)"
+    },
+    "berman2-insane": {
+      "url": "https://www.youtube.com/watch?v=E5B0cS6XRkg",
+      "file": "footage/E5B0cS6XRkg/berman2-insane.mp4",
+      "source_offset": 5198,
+      "title": "Dylan Patel: AI in War, Jobs are Cooked, Chinese Hacking, Microsoft Cope, and Super Intelligence"
+    },
+    "nv-1999": {
+      "url": "https://www.youtube.com/watch?v=xWRPXY8vLY4",
+      "file": "footage/xWRPXY8vLY4/nv-1999.mp4",
+      "source_offset": 1999,
+      "title": "Dylan Patel on GPT-5’s Router Moment, GPUs vs TPUs, Monetization"
+    },
+    "nv-1940": {
+      "url": "https://www.youtube.com/watch?v=cHgCbDWejIs",
+      "file": "footage/cHgCbDWejIs/nv-1940.mp4",
+      "source_offset": 1940,
+      "title": "Dylan Patel: GPT4.5's Flop, Grok 4, Meta's Poaching Spree, Apple's Failure, and Super Intelligence"
+    },
+    "nv-7965": {
+      "url": "https://www.youtube.com/watch?v=kBCpm1fYrnw",
+      "file": "footage/kBCpm1fYrnw/nv-7965.mp4",
+      "source_offset": 7965,
+      "title": "🔵 Live From Cisco AI Summit"
+    },
+    "nv-689": {
+      "url": "https://www.youtube.com/watch?v=vvlE8-MzxyA",
+      "file": "footage/vvlE8-MzxyA/nv-689.mp4",
+      "source_offset": 689,
+      "title": "Dylan Patel on the AI Chip Race - NVIDIA, Intel & the US Government vs. China"
+    }
+  },
+  "clips": [
+    {
+      "slot_in": 0.0,
+      "slot_out": 0.39,
+      "src": "nv-1999",
+      "src_in": 7.3,
+      "cx": 0.38,
+      "cy": 0.42,
+      "zoom": 1.4,
+      "tag": [
+        "Dylan Patel on GPT-5’s Router Moment, GPUs vs TPUs, Monetization",
+        "a16z",
+        "Clip via \"NVIDIA\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 20,
+          "query": "NVIDIA",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "xWRPXY8vLY4@1999",
+          "video_id": "xWRPXY8vLY4",
+          "start_seconds": 1999,
+          "video_title": "Dylan Patel on GPT-5’s Router Moment, GPUs vs TPUs, Monetization",
+          "channel_name": "a16z",
+          "text": "Dylan Patel: Right.\nDylan Patel: Even AMD, right.\nDylan Patel: They got to 2 nanometer before Nvidia.\nDylan Patel: They had higher density HBM.\nDylan Patel: They use 3D stacking all these things on supply chain that should be better than Nvidia."
+        }
+      },
+      "quote": "They got to 2 nanometer before Nvidia.",
+      "youtube_seconds": 2006.3
+    },
+    {
+      "slot_in": 0.39,
+      "slot_out": 0.81,
+      "src": "nv-1940",
+      "src_in": 2.6,
+      "cx": 0.45,
+      "cy": 0.45,
+      "zoom": 1.1,
+      "tag": [
+        "Dylan Patel: GPT4.5's Flop, Grok 4, Meta's Poaching Spree, Apple's Failure, and Super Intelligence",
+        "Matthew Berman",
+        "Clip via \"NVIDIA\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 20,
+          "query": "NVIDIA",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "cHgCbDWejIs@1940",
+          "video_id": "cHgCbDWejIs",
+          "start_seconds": 1940,
+          "video_title": "Dylan Patel: GPT4.5's Flop, Grok 4, Meta's Poaching Spree, Apple's Failure, and Super Intelligence",
+          "channel_name": "Matthew Berman",
+          "text": "Dylan Patel: The chip versus the solder balls versus the PCB would expand and shrink at different rates.\nDylan Patel: And what ended up happening is because of that different rate of expansion, the solder balls connecting the chip and the board would crack.\nDylan Patel: They would.\nDylan Patel: And it was called buff gate.\nDylan Patel: And now the connection is severed, right?"
+        }
+      },
+      "quote": "…the solder balls connecting the chip and the board would crack.",
+      "youtube_seconds": 1942.6
+    },
+    {
+      "slot_in": 0.81,
+      "slot_out": 1.23,
+      "src": "nv-689",
+      "src_in": 10.4,
+      "cx": 0.72,
+      "cy": 0.42,
+      "zoom": 1.7,
+      "tag": [
+        "Dylan Patel on the AI Chip Race - NVIDIA, Intel & the US Government vs. China",
+        "a16z",
+        "Clip via \"NVIDIA\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 20,
+          "query": "NVIDIA",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "vvlE8-MzxyA@689",
+          "video_id": "vvlE8-MzxyA",
+          "start_seconds": 689,
+          "video_title": "Dylan Patel on the AI Chip Race - NVIDIA, Intel & the US Government vs. China",
+          "channel_name": "a16z",
+          "text": "Dylan Patel: But then, you know, the main question that remains is production capacity.\nDylan Patel: So as far as like, hey, Nvidia is banned in China, right.\nDylan Patel: Like they're saying, don't buy Nvidia chips.\nDylan Patel: I think for a period of time, that's fine because.\nDylan Patel: Fine for China, right."
+        }
+      },
+      "quote": "Like they're saying, don't buy Nvidia chips.",
+      "youtube_seconds": 699.4
+    },
+    {
+      "slot_in": 1.23,
+      "slot_out": 1.62,
+      "src": "bneck-huawei",
+      "src_in": 6.5,
+      "cx": 0.42,
+      "cy": 0.4,
+      "zoom": 1.3,
+      "tag": [
+        "Dylan Patel - The Single Biggest Bottleneck to Scaling AI Compute",
+        "Dwarkesh Patel",
+        "Clip via \"NVIDIA\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 20,
+          "query": "NVIDIA",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "mDG_Hx3BSUE@8581",
+          "video_id": "mDG_Hx3BSUE",
+          "start_seconds": 8581,
+          "video_title": "Dylan Patel - The Single Biggest Bottleneck to Scaling AI Compute",
+          "channel_name": "Dwarkesh Patel",
+          "text": "Dylan Patel: Huawei has cracked software engineers.\nDylan Patel: Huawei has cracked networking technologies.\nDylan Patel: That's in fact their biggest business historically, right?\nDylan Patel: And they have cracked AI, uh, talent.\nDylan Patel: Um, but furthermore, beyond NVIDIA, they actually have better AI researchers."
+        }
+      },
+      "quote": "Huawei has cracked software engineers.",
+      "youtube_seconds": 8582.5
+    },
+    {
+      "src": "gtc",
+      "kind": "jensen-zoom",
+      "src_in": 8.0,
+      "slot_in": 1.62,
+      "slot_out": 2.88,
+      "hit": 2.04,
+      "beat2": 2.46
+    },
+    {
+      "slot_in": 2.88,
+      "slot_out": 3.3,
+      "src": "nv-7965",
+      "src_in": 0.8,
+      "cx": 0.56,
+      "cy": 0.38,
+      "zoom": 1.8,
+      "tag": [
+        "🔵 Live From Cisco AI Summit",
+        "TBPN",
+        "Clip via \"NVIDIA\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 20,
+          "query": "NVIDIA",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "kBCpm1fYrnw@7965",
+          "video_id": "kBCpm1fYrnw",
+          "start_seconds": 7965,
+          "video_title": "🔵 Live From Cisco AI Summit",
+          "channel_name": "TBPN",
+          "text": "Dylan Patel: And now that's like an additional engineering problem when sacks of meat are actually very cheap.\nDylan Patel: Yeah.\nJohn Coogan: Yeah.\nJohn Coogan: Speaking of NVIDIA, we haven't talked since the Groq acquisition.\nJohn Coogan: What does that look like in the bull case?"
+        }
+      },
+      "quote": "…sacks of meat are actually very cheap.",
+      "youtube_seconds": 7965.8
+    },
+    {
+      "slot_in": 3.3,
+      "slot_out": 3.69,
+      "src": "labs-credit",
+      "src_in": 10.3,
+      "cx": 0.38,
+      "cy": 0.42,
+      "zoom": 1.35,
+      "tag": [
+        "Dylan Patel – Two labs will soon control most of the world's workforce",
+        "Dwarkesh Patel",
+        "Clip via \"trillion\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 10,
+          "query": "trillion",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "channelIds": [
+            "UCXl4i9dYBrFOabk0xGmbkRA"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "aV26V1UvkJw@3282",
+          "video_id": "aV26V1UvkJw",
+          "start_seconds": 3282,
+          "video_title": "Dylan Patel – Two labs will soon control most of the world's workforce",
+          "channel_name": "Dwarkesh Patel",
+          "text": "Dylan Patel: Total.\nDylan Patel: Total.\nDylan Patel: And if you do, you know, if you fund a lot of this with cash flows and as much as you can, you still end up with north of $5 trillion of credit.\nDylan Patel: That need to be issued for this $11 trillion plus bill."
+        }
+      },
+      "quote": "…north of $5 trillion of credit.",
+      "youtube_seconds": 3286.3
+    },
+    {
+      "slot_in": 3.69,
+      "slot_out": 4.11,
+      "src": "lex-schizo",
+      "src_in": 14.0,
+      "cx": 0.5,
+      "cy": 0.4,
+      "zoom": 1.25,
+      "tag": [
+        "DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI Megaclusters | Lex Fridman Podcast #459",
+        "Lex Fridman",
+        "Clip via \"Stargate\" · Arcmira MCP search"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "query and channelIds (Lex Fridman) only. by = ent_140776 and about = ent_140776 both returned nothing, since this transcript has no speaker labels",
+        "input": {
+          "limit": 5,
+          "query": "Stargate",
+          "channelIds": [
+            "UCSHZKyawb77ixDdsGog4iWA"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "_1f-o0nqpEI@17279",
+          "video_id": "_1f-o0nqpEI",
+          "start_seconds": 17279,
+          "video_title": "DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI Megaclusters | Lex Fridman Podcast #459",
+          "channel_name": "Lex Fridman",
+          "text": "like I had a schizo take\nearlier, another schizo take, if you've ever been to the\nPresidio in San Francisco, beautiful area, you\ncould build a power plant\nand a data center there if you wanted to. Because it is federal land. (Nathan laughing)"
+        }
+      },
+      "quote": "…could build a power plant and a data center there",
+      "youtube_seconds": 17284.0
+    },
+    {
+      "slot_in": 4.11,
+      "slot_out": 4.92,
+      "src": "asia-huawei",
+      "src_in": 8.0,
+      "cx": 0.45,
+      "cy": 0.4,
+      "zoom": 1.3,
+      "tag": [
+        "@Asianometry & Dylan Patel - How the semiconductor industry actually works",
+        "Dwarkesh Patel",
+        "Clip via \"Huawei\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 10,
+          "query": "Huawei",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "channelIds": [
+            "UCXl4i9dYBrFOabk0xGmbkRA"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "pE3KKUKXcTM@2037",
+          "video_id": "pE3KKUKXcTM",
+          "start_seconds": 2037,
+          "video_title": "@Asianometry & Dylan Patel - How the semiconductor industry actually works",
+          "channel_name": "Dwarkesh Patel",
+          "text": "Dylan Patel: Like you kind of like go through the whole gambit.\nDylan Patel: Yeah, a lot of that could use 7 and 5.\nJon Y.: Nanometer.\nJon Y.: Do you think the dominance of Huawei is actually a bad thing for the rest of the Chinese tech.\nDylan Patel: Industry?\nDylan Patel: I think Huawei is so fucking cracked that like it's, it's hard to say that, right?"
+        }
+      },
+      "quote": "I think Huawei is so fucking cracked…",
+      "youtube_seconds": 2038.0
+    },
+    {
+      "slot_in": 4.92,
+      "slot_out": 5.34,
+      "src": "berman2-insane",
+      "src_in": 4.5,
+      "cx": 0.55,
+      "cy": 0.5,
+      "zoom": 1.3,
+      "tag": [
+        "Dylan Patel: AI in War, Jobs are Cooked, Chinese Hacking, Microsoft Cope, and Super Intelligence",
+        "Matthew Berman",
+        "Clip via \"insane\" · Arcmira MCP search · speaker: Dylan Patel"
+      ],
+      "provenance": {
+        "tool": "arcmira_execute_read",
+        "method": "arcmira.search",
+        "run": "2026-10-17",
+        "filter": "by (speakerIds) = ent_140776 Dylan Patel",
+        "input": {
+          "limit": 10,
+          "query": "insane",
+          "speakerIds": [
+            "ent_140776"
+          ],
+          "channelIds": [
+            "UCawZsQWqfGSbCI5yjkdVkTA"
+          ],
+          "after": "2024-01-01"
+        },
+        "result": {
+          "id": "E5B0cS6XRkg@5198",
+          "video_id": "E5B0cS6XRkg",
+          "start_seconds": 5198,
+          "video_title": "Dylan Patel: AI in War, Jobs are Cooked, Chinese Hacking, Microsoft Cope, and Super Intelligence",
+          "channel_name": "Matthew Berman",
+          "text": "Dylan Patel: So it's like, you know, like the - anyways, it's like, you know, the rate, the rate is like adoption is insane.\nDylan Patel: So why on earth would, you know, you like - yes, there is probably some tail risk, but I don't understand it."
+        }
+      },
+      "quote": "…adoption is insane.",
+      "youtube_seconds": 5202.5
+    },
+    {
+      "src": "datacenter",
+      "kind": "hero",
+      "slot_in": 5.34,
+      "slot_out": 6.96,
+      "ramp": [
+        [
+          0.0,
+          0.3
+        ],
+        [
+          0.39,
+          0.95
+        ],
+        [
+          0.81,
+          2.35
+        ],
+        [
+          1.62,
+          3.0
+        ]
+      ],
+      "cx": 0.5,
+      "cy": 0.33,
+      "zoom": [
+        1.0,
+        1.4
+      ],
+      "kick": 6.57
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "takes": [
+    {
+      "label": "Overlay v3 (RIFE retime)",
+      "src": "shots/intro/out/overlay-v3-from05.mp4",
+      "note": "Overlay v2 after the fade, with its 143 frames retimed to the 158-frame slot by RIFE v4.6 interpolation instead of repeating 15 frames, which removes a small periodic stutter. Built by shots/fadein/v3.sh."
+    },
+    {
+      "label": "Overlay v2 (after fade v2)",
+      "src": "shots/intro/out/overlay-v2-from05.mp4",
+      "note": "Overlay v2 from 0.5 s on, retimed to fill the slot. Pair it with Fade v2 so the motion continues across the 1.0 s cut."
+    },
+    {
+      "label": "Overlay v2",
+      "src": "shots/intro/out/overlay-v2.mp4",
+      "note": "Built on the strong slowed take, which keeps Dylan's hair even where the 2x take flashes a light band across his crown. Banner reads DYLAN PATEL, TO BREAK / BOOTSTRAP RECORD, with $2M in the number box, in the original's PTS TO BREAK / SCORING RECORD | 2 form. Scorebug reads SA for LAL in a matched bold sans; OKC, scores and clocks are the original's."
+    },
+    {
+      "label": "Banner alt A",
+      "src": "shots/intro/out/banner-alt-a.mp4",
+      "note": "Same as Overlay v2 with TO BREAK / $100M RECORD and $2M."
+    },
+    {
+      "label": "Banner alt B",
+      "src": "shots/intro/out/banner-alt-b.mp4",
+      "note": "Same as Overlay v2 with TO BREAK BOOTSTRAPPED / REVENUE RECORD and $2M. The long first line is set condensed and slightly smaller to fit the box."
+    },
+    {
+      "label": "Overlay v1",
+      "src": "shots/intro/out/overlay-v1.mp4",
+      "note": "Strong take look-matched to the original and stretched to 5.27 s. Scorebug copied from the original each frame so the clocks tick, banner rebuilt as DYLAN PATEL with GW TO BREAK COMPUTE RECORD and 2. Dylan's moves still run a little behind the original's."
+    },
+    {
+      "label": "Strong slowed",
+      "src": "shots/intro/out/strong-slow-realtime.mp4",
+      "note": "Strong prompt on the source slowed 2x, with no headband and never 6 in the prompt. Same motion as the strong take. Compare the head on the drive for the headband flicker."
+    }
+  ],
+  "status": "work"
+}

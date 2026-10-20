@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reel storyboard</title>
+<link rel="stylesheet" href="storyboard.css">
+<script src="storyboard.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="top-row">
+    <h1 id="title">Reel storyboard</h1>
+    <button type="button" id="theme" title="Switch between the system theme, light and dark">Theme: system</button>
+  </div>
+  <p id="summary" class="muted"></p>
+  <p id="totals" class="totals"></p>
+</header>
+
+<div id="error" class="error" hidden></div>
+
+<section id="drop" class="drop" hidden>
+  <p id="drop-msg">Drop a storyboard.json here, or open one.</p>
+  <label class="file">Open storyboard.json<input type="file" id="open-data" accept=".json,application/json"></label>
+</section>
+
+<main id="app" hidden>
+  <section class="bar">
+    <div class="row">
+      <label for="cp">Checkpoint</label>
+      <select id="cp"></select>
+      <span id="cp-when" class="muted small"></span>
+      <button type="button" id="mode-picks" class="on">Play the picks</button>
+      <button type="button" id="mode-render">Play the render</button>
+      <button type="button" id="clear" hidden>Back to the checkpoint's picks</button>
+    </div>
+    <p id="cp-note"></p>
+    <p id="cp-meta" class="muted small"></p>
+  </section>
+
+  <section class="player">
+    <div>
+      <div id="stage" class="stage"><div id="card" class="card"></div></div>
+      <div class="transport">
+        <button type="button" id="play" class="primary">Play</button>
+        <span id="readout" class="readout">0.00 s</span>
+        <label class="small muted" for="audio">Clock</label>
+        <select id="audio"></select>
+        <label class="small"><input type="checkbox" id="loop"> Loop this slot</label>
+      </div>
+      <div id="timeline" class="timeline" role="slider" aria-label="Reel timeline" aria-valuemin="0" tabindex="0">
+        <div id="sections" class="sections"></div>
+        <div id="grid" class="grid"></div>
+        <div id="segments" class="segments"></div>
+        <div id="landmarks" class="landmarks"></div>
+        <i id="playhead" class="playhead"></i>
+      </div>
+      <div id="legend" class="legend"></div>
+    </div>
+    <aside id="now" class="now" aria-live="polite"></aside>
+  </section>
+
+  <section class="bar">
+    <div class="row">
+      <label class="file">Load my media folder<input type="file" id="open-media" webkitdirectory multiple></label>
+      <span id="media-status" class="muted small"></span>
+    </div>
+  </section>
+
+  <h2>Slots</h2>
+  <p class="muted small">Every take made for each slot, newest first. Space plays, the arrow keys move between slots, and 1 to 9 play a take of the current slot.</p>
+  <div id="slots"></div>
+
+  <section id="assets-wrap" hidden>
+    <h2>Off the clock</h2>
+    <p class="muted small">Takes that feed a slot without sitting on the clock: character sheets, start frames, ranked candidates.</p>
+    <div id="assets" class="takes"></div>
+  </section>
+
+  <h2>Checkpoints</h2>
+  <div class="table-wrap"><table id="cps" class="cp-table"></table></div>
+
+  <p id="warnings" class="footer"></p>
+</main>
+</div>
+</body>
+</html>

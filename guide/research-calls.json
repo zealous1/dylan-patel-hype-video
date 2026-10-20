@@ -1,0 +1,1320 @@
+{
+  "reel": "dylan-patel-hype-edit",
+  "note": "Every Arcmira call made while the reel was built. Credit figures are estimates computed from passage counts. top_hit_in_cut marks a search whose first result is a video somewhere in the final cut, even when a later search is the one a beat cites. guide/chat.json counts these 20 rows as used_in_reel_searches. cited_by_beat gives the reel second of each beat a call backs in ../sources.json. Inputs shown as <q>, <e.id>, <ch> or <arcmira.daysAgo> were variables inside a program. The log kept their names, not their values.",
+  "calls": [
+    {
+      "call": 1,
+      "at": "2026-10-17T01:44:24.527Z",
+      "tool": "arcmira_describe",
+      "kind": "mcp",
+      "method": "describe",
+      "topic": null,
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 2,
+      "at": "2026-10-17T01:44:49.103Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": "Dylan Patel",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 2,
+      "at": "2026-10-17T01:44:49.103Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "<q>",
+      "speakerIds": [
+        "<e.id>"
+      ],
+      "after": "<arcmira.daysAgo>",
+      "limit": 4,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 3,
+      "at": "2026-10-17T01:45:02.490Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "transcript",
+      "video_id": "mDG_Hx3BSUE",
+      "start": 8575,
+      "end": 8605,
+      "credits_estimate": 4,
+      "credits_basis": "window",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 5,
+      "at": "2026-10-17T01:49:18.055Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "resolve",
+      "query": "Dylan Patel",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 5,
+      "at": "2026-10-17T01:49:18.055Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "TSMC",
+      "by": "ent_140776",
+      "after": "2025-10-01",
+      "limit": 2,
+      "paired": "printed",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 8369,
+        "title": null
+      },
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 8,
+      "at": "2026-10-17T03:24:42.473Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "mentions",
+      "limit": 100,
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 9,
+      "at": "2026-10-17T03:24:51.336Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "mentions",
+      "after": "2020-01-01",
+      "limit": 100,
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 10,
+      "at": "2026-10-17T03:25:02.270Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "mentions",
+      "limit": 100,
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "trillion",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 14,
+      "paired": "printed",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 7887,
+        "title": null
+      },
+      "credits_estimate": 36,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "gigawatt",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 16,
+      "paired": "printed",
+      "top": {
+        "video_id": "aV26V1UvkJw",
+        "start_seconds": 1338,
+        "title": null
+      },
+      "credits_estimate": 44,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "China",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "printed",
+      "top": {
+        "video_id": "aV26V1UvkJw",
+        "start_seconds": 2207,
+        "title": null
+      },
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "Nvidia",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "printed",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 8581,
+        "title": null
+      },
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "TSMC",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "printed",
+      "top": {
+        "video_id": "pE3KKUKXcTM",
+        "start_seconds": 322,
+        "title": null
+      },
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "cooked",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 6,
+      "paired": "printed",
+      "top": {
+        "video_id": "aV26V1UvkJw",
+        "start_seconds": 1338,
+        "title": null
+      },
+      "credits_estimate": 4,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "Huawei",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 13,
+      "paired": "printed",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 8581,
+        "title": null
+      },
+      "credits_estimate": 32,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "Taiwan invasion",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 11,
+      "paired": "printed",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 8913,
+        "title": null
+      },
+      "credits_estimate": 24,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "Anthropic OpenAI compute",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "printed",
+      "top": {
+        "video_id": "aV26V1UvkJw",
+        "start_seconds": 245,
+        "title": null
+      },
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "Microsoft datacenter",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "printed",
+      "top": {
+        "video_id": "pE3KKUKXcTM",
+        "start_seconds": 5864,
+        "title": null
+      },
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "insane",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 16,
+      "paired": "printed",
+      "top": {
+        "video_id": "pE3KKUKXcTM",
+        "start_seconds": 2855,
+        "title": null
+      },
+      "credits_estimate": 44,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 11,
+      "at": "2026-10-17T03:27:08.063Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "power",
+      "by": "ent_140776",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "printed",
+      "top": {
+        "video_id": "pE3KKUKXcTM",
+        "start_seconds": 4792,
+        "title": null
+      },
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 12,
+      "at": "2026-10-17T03:27:50.338Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "DeepSeek",
+      "speakerIds": "ent_140776",
+      "channelIds": "UCSHZKyawb77ixDdsGog4iWA",
+      "limit": 8,
+      "result_count": 3,
+      "paired": "printed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 12,
+      "at": "2026-10-17T03:27:50.338Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "megacluster",
+      "speakerIds": "ent_140776",
+      "channelIds": "UCSHZKyawb77ixDdsGog4iWA",
+      "limit": 8,
+      "result_count": 0,
+      "paired": "printed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 12,
+      "at": "2026-10-17T03:27:50.338Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "Stargate",
+      "speakerIds": "ent_140776",
+      "channelIds": "UCSHZKyawb77ixDdsGog4iWA",
+      "limit": 8,
+      "result_count": 3,
+      "paired": "printed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 12,
+      "at": "2026-10-17T03:27:50.338Z",
+      "tool": "Bash",
+      "kind": "rest",
+      "method": "search",
+      "query": "export controls",
+      "speakerIds": "ent_140776",
+      "channelIds": "UCSHZKyawb77ixDdsGog4iWA",
+      "limit": 8,
+      "result_count": 3,
+      "paired": "printed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 13,
+      "at": "2026-10-17T08:08:52.547Z",
+      "tool": "arcmira_describe",
+      "kind": "mcp",
+      "method": "describe",
+      "topic": "search",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 14,
+      "at": "2026-10-17T08:09:02.804Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "trillion",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 14,
+      "paired": "echo",
+      "top": {
+        "video_id": "aV26V1UvkJw",
+        "start_seconds": 2560,
+        "title": "Dylan Patel – Two labs will soon control most of the world's workforce"
+      },
+      "credits_estimate": 36,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 14,
+      "at": "2026-10-17T08:09:02.804Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "gigawatt",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 16,
+      "paired": "echo",
+      "top": {
+        "video_id": "pE3KKUKXcTM",
+        "start_seconds": 2751,
+        "title": "@Asianometry & Dylan Patel - How the semiconductor industry actually works"
+      },
+      "credits_estimate": 44,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 14,
+      "at": "2026-10-17T08:09:02.804Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Huawei",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 13,
+      "paired": "echo",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 8581,
+        "title": "Dylan Patel - The Single Biggest Bottleneck to Scaling AI Compute"
+      },
+      "credits_estimate": 32,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 14,
+      "at": "2026-10-17T08:09:02.804Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "EUV",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 9,
+      "paired": "echo",
+      "top": {
+        "video_id": "mDG_Hx3BSUE",
+        "start_seconds": 2415,
+        "title": "Dylan Patel - The Single Biggest Bottleneck to Scaling AI Compute"
+      },
+      "credits_estimate": 16,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 14,
+      "at": "2026-10-17T08:09:02.804Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Stargate",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 5,
+      "paired": "echo",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 15,
+      "at": "2026-10-17T08:09:32.190Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": null,
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 16,
+      "at": "2026-10-17T08:09:41.200Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Stargate",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCSHZKyawb77ixDdsGog4iWA"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "result_count": 0,
+      "paired": "json-keyed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 16,
+      "at": "2026-10-17T08:09:41.200Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Stargate",
+      "channelIds": [
+        "UCSHZKyawb77ixDdsGog4iWA"
+      ],
+      "about": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "result_count": 0,
+      "paired": "json-keyed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 16,
+      "at": "2026-10-17T08:09:41.200Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Stargate",
+      "channelIds": [
+        "UCSHZKyawb77ixDdsGog4iWA"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "result_count": 3,
+      "paired": "json-keyed",
+      "top": {
+        "video_id": "_1f-o0nqpEI",
+        "start_seconds": 17334,
+        "title": "DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI"
+      },
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 16,
+      "at": "2026-10-17T08:09:41.200Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "compute",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCpQBb0fToph3jrDulwz1iUQ"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "result_count": 0,
+      "paired": "json-keyed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 16,
+      "at": "2026-10-17T08:09:41.200Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Nvidia",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UC-yRDvpR99LUc5l7i7jLzew"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "result_count": 0,
+      "paired": "json-keyed",
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 16,
+      "at": "2026-10-17T08:09:41.200Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "trillion",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCawZsQWqfGSbCI5yjkdVkTA"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "result_count": 3,
+      "paired": "json-keyed",
+      "top": {
+        "video_id": "cHgCbDWejIs",
+        "start_seconds": 702,
+        "title": "Dylan Patel: GPT4.5's Flop, Grok 4, Meta's Poaching Spree, A"
+      },
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true
+    },
+    {
+      "call": 17,
+      "at": "2026-10-17T08:10:01.630Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "<q>",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": "a16z",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "trillion",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCXl4i9dYBrFOabk0xGmbkRA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false,
+      "cited_by_beat": [
+        17.14
+      ]
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "gigawatt",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCXl4i9dYBrFOabk0xGmbkRA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Huawei",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCXl4i9dYBrFOabk0xGmbkRA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Huawei",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCXl4i9dYBrFOabk0xGmbkRA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false,
+      "cited_by_beat": [
+        17.95
+      ]
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "EUV",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCXl4i9dYBrFOabk0xGmbkRA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Stargate",
+      "channelIds": [
+        "UCSHZKyawb77ixDdsGog4iWA"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false,
+      "cited_by_beat": [
+        17.53
+      ]
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "crazy",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UC9cn0TuPq4dnbTY-CBsm8XA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "trillion",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCawZsQWqfGSbCI5yjkdVkTA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 18,
+      "at": "2026-10-17T08:11:25.216Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "insane",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCawZsQWqfGSbCI5yjkdVkTA"
+      ],
+      "after": "",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 19,
+      "at": "2026-10-17T08:11:41.398Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "insane",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCawZsQWqfGSbCI5yjkdVkTA"
+      ],
+      "after": "2024-01-01",
+      "limit": 10,
+      "credits_estimate": 20,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false,
+      "cited_by_beat": [
+        18.76
+      ]
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "status",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "occurrences",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "mentions",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Dylan Patel",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UCpQBb0fToph3jrDulwz1iUQ"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Dylan Patel",
+      "channelIds": [
+        "UCpQBb0fToph3jrDulwz1iUQ"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Dylan Patel",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "channelIds": [
+        "UC-yRDvpR99LUc5l7i7jLzew"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 20,
+      "at": "2026-10-17T08:12:52.714Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "Dylan Patel",
+      "channelIds": [
+        "UC-yRDvpR99LUc5l7i7jLzew"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 21,
+      "at": "2026-10-17T08:14:29.290Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "NVIDIA",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 20,
+      "paired": "echo",
+      "credits_estimate": 60,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 22,
+      "at": "2026-10-17T08:16:39.436Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "NVIDIA",
+      "speakerIds": [
+        "ent_140776"
+      ],
+      "after": "2024-01-01",
+      "limit": 20,
+      "result_count": 5,
+      "paired": "echo-list",
+      "top": {
+        "video_id": "xWRPXY8vLY4",
+        "start_seconds": 1999,
+        "title": "Dylan Patel on GPT-5’s Router Moment, GPUs vs TPUs, Monetization"
+      },
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": true,
+      "cited_by_beat": [
+        13.84,
+        14.23,
+        14.65,
+        15.07,
+        16.72
+      ]
+    },
+    {
+      "call": 23,
+      "at": "2026-10-17T09:11:20.589Z",
+      "tool": "arcmira_describe",
+      "kind": "mcp",
+      "method": "describe",
+      "topic": "mentions",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 24,
+      "at": "2026-10-17T09:11:28.769Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "occurrences",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 24,
+      "at": "2026-10-17T09:11:28.769Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "mentions",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 25,
+      "at": "2026-10-17T09:11:38.283Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "occurrences",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 25,
+      "at": "2026-10-17T09:11:38.283Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "mentions",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 26,
+      "at": "2026-10-18T00:40:45.102Z",
+      "tool": "arcmira_describe",
+      "kind": "mcp",
+      "method": "describe",
+      "topic": "channel",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 27,
+      "at": "2026-10-18T00:40:57.167Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": "NVIDIA",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 27,
+      "at": "2026-10-18T00:40:57.167Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "status",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 27,
+      "at": "2026-10-18T00:40:57.167Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "SemiAnalysis",
+      "channelIds": [
+        "<ch>"
+      ],
+      "after": "2024-01-01",
+      "limit": 5,
+      "credits_estimate": 0,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 27,
+      "at": "2026-10-18T00:40:57.167Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "SemiAnalysis InferenceMAX",
+      "after": "2025-01-01",
+      "limit": 5,
+      "result_count": 5,
+      "paired": "json-keyed",
+      "top": {
+        "video_id": "wFONmUOz5sk",
+        "start_seconds": 1915,
+        "title": "TBPN LIVE | Friday, March 28"
+      },
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 28,
+      "at": "2026-10-18T00:42:52.647Z",
+      "tool": "arcmira_describe",
+      "kind": "mcp",
+      "method": "describe",
+      "topic": "transcript",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 29,
+      "at": "2026-10-18T00:43:00.963Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "status",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 29,
+      "at": "2026-10-18T00:43:00.963Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": "NVIDIA",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 29,
+      "at": "2026-10-18T00:43:00.963Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": "Jensen Huang",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 30,
+      "at": "2026-10-18T00:50:50.642Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "transcript",
+      "video_id": "jw_o0xr8MWU",
+      "start": 3820,
+      "end": 3925,
+      "credits_estimate": 4,
+      "credits_basis": "window",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 31,
+      "at": "2026-10-18T00:55:51.086Z",
+      "tool": "Bash",
+      "kind": "cli",
+      "method": "search",
+      "credits_estimate": 60,
+      "credits_basis": "limit",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 32,
+      "at": "2026-10-18T01:28:39.919Z",
+      "tool": "arcmira_describe",
+      "kind": "mcp",
+      "method": "describe",
+      "topic": "resolve",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 33,
+      "at": "2026-10-18T01:28:45.518Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "resolve",
+      "name": "Jensen Huang",
+      "credits_estimate": null,
+      "credits_basis": "not-metered-here",
+      "top_hit_in_cut": false
+    },
+    {
+      "call": 34,
+      "at": "2026-10-18T02:46:29.439Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "semianalysis",
+      "speakerIds": [
+        "ent_122115"
+      ],
+      "limit": 3,
+      "result_count": 2,
+      "paired": "json-positional",
+      "top": {
+        "video_id": "jIviHI7fqyc",
+        "start_seconds": 3804,
+        "title": null
+      },
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false,
+      "cited_by_beat": [
+        15.46
+      ],
+      "note": "The search printed on the Jensen beat, run after the clip was picked. It returned the keynote at 3804 s in another upload (jIviHI7fqyc), the copy whose Premium transcript labels Jensen. The reel cuts NVIDIA's own upload."
+    },
+    {
+      "call": 34,
+      "at": "2026-10-18T02:46:29.439Z",
+      "tool": "arcmira_execute_read",
+      "kind": "mcp",
+      "method": "search",
+      "query": "semianalysis",
+      "channelIds": [
+        "UCHuiy8bXnmK5nisYHUd1J5g"
+      ],
+      "limit": 3,
+      "result_count": 3,
+      "paired": "json-positional",
+      "top": {
+        "video_id": "kDd24YOeqQQ",
+        "start_seconds": 71,
+        "title": null
+      },
+      "credits_estimate": 0,
+      "credits_basis": "result_count",
+      "top_hit_in_cut": false
+    }
+  ]
+}

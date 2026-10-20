@@ -1,0 +1,15 @@
+{
+  "status": "done",
+  "takes": [
+    {
+      "label": "Look-matched",
+      "src": "shots/rim/out/look-v1.mp4",
+      "note": "Wide shot of the take only, retimed to 0.80 s, with the original's grade, zoom blur on the whip at 10.7 and the flash. The take cut to the celebration 3 frames early, which this drops."
+    },
+    {
+      "label": "Dylan V2V",
+      "src": "shots/rim/out/final-realtime.mp4",
+      "note": "Same rim explosion with Dylan, no headband. The last frames come out sharp where the original whips, so it needs the look-match blur."
+    }
+  ]
+}

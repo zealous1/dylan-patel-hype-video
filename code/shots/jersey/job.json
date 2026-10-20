@@ -1,0 +1,24 @@
+{
+  "video": "src-720.mp4",
+  "video_url_slow": "${SOURCE_BASE_URL}/jersey/src-720-slow.mp4",
+  "duration_slow": 3,
+  "duration": 3,
+  "first": "../../starts/out/jersey-start-gpt-image-2.5-sunburst.png",
+  "last": "../../starts/out/jersey-start-gpt-image-2.5-sunburst.png",
+  "refs_focus": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/jersey-start-gpt-image-2.5-sunburst.png",
+    "../../starts/out/jersey-start-gpt-image-2.5-sunburst.png"
+  ],
+  "refs": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/jersey-start-gpt-image-2.5-sunburst.png",
+    "../../starts/out/jersey-start-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt_focus": "Edit the reference video. It is a stylised graphic shot, not live play: keep the posterized high-contrast look, the white light streak sweeping across the top, the dark arena background with its specks of light, every colour shift and flash, the framing and the slow camera pull-back exactly as they are, frame for frame. Change only the man seen from behind for the whole clip: he becomes the man from the character sheet (first reference image) seen from behind, the back of his head with short dark hair, his medium-brown skin on the neck, shoulders and arms, same pose and movement as the original. The back of his white jersey reads PATEL above a large 67, in the same dark lettering, size, curve and placement as JAMES and 6, clearly legible in every frame. The fourth and fifth reference images show exactly how he looks at the start and the end of the clip. His face is never visible. No new cuts.",
+  "prompt": "Edit the reference video. It is a stylised graphic shot, not live play: keep the posterized high-contrast look, the white light streak sweeping across the top, the dark arena background with its specks of light, every colour shift and flash, the framing and the slow camera pull-back exactly as they are, frame for frame. Change only the man seen from behind for the whole clip: he becomes the man from the character sheet (first reference image) seen from behind, the back of his head with short dark hair, his medium-brown skin on the neck, shoulders and arms, same pose and movement as the original. The back of his white jersey reads PATEL above a large 67, in the same dark lettering, size, curve and placement as JAMES and 6, clearly legible in every frame. The fourth and fifth reference images show exactly how he looks at the start and the end of the clip. His face is never visible. No new cuts."
+}

@@ -1,0 +1,282 @@
+{
+  "reference_edit": {
+    "url": "https://www.youtube.com/watch?v=_g0Bx6o58aE",
+    "title": "LeBron James - How it go (NBA EDIT) 4k",
+    "uploader": "Zweng",
+    "use": "The spec: cuts, timing, camera moves, film flicker, and the audio bed. Supply it yourself; nothing from it is in this repo."
+  },
+  "song": {
+    "title": "How it go",
+    "artist": "Yeat",
+    "use": "Plays as part of the reference edit's audio. Not in this repo."
+  },
+  "podcast_section": {
+    "reel_seconds": [
+      13.84,
+      20.8
+    ],
+    "note": "Ten beats from ten videos, then the generated hero shot. Slots are seconds from the section start, 13.84 s on the reel. Times are source seconds. found_with is the search behind the beat, returned is the passage it gave back, as video_id@second, and said is a line from that passage. Each beat plays about 0.4 s of picture under the song. Every on-screen tag shows found_with in lowercase.",
+    "beats": [
+      {
+        "slot": [
+          0.0,
+          0.39
+        ],
+        "url": "https://www.youtube.com/watch?v=xWRPXY8vLY4&t=2006",
+        "source_seconds": 2006.3,
+        "title": "Dylan Patel on GPT-5’s Router Moment, GPUs vs TPUs, Monetization",
+        "channel": "a16z",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 20,
+            "query": "nvidia",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "They got to 2 nanometer before Nvidia.",
+        "returned": "xWRPXY8vLY4@1999"
+      },
+      {
+        "slot": [
+          0.39,
+          0.81
+        ],
+        "url": "https://www.youtube.com/watch?v=cHgCbDWejIs&t=1942",
+        "source_seconds": 1942.6,
+        "title": "Dylan Patel: GPT4.5's Flop, Grok 4, Meta's Poaching Spree, Apple's Failure, and Super Intelligence",
+        "channel": "Matthew Berman",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 20,
+            "query": "nvidia",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "…the solder balls connecting the chip and the board would crack.",
+        "returned": "cHgCbDWejIs@1940"
+      },
+      {
+        "slot": [
+          0.81,
+          1.23
+        ],
+        "url": "https://www.youtube.com/watch?v=vvlE8-MzxyA&t=699",
+        "source_seconds": 699.4,
+        "title": "Dylan Patel on the AI Chip Race - NVIDIA, Intel & the US Government vs. China",
+        "channel": "a16z",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 20,
+            "query": "nvidia",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "Like they're saying, don't buy Nvidia chips.",
+        "returned": "vvlE8-MzxyA@689"
+      },
+      {
+        "slot": [
+          1.23,
+          1.62
+        ],
+        "url": "https://www.youtube.com/watch?v=mDG_Hx3BSUE&t=8582",
+        "source_seconds": 8582.5,
+        "title": "Dylan Patel - The Single Biggest Bottleneck to Scaling AI Compute",
+        "channel": "Dwarkesh Patel",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 20,
+            "query": "nvidia",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "Huawei has cracked software engineers.",
+        "returned": "mDG_Hx3BSUE@8581"
+      },
+      {
+        "slot": [
+          1.62,
+          2.88
+        ],
+        "url": "https://www.youtube.com/watch?v=jw_o0xr8MWU&t=3908",
+        "source_seconds": 3908.0,
+        "title": "NVIDIA GTC Keynote 2026",
+        "channel": "NVIDIA",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "query": "semianalysis",
+            "speakerIds": [
+              "ent_122115"
+            ],
+            "limit": 3
+          }
+        },
+        "returned": "jIviHI7fqyc@3804",
+        "note": "Found by a web search for SemiAnalysis news, done for the newspaper headlines. Zeal builds Arcmira and added the keynote to the index with a Premium transcript that labels Jensen. This search ran after that and finds the moment in another upload of the keynote. The reel cuts NVIDIA's own upload, which has captions only. There, at 3817 to 3830 s, Jensen says \"Nobody believed me. And then SemiAnalysis came out and Dylan Patel had a quote. He accused me of sandbagging.\""
+      },
+      {
+        "slot": [
+          2.88,
+          3.3
+        ],
+        "url": "https://www.youtube.com/watch?v=kBCpm1fYrnw&t=7965",
+        "source_seconds": 7965.8,
+        "title": "🔵 Live From Cisco AI Summit",
+        "channel": "TBPN",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 20,
+            "query": "nvidia",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "…sacks of meat are actually very cheap.",
+        "returned": "kBCpm1fYrnw@7965"
+      },
+      {
+        "slot": [
+          3.3,
+          3.69
+        ],
+        "url": "https://www.youtube.com/watch?v=aV26V1UvkJw&t=3286",
+        "source_seconds": 3286.3,
+        "title": "Dylan Patel – Two labs will soon control most of the world's workforce",
+        "channel": "Dwarkesh Patel",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 10,
+            "query": "trillion",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "channelIds": [
+              "UCXl4i9dYBrFOabk0xGmbkRA"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "…north of $5 trillion of credit.",
+        "returned": "aV26V1UvkJw@3282"
+      },
+      {
+        "slot": [
+          3.69,
+          4.11
+        ],
+        "url": "https://www.youtube.com/watch?v=_1f-o0nqpEI&t=17284",
+        "source_seconds": 17284.0,
+        "title": "DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI Megaclusters | Lex Fridman Podcast #459",
+        "channel": "Lex Fridman",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 5,
+            "query": "stargate",
+            "channelIds": [
+              "UCSHZKyawb77ixDdsGog4iWA"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "…could build a power plant and a data center there",
+        "returned": "_1f-o0nqpEI@17279"
+      },
+      {
+        "slot": [
+          4.11,
+          4.92
+        ],
+        "url": "https://www.youtube.com/watch?v=pE3KKUKXcTM&t=2038",
+        "source_seconds": 2038.0,
+        "title": "@Asianometry & Dylan Patel - How the semiconductor industry actually works",
+        "channel": "Dwarkesh Patel",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 10,
+            "query": "huawei",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "channelIds": [
+              "UCXl4i9dYBrFOabk0xGmbkRA"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "I think Huawei is so fucking cracked…",
+        "returned": "pE3KKUKXcTM@2037"
+      },
+      {
+        "slot": [
+          4.92,
+          5.34
+        ],
+        "url": "https://www.youtube.com/watch?v=E5B0cS6XRkg&t=5202",
+        "source_seconds": 5202.5,
+        "title": "Dylan Patel: AI in War, Jobs are Cooked, Chinese Hacking, Microsoft Cope, and Super Intelligence",
+        "channel": "Matthew Berman",
+        "found_with": {
+          "tool": "arcmira_execute_read",
+          "call": "arcmira.search",
+          "input": {
+            "limit": 10,
+            "query": "insane",
+            "speakerIds": [
+              "ent_140776"
+            ],
+            "channelIds": [
+              "UCawZsQWqfGSbCI5yjkdVkTA"
+            ],
+            "after": "2024-01-01"
+          }
+        },
+        "said": "…adoption is insane.",
+        "returned": "E5B0cS6XRkg@5198"
+      },
+      {
+        "slot": [
+          5.34,
+          6.96
+        ],
+        "source": "generated",
+        "what": "Wan 3.0 hero shot of Dylan in a GPU aisle, made in this repo (shots/datacenter)"
+      }
+    ]
+  },
+  "voice": {
+    "what": "Two announcer lines re-recorded by the artist as phone voice memos",
+    "in_repo": false
+  }
+}

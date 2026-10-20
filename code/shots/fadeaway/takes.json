@@ -1,0 +1,10 @@
+{
+  "status": "work",
+  "takes": [
+    {
+      "label": "Wafer v1",
+      "src": "shots/fadeaway/out/wafer-v1.mp4",
+      "note": "Look-matched and retimed to 1.43 s, with the original's white flash frame first. A tumbling silicon wafer sits in the take's fireball on a hand-keyed path, with glow and trail. The jersey still reads PATTI in the first frames, too small to patch cleanly."
+    }
+  ]
+}

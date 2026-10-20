@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Newspaper Compositor</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+</head>
+<body>
+<canvas id="out" width="1920" height="1080"></canvas>
+<script>
+// Frame k (0..35) of the 12.00 to 13.20 newspaper transition, timed beat for beat to the
+// original 12.00 to 13.20 span. World units are page CSS px; the main page spans 0..1920 x 0..1080.
+// Layer PNGs are 2x (3840x2160). Times t are in frames at 30 fps.
+const W = 1920, H = 1080, LX = 2; // layer px per world px
+const NF = 55; // 12.00 to 13.84 s (55 frames); the next section starts on the 13.84 beat
+// ?fps=60 renders the same camera path at half steps, each with half the shutter, so every 60 fps frame is real.
+const FPS = Number(new URLSearchParams(location.search).get('fps') || 30), STEP = 30 / FPS;
+window.NF = NF / STEP;
+const $ = id => document.getElementById(id);
+const load = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const lerp = (a, b, x) => a + (b - a) * x;
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const smooth = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+function rng(seed) { let s = seed >>> 0; return () => { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+
+// Monotone cubic interpolation (Fritsch-Carlson): smooth, no overshoot between keys.
+function track(keys) {
+  const t = keys.map(k => k[0]), y = keys.map(k => k[1]), n = t.length;
+  const d = [], m = [];
+  for (let i = 0; i < n - 1; i++) d.push((y[i + 1] - y[i]) / (t[i + 1] - t[i]));
+  m[0] = d[0]; m[n - 1] = d[n - 2];
+  for (let i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : 3 * (t[i + 1] - t[i - 1]) / ((2 * t[i + 1] - t[i] - t[i - 1]) / d[i - 1] + (t[i + 1] + t[i] - 2 * t[i - 1]) / d[i]);
+  // Keys may pin a slope: [t, y, slope].
+  keys.forEach((k, i) => { if (k.length > 2) m[i] = k[2]; });
+  return x => {
+    if (x <= t[0]) return y[0];
+    if (x >= t[n - 1]) return y[n - 1] + m[n - 1] * (x - t[n - 1]);
+    let i = 0; while (x > t[i + 1]) i++;
+    const h = t[i + 1] - t[i], s = (x - t[i]) / h, s2 = s * s, s3 = s2 * s;
+    return (2 * s3 - 3 * s2 + 1) * y[i] + (s3 - 2 * s2 + s) * h * m[i] + (-2 * s3 + 3 * s2) * y[i + 1] + (s3 - s2) * h * m[i + 1];
+  };
+}
+
+window.ready = (async () => {
+  const L = await (await fetch('build/layout.json')).json();
+  const img = {};
+  for (const n of ['main', 'banner', 'blitz', 'billy', 'ding', 'leftcol4x']) img[n] = await load(`build/layers/${n}.png`);
+  img.cel = await load('build/celebrate-last.png');
+  img.podA = await load('../../refs/dylan/front-b.png');
+  img.podB = await load('../../refs/dylan/threequarter-a.png');
+  img.logo = await load('../../refs/logo/end-logo.png');
+  const P = L.main.photo, Pc = { x: P.x + P.w / 2, y: P.y + P.h / 2 };
+  const S0 = W / P.w; // photo fills the screen
+  const celH = P.w * img.cel.height / img.cel.width; // cover crop height (taller than the slot)
+
+  // ---------- paper texture (world-locked) ----------
+  const tex = mk(960, 540); {
+    const g = tex.getContext('2d'), id = g.createImageData(960, 540), r = rng(7);
+    // value noise, 3 octaves
+    const oct = [[24, .5], [8, .3], [3, .2]].map(([cell, amp]) => {
+      const gw = Math.ceil(960 / cell) + 2, gh = Math.ceil(540 / cell) + 2, v = new Float32Array(gw * gh).map(() => r());
+      return { cell, amp, gw, v };
+    });
+    for (let y = 0; y < 540; y++) for (let x = 0; x < 960; x++) {
+      let n = 0;
+      for (const o of oct) { const fx = x / o.cell, fy = y / o.cell, ix = fx | 0, iy = fy | 0, ax = fx - ix, ay = fy - iy;
+        const a = o.v[iy * o.gw + ix], b = o.v[iy * o.gw + ix + 1], c = o.v[(iy + 1) * o.gw + ix], d = o.v[(iy + 1) * o.gw + ix + 1];
+        n += o.amp * lerp(lerp(a, b, ax), lerp(c, d, ax), ay); }
+      const v = 255 * (0.925 + 0.075 * n) * (0.985 + 0.015 * r()), i = (y * 960 + x) * 4;
+      id.data[i] = v; id.data[i + 1] = v * 0.992; id.data[i + 2] = v * 0.975; id.data[i + 3] = 255;
+    }
+    g.putImageData(id, 0, 0);
+    // fibers
+    g.lineWidth = 0.6;
+    for (let i = 0; i < 900; i++) { const x = r() * 960, y = r() * 540, a = r() * Math.PI, l = 3 + r() * 9;
+      g.strokeStyle = r() < .5 ? 'rgba(120,105,80,.10)' : 'rgba(255,255,255,.25)';
+      g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + Math.cos(a) * l * .5 + r() * 2, y + Math.sin(a) * l * .5 + r() * 2, x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); }
+  }
+
+  // ---------- halftone of a photo region (monochrome dots, 45 degree screen) ----------
+  function halftone(srcCanvas, cell) {
+    const w = srcCanvas.width, h = srcCanvas.height, sd = srcCanvas.getContext('2d').getImageData(0, 0, w, h).data;
+    const o = mk(w, h), og = o.getContext('2d'), od = og.createImageData(w, h), D = od.data;
+    const c45 = Math.SQRT1_2, lum = (x, y) => { x = clamp(Math.round(x), 0, w - 1); y = clamp(Math.round(y), 0, h - 1); const i = (y * w + x) * 4; return (0.299 * sd[i] + 0.587 * sd[i + 1] + 0.114 * sd[i + 2]) / 255; };
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const u = (x * c45 + y * c45) / cell, v = (-x * c45 + y * c45) / cell;
+      const cu = Math.floor(u) + .5, cv = Math.floor(v) + .5;
+      const sx = (cu * c45 - cv * c45) * cell, sy = (cu * c45 + cv * c45) * cell; // cell centre in px
+      const dark = 1 - lum(sx, sy), rad = Math.sqrt(dark / Math.PI) * 1.08; // in cell units
+      const dist = Math.hypot(u - cu, v - cv), ink = clamp((rad - dist) * cell + .5);
+      const i = (y * w + x) * 4;
+      D[i] = lerp(246, 26, ink); D[i + 1] = lerp(242, 21, ink); D[i + 2] = lerp(232, 15, ink); D[i + 3] = 255;
+    }
+    og.putImageData(od, 0, 0); return o;
+  }
+
+  // ---------- printed pages: layer + ink softening + paper texture + halftoned photo ----------
+  function printed(layer, photoHalf) {
+    const c = mk(layer.width, layer.height), g = c.getContext('2d');
+    g.filter = 'blur(0.55px)'; g.drawImage(layer, 0, 0); g.filter = 'none';
+    g.globalCompositeOperation = 'multiply'; g.drawImage(tex, 0, 0, c.width, c.height); g.globalCompositeOperation = 'source-over';
+    return c;
+  }
+  // main photo, cover-cropped to the slot, 2x
+  const celSlot = mk(Math.round(P.w * LX), Math.round(P.h * LX)); {
+    const g = celSlot.getContext('2d'); g.imageSmoothingQuality = 'high';
+    g.drawImage(img.cel, 0, (P.h - celH) / 2 * LX, P.w * LX, celH * LX);
+  }
+  const celHalf = halftone(celSlot, 10);
+  const pages = {
+    main: printed(img.main),
+    blitz: printed(img.blitz), billy: printed(img.billy), ding: printed(img.ding),
+  };
+  // halftone the Dingboard screenshot in the right column of every page
+  { const D = L.main.dingshot, x = Math.round(D.x * LX), y = Math.round(D.y * LX), w = Math.round(D.w * LX), h = Math.round(D.h * LX);
+    for (const n of ['main', 'blitz', 'billy', 'ding']) {
+      const ph = mk(w, h); ph.getContext('2d').drawImage(img[n], -x, -y);
+      const ht = halftone(ph, 7), pg = pages[n].getContext('2d');
+      pg.save(); pg.beginPath(); pg.rect(x + 2, y + 2, w - 4, h - 4); pg.clip(); pg.globalAlpha = .5; pg.drawImage(ht, x, y); pg.restore();
+    } }
+  // halftone the collage photos in place
+  for (const n of ['blitz', 'billy', 'ding']) {
+    const ph = mk(Math.round(P.w * LX), Math.round(P.h * LX)); ph.getContext('2d').drawImage(img[n], -P.x * LX, -P.y * LX);
+    const ht = halftone(ph, 10), g = pages[n].getContext('2d');
+    g.globalAlpha = 0.55; g.drawImage(ht, P.x * LX, P.y * LX); g.globalAlpha = 1;
+    g.globalCompositeOperation = 'multiply'; g.drawImage(tex, 0, 0, pages[n].width, pages[n].height); g.globalCompositeOperation = 'source-over';
+  }
+  const texSlot = mk(celSlot.width, celSlot.height); texSlot.getContext('2d').drawImage(tex, -P.x * LX * 0.25, -P.y * LX * 0.25, 960 * 4, 540 * 4);
+
+  // the left column at 4x for the punch-ins, printed the same way (world rect 0,190 400x890)
+  const LEFT = { x: 0, y: 190, w: 400, h: 890 };
+  const leftHi = (() => { const c = mk(img.leftcol4x.width, img.leftcol4x.height), cg = c.getContext('2d');
+    cg.fillStyle = '#fbfbf9'; cg.fillRect(0, 0, c.width, c.height);
+    cg.filter = 'blur(1.1px)'; cg.drawImage(img.leftcol4x, 0, 0); cg.filter = 'none';
+    cg.globalCompositeOperation = 'multiply'; cg.drawImage(tex, LEFT.x / 2, LEFT.y / 2, LEFT.w / 2, LEFT.h / 2, 0, 0, c.width, c.height); cg.globalCompositeOperation = 'source-over';
+    return c; })();
+  // banner typing geometry
+  const B = L.main.banner, chars = L.main.chars, bLeft = 2 * (B.x + B.w / 2) - chars[chars.length - 1];
+  const edges = [bLeft, ...chars];
+
+  // ---------- collage (world) ----------
+  // Each collage piece is a clipping of a paper's lead (banner and photo) with a torn edge and a baked
+  // drop shadow, laid over one full page so no gap shows. cx, cy = piece centre, rot in degrees, sc = scale.
+  // src is drawn at world size sw x sh; rect is the part kept, in those units.
+  function clipping(src, sw, sh, rect, seed) {
+    const pad = 40, c = mk((rect.w + pad * 2) * LX, (rect.h + pad * 2) * LX), cg = c.getContext('2d'), r = rng(seed);
+    const path = new Path2D(), jag = (a, b, n, f) => { for (let i = 0; i <= n; i++) f(lerp(a, b, i / n), (r() - .5) * 9); };
+    const x0 = pad, y0 = pad, x1 = pad + rect.w, y1 = pad + rect.h;
+    path.moveTo(x0, y0);
+    jag(x0, x1, 40, (x, d) => path.lineTo(x, y0 + d)); jag(y0, y1, 26, (y, d) => path.lineTo(x1 + d, y));
+    jag(x1, x0, 40, (x, d) => path.lineTo(x, y1 + d)); jag(y1, y0, 26, (y, d) => path.lineTo(x0 + d, y));
+    cg.scale(LX, LX);
+    cg.save(); cg.shadowColor = 'rgba(0,0,0,.45)'; cg.shadowBlur = 22; cg.shadowOffsetX = 6; cg.shadowOffsetY = 8; cg.fillStyle = '#f4f1ea'; cg.fill(path); cg.restore();
+    cg.save(); cg.clip(path); cg.drawImage(src, pad - rect.x, pad - rect.y, sw, sh); cg.restore();
+    return { c, w: rect.w + pad * 2, h: rect.h + pad * 2 };
+  }
+  // a news photo printed on paper: margin, halftone, paper texture
+  function printedPhoto(im, seed) {
+    const w = 960, h = 540, m = 22, c = mk(w * LX, h * LX), cg = c.getContext('2d');
+    cg.fillStyle = '#f1eee6'; cg.fillRect(0, 0, c.width, c.height);
+    const ph = mk((w - 2 * m) * LX, (h - 2 * m) * LX), pg = ph.getContext('2d'); pg.filter = 'grayscale(1) brightness(1.45) contrast(.8)'; pg.drawImage(im, 0, 0, ph.width, ph.height);
+    cg.drawImage(ph, m * LX, m * LX); cg.globalAlpha = .7; cg.drawImage(halftone(ph, 10), m * LX, m * LX); cg.globalAlpha = 1;
+    cg.globalCompositeOperation = 'multiply'; cg.drawImage(tex, 0, 0, c.width, c.height); cg.globalCompositeOperation = 'source-over';
+    return clipping(c, w, h, { x: 0, y: 0, w, h }, seed);
+  }
+  // ink silhouette of the money bag from the end logo (the original has a black cut-out in front)
+  // The whole end logo printed as ink: money hand, bag, octagon mark and wordmark in one piece.
+  // Light parts (the glove, the circuit lines) stay paper. Placed so the mark and wordmark run off frame.
+  const bag = (() => {
+    const c = mk(img.logo.width * 2, img.logo.height * 2), cg = c.getContext('2d');
+    cg.drawImage(img.logo, 0, 0, c.width, c.height);
+    const id = cg.getImageData(0, 0, c.width, c.height), d = id.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const y = (0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]) / 255, ink = clamp((0.6 - y) * 10 + .5);
+      d[i] = lerp(242, 20, ink); d[i + 1] = lerp(237, 14, ink); d[i + 2] = lerp(224, 8, ink); // alpha kept
+    }
+    cg.putImageData(id, 0, 0); return c;
+  })();
+  const bagRim = mk(bag.width, bag.height); { const rg = bagRim.getContext('2d'); rg.drawImage(bag, 0, 0); rg.globalCompositeOperation = 'source-in'; rg.fillStyle = '#f2ede0'; rg.fillRect(0, 0, bag.width, bag.height); }
+  const LEAD = { x: 375, y: 205, w: 1150, h: 780 }; // page px: kicker, banner, deck, photo
+  const pieces = {
+    blitz: clipping(pages.blitz, 1920, 1080, LEAD, 11), billy: clipping(pages.billy, 1920, 1080, LEAD, 12), ding: clipping(pages.ding, 1920, 1080, LEAD, 13),
+    podA: printedPhoto(img.podA, 14), podB: printedPhoto(img.podB, 15),
+  };
+  // The collage is laid out as seen at the landing camera C1 (screen px, rot in degrees, sc = piece scale),
+  // then placed in the world from there.
+  const C1 = { x: 2650, y: 600, s: 1.28 };
+  const toWorld = (sx, sy) => ({ cx: C1.x + (sx - W / 2) / C1.s, cy: C1.y + (sy - H / 2) / C1.s });
+  const UNDER = { n: 'billy', ...toWorld(960, 560), rot: 4 }; // full page under the clippings so no gap shows
+  const COLLAGE = [ // drawn in order, last on top
+    { n: 'podA', ...toWorld(380, 250), rot: -12, sc: .8 },
+    { n: 'podB', ...toWorld(1650, 860), rot: 9, sc: .8 },
+    { n: 'billy', ...toWorld(1390, 300), rot: 6, sc: .62 },
+    { n: 'blitz', ...toWorld(520, 720), rot: -8, sc: .6 },
+    { n: 'ding', ...toWorld(1080, 780), rot: -2, sc: .52 },
+  ];
+  const BAG = { ...toWorld(1650, 880), h: 640, rot: -4 }; // centre of the bag; the logo extends right from it. v4 raises the money hand back into view, as in v1
+  function drawCollage(g) {
+    g.save(); g.translate(UNDER.cx, UNDER.cy); g.rotate(UNDER.rot * Math.PI / 180); g.drawImage(pages[UNDER.n], -960, -540, 1920, 1080); g.restore();
+    for (const p of COLLAGE) {
+      const pc = pieces[p.n]; g.save(); g.translate(p.cx, p.cy); g.rotate(p.rot * Math.PI / 180); g.scale(p.sc, p.sc);
+      g.drawImage(pc.c, -pc.w / 2, -pc.h / 2, pc.w, pc.h); g.restore();
+    }
+    const bw = BAG.h * bag.width / bag.height, bx = -bw * 0.085; // bag centre sits 8.5% in from the logo's left edge
+    g.save(); g.translate(BAG.cx, BAG.cy); g.rotate(BAG.rot * Math.PI / 180);
+    for (let a = 0; a < 12; a++) g.drawImage(bagRim, bx + 7 * Math.cos(a * .5236), -BAG.h / 2 + 7 * Math.sin(a * .5236), bw, BAG.h); // paper cut-out rim
+    g.drawImage(bag, bx, -BAG.h / 2, bw, BAG.h); g.restore();
+  }
+
+  // ---------- camera ----------
+  // Settled photo centre on screen (u, v) and photo width as a fraction of the screen (p),
+  // read from the original frame by frame; converted to a world camera below.
+  // Camera keys in world units: [t, x, y, s, rot]. Page keys are written as photo width fraction p and
+  // photo centre on screen (u, v), read from the original, and converted.
+  const page = (t, p, u, v, r = 0) => { const s = p * S0; return [t, Pc.x - (u - W / 2) / s, Pc.y - (v - H / 2) / s, s, r]; };
+  const head = (i, t, s, r, dy = 0) => { const h = L.main.heads[i]; return [t, W / 2 / s + 10, h.y + 150 + dy, s, r]; }; // view starts at the page's left edge
+  const DING = COLLAGE.find(p => p.n === 'ding'), DS = 2.12;
+  const KEYS = [
+    page(0, 1.00, 960, 540), page(1, .755, 957, 650), page(2, .73, 960, 662),
+    page(6, .72, 952, 675), page(9, .705, 940, 690), page(12.5, .695, 930, 702),      // front page holds and drifts
+    head(0, 14, 2.9, -2), head(0, 18.5, 3.0, -2.4, -6),                              // punch: Blitzscaling Past 318,000 Subs
+    head(1, 20, 3.0, 1.5), head(1, 25, 3.1, 1.8, -6),                              // punch: Half a Billy CLOSED
+    page(27.8, .66, 760, 745), page(30, .645, 545, 746),                               // pull back, pan right
+    [31, null], [32.8, 'mid'], [34.2, C1.x - 14, C1.y, C1.s, 0.4], [35, C1.x - 4, C1.y, C1.s, 0.4], // whip, land
+    [38.5, C1.x + 20, C1.y - 8, C1.s + .05, 0.6],                                    // collage hold
+    [41.5, DING.cx, DING.cy - 6, DS, 2], [49.5, DING.cx + 8, DING.cy - 10, DS + .1, 2.2], // Dingboard hold
+    [51, DING.cx + 30, DING.cy - 2, DS * 1.35, 1], [52, DING.cx + 110, DING.cy + 10, DS * 2.6, -1.5],
+    [53, DING.cx + 260, DING.cy + 40, DS * 5, -4], [54, DING.cx + 480, DING.cy + 80, DS * 9, -6], [55, DING.cx + 800, DING.cy + 120, DS * 14, -8],
+  ];
+  { // fill the whip keys: carry the pan's speed into the whip, then ease onto the collage
+    const i = KEYS.findIndex(k => k[1] === null), a = KEYS[i - 1], b = KEYS[i - 2], v = (a[1] - b[1]) / (a[0] - b[0]);
+    KEYS[i] = [31, a[1] + v * 1.3, a[2], a[3], 0];
+    KEYS[i + 1] = [32.8, lerp(a[1], C1.x, .62), 640, .95, -1.2];
+  }
+  const ch = j => track(KEYS.map(k => [k[0], k[j]]));
+  const camX = ch(1), camY = ch(2), camS = ch(3), camR = ch(4);
+  window.cam = t => ({ x: camX(t), y: camY(t), s: camS(t), r: camR(t) });
+
+  // shutter (fraction of a frame) and sub-sample count per frame
+  // Holds get a short shutter so nothing smears; moves get more; the whip and the exit the most.
+  const MOVES = [[12, 14], [18, 20], [25, 30]], moving = k => MOVES.some(([a, b]) => k >= a && k <= b);
+  const shutter = k => k === 0 ? 0 : k === 1 ? .8 : k <= 3 ? .3 : (k >= 31 && k <= 34) ? .6 : (k >= 39 && k <= 41) ? .2 : k >= 50 ? 1.0 : moving(k) ? (k >= 27 ? .45 : .25) : .3;
+  const subs = k => k === 0 ? 1 : (k === 1 || (k >= 31 && k <= 34) || k >= 50 || moving(k)) ? 20 : 10;
+
+  // ---------- one sub-frame ----------
+  const sc = mk(W, H), g = sc.getContext('2d');
+  g.imageSmoothingQuality = 'high';
+  function drawScene(t, k) {
+    const c = window.cam(t);
+    g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#d8d2c2'; g.fillRect(0, 0, W, H);
+    g.setTransform(c.s, 0, 0, c.s, W / 2, H / 2); g.rotate(c.r * Math.PI / 180); g.translate(-c.x, -c.y);
+    if (k === 0) { // exact hand-off frame
+      g.drawImage(img.cel, P.x, Pc.y - celH / 2, P.w, celH); return;
+    }
+    // collage pages that sit under the main page's right edge are drawn after it (they overlap it)
+    g.drawImage(pages.main, 0, 0, 1920, 1080);
+    if (c.s > 2) g.drawImage(leftHi, LEFT.x, LEFT.y, LEFT.w, LEFT.h);
+    // photo: uncropped at the start, settles into the slot by t = 2.5
+    const clip = smooth(0, 2.5, t), ph = lerp(celH, P.h, clip);
+    g.save(); g.beginPath(); g.rect(P.x, Pc.y - ph / 2, P.w, ph); g.clip();
+    g.drawImage(img.cel, P.x, Pc.y - celH / 2, P.w, celH);
+    const ht = 0.55 * smooth(4, 13, t) + 0.3 * smooth(26, 30, t);
+    if (ht > 0) { g.globalAlpha = ht; g.drawImage(celHalf, P.x, P.y, P.w, P.h); g.globalAlpha = 1; }
+    g.globalCompositeOperation = 'multiply'; g.globalAlpha = smooth(1, 6, t); g.drawImage(texSlot, P.x, P.y, P.w, P.h);
+    g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+    g.restore();
+    // banner types on
+    const n = track([[0, 0], [1, 7], [2, 11], [4, 18], [6, 25], [8, 30], [9, 32]])(t);
+    const full = Math.floor(n), frac = n - full, x1 = edges[Math.min(full, 32)];
+    const by = B.y - 10, bh = B.h + 24;
+    if (full > 0) { g.save(); g.beginPath(); g.rect(bLeft - 20, by, x1 - bLeft + 20, bh); g.clip(); g.drawImage(img.banner, 0, 0, 1920, 1080); g.restore(); }
+    if (full < 32 && frac > 0) { g.save(); g.globalAlpha = frac * .8; g.beginPath(); g.rect(x1, by, edges[full + 1] - x1, bh); g.clip(); g.drawImage(img.banner, 0, 0, 1920, 1080); g.restore(); }
+    drawCollage(g);
+  }
+
+  // ---------- grade, grain, dust ----------
+  const DARK = [24, 17, 9], LIGHT = [251, 245, 226];
+  const gradeAt = t => ({
+    sat: 1 - smooth(4, 13, t),
+    sep: smooth(4, 13, t),
+    con: 1 + 0.45 * smooth(4, 13, t) + 1.1 * smooth(26, 31, t) - 0.45 * smooth(32, 36, t),
+    piv: 0.5 + 0.06 * smooth(26, 31, t),
+    soft: 1.6 * smooth(27, 30, t) * (1 - smooth(32.5, 34.5, t)),
+    grain: k => k === 0 ? 0 : 5 + 5 * smooth(4, 16, k),
+  });
+  const acc = new Float32Array(W * H * 3);
+  const out = $('out'), og = out.getContext('2d'), tmp = mk(W, H), tg = tmp.getContext('2d');
+
+  window.renderFrame = (j) => {
+    const T0 = performance.now(); acc.fill(0);
+    // A half-step frame takes the shutter schedule of the 30 fps frame after it. Grain and dust keep the 30 fps cadence.
+    const tc = j * STEP, k = j === 0 ? 0 : Math.max(1, Math.round(tc)), cad = Math.floor(tc);
+    const N = subs(k), sh = shutter(k) * STEP;
+    for (let i = 0; i < N; i++) {
+      const t = N === 1 ? tc : tc + (i / (N - 1) - 0.5) * sh;
+      drawScene(Math.max(t, 0.001), k); if (window.DEBUG) console.log("sub", i, Math.round(performance.now() - T0));
+      const d = g.getImageData(0, 0, W, H).data;
+      for (let p = 0, q = 0; p < d.length; p += 4, q += 3) { acc[q] += d[p]; acc[q + 1] += d[p + 1]; acc[q + 2] += d[p + 2]; }
+    }
+    const G = gradeAt(tc), id = og.createImageData(W, H), D = id.data, r = rng(1000 + cad), inv = 1 / (N * 255);
+    if (k === 0) { // untouched
+      for (let p = 0, q = 0; p < D.length; p += 4, q += 3) { D[p] = acc[q] / N; D[p + 1] = acc[q + 1] / N; D[p + 2] = acc[q + 2] / N; D[p + 3] = 255; }
+      og.putImageData(id, 0, 0); return out.toDataURL('image/png');
+    }
+    const gr = G.grain(tc);
+    for (let p = 0, q = 0; p < D.length; p += 4, q += 3) {
+      let R = acc[q] * inv, Gc = acc[q + 1] * inv, Bc = acc[q + 2] * inv;
+      const Y = 0.299 * R + 0.587 * Gc + 0.114 * Bc;
+      // colour path with contrast
+      const cr = (lerp(Y, R, G.sat) - G.piv) * G.con + G.piv, cg = (lerp(Y, Gc, G.sat) - G.piv) * G.con + G.piv, cb = (lerp(Y, Bc, G.sat) - G.piv) * G.con + G.piv;
+      // sepia path: contrast on luma, then tone between ink and paper
+      const l = clamp((Y - G.piv) * G.con + G.piv), sr = lerp(DARK[0], LIGHT[0], Math.pow(l, .88)), sg = lerp(DARK[1], LIGHT[1], l), sb = lerp(DARK[2], LIGHT[2], Math.pow(l, 1.22));
+      const n = (r() - .5) * 2 * gr;
+      D[p] = lerp(clamp(cr) * 255, sr, G.sep) + n; D[p + 1] = lerp(clamp(cg) * 255, sg, G.sep) + n; D[p + 2] = lerp(clamp(cb) * 255, sb, G.sep) + n; D[p + 3] = 255;
+    }
+    og.putImageData(id, 0, 0);
+    if (G.soft > 0.05) { tg.filter = `blur(${G.soft}px)`; tg.drawImage(out, 0, 0); tg.filter = 'none'; og.drawImage(tmp, 0, 0); }
+    // film dust: specks and hairs, fresh every frame
+    og.fillStyle = 'rgba(20,14,8,.9)'; og.strokeStyle = 'rgba(20,14,8,.75)';
+    const nd = 8 + Math.floor(r() * 10);
+    for (let i = 0; i < nd; i++) { const x = r() * W, y = r() * H, s = 0.8 + r() * r() * 3.5;
+      og.beginPath(); og.ellipse(x, y, s, s * (0.6 + r() * .5), r() * 3, 0, 7); og.fill(); }
+    if (r() < .5) { const x = r() * W, y = r() * H, a = r() * 6; og.lineWidth = 1 + r();
+      og.beginPath(); og.moveTo(x, y); og.bezierCurveTo(x + 20 * Math.cos(a), y + 20 * Math.sin(a), x + 30 * Math.cos(a + 1), y + 30 * Math.sin(a + 1), x + 45 * Math.cos(a + .6), y + 45 * Math.sin(a + .6)); og.stroke(); }
+    console.log('frame', j, Math.round(performance.now() - T0), 'ms');
+    return out.toDataURL('image/png');
+  };
+
+  // debug: world overview with the camera frame at time t
+  window.overview = (ts) => {
+    const s = 0.22; g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#555'; g.fillRect(0, 0, W, H);
+    g.setTransform(s, 0, 0, s, 40, 300);
+    g.drawImage(pages.main, 0, 0, 1920, 1080);
+    if (c.s > 2) g.drawImage(leftHi, LEFT.x, LEFT.y, LEFT.w, LEFT.h);
+    drawCollage(g);
+    g.lineWidth = 8; ts.forEach((t, i) => { const c = window.cam(t); g.save(); g.translate(c.x, c.y); g.rotate(-c.r * Math.PI / 180); g.strokeStyle = `hsl(${i * 50},90%,50%)`; g.strokeRect(-W / 2 / c.s, -H / 2 / c.s, W / c.s, H / c.s); g.restore(); });
+    og.drawImage(sc, 0, 0); return out.toDataURL('image/png');
+  };
+  return true;
+})();
+</script>
+</body>
+</html>

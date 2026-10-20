@@ -1,0 +1,302 @@
+{
+  "reel": "dylan-patel-hype-edit",
+  "what": "Statistics from the chat in which Zeal and Claude Code made the Dylan Patel hype reel.",
+  "zeal_turns": 167,
+  "median_words": 29,
+  "assistant_turns": {
+    "main": 1193,
+    "helpers": 1847
+  },
+  "tool_calls": {
+    "main": 1255,
+    "helpers": 2132
+  },
+  "helper_agents": 24,
+  "span_hours": 35.5,
+  "first_day": "2026-10-16",
+  "last_day": "2026-10-18",
+  "first_message_to_last_checkpoint": {
+    "checkpoint": "Final approved",
+    "hours": 35.5,
+    "first_day": "2026-10-16",
+    "last_day": "2026-10-17",
+    "messages_after": 0
+  },
+  "directing": [
+    "Zeal directed the way an editor sits behind a cutter. The agent rendered, Zeal watched, and the answer came back in a line or two, often several a minute, like \"delete san francisco from top left\" or \"actually +2 on the intro\". When a call was close, Zeal asked for the options side by side, or asked the agent to \"steelman the case for and against\", and picked by eye or by ear. The announcer's lines are Zeal's own voice, recorded as voice memos and dropped into the chat."
+  ],
+  "quotes": [
+    {
+      "turn": 28,
+      "at": "2026-10-17T06:25:00.411Z",
+      "text": "honestly i think we can do that and the score box after the fact with software overlay. we just need to get clip right.",
+      "context": "The rule for the whole reel. The video model only swaps the person, and every score box, banner and tag is drawn in code."
+    },
+    {
+      "turn": 28,
+      "at": "2026-10-17T06:25:00.411Z",
+      "text": "why is it $0.88 vs $0.43?",
+      "context": "The bill gave it away. Pinned start frames made Wan 3.0 skip the source clip, and the cheaper run was the one that ignored it."
+    },
+    {
+      "turn": 32,
+      "at": "2026-10-17T06:33:48.475Z",
+      "text": "rly important to get that light beard right with the face matching",
+      "context": "The likeness lives in the beard. Early takes gave him a full one."
+    },
+    {
+      "turn": 70,
+      "at": "2026-10-17T08:51:45.232Z",
+      "text": "also maybe we put speaker first bc changing query by deleting everything is weird",
+      "context": "Why each on-screen search tag names the speaker before the words."
+    },
+    {
+      "turn": 122,
+      "at": "2026-10-17T17:21:55.363Z",
+      "text": "brilliant can you push this somewhere i can lowkey access it on mobile",
+      "context": "The first version Zeal treated as done, 10.7 hours before the one that shipped. Everything after it was polish."
+    },
+    {
+      "turn": 132,
+      "at": "2026-10-17T20:37:07.898Z",
+      "text": "Some of the newspaper stuff is remarkably clear on the 30, so that's why I'm going with that",
+      "context": "Why the reel ships at 30 fps. The 60 fps in-betweens smeared the newspaper."
+    },
+    {
+      "turn": 136,
+      "at": "2026-10-17T22:13:49.470Z",
+      "text": "honestly, I love audio D. I thought that sounded cooler on my laptop speakers.",
+      "context": "Mix D keeps the original song whole and swaps only the announcer's words for Zeal's takes."
+    },
+    {
+      "turn": 167,
+      "at": "2026-10-18T03:57:30.271Z",
+      "text": "I think I just want to go with the Super Saiyan one, man.",
+      "context": "The last pick, the aura on the hero's final frames."
+    }
+  ],
+  "reversals": [
+    {
+      "turns": [
+        92,
+        132
+      ],
+      "text": "Zeal asked for \"the maximum fps and clarity\" (turn 92). The 60 fps master used RIFE in-betweens that smeared the newspaper and the tags, and after watching both full exports Zeal wrote \"30 is goated.\" (turn 132)."
+    },
+    {
+      "turns": [
+        78
+      ],
+      "text": "The agent's end card rolled a counter up to \"156 videos · 37 channels\" under the logo. Zeal kept the typing and cut the number, \"don't even put the counter\" (turn 78)."
+    },
+    {
+      "turns": [
+        71,
+        84
+      ],
+      "text": "Zeal asked for the end profile to turn to the side (turn 71). Once it rendered, \"nah fuck this rotation i just don't like it\" (turn 84), and the shot became him standing still, \"lookin real serious\"."
+    },
+    {
+      "turns": [
+        154
+      ],
+      "text": "Claude ranked four ways to make Dylan pop in the podcast cuts and picked P4, a mix of the other three. Zeal picked P2, the halation glow around his outline, \"b2b p2 is goated.\" (turn 154)."
+    },
+    {
+      "turns": [
+        154,
+        155,
+        162
+      ],
+      "text": "Zeal asked for fire from the hero's eyes (turn 154) and dropped it on sight, \"ok i see fire and i don't like it.\" (turn 155). Energy eyes went next, \"nah these might be cooked\", and the same message asked for the aura that shipped, \"what about a super saiyan animated style aura around him pops upin the last few frames\" (turn 162)."
+    }
+  ],
+  "tokens_by_model": {
+    "claude-opus-5-5": {
+      "input": 6232,
+      "cache_creation": 17164040,
+      "cache_read": 652314872,
+      "output": 2632295,
+      "cache_write_1h": 3008077,
+      "cache_write_5m": 14155963,
+      "messages": 3040,
+      "cost_usd": 277.98
+    }
+  },
+  "tokens_cost_usd": 277.98,
+  "prices": {
+    "basis": "Claude API list prices, USD per million tokens",
+    "as_of": "October 2026",
+    "by_model": {
+      "claude-opus-5-5": {
+        "input": 4.0,
+        "cache_write_5m": 5.0,
+        "cache_write_1h": 8.0,
+        "cache_read": 0.2,
+        "output": 20.0
+      }
+    }
+  },
+  "media_costs": {
+    "openrouter": {
+      "basis": "measured",
+      "source": "cost field of each generation log",
+      "log_files": 19,
+      "by_model": {
+        "alibaba/wan-3.0": {
+          "runs": 29,
+          "failures": 2,
+          "cost_usd": 18.2402,
+          "runs_without_cost": 0
+        },
+        "bytedance/seedance-2.5": {
+          "runs": 4,
+          "failures": 4,
+          "cost_usd": 0.0,
+          "runs_without_cost": 0
+        },
+        "google/gemini-nano-banana-2.1": {
+          "runs": 2,
+          "failures": 2,
+          "cost_usd": 0.0,
+          "runs_without_cost": 0
+        },
+        "minimax/hailuo-3": {
+          "runs": 2,
+          "failures": 1,
+          "cost_usd": 0.65,
+          "runs_without_cost": 0
+        },
+        "openai/gpt-image-2": {
+          "runs": 2,
+          "failures": 1,
+          "cost_usd": 0.1978,
+          "runs_without_cost": 0
+        },
+        "openai/gpt-image-2.5-sunburst": {
+          "runs": 51,
+          "failures": 14,
+          "cost_usd": 2.4531,
+          "runs_without_cost": 0
+        }
+      },
+      "total_usd": 21.5411,
+      "runs": 90,
+      "failures": 24
+    },
+    "modal": {
+      "basis": "measured",
+      "source": "Modal billing report",
+      "by_app": {
+        "practical-rife": 0.7142,
+        "seedvr2-sweep": 9.7241,
+        "seedvr2-upscale": 1.5147
+      },
+      "total_usd": 11.953,
+      "per_run_table_usd": 14.69
+    },
+    "notes": [
+      "OpenRouter amounts are the cost each generation reported. Modal is the billing report for the GPU apps used on the reel, and the per-run table is the upscale sweep's own estimate of the same work."
+    ]
+  },
+  "arcmira": {
+    "calls": 34,
+    "searches": 51,
+    "by_kind": {
+      "cli": 1,
+      "mcp": 24,
+      "rest": 9
+    },
+    "credits_estimate": 1000,
+    "credits_basis_counts": {
+      "limit": 19,
+      "result_count": 32,
+      "window": 2
+    },
+    "credits_printed_in_results": null,
+    "used_in_reel_searches": 20,
+    "edl_video_ids": 10,
+    "basis": "estimated"
+  },
+  "checkpoints": [
+    {
+      "name": "First start frame approved",
+      "turn": 18,
+      "at": "2026-10-17T04:56:48.671Z",
+      "turns_since_previous": 18
+    },
+    {
+      "name": "First generated shot accepted",
+      "turn": 24,
+      "at": "2026-10-17T05:34:49.149Z",
+      "turns_since_previous": 6
+    },
+    {
+      "name": "Podcast section first cut",
+      "turn": 40,
+      "at": "2026-10-17T07:10:24.681Z",
+      "turns_since_previous": 16
+    },
+    {
+      "name": "First full cut playable",
+      "turn": 44,
+      "at": "2026-10-17T07:49:45.751Z",
+      "turns_since_previous": 4
+    },
+    {
+      "name": "Newspaper done",
+      "turn": 79,
+      "at": "2026-10-17T09:23:53.259Z",
+      "turns_since_previous": 35
+    },
+    {
+      "name": "Film look Worn locked",
+      "turn": 130,
+      "at": "2026-10-17T19:55:30.320Z",
+      "turns_since_previous": 51
+    },
+    {
+      "name": "30 fps locked",
+      "turn": 132,
+      "at": "2026-10-17T20:39:25.200Z",
+      "turns_since_previous": 2
+    },
+    {
+      "name": "Audio D picked",
+      "turn": 136,
+      "at": "2026-10-17T22:14:19.674Z",
+      "turns_since_previous": 4
+    },
+    {
+      "name": "Upscale C locked",
+      "turn": 137,
+      "at": "2026-10-17T23:08:05.561Z",
+      "turns_since_previous": 1
+    },
+    {
+      "name": "Opener name 2 picked",
+      "turn": 140,
+      "at": "2026-10-17T23:34:37.991Z",
+      "turns_since_previous": 3
+    },
+    {
+      "name": "B2 with P2 locked",
+      "turn": 154,
+      "at": "2026-10-18T01:45:53.986Z",
+      "turns_since_previous": 14
+    },
+    {
+      "name": "SSJ2 aura rendered",
+      "turn": 163,
+      "at": "2026-10-18T02:25:20.338Z",
+      "turns_since_previous": 9
+    },
+    {
+      "name": "Final approved",
+      "turn": 167,
+      "at": "2026-10-18T03:57:30.271Z",
+      "turns_since_previous": 4
+    }
+  ],
+  "timezone": "America/Los_Angeles"
+}

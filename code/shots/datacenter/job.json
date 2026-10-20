@@ -1,0 +1,10 @@
+{
+  "video": null,
+  "duration": 3,
+  "first": "../../starts/out/dcstart-gpt-image-2.5-sunburst.png",
+  "last": "../../starts/out/dcend-gpt-image-2.5-sunburst.png",
+  "refs": ["../../starts/out/sheet-gpt-image-2.5-sunburst.png", "../../refs/dylan/headshot-smile-768.png", "../../refs/dylan/headshot-suit-768.png"],
+  "refs_min": ["../../starts/out/sheet-gpt-image-2.5-sunburst.png", "../../refs/dylan/headshot-smile-768.png", "../../refs/dylan/headshot-suit-768.png"],
+  "prompt": "The man from the character sheet, with the face and short trimmed beard of the two headshots, stands with his arms crossed in the centre aisle of a huge AI datacenter. He starts looking down at the floor, then slowly lifts his head and looks straight into the camera, and at the very end breaks into a big wide smile, exactly between the first and last frames. Arms stay crossed, he barely moves otherwise. Very slow camera push-in. Rack status lights blink softly. Photoreal cinematic footage, no cuts.",
+  "prompt_min": "The man from the character sheet, with the face and short trimmed beard of the two headshots, stands with his arms crossed in the centre aisle of a huge AI datacenter. He starts looking down at the floor, then slowly lifts his head and looks straight into the camera, and at the very end breaks into a big wide smile, exactly between the first and last frames. Arms stay crossed, he barely moves otherwise. Very slow camera push-in. Rack status lights blink softly. Photoreal cinematic footage, no cuts."
+}

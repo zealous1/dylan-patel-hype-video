@@ -1,0 +1,15 @@
+{
+  "status": "work",
+  "takes": [
+    {
+      "label": "Look-matched",
+      "src": "shots/celebrate/out/look-v1.mp4",
+      "note": "The min take with its content unchanged, given the original's grade and blur per frame, stretched from 1.17 s to 1.20 s."
+    },
+    {
+      "label": "Min",
+      "src": "shots/celebrate/out/min-realtime.mp4",
+      "note": "The take Zeal likes, as generated, 1.17 s."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "video": "src-720.mp4",
+  "video_url_slow": "${SOURCE_BASE_URL}/fadeout/src-720-slow.mp4",
+  "duration_slow": 3,
+  "duration": 3,
+  "first": "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png",
+  "last": "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png",
+  "refs_focus": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/alleyoop-start-gpt-image-2.5-sunburst.png",
+    "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt_focus": "Edit the reference video. Keep the overhead camera, every other player, the rim, the net and every move exactly as they are. Replace the Lakers player wearing number 6, who hangs on the rim after the dunk and drops away, with the man from the character sheet (first reference image): his face and short dark hair exactly as in the two close-up headshots (second and third reference images), short neatly trimmed beard, medium-brown skin, slimmer build, no headband ever. He wears the yellow jersey with PATEL above 67 on the back in purple, never the number 6. The other reference images show how he looks in this overhead shot. Move for move with the number 6. Photoreal NBA broadcast footage, no new cuts.",
+  "refs": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/alleyoop-start-gpt-image-2.5-sunburst.png",
+    "../../starts/out/alleyoop-end-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt": "Edit the reference video. Keep the overhead camera, every other player, the rim, the net and every move exactly as they are. Replace the Lakers player wearing number 6, who hangs on the rim after the dunk and drops away, with the man from the character sheet (first reference image): his face and short dark hair exactly as in the two close-up headshots (second and third reference images), short neatly trimmed beard, medium-brown skin, slimmer build, no headband ever. He wears the yellow jersey with PATEL above 67 on the back in purple, never the number 6. The other reference images show how he looks in this overhead shot. Move for move with the number 6. Photoreal NBA broadcast footage, no new cuts."
+}

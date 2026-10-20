@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>60 fps Routes</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ff8a80}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ff8a80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Helvetica,Arial,sans-serif}
+main{max-width:1200px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}h2{margin-top:32px}.note,.m{color:var(--muted)}
+img{width:100%;border-radius:6px;display:block;margin:6px 0 2px}figure{margin:16px 0}figcaption{color:var(--muted);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:right;vertical-align:top}
+td:first-child,th:first-child,td.mix{text-align:left}.mix{font-size:12px;color:var(--muted)}.wrap{overflow-x:auto}
+.player{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;margin:12px 0}
+.panes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.panes.one{grid-template-columns:1fr}.panes.one .pane:nth-child(2){display:none}
+.pane video{width:100%;display:block;background:#000;border-radius:4px;aspect-ratio:16/9}
+.pane select{width:100%;margin:0 0 4px;font:inherit;padding:3px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px}
+.pane .how{font-size:13px;color:var(--muted);min-height:1.4em}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.bar button{font:inherit;font-size:13px;padding:3px 9px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg);cursor:pointer}
+.bar button.on{border-color:var(--on);color:var(--on)}.bar input[type=range]{flex:1;min-width:160px}
+.frame{font-variant-numeric:tabular-nums;min-width:15ch}kbd{border:1px solid var(--line);border-radius:3px;padding:0 4px;font-size:12px}
+@media (max-width:700px){.panes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>60 fps routes for the LeBron reel</h1>
+<p class="note">Every route is the full reel at 60 fps before the film pass, 1804 frames. The players stay on the same frame when you switch routes. Keys: <kbd>←</kbd> <kbd>→</kbd> step one frame, with <kbd>Shift</kbd> ten, <kbd>Space</kbd> plays or pauses, <kbd>F</kbd> swaps the two panes in place, <kbd>1</kbd> shows one pane or two.</p>
+
+<h2>Compare</h2>
+<div class="player" id="reel"></div>
+
+<h2>Measures</h2>
+<p class="note">Measured on every in-between frame (the odd 60 fps frames). Sharpness is the variance of the Laplacian. <b>Ratio</b> is an in-between's sharpness over the geometric mean of its two neighbours, so 1.00 means as sharp as the real frames; <b>Text</b> is the newspaper and the podcast cut, <b>Rest</b> everything else. <b>Soft</b> counts in-betweens under 0.70. <b>Judder</b> is the mean size of that ratio's log2, so it counts frames that are softer and frames that are crisper than their neighbours alike, which is what reads as flicker. <b>Cadence</b> is how unevenly a frame splits the motion between its neighbours, 0 for an even split and 1 for a held frame, over in-betweens with motion.</p>
+<div class="wrap"><table>
+<tr><th>Route</th><th>Ratio</th><th>Text</th><th>Rest</th><th>Worst</th><th>Soft</th><th>Judder</th><th>Cadence</th><th>In-betweens</th></tr>
+%ROWS%
+</table></div>
+
+%VERDICT%
+
+<h2>Strips</h2>
+<p class="note">Each strip is the frame before, the frame and the frame after, on every route. The fastcuts strips sit on the in-between just before each cut.</p>
+%STRIPS%
+
+<h2>The alley-oop</h2>
+<p class="note">The scene plays a slowed Wan generation sped up, so its 60 fps frames can come from that generation or from the realtime take. Mean and min are absolute sharpness over all 142 frames.</p>
+<div class="wrap"><table>
+<tr><th>Way</th><th>Mean</th><th>Min</th><th>Ratio</th><th>Judder</th><th>Cadence</th></tr>
+%ALLY%
+</table></div>
+<div class="player" id="ally"></div>
+</main>
+<script>
+const DATA = %DATA%;
+let active = null;
+function player(el, cfg) {
+  const fps = 60, n = cfg.n;
+  el.innerHTML = `<div class="panes"></div><div class="bar"><button data-a=play>Play</button><button data-a=prev>&larr;</button><button data-a=next>&rarr;</button>
+    <span class="frame"></span><input type=range min=0 max=${n - 1} value=0></div><div class="bar marks"></div>`;
+  const panes = el.querySelector('.panes'), frameEl = el.querySelector('.frame'), range = el.querySelector('input');
+  const vids = [];
+  let frame = 0, playing = false;
+  [0, 1].forEach(p => {
+    const d = document.createElement('div'); d.className = 'pane';
+    const sel = document.createElement('select');
+    cfg.sources.forEach((s, i) => sel.add(new Option(s.label, i)));
+    sel.value = String(Math.min(p, cfg.sources.length - 1));
+    const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.preload = 'auto';
+    const how = document.createElement('div'); how.className = 'how';
+    d.append(sel, v, how); panes.append(d);
+    const o = { sel, v, how };
+    sel.onchange = () => load(o);
+    vids.push(o); load(o);
+  });
+  function load(o) {
+    o.v.src = cfg.sources[+o.sel.value].src;
+    o.v.addEventListener('loadedmetadata', () => { o.v.currentTime = (frame + 0.5) / fps; if (playing) o.v.play(); }, { once: true });
+    label();
+  }
+  function label() {
+    frameEl.textContent = `frame ${frame} · ${(frame / fps).toFixed(3)} s` + (cfg.scenes.length ? ' · ' + cfg.scenes.filter(s => s[1] <= frame).pop()[0] : '');
+    range.value = frame;
+    vids.forEach(o => { const h = cfg.sources[+o.sel.value].how[frame]; o.how.textContent = h ? DATA.names[h] : ''; });
+  }
+  function seek(f) {
+    playing && toggle();
+    frame = Math.max(0, Math.min(n - 1, f));
+    vids.forEach(o => { o.v.currentTime = (frame + 0.5) / fps; });
+    label();
+  }
+  function toggle() {
+    playing = !playing;
+    el.querySelector('[data-a=play]').textContent = playing ? 'Pause' : 'Play';
+    if (playing) { const t = (frame + 0.5) / fps; vids.forEach(o => { o.v.currentTime = t; o.v.play(); }); tick(); }
+    else { vids.forEach(o => o.v.pause()); frame = Math.min(n - 1, Math.floor(vids[0].v.currentTime * fps)); seek(frame); }
+  }
+  function tick() {
+    if (!playing) return;
+    const lead = vids[0].v;
+    frame = Math.min(n - 1, Math.floor(lead.currentTime * fps));
+    if (Math.abs(vids[1].v.currentTime - lead.currentTime) > 0.04) vids[1].v.currentTime = lead.currentTime;
+    if (lead.ended) toggle(); else label();
+    requestAnimationFrame(tick);
+  }
+  el.querySelector('[data-a=play]').onclick = () => { active = api; toggle(); };
+  el.querySelector('[data-a=prev]').onclick = () => { active = api; seek(frame - 1); };
+  el.querySelector('[data-a=next]').onclick = () => { active = api; seek(frame + 1); };
+  range.oninput = () => { active = api; seek(+range.value); };
+  const marks = el.querySelector('.marks');
+  cfg.marks.forEach(m => { const b = document.createElement('button'); b.textContent = m; b.onclick = () => { active = api; seek(m); }; marks.append(b); });
+  el.addEventListener('pointerdown', () => { active = api; });
+  const api = {
+    get frame() { return frame; }, seek, toggle,
+    swap() { const a = vids[0].sel.value; vids[0].sel.value = vids[1].sel.value; vids[1].sel.value = a; vids.forEach(load); },
+    single() { panes.classList.toggle('one'); },
+  };
+  return api;
+}
+const reel = player(document.getElementById('reel'), DATA.reel);
+const ally = DATA.ally.sources.length ? player(document.getElementById('ally'), DATA.ally) : null;
+active = reel;
+window.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' && e.target.type !== 'range') return;
+  const step = e.shiftKey ? 10 : 1;
+  if (e.key === 'ArrowRight') { active.seek(active.frame + step); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { active.seek(active.frame - step); e.preventDefault(); }
+  else if (e.key === ' ') { active.toggle(); e.preventDefault(); }
+  else if (e.key === 'f' || e.key === 'F') active.swap();
+  else if (e.key === '1') active.single();
+});
+window.__players = { reel, ally };
+</script>
+</body>
+</html>

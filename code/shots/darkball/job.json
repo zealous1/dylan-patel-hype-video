@@ -1,0 +1,12 @@
+{
+  "video": "src-720.mp4",
+  "video_url_slow": "${SOURCE_BASE_URL}/darkball/src-720-slow.mp4",
+  "duration_slow": 3,
+  "duration": 3,
+  "first": null,
+  "last": null,
+  "refs_focus": [],
+  "refs": [],
+  "prompt_focus": "Edit the reference video. Keep everything exactly as it is: the camera, the tilt down, the shooter, the dark arena, the lighting, the backboard, the rim and net, and every scoreboard and sign graphic with its text unchanged. Change only the basketball, for the whole clip: it becomes a glowing silicon wafer, a thin round disc the same size as the ball, its face covered in a shimmering iridescent grid of square chips. The wafer follows the exact path of the ball, floating up through the darkness and dropping through the rim and net, with the same warm glow and highlights. Photoreal arena footage, no new cuts.",
+  "prompt": "Edit the reference video. Keep everything exactly as it is: the camera, the tilt down, the shooter, the dark arena, the lighting, the backboard, the rim and net, and every scoreboard and sign graphic with its text unchanged. Change only the basketball, for the whole clip: it becomes a glowing silicon wafer, a thin round disc the same size as the ball, its face covered in a shimmering iridescent grid of square chips. The wafer follows the exact path of the ball, floating up through the darkness and dropping through the rim and net, with the same warm glow and highlights. Photoreal arena footage, no new cuts."
+}

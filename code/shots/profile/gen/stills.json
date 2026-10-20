@@ -1,0 +1,99 @@
+{
+ "gen/profile-b.png": {
+  "nose": [
+   912,
+   687
+  ],
+  "ear": [
+   365,
+   737
+  ],
+  "rot": 4
+ },
+ "gen/up-b.png": {
+  "nose": [
+   885,
+   594
+  ],
+  "ear": [
+   314,
+   694
+  ],
+  "rot": -10
+ },
+ "gen/up-a.png": {
+  "nose": [
+   855,
+   560
+  ],
+  "ear": [
+   295,
+   650
+  ],
+  "rot": 0
+ },
+ "gen-video/frames/089.png": {
+  "nose": [
+   728,
+   270
+  ],
+  "ear": [
+   400,
+   330
+  ],
+  "rot": -4,
+  "scale": 1.55,
+  "nose_at": [
+   835,
+   420
+  ]
+ },
+ "gen-video-v11/frames/089.png": {
+  "nose": [
+   728,
+   270
+  ],
+  "ear": [
+   400,
+   330
+  ],
+  "rot": -4,
+  "scale": 1.55,
+  "nose_at": [
+   835,
+   420
+  ]
+ },
+ "gen-video-v12/frames/089.png": {
+  "nose": [
+   728,
+   325
+  ],
+  "ear": [
+   410,
+   322
+  ],
+  "rot": 0,
+  "scale": 1.55,
+  "nose_at": [
+   820,
+   518
+  ]
+ },
+ "gen-video-v13/frames/080.png": {
+  "nose": [
+   770,
+   350
+  ],
+  "ear": [
+   460,
+   310
+  ],
+  "rot": 0,
+  "scale": 1.86,
+  "nose_at": [
+   861,
+   575
+  ]
+ }
+}

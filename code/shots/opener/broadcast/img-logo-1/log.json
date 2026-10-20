@@ -1,0 +1,12 @@
+[
+  {
+    "name": "bclogo",
+    "model": "openai/gpt-image-2.5-sunburst",
+    "status": 200,
+    "seconds": 29.248,
+    "cost": 0.050013,
+    "error": null,
+    "file": "../shots/opener/broadcast/img-logo-1/bclogo-gpt-image-2.5-sunburst.png",
+    "at": "2026-10-17T22:13:17.844Z"
+  }
+]

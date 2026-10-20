@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Podcast lab</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c;--bad:#c62828;--ok:#2e7d32;--tick:#9a968c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ef5350;--ok:#66bb6a;--tick:#6a6a74}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ef5350;--ok:#66bb6a;--tick:#6a6a74}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1500px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;margin:28px 0 6px}
+.note{color:var(--muted)}a{color:var(--on)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:center}
+button,select{font:inherit;padding:6px 11px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer}
+button.on{border-color:var(--on);color:var(--on)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid.six{grid-template-columns:1fr 1fr 1fr}
+@media (max-width:800px){.grid,.grid.six{grid-template-columns:1fr}}
+.pane{position:relative}.pane select{margin-bottom:4px;max-width:100%}
+.pane .cap{color:var(--muted);font-size:13px;margin-top:4px;min-height:2.6em}
+.stage{position:relative}video{width:100%;background:#000;border-radius:8px;display:block}#reel{max-width:1100px}
+canvas.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+input[type=range]{flex:1;min-width:200px}#t{font-variant-numeric:tabular-nums;min-width:230px}
+.strips{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;overflow-x:auto}
+.strip{display:grid;grid-template-columns:150px 1fr;align-items:center;min-width:640px}
+.strip .lab{font-size:13px;color:var(--muted)}.strip svg{width:100%;height:34px;display:block;cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+th,td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th{font-weight:600}
+td:first-child,th:first-child{text-align:left}tr:last-child td{border-bottom:0}
+td.l{text-align:left;white-space:normal;min-width:220px}
+.legend span{margin-right:14px}
+.sheets{display:flex;flex-wrap:wrap;gap:8px}
+.mock{display:block;width:100%;max-width:1350px;height:auto;margin:0 0 10px;border-radius:8px}
+</style></head><body><main>
+<h1>Podcast lab</h1>
+<p class="note">The podcast hype section (reel frames 415 to 623, 13.83 to 20.80 s). Round 1 rebuilt it four ways and Zeal picked B. The Super Saiyan aura comes first below, then round 2. Nothing here replaces the current cut, and no version moves the picture to the right.</p>
+
+<h2>Round 4, Super Saiyan aura</h2>
+<p class="note">Zeal locked B2 with P2 and dropped the eye effects. On the hero's kick at 6.57 s into the section (reel 20.40 s), a cel-shaded aura pops on behind him at full strength in one frame and holds the last 12 frames to the cut. It hugs his MediaPipe person matte and is never drawn over him. The aura is three flat tones, a white inner edge, bright gold-yellow and a gold-orange rim, with a soft orange bloom outside it like the halation wrap. Its tongues stand tall over his head and shoulders and lean up and out at his sides. They re-form every two frames, flow upward, shimmer a few pixels sideways, and the whole aura pulses between 85% and 115%. S1 is the classic aura. S2 adds thin blue-white lightning inside it. S3 is half the height and width. The players loop the hero's last second.</p>
+<a href="sheets/v18-aura.jpg"><img class="mock" src="sheets/v18-aura.jpg" alt="S1, S2 and S3 at full aura, and four frames of S1 in a row"></a>
+<div class="row" data-group="r3"><label><input type="checkbox" class="loop" checked> Loop</label></div>
+<div class="grid" id="panes3"></div>
+<div class="row" data-group="r3"><button class="play">Play</button><button class="rate">Speed 1x</button>
+<button class="back">Frame back</button><button class="fwd">Frame forward</button>
+<input type="range" class="seek" min="186" max="208" step="1" value="199"><span class="t"></span></div>
+
+<h2>Round 2, B2 and making him pop</h2>
+<p class="note">B2 changes only the Jensen slot. The cut lands on Jensen's face at B's anchor and size. The zoom pulls out to the whole stage on the music's one strong hit at 15.88 s. The slam into the belt plate moves one beat later, to 16.30 s, and ends on v14's framing. Face, stage and belt in the 0.42 s before 15.88 s would have zoomed about 50% a frame, four times the original's fastest. P1 to P4 are B2 with one treatment each, cut out by a person matte from MediaPipe selfie segmentation. Every on-screen search is lowercase, and the tags sit on top of every treatment.</p>
+<div class="row" data-group="r2"><label><input type="checkbox" class="loop" checked> Loop</label></div>
+<div class="grid six" id="panes2"></div>
+<div class="row" data-group="r2"><button class="play">Play</button><button class="rate">Speed 1x</button>
+<button class="back">Frame back</button><button class="fwd">Frame forward</button>
+<input type="range" class="seek" min="0" max="208" step="1" value="0"><span class="t"></span></div>
+<div class="tw"><table id="pop"></table></div>
+<p class="note">Face ÷ room is the face's luma over the room's, and face vividness is the Lab chroma of the lit face, both over the podcast clips only. P3's burns last eight frames in all and most are left out as flash frames, so its numbers sit near B2's.</p>
+
+<h2>Round 1, the section synced</h2>
+<div class="row" data-group="r1"><button id="two" class="on">Two up</button><button id="six">All six</button>
+<label><input type="checkbox" id="faces"> Face point</label>
+<label><input type="checkbox" class="loop" checked> Loop</label></div>
+<div class="grid" id="panes"></div>
+<div class="row" data-group="r1"><button class="play">Play</button><button class="rate">Speed 1x</button>
+<button class="back" title="Left arrow">Frame back</button><button class="fwd" title="Right arrow">Frame forward</button>
+<input type="range" class="seek" min="0" max="208" step="1" value="0"><span class="t"></span></div>
+<p class="note">Space plays and pauses the players you used last. The arrow keys step one frame. Sound is the reel's audio. The face point draws, in cyan, the screen point B, C and D line his face up on, and in yellow where his face is in every frame. Every pane can show any version, round 2's included.</p>
+
+<h2>Which way the picture travels at every cut</h2>
+<div class="strips" id="strips"></div>
+<p class="note legend"><span>Arrows show which way the picture moves on the frames either side of each cut, measured from the rendered video.</span> <span style="color:var(--bad)">Red</span> is travel to the right, which the rule forbids. Grey ticks are the beats. Small red ticks mark single frames where something in the shot moves right faster than 8 px a frame. Click a strip to jump there.</p>
+<p class="note" id="auditnote"></p>
+
+<h2>Colour</h2>
+<div class="tw"><table id="colour"></table></div>
+<p class="note">Measured on every frame of each section, flash frames left out. Luma is 0 to 255. Vividness is the Lab chroma of lit pixels only (luma above 50), since most of the original is black arena and a whole-frame average measures the black. Warmth is Lab b* and tint is Lab a* on the same pixels. Face and room use the largest detected face and everything away from the person. The variants' rows are the podcast clips only, where the colour pass applies.</p>
+
+<h2>What the original does here</h2>
+<div class="tw"><table id="shots"></table></div>
+<p class="note">Motion is the median per-frame travel of the matched corners in each shot, in pixels of a 1920 wide frame. Positive x is the picture moving right, which is the camera panning left. Zoom is percent per frame, negative pulls out.</p>
+<svg id="hoop" viewBox="0 0 640 120" style="width:100%;max-width:760px;height:auto;display:block;margin-top:8px" role="img" aria-label="Zoom per frame across the hoop cut"></svg>
+<p class="note">Zoom per frame across the hoop cut (section frames 148 to 180). The pull-out starts before the cut, peaks at 12% a frame two frames after it, and settles over about 20 frames in the new shot.</p>
+
+<h2>Where his face starts in each clip</h2>
+<div class="tw"><table id="starts"></table></div>
+<p class="note">Face centre and height as fractions of the frame on each clip's first frame. v14's framing is variant A's, since A only changes direction and colour.</p>
+
+<h2>Full reel, spliced</h2>
+<div class="row"><select id="reelpick"></select><button id="from13">Play from 13.0 s</button></div>
+<video id="reel" controls playsinline preload="metadata"></video>
+<p class="note" id="reelcap"></p>
+
+<h2>Energy eyes, dropped</h2>
+<p class="note">Zeal dropped these for the aura above. Stills only, kept for the record. Every look is bright gold-yellow on the B2 P2 hero frame at 6.40 s into the section (reel 20.23 s), just after the smile peaks, with his eyes traced by MediaPipe Face Mesh. Nothing rises more than 0.15 of his face height. The first sheet leads with the anime demon looks and shows three of them over three frames in a row, where the energy slides 1 to 3 px sideways and flickers between 86% and 114% brightness. The second sheet has the plain fills and the other styles. In video the glow would switch on in one frame.</p>
+<p class="sheets note"><a href="sheets/eyes-mockups.jpg">demon looks and motion</a><a href="sheets/eyes-mockups-2.jpg">fills and other styles</a></p>
+<a href="sheets/eyes-mockups.jpg"><img class="mock" src="sheets/eyes-mockups.jpg" alt="Nine demon energy-eye looks, three of them over three frames, and one at full frame"></a>
+<a href="sheets/eyes-mockups-2.jpg"><img class="mock" src="sheets/eyes-mockups-2.jpg" alt="Fifteen more energy-eye styles in gold-yellow"></a>
+
+<h2>Contact sheets</h2>
+<p class="sheets note"><a href="sheets/original-all.jpg">original</a><a href="sheets/original-match.jpg">original, the hoop cut</a><a href="sheets/v14-all.jpg">v14</a><a href="sheets/v15a-all.jpg">A</a><a href="sheets/v15b-all.jpg">B</a><a href="sheets/v15c-all.jpg">C</a><a href="sheets/v15d-all.jpg">D</a><a href="sheets/v16-b2-jensen.jpg">B2, the Jensen slot</a><a href="sheets/v16-b2-tag.jpg">B2, the Jensen tag until the hit</a><a href="sheets/v16-tags-lowercase.jpg">lowercase tags</a><a href="sheets/v16-treatments.jpg">B2 and P1 to P4 side by side</a><a href="sheets/mattes.jpg">person mattes</a><a href="sheets/v16-b2-jensen-hud.jpg">B2, the Jensen tag</a><a href="sheets/v16-p4-burn-tag.jpg">P4, a burn hit with its tag</a><a href="sheets/v18-aura.jpg">S1 to S3, the aura</a></p>
+<p class="note">Built by <code>build.py</code> from <code>edl-v15a.json</code> to <code>edl-v15d.json</code>, <code>edl-v16-b2.json</code> to <code>edl-v16-p4.json</code> and <code>edl-v18-s1.json</code> to <code>edl-v18-s3.json</code> (written by <code>lab/make_edls.py</code>). Faces from <code>lab/faces.py</code>, mattes from <code>lab/matte.py</code>, the smile track from <code>lab/eyes.py</code>, the energy-eye stills from <code>lab/eyes_mockups.py</code>, measures from <code>lab/measure.py</code>, the direction audit from <code>lab/audit.py</code>, this page's numbers from <code>lab/stats.py</code>, the reels from <code>lab/splice.sh</code>.</p>
+</main>
+<script>
+const FPS = 30, N = 209, REEL0 = 415;
+const V = {
+  original: {label: 'The LeBron original', src: '../../../src/clip.mp4', off: REEL0 / FPS,
+    cap: 'The matched section of the LeBron edit. Few cuts, long camera moves, and a zoom that carries the hoop across a cut.'},
+  v14: {label: 'v14, current', src: '../out/fastcuts-v14.mp4', off: 0, path: 'a',
+    cap: 'The current cut. Eased pans alternate direction, three of them travel right, and the grade pulls the podcasts to grey.'},
+  v15a: {label: 'A, direction and colour', src: '../out/fastcuts-v15a.mp4', off: 0, path: 'a',
+    cap: 'v14 with each rightward pan turned to travel left, the subject-aware grade, and punches on the three beats that fall inside a clip.'},
+  v15b: {label: 'B, face-matched zoom-through', src: '../out/fastcuts-v15b.mp4', off: 0, path: 'b',
+    cap: 'His face sits on one screen point at one size at every cut while the zoom keeps going, pushing in through one cut and pulling out through the next, like the hoop cut. The hero pulls out from his face.'},
+  v15c: {label: 'C, hybrid', src: '../out/fastcuts-v15c.mp4', off: 0, path: 'c',
+    cap: 'Each clip lands with his face on the same point, then pushes in. v14\'s eased pans stay, only left, up or down.'},
+  v15d: {label: 'D, one camera travelling right', src: '../out/fastcuts-v15d.mp4', off: 0, path: 'd',
+    cap: 'The newspaper\'s rightward exit never stops. His face drifts left at one speed and one size through every clip, hard cuts on the beat with a landing punch.'},
+  'v16-b2': {label: 'B2, Jensen face-matched', src: '../out/fastcuts-v16-b2.mp4', off: 0, path: 'b2',
+    cap: 'B with the Jensen slot reworked. His face takes Dylan\'s place at the cut, the stage opens on the strong hit, and the belt slams a beat later. The Jensen tag shows until a frame before the slam.'},
+  'v16-p1': {label: 'B2 P1, print room', src: '../out/fastcuts-v16-p1.mp4', off: 0, path: 'p1',
+    cap: 'The room goes to the warm monochrome print of the opener and the Worn ending. Dylan keeps full colour.'},
+  'v16-p2': {label: 'B2 P2, halation wrap', src: '../out/fastcuts-v16-p2.mp4', off: 0, path: 'p2',
+    cap: 'His own light bleeds off his silhouette in the reel\'s orange glow, with a soft halation from his highlights, as if he is the brightest thing in the shot.'},
+  'v16-p3': {label: 'B2 P3, burn hits', src: '../out/fastcuts-v16-p3.mp4', off: 0, path: 'p3',
+    cap: 'On the four beats that fall inside a clip (17.34, 18.57, 18.99 and 19.41 s), two frames of the opener\'s name burn on his silhouette.'},
+  'v16-p4': {label: 'B2 P4, the pick', src: '../out/fastcuts-v16-p4.mp4', off: 0, path: 'p4',
+    cap: 'The print room, the halation at half strength, and the burn hits. The room recedes, a warm edge holds him, and the beats burn him in.'},
+  'v18-s1': {label: 'v6 S1, SSJ aura', src: '../out/fastcuts-v18-s1.mp4', off: 0,
+    cap: 'B2 P2 with the classic gold Super Saiyan aura behind him, popping on at the kick and holding to the cut.'},
+  'v18-s2': {label: 'v6 S2, SSJ2 aura with lightning', src: '../out/fastcuts-v18-s2.mp4', off: 0,
+    cap: 'S1 with thin blue-white lightning crackling inside the aura, Super Saiyan 2 style.'},
+  'v18-s3': {label: 'v6 S3, tight SSJ aura', src: '../out/fastcuts-v18-s3.mp4', off: 0,
+    cap: 'A tighter, thinner aura at half S1\'s height and width, for a subtler read.'},
+};
+const UP = '../../../master/out/';
+const REELS = {
+  'v6 S1, SSJ aura': {src: UP + 'final-v6-S1-upload.mp4', cap: V['v18-s1'].cap},
+  'v6 S2, SSJ2 aura with lightning': {src: UP + 'final-v6-S2-upload.mp4', cap: V['v18-s2'].cap},
+  'v6 S3, tight SSJ aura': {src: UP + 'final-v6-S3-upload.mp4', cap: V['v18-s3'].cap},
+  'v6, B2 P2': {src: UP + 'final-v6-upload.mp4', cap: 'Zeal\'s lock. B2 with the halation wrap, before any energy eyes.'},
+  'v5, current': {src: UP + 'final-v5-worn-30-upload.mp4', cap: 'The current final with v14, its end card in lowercase. Round 2 is spliced into it; round 1 (A to D) is spliced into v3, whose podcast section is the same frame for frame.'},
+  'B2': {src: UP + 'final-v5-pod-B2-upload.mp4', cap: V['v16-b2'].cap},
+  'B2 P1, print room': {src: UP + 'final-v5-pod-B2-P1-upload.mp4', cap: V['v16-p1'].cap},
+  'B2 P2, halation wrap': {src: UP + 'final-v5-pod-B2-P2-upload.mp4', cap: V['v16-p2'].cap},
+  'B2 P3, burn hits': {src: UP + 'final-v5-pod-B2-P3-upload.mp4', cap: V['v16-p3'].cap},
+  'B2 P4, the pick': {src: UP + 'final-v5-pod-B2-P4-upload.mp4', cap: V['v16-p4'].cap},
+  'A, direction and colour': {src: UP + 'final-v3-pod-A-upload.mp4', cap: V.v15a.cap},
+  'B, face-matched zoom-through': {src: UP + 'final-v3-pod-B-upload.mp4', cap: V.v15b.cap},
+  'C, hybrid': {src: UP + 'final-v3-pod-C-upload.mp4', cap: V.v15c.cap},
+  'D, one camera travelling right': {src: UP + 'final-v3-pod-D-upload.mp4', cap: V.v15d.cap},
+};
+const ANCHOR = [0.46, 0.40];
+const $ = id => document.getElementById(id);
+const store = {get: k => { try { return localStorage.getItem('podlab.' + k); } catch (e) { return null; } },
+               set: (k, v) => { try { localStorage.setItem('podlab.' + k, v); } catch (e) {} }};
+let LAB = null, PATHS = {}, mode = store.get('mode') || 'two', active = null;
+const GROUPS = [];
+
+// One synced group of players: a grid of panes, its controls (found by class in the group's rows) and the reel's
+// audio. The first pane is the clock, since a muted video always plays; the other panes and the audio follow it.
+function group(name, box, from = 0) {
+  const ctl = c => document.querySelector(`[data-group="${name}"] .${c}`);
+  const g = {name, box, from, panes: [], frame: from, playing: false, rate: 1, audio: new Audio(UP + 'final-v5-worn-30-upload.mp4')};
+  g.audio.preload = 'auto';
+  g.show = () => {
+    ctl('seek').value = g.frame;
+    ctl('t').textContent = `section frame ${g.frame} · reel frame ${REEL0 + g.frame} · ${((REEL0 + g.frame) / FPS).toFixed(3)} s`;
+    g.panes.forEach(p => draw(g, p));
+    if (name === 'r1') drawHeads(g.frame);
+  };
+  g.seek = f => {
+    g.frame = Math.max(g.from, Math.min(N - 1, f));
+    for (const p of g.panes) p.v.currentTime = V[p.key].off + (g.frame + 0.5) / FPS;
+    g.audio.currentTime = (REEL0 + g.frame) / FPS;
+    g.show();
+  };
+  g.play = on => {
+    if (on) for (const o of GROUPS) if (o !== g && o.playing) o.play(false);
+    g.playing = on; active = g; ctl('play').textContent = on ? 'Pause' : 'Play';
+    for (const p of g.panes) { p.v.playbackRate = g.rate; on ? p.v.play().catch(() => {}) : p.v.pause(); }
+    g.audio.playbackRate = g.rate; on ? g.audio.play().catch(() => {}) : g.audio.pause();
+    if (!on) g.seek(g.frame);
+  };
+  g.tick = () => {
+    if (!g.playing || !g.panes.length) return;
+    const clock = g.panes[0], u = clock.v.currentTime - V[clock.key].off, f = Math.floor(u * FPS);
+    if (f >= N || f < g.from - 1 || f < g.frame - 2) { if (ctl('loop').checked) g.seek(g.from); else g.play(false); return; }
+    g.frame = f;
+    for (const p of g.panes.slice(1)) { const want = V[p.key].off + u; if (Math.abs(p.v.currentTime - want) > 2 / FPS) p.v.currentTime = want; }
+    if (Math.abs(g.audio.currentTime - (REEL0 / FPS + u)) > 0.08) g.audio.currentTime = REEL0 / FPS + u;
+    g.show();
+  };
+  g.build = keys => { g.box.innerHTML = ''; g.panes = keys.map(k => pane(g, k)); };
+  ctl('play').onclick = () => g.play(!g.playing);
+  ctl('rate').onclick = () => { g.rate = g.rate === 1 ? 0.5 : g.rate === 0.5 ? 0.25 : 1; ctl('rate').textContent = `Speed ${g.rate}x`;
+    for (const p of g.panes) p.v.playbackRate = g.rate; g.audio.playbackRate = g.rate; };
+  ctl('back').onclick = () => { g.play(false); g.seek(g.frame - 1); };
+  ctl('fwd').onclick = () => { g.play(false); g.seek(g.frame + 1); };
+  ctl('seek').oninput = e => { g.play(false); g.seek(+e.target.value); };
+  GROUPS.push(g);
+  return g;
+}
+function pane(g, key) {
+  const d = document.createElement('div'); d.className = 'pane';
+  const s = document.createElement('select');
+  for (const [k, v] of Object.entries(V)) s.add(new Option(v.label, k, false, k === key));
+  const st = document.createElement('div'); st.className = 'stage';
+  const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.preload = 'auto';
+  v.loop = true;  // wraps to 0 instead of ending, which a later seek would leave paused; tick then seeks to the group's start
+  const c = document.createElement('canvas'); c.className = 'ov'; c.width = 960; c.height = 540;
+  const cap = document.createElement('div'); cap.className = 'cap';
+  st.append(v, c); d.append(s, st, cap); g.box.append(d);
+  const p = {key, v, c, s, cap};
+  const load = () => { p.key = s.value; v.src = V[p.key].src; cap.textContent = V[p.key].cap;
+    v.onloadedmetadata = () => { v.currentTime = V[p.key].off + (g.frame + 0.5) / FPS; if (g.playing) v.play(); }; draw(g, p); };
+  s.onchange = () => { load(); store.set('keys.' + g.name, g.panes.map(q => q.key).join(',')); };
+  load();
+  return p;
+}
+function draw(g, p) {
+  const ctx = p.c.getContext('2d'); ctx.clearRect(0, 0, p.c.width, p.c.height);
+  if (g.name !== 'r1' || !$('faces').checked) return;
+  const path = PATHS[V[p.key].path];
+  if (!path) return;
+  const W = p.c.width, H = p.c.height;
+  if (V[p.key].path !== 'a') {
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(ANCHOR[0] * W - 40, ANCHOR[1] * H); ctx.lineTo(ANCHOR[0] * W + 40, ANCHOR[1] * H);
+    ctx.moveTo(ANCHOR[0] * W, ANCHOR[1] * H - 40); ctx.lineTo(ANCHOR[0] * W, ANCHOR[1] * H + 40); ctx.stroke();
+  }
+  for (const clip of Object.values(path)) {
+    const i = g.frame - clip.f0;
+    if (!clip.boxes || i < 0 || i >= clip.boxes.length) continue;
+    const [x, y, w, h] = clip.boxes[i];
+    ctx.strokeStyle = '#ffd400'; ctx.lineWidth = 2;
+    ctx.strokeRect((x - w / 2) * W, (y - h / 2) * H, w * W, h * H);
+    ctx.fillStyle = '#ffd400'; ctx.beginPath(); ctx.arc(x * W, y * H, 7, 0, 7); ctx.fill();
+  }
+}
+
+const GLYPH = {left: '←', right: '→', up: '↑', down: '↓', 'zoom in': '+', 'zoom out': '−', still: '·'};
+const ORDER = ['original', 'v14', 'v15a', 'v15b', 'v15c', 'v15d', 'v16-b2', 'v16-p1', 'v16-p2', 'v16-p3', 'v16-p4'];
+const ROUND2 = ['v16-b2', 'v16-p1', 'v16-p2', 'v16-p3', 'v16-p4'];
+function strips() {
+  const box = $('strips'); box.innerHTML = '';
+  const W = 1000, x = f => 6 + f / (N - 1) * (W - 12);
+  for (const k of ORDER) {
+    const a = LAB.audits[k];
+    const row = document.createElement('div'); row.className = 'strip';
+    const lab = document.createElement('div'); lab.className = 'lab'; lab.textContent = V[k].label;
+    let s = `<svg viewBox="0 0 ${W} 34" preserveAspectRatio="none">`;
+    s += `<line x1="0" x2="${W}" y1="17" y2="17" style="stroke:var(--line)"/>`;
+    for (const b of LAB.beats) s += `<line x1="${x(b)}" x2="${x(b)}" y1="27" y2="33" style="stroke:var(--tick)"/>`;
+    for (const r of a.right_frames) s += `<line x1="${x(r.frame)}" x2="${x(r.frame)}" y1="0" y2="5" style="stroke:var(--bad)" stroke-width="2"/>`;
+    for (const t of a.transitions) {
+      const o = t.out ? GLYPH[t.out.dir] : '', i = t.in ? GLYPH[t.in.dir] : '';
+      const col = (d) => d && d.dir === 'right' ? '--bad' : '--fg';
+      s += `<line x1="${x(t.frame)}" x2="${x(t.frame)}" y1="8" y2="26" style="stroke:var(--muted)"/>`;
+      s += `<text x="${x(t.frame) - 3}" y="22" text-anchor="end" font-size="15" style="fill:var(${col(t.out)})">${o}</text>`;
+      s += `<text x="${x(t.frame) + 3}" y="22" font-size="15" style="fill:var(${col(t.in)})">${i}</text>`;
+    }
+    s += `<line class="head" x1="0" x2="0" y1="0" y2="34" style="stroke:var(--on)" stroke-width="2"/></svg>`;
+    const wrap = document.createElement('div'); wrap.innerHTML = s;
+    const svg = wrap.firstChild;
+    svg.onclick = e => { const r = svg.getBoundingClientRect(); R1.play(false); R1.seek(Math.round((e.clientX - r.left) / r.width * (N - 1))); };
+    row.append(lab, svg); box.append(row);
+  }
+  const bad = k => LAB.audits[k].transitions.filter(t => !t.ok).map(t => t.frame);
+  const r2 = ROUND2.map(k => bad(k).length).reduce((a, b) => a + b, 0);
+  $('auditnote').textContent = `Transitions that travel right: original ${bad('original').length} (frames ${bad('original').join(', ')}), v14 ${bad('v14').length} (frames ${bad('v14').join(', ')}, the cuts into nv-689, nv-7965 and Asianometry), A ${bad('v15a').length}, B ${bad('v15b').length}, C ${bad('v15c').length}, D ${bad('v15d').length}, B2 and P1 to P4 ${r2} in all. The small red ticks left are single frames of 8 to 13 px with no camera move behind them. Frames 19 and 20 are his arm sweeping right in the Matthew Berman clip (v14 has them too), 38 in A is a landing punch settling, and 122 is Lex under the white flash. B2's Jensen hit shakes only up and down, since a sideways shake settling back read as travel to the right. The original pans left freely, so the rule is stricter than the edit it copies.`;
+}
+function drawHeads(frame) {
+  const W = 1000, x = 6 + frame / (N - 1) * (W - 12);
+  document.querySelectorAll('#strips .head').forEach(l => { l.setAttribute('x1', x); l.setAttribute('x2', x); });
+}
+
+function tables() {
+  const cols = [['y', 'Brightness'], ['contrast', 'Contrast'], ['vivid', 'Vividness'], ['sat', 'Saturation'], ['warm', 'Warmth'], ['tint', 'Tint'],
+                ['face_y', 'Face luma'], ['room_y', 'Room luma'], ['ratio', 'Face ÷ room'], ['face_vivid', 'Face vividness']];
+  let h = '<tr><th>Version</th>' + cols.map(c => `<th>${c[1]}</th>`).join('') + '</tr>';
+  for (const r of LAB.colour) {
+    const rows = r.key === 'original' ? [['whole section', r.all]] : r.key === 'v14' ? [['whole section', r.all], ['podcast clips', r.podcast]] : [['podcast clips', r.podcast]];
+    for (const [what, c] of rows) h += `<tr><td>${V[r.key].label}, ${what}</td>` + cols.map(k => `<td>${c[k[0]] ?? '-'}</td>`).join('') + '</tr>';
+  }
+  $('colour').innerHTML = h;
+  const orig = LAB.colour.find(r => r.key === 'original').all;
+  h = '<tr><th>Version</th><th>Face ÷ room</th><th>Face vividness</th><th>Room luma</th><th>Warmth</th></tr>';
+  h += `<tr><td>The LeBron original</td><td>${orig.ratio}</td><td>${orig.face_vivid}</td><td>${orig.room_y}</td><td>${orig.warm}</td></tr>`;
+  for (const r of LAB.colour.filter(r => ['v15b', ...ROUND2].includes(r.key)))
+    h += `<tr><td>${V[r.key].label}</td><td>${r.podcast.ratio}</td><td>${r.podcast.face_vivid}</td><td>${r.podcast.room_y}</td><td>${r.podcast.warm}</td></tr>`;
+  $('pop').innerHTML = h;
+  const t = f => ((REEL0 + f) / FPS).toFixed(2);
+  h = '<tr><th>Frames</th><th>Reel time</th><th style="text-align:left">Shot</th><th>Picture x</th><th>Picture y</th><th>Zoom %</th><th>Beats</th><th style="text-align:left">Subject</th></tr>';
+  for (const s of LAB.shots) {
+    const m = s.motion;
+    h += `<tr><td>${s.from} to ${s.to}</td><td>${t(s.from)} s</td><td style="text-align:left">${s.name}</td><td>${m ? m.dx : 'blur'}</td><td>${m ? m.dy : '-'}</td><td>${m ? m.zoom : '-'}</td><td>${s.beats.map(b => Math.round(b)).join(', ')}</td><td class="l">${s.subject}</td></tr>`;
+  }
+  $('shots').innerHTML = h;
+  const hz = LAB.hoop_zoom, svg = $('hoop'), X = f => 30 + (f - 148) / 32 * 600, Y = z => 60 - z * 4;
+  let s = `<line x1="30" x2="630" y1="${Y(0)}" y2="${Y(0)}" style="stroke:var(--line)"/><line x1="${X(156)}" x2="${X(156)}" y1="4" y2="116" style="stroke:var(--on)" stroke-dasharray="3 3"/>`;
+  s += `<text x="${X(156) + 4}" y="14" font-size="11" style="fill:var(--muted)">cut</text><text x="34" y="${Y(0) - 4}" font-size="11" style="fill:var(--muted)">0%</text><text x="34" y="${Y(-12) + 4}" font-size="11" style="fill:var(--muted)">−12%</text>`;
+  s += `<polyline fill="none" style="stroke:var(--fg)" stroke-width="2" points="${hz.map(p => `${X(p.f)},${Y(p.zoom)}`).join(' ')}"/>`;
+  s += hz.map(p => `<circle cx="${X(p.f)}" cy="${Y(p.zoom)}" r="2.5" style="fill:var(--fg)"/>`).join('');
+  svg.innerHTML = s;
+  const keys = ['v14', 'v15b', 'v15c', 'v15d'];
+  const srcs = LAB.starts.v14.map(r => r.src);
+  h = '<tr><th>Clip</th>' + keys.map(k => `<th>${V[k].label.split(',')[0]}</th>`).join('') + '</tr>';
+  for (const src of srcs) {
+    h += `<tr><td>${src}</td>` + keys.map(k => { const r = LAB.starts[k].find(x => x.src === src); return `<td>${r.face[0].toFixed(2)}, ${r.face[1].toFixed(2)} · h ${r.h.toFixed(2)}</td>`; }).join('') + '</tr>';
+  }
+  const sd = a => { const m = a.reduce((x, y) => x + y, 0) / a.length; return Math.sqrt(a.reduce((x, y) => x + (y - m) ** 2, 0) / a.length); };
+  h += '<tr><td>Spread (SD of x, y)</td>' + keys.map(k => `<td>${sd(LAB.starts[k].map(r => r.face[0])).toFixed(3)}, ${sd(LAB.starts[k].map(r => r.face[1])).toFixed(3)}</td>`).join('') + '</tr>';
+  $('starts').innerHTML = h;
+}
+
+function reel() {
+  const sel = $('reelpick'), v = $('reel');
+  const saved = store.get('reel3');
+  for (const k of Object.keys(REELS)) sel.add(new Option(k, k, false, k === (REELS[saved] ? saved : 'v6 S1, SSJ aura')));
+  const load = () => { v.src = REELS[sel.value].src; $('reelcap').textContent = REELS[sel.value].cap; v.onloadedmetadata = () => { v.currentTime = 13.0; }; store.set('reel3', sel.value); };
+  sel.onchange = load; load();
+  $('from13').onclick = () => { v.currentTime = 13.0; v.play(); };
+}
+
+const R3 = group('r3', $('panes3'), 186), R2 = group('r2', $('panes2')), R1 = group('r1', $('panes'));
+active = R3;
+R3.build(['v16-p2', 'v18-s1', 'v18-s2', 'v18-s3']);
+function buildR1() {
+  $('panes').className = 'grid' + (mode === 'six' ? ' six' : '');
+  const saved = (store.get('keys.r1') || '').split(',').filter(k => V[k]);
+  R1.build(mode === 'six' ? ['original', 'v14', 'v15a', 'v15b', 'v15c', 'v15d'] : (saved.length === 2 ? saved : ['original', 'v16-b2']));
+  $('two').classList.toggle('on', mode === 'two'); $('six').classList.toggle('on', mode === 'six');
+}
+const saved2 = (store.get('keys.r2') || '').split(',').filter(k => V[k]);
+R2.build(saved2.length === 6 ? saved2 : ['v16-b2', 'v16-p1', 'v16-p2', 'v16-p3', 'v16-p4', 'v15b']);
+buildR1();
+$('two').onclick = () => { mode = 'two'; store.set('mode', mode); R1.play(false); buildR1(); };
+$('six').onclick = () => { mode = 'six'; store.set('mode', mode); R1.play(false); buildR1(); };
+$('faces').onchange = () => R1.panes.forEach(p => draw(R1, p));
+for (const g of GROUPS) document.querySelectorAll(`[data-group="${g.name}"]`).forEach(el => el.addEventListener('pointerdown', () => { active = g; }));
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' && !['range', 'checkbox'].includes(e.target.type)) return;
+  if (document.activeElement === $('reel')) return;
+  const g = active;
+  if (e.code === 'Space') { e.preventDefault(); g.play(!g.playing); }
+  if (e.code === 'ArrowLeft') { e.preventDefault(); g.play(false); g.seek(g.frame - 1); }
+  if (e.code === 'ArrowRight') { e.preventDefault(); g.play(false); g.seek(g.frame + 1); }
+});
+reel();
+const PATH_FILES = {a: 'v15a', b: 'v15b', c: 'v15c', d: 'v15d', b2: 'v16-b2', p1: 'v16-p1', p2: 'v16-p2', p3: 'v16-p3', p4: 'v16-p4'};
+Promise.all([fetch('data/lab.json').then(r => r.json()),
+             ...Object.entries(PATH_FILES).map(([k, f]) => fetch(`data/path-fastcuts-${f}.json`).then(r => r.json()).then(j => PATHS[k] = j))])
+  .then(([lab]) => { LAB = lab; strips(); tables(); R1.seek(0); R2.seek(0); R3.seek(199); })
+  .catch(e => { $('auditnote').textContent = 'Could not load the lab data: ' + e; });
+(function tick() { GROUPS.forEach(g => g.tick()); requestAnimationFrame(tick); })();
+</script>
+</body></html>

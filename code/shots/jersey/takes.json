@@ -1,0 +1,25 @@
+{
+  "status": "work",
+  "takes": [
+    {
+      "label": "Fade-in v3 + mentions",
+      "src": "shots/jersey/out/fadein-v3.mp4",
+      "note": "Fade-in v2 with arcmira.mentions(entity: \"Dylan Patel\") in soft white at 72%, Inter Display Medium 40 px, centred above his head and above the white stadium bar. It fades in from 25.56 to 26.06 s and holds; the profile crossfade carries the same layer (out/mentions-layer.png) out with the jersey. Built by mentions.py."
+    },
+    {
+      "label": "Fade-in v2",
+      "src": "shots/jersey/out/fadein-v2.mp4",
+      "note": "Same cut, grade and fade-in as v1, made from the deghosted take (out/final-realtime-clean.mp4, deghost.py). The take's frames 34 to 45 carried a translucent ghost of LeBron's profile, left of the player and down onto his left arm. Each of those frames gets the take's own stadium from frame 33, aligned to it, under a matte drawn from the difference against that clean frame, so the chin patch on the arm is gone too. This scene only uses the take's first 1.10 s (frames 0 to 32), which were already clean, so it looks the same as v1 (42 dB PSNR, re-encode only). The cleaned frames feed the profile scene's crossfade (profile v12), so both scenes now come from the same clean take."
+    },
+    {
+      "label": "Fade-in v1",
+      "src": "shots/jersey/out/fadein-v1.mp4",
+      "note": "Starts at 25.43 where the original fades its jersey shot in, so no JAMES frames show. The look-matched take is slowed slightly to fill the slot and fades in on the original curve."
+    },
+    {
+      "label": "Look-matched",
+      "src": "shots/jersey/out/look-v1.mp4",
+      "note": "Only the clean first 1.10 s of the take, slowed to fill 1.53 s, so the 67 never tints purple. Graded per frame to the original's posterized look. Skin is a little less orange than the original."
+    }
+  ]
+}

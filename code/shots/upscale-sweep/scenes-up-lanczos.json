@@ -1,0 +1,12 @@
+{
+ "backdown": "shots/backdown/out/look-v1.mp4",
+ "fadeaway": "shots/fadeaway/out/wafer-v1.mp4",
+ "rim": "shots/rim/out/look-v1.mp4",
+ "celebrate": "shots/celebrate/out/look-v1.mp4",
+ "newspaper": "shots/newspaper/out/paper-v5-sr-30.mp4",
+ "alleyoop": [
+  "shots/alleyoop/out/final-realtime.mp4",
+  "shots/alleyoop/out/wan-3.0-noframes-slow-focus-2.mp4"
+ ],
+ "fadeout": "shots/fadeout/out/splice-v3.mp4"
+}

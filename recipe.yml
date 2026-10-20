@@ -1,0 +1,80 @@
+# AIMV recipe folder file. The video id is zealcaiden--dylan-patel-hype-reel.
+# Every model and tool id exists in the AIMV generators repo. Sunburst, SeedVR2, OpenCV, MediaPipe,
+# Modal and headless Chrome have proposed ids and are named in each step's `did` until those merge.
+made_with:
+  agent: claude-code
+  models: [claude-opus-5-5, wan-3-0]
+  frameworks: [python, canvas]
+process:
+  prompts:
+    - stage: stills
+      tool: openrouter
+      file: prompts/1-stills.md
+      as: written
+    - stage: motion
+      tool: openrouter
+      model: wan-3-0
+      file: prompts/2-motion.md
+      as: written
+    - stage: code
+      tool: claude-code
+      file: prompts/3-code.md
+      as: written
+    - stage: context
+      file: prompts/4-context.md
+      as: recalled
+  steps:
+    - part: research
+      tool: ffmpeg
+      did: Measured every cut, flash and flicker of the reference edit frame by frame before looking at it.
+      file: code/analysis/transitions/measure.py
+    - part: research
+      tool: arcmira
+      did: Found each podcast beat with an Arcmira search, most on Dylan's speaker id, one episode per beat, and printed the search on screen.
+      file: sources.json
+    - part: vocals
+      tool: demucs
+      did: Kept the original mix and replaced only the announcer's words with Zeal's own recorded lines.
+      file: code/audio/audit/build.py
+    - part: stills
+      tool: openrouter
+      did: GPT Image 2.5 Sunburst built a six-view character sheet, then a start and end frame for every swapped shot.
+      file: code/starts/gen.mjs
+    - part: motion
+      tool: openrouter
+      model: wan-3-0
+      did: Swapped Dylan into each shot by video-to-video, with the slowed source span, the sheet and both frames as references.
+      file: code/shots/vid.mjs
+    - part: edit
+      tool: claude-code
+      did: Graded each generated take frame by frame to match the reference and redrew the scorebug and banners in code.
+      file: code/shots/lookmatch.py
+    - part: graphics
+      tool: claude-code
+      did: Rendered the newspaper as an HTML canvas page, frame by frame in headless Chrome.
+      file: code/shots/newspaper/render.mjs
+    - part: edit
+      tool: claude-code
+      did: Cut ten podcast clips, nine of Dylan and one of Jensen, into 7 s with a face-matched zoom-through and a halation wrap on a person matte.
+      file: code/shots/fastcuts/build.py
+    - part: render
+      tool: claude-code
+      did: Upscaled the six softest shots with SeedVR2 7B at 1440 on a rented H100, then Lanczos to 1080.
+      file: code/shots/upscale-sweep/modal_seedvr2.py
+    - part: render
+      tool: ffmpeg
+      did: Assembled at 30 fps with a film look borrowed from the reference's flicker and a name-burn opener.
+      file: code/master/render.py
+audio:
+  tracks:
+    - title: How it go
+      artist: Yeat
+      role: music
+      source: existing
+    - title: Announcer lines
+      role: voiceover
+      source: recorded
+      generator: human
+time_spent: Two days, 16 to 17 Oct 2026 (Pacific)
+cost: $21.54 of logged image and video generation plus $11.95 of logged GPU time (SeedVR2 and RIFE on Modal)
+code: { files: [code/master/render.py, code/shots/vid.mjs, code/starts/gen.mjs, code/shots/fastcuts/build.py], license: Apache-2.0 }

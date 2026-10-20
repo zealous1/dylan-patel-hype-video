@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Classic vs Worn</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1400px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}.note{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;align-items:center}
+button{font:inherit;padding:7px 13px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer}
+button.on{border-color:var(--on);box-shadow:0 0 0 1px var(--on)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:800px){.grid{grid-template-columns:1fr}}
+video{width:100%;background:#000;border-radius:8px;display:block}.lab{font-weight:bold;margin:4px 0}
+input[type=range]{flex:1;min-width:200px}
+</style></head><body><main>
+<h1>Classic vs Worn, on the current cut</h1>
+<p class="note">Both are the finished reel (v15 ending, Patel +2, DYLAN outro take 3) with the film pass from 23.50 s on. Classic is Match plus grain, a 1 px frame float, red glow on the highlights and darker corners. Worn adds a harder random flicker, heavier grain and damage, and a 2 px float. The 60 fps here still uses the old RIFE in-betweens, which get replaced once the interpolation work lands.</p>
+<div class="row" id="fps"></div>
+<div class="grid">
+<div><div class="lab">Classic</div><video id="a" playsinline muted></video></div>
+<div><div class="lab">Worn</div><video id="b" playsinline></video></div>
+</div>
+<div class="row"><button id="play">Play</button><button id="end">Jump to 23.0 s</button><button id="start">Jump to start</button><input type="range" id="seek" min="0" max="30.07" step="0.01" value="23"><span id="t"></span></div>
+<p class="note">Space plays and pauses. The left and right arrows step one frame. Sound comes from the Worn player.</p>
+</main><script>
+const a=document.getElementById('a'),b=document.getElementById('b'),seek=document.getElementById('seek'),T=document.getElementById('t');
+let fps=30;
+function load(f){fps=f;const t=a.currentTime||23;
+ a.src=`../out/final-classic-${f}-upload.mp4`;b.src=`../out/final-worn-${f}-upload.mp4`;
+ Promise.all([a,b].map(v=>new Promise(r=>v.onloadedmetadata=r))).then(()=>{a.currentTime=b.currentTime=t;});
+ document.querySelectorAll('#fps button').forEach(x=>x.classList.toggle('on',x.dataset.f==f));}
+[30,60].forEach(f=>{const x=document.createElement('button');x.textContent=f+' fps';x.dataset.f=f;x.onclick=()=>load(f);document.getElementById('fps').append(x);});
+const set=t=>{a.pause();b.pause();a.currentTime=b.currentTime=t;};
+document.getElementById('play').onclick=()=>{if(b.paused){a.currentTime=b.currentTime;a.play();b.play();}else{a.pause();b.pause();}};
+document.getElementById('end').onclick=()=>set(23);document.getElementById('start').onclick=()=>set(0);
+seek.oninput=()=>set(+seek.value);
+setInterval(()=>{if(!b.paused&&Math.abs(a.currentTime-b.currentTime)>0.05)a.currentTime=b.currentTime;seek.value=b.currentTime;T.textContent=b.currentTime.toFixed(2)+' s';},100);
+document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();document.getElementById('play').click();}
+ if(e.code==='ArrowRight'||e.code==='ArrowLeft'){e.preventDefault();set(Math.max(0,b.currentTime+(e.code==='ArrowRight'?1:-1)/fps));}});
+load(30);
+</script></body></html>

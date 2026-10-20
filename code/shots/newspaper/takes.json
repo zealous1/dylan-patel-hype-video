@@ -1,0 +1,25 @@
+{
+  "status": "work",
+  "takes": [
+    {
+      "label": "Paper v4",
+      "src": "shots/newspaper/out/paper-v4.mp4",
+      "note": "v3 with the money hand back in view on the collage, as in v1. The ink cut-out of the cash-grab logo is raised and enlarged on the right, so the fist, the cash and the $ bag read, with the mark and wordmark running off frame. It now sits clear of the Dingboard clipping, and its ink threshold is lighter so the cash and the $ stay paper-white inside black outlines. Timing is unchanged (12.00 to 13.84, 55 frames)."
+    },
+    {
+      "label": "Paper v3",
+      "src": "shots/newspaper/out/paper-v3.mp4",
+      "note": "12.00 to 13.84 (1.84 s, 55 frames). The super-zoom exit ends on the 13.84 beat, so the podcast section starts there. The front page holds sharp and drifts, the camera punches into Blitzscaling Past 318,000 Subs and Half a Billy CLOSED, then the pan, the whip, the v1 collage and the Dingboard hold. Each move between holds has one or two blurred frames. The player slot still says 13.20 until the cut list moves it."
+    },
+    {
+      "label": "Paper v2",
+      "src": "shots/newspaper/out/paper-v2.mp4",
+      "note": "12.00 to 13.40 (1.40 s, 42 frames). Longer holds on the front page and the Dingboard clipping, and the end logo is a single black cut-out. No punch-ins on the side articles."
+    },
+    {
+      "label": "Paper v1",
+      "src": "shots/newspaper/out/paper-v1.mp4",
+      "note": "12.00 to 13.20. The first build with the v1 collage and a whip out. The headlines go by too fast to read."
+    }
+  ]
+}

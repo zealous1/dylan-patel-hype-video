@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Film Look Ending</title>
+<style>
+:root { --bg: #f6f5f1; --fg: #16161a; --muted: #5d5d66; --card: #fff; --line: #dedbd3; --accent: #b8501c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #111114; --fg: #ececf0; --muted: #a0a0aa; --card: #1a1a20; --line: #2d2d36; --accent: #f08a4b; } }
+:root[data-theme="dark"] { --bg: #111114; --fg: #ececf0; --muted: #a0a0aa; --card: #1a1a20; --line: #2d2d36; --accent: #f08a4b; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 Helvetica, Arial, sans-serif; }
+main { max-width: 1400px; margin: 0 auto; padding: 24px 16px 80px; }
+h1 { font-size: 26px; margin: 0 0 4px; } h2 { font-size: 18px; margin: 32px 0 10px; }
+.lede, .note { color: var(--muted); }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; position: sticky; top: 0; background: var(--bg); padding: 8px 0; z-index: 2; }
+button, select { font: inherit; padding: 6px 12px; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 6px; cursor: pointer; }
+#t { font-variant-numeric: tabular-nums; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 12px; }
+@media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.card strong { display: block; margin-bottom: 4px; }
+.card.on { border-color: var(--accent); }
+video { width: 100%; display: block; background: #000; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+td, th { text-align: left; padding: 8px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+th { background: var(--bg); font-size: 13px; color: var(--muted); border-top: 0; }
+td:first-child { font-weight: 700; white-space: nowrap; }
+.wrap { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+<h1>Film look on the ending</h1>
+<p class="lede">23.50 to the end: the fade-out, the jersey and the profile with the logo. Each pass runs over the current 30 fps master, so the jersey crossfade is still the frozen v13 one, and the moving v14 is being rebuilt. All five play in sync. Click a card to hear it.</p>
+<div class="bar">
+  <button id="play">Play all</button><button id="back">◀ frame</button><button id="fwd">frame ▶</button>
+  <button id="slow">0.25x</button><span id="t">0.00</span>
+</div>
+<div class="grid" id="grid"></div>
+
+<h2>What the original is doing, measured</h2>
+<p class="note">From analysis/flicker. The original stacks several old-film effects. None of them is a filter preset you'd name on its own.</p>
+<div class="wrap"><table>
+<tr><th>Layer</th><th>In the original</th><th>In our passes</th></tr>
+<tr><td>Strobe</td><td>23.50 to 23.70, every other frame swings between 125 and 110 mean luma, about 13%. That's a 15 Hz strobe on the jersey hit.</td><td>Borrowed. We read their per-frame exposure over a running median and apply the same wobble to our frames, so the strobe lands on the same frames.</td></tr>
+<tr><td>Flicker</td><td>On the end card, frame-to-frame exposure jitters 2 to 10% with no regular period (ratios 0.90 to 1.10). The clipped whites stay put, so the flicker lives in the face and the midtones.</td><td>Borrowed in all three. Worn adds its own random projector flicker on top.</td></tr>
+<tr><td>Black floor</td><td>Nothing reaches black. The 2nd percentile sits at 22 to 25 out of 255, a flat dark grey, while contrast is crushed hard.</td><td>An S curve, then blacks lifted to 20 to 26.</td></tr>
+<tr><td>Scratches</td><td>Thin vertical lines, white and dark, appear for a few frames on the jersey and through the logo. The vertical white line through his head that we chased earlier is one of these, and it's in the original.</td><td>Scratches that live 3 to 14 frames and drift sideways.</td></tr>
+<tr><td>Dust</td><td>Specks and dots, most visible on the swoosh, one frame each.</td><td>One-frame specks and the odd hair, 60% dark.</td></tr>
+<tr><td>Colour</td><td>Skin and swoosh go warm yellow-orange, saturation breathes from 15 to 52 as the logo comes in.</td><td>Ours keeps our grade. Classic and Worn add red halation around the highlights.</td></tr>
+</table></div>
+
+<h2>Other tools for a classic film look, and how they stack</h2>
+<p class="note">The order matters, because a real print gains each one at a different stage. Lens and camera come first, then the negative, the print and the projector.</p>
+<div class="wrap"><table>
+<tr><th>Stage</th><th>Effect</th><th>What it adds</th><th>Status</th></tr>
+<tr><td>Lens</td><td>Halation</td><td>A red-orange glow bleeding off bright edges, from light scattering back through the film base. It's the single most "shot on film" cue.</td><td>In Classic and Worn</td></tr>
+<tr><td>Lens</td><td>Bloom, soft diffusion</td><td>A Pro-Mist style glow that softens the highlights. It flatters faces and fights the AI sharpness.</td><td>Easy to add</td></tr>
+<tr><td>Lens</td><td>Chromatic aberration at the edges</td><td>Red and cyan fringes toward the frame edge.</td><td>Easy to add</td></tr>
+<tr><td>Camera</td><td>Gate weave</td><td>The frame floats 1 to 2 px as film moves through the gate. It's felt more than seen, and makes a still end card feel alive.</td><td>Classic 1 px, Worn 2 px</td></tr>
+<tr><td>Camera</td><td>Shutter: 180° motion blur, 24 fps cadence</td><td>Real film judders at 24. That's the opposite of the 60 fps smoothness, so it's a choice. A 24 fps ending with a 60 fps body could work.</td><td>Decision</td></tr>
+<tr><td>Negative</td><td>Grain</td><td>Strongest in the mids, new every frame. It also hides Wan's smoothing and dither on the face.</td><td>Classic and Worn</td></tr>
+<tr><td>Negative</td><td>Bleach bypass</td><td>Silver left in: desaturated, metallic, hard contrast. The Saving Private Ryan look.</td><td>Easy to add</td></tr>
+<tr><td>Print</td><td>Print film curve, lifted blacks</td><td>The S curve with the dark grey floor the original uses.</td><td>All three</td></tr>
+<tr><td>Print</td><td>Split toning</td><td>Warm highlights, teal or green shadows. The original's swoosh and skin warm-up lives here.</td><td>Easy to add</td></tr>
+<tr><td>Projector</td><td>Flicker, strobe</td><td>Uneven exposure frame to frame. It's what you noticed.</td><td>All three</td></tr>
+<tr><td>Projector</td><td>Scratches, dust, hairs</td><td>Damage on the print.</td><td>All three</td></tr>
+<tr><td>Projector</td><td>Vignette, gate edge</td><td>Darkened corners, and optionally the rounded frame edge or a sprocket strip.</td><td>Classic and Worn</td></tr>
+<tr><td>Projector</td><td>Burn, light leak</td><td>Orange flashes, or the frame melting at a cut. A stronger tool for a transition, like the jersey to profile cut.</td><td>Easy to add</td></tr>
+</table></div>
+</main>
+<script>
+const TAKES = [
+  ['Original', 'out/original.mp4', 'The LeBron reel, same span.'],
+  ['Clean (ours now)', 'out/clean.mp4', 'The current master with no film pass.'],
+  ['Match', 'out/film-match.mp4', "The original's own flicker and strobe, S curve, lifted blacks, scratches, dust. Nothing it doesn't have."],
+  ['Classic', 'out/film-classic.mp4', 'Match plus grain, 1 px gate weave, red halation, soft vignette.'],
+  ['Worn', 'out/film-worn.mp4', 'Classic pushed: extra random flicker, heavier grain and damage, 2 px weave.'],
+];
+const grid = document.getElementById('grid');
+const vids = TAKES.map(([name, src, note], i) => {
+  const c = document.createElement('div'); c.className = 'card' + (i === 3 ? ' on' : '');
+  c.innerHTML = `<strong>${name}</strong><video playsinline preload="auto"></video><div class="note">${note}</div>`;
+  grid.append(c); const v = c.querySelector('video'); v.muted = i !== 3;
+  // The server has no Range support, so seeking only works on a blob.
+  fetch(`${src}?v=${Date.now()}`).then((r) => r.blob()).then((b) => { v.src = URL.createObjectURL(b); });
+  c.onclick = () => { vids.forEach((x, j) => { x.muted = j !== i; x.parentElement.classList.toggle('on', j === i); }); };
+  return v;
+});
+const lead = () => vids[1];
+const sync = () => { const t = lead().currentTime; vids.forEach((v) => { if (Math.abs(v.currentTime - t) > 0.04) v.currentTime = t; }); document.getElementById('t').textContent = (23.5 + t).toFixed(2); };
+setInterval(sync, 250);
+document.getElementById('play').onclick = () => { const p = lead().paused; vids.forEach((v) => (p ? v.play() : v.pause())); };
+const step = (d) => { const t = Math.max(0, lead().currentTime + d); vids.forEach((v) => { v.pause(); v.currentTime = t; }); setTimeout(sync, 50); };
+document.getElementById('back').onclick = () => step(-1 / 30);
+document.getElementById('fwd').onclick = () => step(1 / 30);
+document.getElementById('slow').onclick = (e) => { const r = vids[0].playbackRate === 1 ? 0.25 : 1; vids.forEach((v) => (v.playbackRate = r)); e.target.textContent = r === 1 ? '0.25x' : '1x'; };
+</script>
+</body>
+</html>

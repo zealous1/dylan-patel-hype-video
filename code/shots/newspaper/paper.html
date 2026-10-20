@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Newspaper Front Page</title>
+<style>@font-face { font-family:"UnifrakturMaguntia"; src:url("/fonts/UnifrakturMaguntia-Book.ttf") format("truetype"); font-display:block; }</style>
+<style>
+:root { --line:#e4e1da; }
+* { box-sizing:border-box; }
+html, body { margin:0; background:transparent; }
+/* Copied verbatim from index.html, section "Front page concept". */
+.paper { aspect-ratio:16/9; max-width:960px; background:#fbfbf9; color:#111; padding:2% 2.4%; font-family:"Times New Roman", Georgia, serif; border:1px solid var(--line); border-radius:4px; display:grid; grid-template-rows:auto auto 1fr; overflow:hidden; container-type:inline-size; }
+.paper .mast { text-align:center; font-family:"UnifrakturMaguntia","Old English Text MT",serif; font-size:5.3cqw; line-height:1; border-bottom:2px solid #111; padding-bottom:.6cqw; }
+.paper .dateline { display:flex; justify-content:space-between; font-size:1.15cqw; letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid #111; padding:.4cqw 0; margin-bottom:1cqw; }
+.paper .cols { display:grid; grid-template-columns:1fr 3.6fr 1fr; gap:1.3cqw; min-height:0; }
+.paper .col { border-right:1px solid #999; padding-right:1.1cqw; font-size:.97cqw; line-height:1.26; overflow:hidden; display:flex; flex-direction:column; gap:.7cqw; } .paper .col:last-child { border:0; padding:0; } .paper .col:first-child { }
+.paper .cols > .col:nth-child(2) { border-right:1px solid #999; padding-right:1.1cqw; }
+.paper h4 { font-size:2.05cqw; line-height:1.02; text-align:left; margin:0 0 .5cqw; } .paper .col p { margin:0 0 .4cqw; }
+.paper .kicker { font-size:1.3cqw; letter-spacing:.12em; text-transform:uppercase; text-align:center; color:#7a1c12; }
+.paper .banner { font-size:3.85cqw; line-height:1; text-align:center; margin:.3cqw 0 .5cqw; font-weight:700; white-space:nowrap; }
+.paper .deck { text-align:center; font-size:1.5cqw; font-style:italic; margin-bottom:.7cqw; }
+.paper .photo { background:#222 center/cover; aspect-ratio:16/8.6; }
+.paper .ad { border:1.5px dashed #111; padding:.7cqw; text-align:center; margin-top:auto; }
+/* Render-only overrides: one paper fills the 1920x1080 viewport, no screen border. */
+.paper { width:1920px; max-width:none; border:0; border-radius:0; }
+body.layer-banner .paper { background:transparent; }
+body.layer-banner .paper > *:not(.cols), body.layer-banner .cols > .col:not(:nth-child(2)), body.layer-banner .kicker, body.layer-banner .deck, body.layer-banner .photo { visibility:hidden; }
+body.layer-banner .cols > .col { border-color:transparent; }
+body.no-banner .banner { color:transparent; }
+body.no-photo .photo { background:transparent !important; }
+/* Zeal 2026-10-17: the Dingboard article carries the ad screenshot as its own printed photo. */
+.paper .dingshot { border:1px solid #111; aspect-ratio:16/9; background:#ddd center 25%/cover no-repeat; filter:grayscale(1) contrast(1.08); flex:none; }
+</style>
+</head>
+<body>
+<div class="paper">
+  <div class="mast">Niche San Francisco Technology Times</div>
+  <div class="dateline"><span>Friday, October 16, 2026</span><span>"All the Singularity That's Fit to Print"</span><span>Demon Edition</span></div>
+  <div class="cols">
+    <div class="col">
+      <div><h4>Blitzscaling Past 318,000 Subs</h4>
+      <p>SemiAnalysis had 32 people at its five-year mark in May 2025 and is on track for about 100 by the end of 2026, roughly 3.1x in a year and a half. The hires are analysts in San Francisco, Seoul, Singapore and Chicago.</p>
+      <p>Subscribers kept pace, from about 200,000 in June 2025 to 318,000 this week. The firm now counts more wafers per employee than most fabs make. New hires reportedly get a 40-page note on CoWoS capacity in place of a welcome packet.</p></div>
+      <div><h4>Half a Billy CLOSED</h4>
+      <p>SemiAnalysis Capital Fund I closes at $500 million against a $400 million target, a 25% overshoot. Limited partners were reportedly told the diligence process is reading the newsletter before everyone else does.</p>
+      <p>The GPU poor are advised to apply within.</p></div>
+    </div>
+    <div class="col" style="display:block">
+      <div class="kicker">GPU Rich Getting Richer</div>
+      <div class="banner">SemiAnalysis Prints $100 Million</div>
+      <div class="deck">5x Revenue in a Year; Looking Good Here</div>
+      <div class="photo" style="background-image:url(build/celebrate-last.png)"></div>
+    </div>
+    <div class="col">
+      <div><h4>Compute Demand at All-Time Highs</h4>
+      <p>One-year H100 rents are up about 40%, per the SemiAnalysis rental index. China is tracked at 24 gigawatts, and Memphis is home to the first gigawatt datacenter. Every watt is spoken for and every transformer is back-ordered.</p>
+      <p>Jensen Huang put SemiAnalysis's InferenceX on the GTC keynote screen. Analysts call it the chart about the chart.</p></div>
+      <div><h4>Dingboard Ad Still Up, Still Says 80,000 Subscribers</h4>
+      <p>SemiAnalysis sponsored yacine's Dingboard in March 2024. Thirty-one months later the cartoon money bag is still waving and the banner still reads "Over 80,000 subscribers!" against 318,000 today.</p>
+      <p>Historians are calling it the longest running ad in meme history, and the only number SemiAnalysis has ever lowballed.</p></div>
+    </div>
+  </div>
+</div>
+<script>
+// The one place the Dingboard screenshot path lives.
+const DINGBOARD_SHOT = '../../refs/logo/dingboard-screenshot.png';
+{
+  const art = [...document.querySelectorAll('.paper h4')].find(h => h.textContent.startsWith('Dingboard')).parentElement;
+  const fig = document.createElement('div'); fig.className = 'dingshot'; fig.style.backgroundImage = `url(${DINGBOARD_SHOT})`;
+  art.appendChild(fig);
+}
+// Variants for the collage pages. Same layout, other headline from the page.
+const VARIANTS = {
+  blitz: { kicker:'Headcount 3.1x in 18 Months', banner:'Blitzscaling Past 318,000 Subs', deck:'From 200,000 Readers to 318,000; Analysts Hired in Four Cities', photo:'../../refs/dylan/front-a.png' },
+  billy: { kicker:'SemiAnalysis Capital Fund I', banner:'Half a Billy CLOSED', deck:'$500 Million Raised Against a $400 Million Target', photo:'../../refs/dylan/headshot-suit.png', pos:'center 30%' },
+  ding:  { kicker:'Longest Running Ad in Meme History', banner:'Dingboard Ad Still Up', deck:'Still Says 80,000 Subscribers; the Real Count Is 318,000', photo:DINGBOARD_SHOT, pos:'center top', gray:true },
+};
+const q = new URLSearchParams(location.search);
+const v = VARIANTS[q.get('v')];
+if (v) {
+  document.querySelector('.kicker').textContent = v.kicker;
+  document.querySelector('.banner').textContent = v.banner;
+  document.querySelector('.deck').textContent = v.deck;
+  const ph = document.querySelector('.photo');
+  ph.style.backgroundImage = `url(${v.photo})`;
+  if (v.pos) ph.style.backgroundPosition = v.pos;
+  if (v.gray) { ph.style.filter = 'grayscale(1) contrast(1.08)'; ph.style.outline = '1.5px solid #111'; ph.style.outlineOffset = '-1.5px'; }
+  if (v.contain) { ph.style.backgroundSize = 'contain'; ph.style.backgroundRepeat = 'no-repeat'; ph.style.backgroundColor = '#e9e8e4'; }
+}
+for (const c of (q.get('body') || '').split(',').filter(Boolean)) document.body.classList.add(c);
+// Layout read by render.mjs: photo slot and banner glyph boxes in page px.
+window.layout = async () => {
+  await document.fonts.ready;
+  const bgs = [...document.querySelectorAll('[style*="background-image"]')].map(e => getComputedStyle(e).backgroundImage.match(/url\("?(.*?)"?\)/)?.[1]).filter(Boolean);
+  await Promise.all(bgs.map(u => { const i = new Image(); i.src = u; return i.decode().catch(() => {}); }));
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  const r = e => { const b = e.getBoundingClientRect(); return { x:b.x, y:b.y, w:b.width, h:b.height }; };
+  const ban = document.querySelector('.banner');
+  const range = document.createRange(); const t = ban.firstChild; const chars = [];
+  for (let i = 0; i < t.length; i++) { range.setStart(t, i); range.setEnd(t, i + 1); const b = range.getBoundingClientRect(); chars.push(b.right); }
+  return { heads: [...document.querySelectorAll('.paper h4')].map(h => ({ text: h.textContent, ...r(h), art: r(h.parentElement) })), dingArticle: r(document.querySelector('.dingshot').parentElement), dingshot: r(document.querySelector('.dingshot')), photo: r(document.querySelector('.photo')), banner: r(ban), chars, paper: r(document.querySelector('.paper')), mast: r(document.querySelector('.mast')) };
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Demucs, which splits the reference audio into stems in setup/prep.sh. Python 3.12. Demucs caps torch below 2.3
+# on Intel Macs, so torch is pinned per platform.
+demucs==4.1.0
+torch==2.9.0 ; sys_platform != 'darwin' or platform_machine != 'x86_64'
+torch==2.2.2 ; sys_platform == 'darwin' and platform_machine == 'x86_64'

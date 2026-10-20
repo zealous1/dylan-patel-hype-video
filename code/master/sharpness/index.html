@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>60 fps Sharpness</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ff8a80}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b;--bad:#ff8a80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Helvetica,Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}h2{margin-top:30px}.note{color:var(--muted)}
+img{width:100%;border-radius:6px;display:block;margin:6px 0 2px}figure{margin:16px 0}figcaption{color:var(--muted);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}td,th{border-bottom:1px solid var(--line);padding:5px 8px;text-align:right}td:first-child,th:first-child{text-align:left}
+.bad{color:var(--bad);font-weight:bold}.wrap{overflow-x:auto}ol li,ul li{margin:6px 0}
+</style></head><body><main>
+<h1>Why the 60 fps looks soft in places</h1>
+<p class="note">Measured on master/out/final-60-master.mp4 against final-30-master.mp4, 2026-10-17. Sharpness is the variance of the Laplacian (fine-edge energy) per frame. In the 60 fps file the even frames are the real 30 fps frames and the odd frames are RIFE's in-betweens.</p>
+
+<h2>Two separate causes</h2>
+<ol>
+<li><b>The in-betweens break at whips, flashes and cuts.</b> RIFE v4.6 tries to morph from one picture to a different one and invents warped mush. The newspaper whip, the podcast cuts in fastcuts (15 of them) and the flash in the fadeaway are the worst. Each bad frame is on screen for 1/60 s, but there are dozens, and the eye reads them as smear.</li>
+<li><b>Several shots are soft at 30 fps too.</b> Rim, celebrate, the alley-oop and the fadeout are 720p Wan generations scaled to 1080 with plain Lanczos. Interpolation doesn't make them worse. Nothing in the final upscaled them. The SeedVR2 runs were a three-shot test and were never cut in.</li>
+</ol>
+
+<h2>Per scene</h2>
+<div class="wrap"><table>
+<tr><th>scene</th><th>30 fps</th><th>60 real</th><th>60 in-between</th><th>ratio</th><th>worst in-between</th></tr>
+<tr><td>fadein</td><td>57</td><td>57</td><td>60</td><td>1.05</td><td></td></tr>
+<tr><td>intro</td><td>399</td><td>396</td><td>374</td><td>0.95</td><td>0.82 at 1.87 s</td></tr>
+<tr><td>backdown</td><td>105</td><td>103</td><td>90</td><td>0.87</td><td>0.55 at 8.20 s</td></tr>
+<tr><td>fadeaway</td><td>74</td><td>75</td><td>57</td><td class="bad">0.76</td><td class="bad">0.32 at 8.57 s</td></tr>
+<tr><td>rim</td><td class="bad">17</td><td>16</td><td>17</td><td>1.07</td><td></td></tr>
+<tr><td>celebrate</td><td class="bad">17</td><td>16</td><td>20</td><td>1.27</td><td></td></tr>
+<tr><td>newspaper</td><td>1832</td><td>1794</td><td>925</td><td class="bad">0.52</td><td class="bad">0.09 at 12.40 s</td></tr>
+<tr><td>fastcuts</td><td>79</td><td>75</td><td>61</td><td class="bad">0.81</td><td class="bad">0.12 at 17.80 s</td></tr>
+<tr><td>alleyoop</td><td class="bad">39</td><td>38</td><td>39</td><td>1.04</td><td></td></tr>
+<tr><td>fadeout</td><td class="bad">20</td><td>19</td><td>19</td><td>1.02</td><td></td></tr>
+<tr><td>jersey</td><td>169</td><td>169</td><td>160</td><td>0.95</td><td></td></tr>
+<tr><td>profile</td><td>164</td><td>164</td><td>152</td><td>0.93</td><td></td></tr>
+</table></div>
+<p class="note">Red in the 30 fps column means a soft source, which needs an upscale. Red in the ratio column means bad in-betweens, which need better interpolation.</p>
+
+<h2>The worst in-betweens</h2>
+<p class="note">Each strip shows the real frame before, RIFE's frame, and the real frame after.</p>
+<figure><img src="newspaper.jpg" alt="newspaper whip"><figcaption>Newspaper at 12.40 s. The page into the whip becomes a warped smear.</figcaption></figure>
+<figure><img src="fastcuts.jpg" alt="fastcuts cut"><figcaption>Fastcuts at 17.80 s. The Lex Fridman tag and the hands double up across a cut.</figcaption></figure>
+<figure><img src="fadeaway.jpg" alt="fadeaway flash"><figcaption>Fadeaway at 8.57 s. The flash frame and the clean frame melt into each other.</figcaption></figure>
+<figure><img src="backdown.jpg" alt="backdown"><figcaption>Backdown at 8.20 s. Fast motion, a milder case.</figcaption></figure>
+
+<h2>The better order for a final export</h2>
+<ol>
+<li><b>Upscale first, at 30 fps.</b> Run SeedVR2 7B on every 720p Wan shot before anything else. The interpolator then works from sharp frames, and the upscaler sees real frames rather than invented ones.</li>
+<li><b>Then interpolate, frame pair by frame pair.</b> Use RIFE only where the two frames are the same picture moving. Across a hard cut, hold the frame. Across a whip or a flash, use a plain 50/50 blend, which reads as motion blur, not a morph. Use a newer RIFE (4.2x) in place of the 2022 v4.6.</li>
+<li><b>Then the film pass, then encode.</b> These stay as they are. The film already runs last at a 30 fps cadence.</li>
+</ol>
+
+<h2>Knobs worth a sweep</h2>
+<ul>
+<li><b>SeedVR2.</b> The repo ships a <code>seedvr2_ema_7b_sharp</code> model, which we haven't tried. <code>--resolution 1440</code> or <code>2160</code> with a downscale to 1080 supersamples. <code>--input_noise_scale</code> and <code>--latent_noise_scale</code> trade fidelity to the source for new detail. We already run whole-shot batches with lab colour.</li>
+<li><b>RIFE.</b> <code>-x</code> (spatial TTA) and <code>-z</code> (temporal TTA) average several passes and cut flicker. <code>-u</code> (UHD mode) estimates motion at a coarser scale, which helps big moves.</li>
+</ul>
+
+<h2>Film grain</h2>
+<p>Match, the chosen look, has no grain. It has the borrowed flicker, the contrast curve, the lifted blacks, the scratches and the dust. Grain is in Classic and Worn. Adding grain on the ending would also mask some softness.</p>
+</main></body></html>

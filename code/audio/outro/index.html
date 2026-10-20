@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dylan Outro Takes</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}.note{color:var(--muted)}
+.label{font-size:12px;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;padding:8px 14px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer}
+button.on{border-color:var(--on);box-shadow:0 0 0 1px var(--on)}
+video{width:100%;background:#000;border-radius:8px;display:block;margin-top:16px}
+.bar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}#t{color:var(--muted);font-variant-numeric:tabular-nums}
+</style></head><body><main>
+<h1>DYLAN outro takes</h1>
+<p class="note">The last two takes from the gigawatt memo, "Whoa... DYLAN with the gigawatt", where the original yelled "LeBron, make doin' it, kid!" (23.3 to 26.4 s). "Dylan" lands on "LeBron", and the voice fades out from the start of "gigawatt" to its end. The Patel line is memo 3 take 5, blended. Keys: 1 to 9 pick a take, G steps the level, H loops the outro (22.8 to 27.0 s).</p>
+<div class="label">Take</div><div class="picks" id="takes"></div>
+<div class="label">Outro level</div><div class="picks" id="gains"></div>
+<video id="v" muted playsinline></video>
+<div class="bar"><button id="play">Play</button><button id="hook">Loop the line</button><button id="start">From the top</button><span id="t">0.00</span></div>
+<audio id="a"></audio>
+</main><script>
+const a=document.getElementById('a'),v=document.getElementById('v'),cache={};
+const blob=(src)=>cache[src]??=fetch(src).then(r=>r.blob()).then(b=>URL.createObjectURL(b));
+const takes=[{name:'Take 3',line:{'0':'out/take3-g0.mp3','4':'out/take3-g4.mp3'}},{name:'Take 4 (last)',line:{'0':'out/take4-g0.mp3','4':'out/take4-g4.mp3'}}];
+const REFS=[{name:'No outro (current)',ref:'out/none.mp3'}],gains=['0','4'];let take=takes[1],gain='0',hook=false;
+async function set(){const t=a.currentTime,p=!a.paused;a.src=await blob(take.ref??take.line[gain]);a.onloadedmetadata=()=>{a.currentTime=t;if(p)a.play();};
+ document.querySelectorAll('#takes button').forEach((b,i)=>b.classList.toggle('on',[...takes,...REFS][i]===take));
+ document.querySelectorAll('#gains button').forEach(b=>{b.classList.toggle('on',b.dataset.g===gain);b.disabled=!!take.ref;});}
+[...takes,...REFS].forEach(t=>{const b=document.createElement('button');b.textContent=t.name;b.onclick=()=>{take=t;set();};document.getElementById('takes').append(b);});
+gains.forEach(g=>{const b=document.createElement('button');b.dataset.g=g;b.textContent=g==='0'?'Matched to the original yell':'+4 dB';b.onclick=()=>{gain=g;set();};document.getElementById('gains').append(b);});
+set();takes.forEach(t=>gains.forEach(g=>blob(t.line[g])));
+blob('../../master/out/reel-60-master.mp4').then(u=>v.src=u);
+document.getElementById('play').onclick=()=>a.paused?a.play():a.pause();
+document.getElementById('start').onclick=()=>{a.currentTime=0;a.play();};
+document.getElementById('hook').textContent='Loop the outro';
+document.getElementById('hook').onclick=(e)=>{hook=!hook;e.target.classList.toggle('on',hook);if(hook){a.currentTime=22.8;a.play();}};
+a.onplay=()=>{v.play();document.getElementById('play').textContent='Pause'};a.onpause=()=>{v.pause();document.getElementById('play').textContent='Play'};
+setInterval(()=>{if(hook&&a.currentTime>27)a.currentTime=22.8;if(Math.abs(v.currentTime-a.currentTime)>0.05)v.currentTime=a.currentTime;document.getElementById('t').textContent=a.currentTime.toFixed(2);},50);
+addEventListener('keydown',(e)=>{const all=[...takes,...REFS];if(e.key>='1'&&e.key<='9'&&all[e.key-1]){take=all[e.key-1];set();}
+ if(e.key==='g'){gain=gains[(gains.indexOf(gain)+1)%gains.length];set();} if(e.key==='h')document.getElementById('hook').click(); if(e.key===' '){e.preventDefault();document.getElementById('play').click();}});
+</script></body></html>

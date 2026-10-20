@@ -1,0 +1,24 @@
+{
+  "video": "src-720.mp4",
+  "video_url_slow": "${SOURCE_BASE_URL}/rim/src-720-slow.mp4",
+  "duration_slow": 3,
+  "duration": 3,
+  "first": "../../starts/out/fadeaway-end-gpt-image-2.5-sunburst.png",
+  "last": "../../starts/out/celebrate-start-gpt-image-2.5-sunburst.png",
+  "refs_focus": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/fadeaway-end-gpt-image-2.5-sunburst.png",
+    "../../starts/out/celebrate-start-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt_focus": "Edit the reference video. Keep the camera, the fast zoom blurs, the flash, the explosion of fire on the rim, the colour grade and every move exactly as they are. Replace the Lakers player wearing number 6 for the whole clip with the man from the character sheet (first reference image): his face exactly as in the two close-up headshots (second and third reference images): a long narrow face, dark eyebrows, short dark hair with no headband, and a short, neatly trimmed beard, never a full or bushy beard; medium-brown skin; a slimmer build than the original player. He wears the yellow jersey with SemiAnalysis and 67 on the front and PATEL above 67 on the back, in purple. The fourth reference image shows him just before this clip and the fifth shows him just after it. There is never a headband and never the number 6. Every move matches the reference. Photoreal NBA broadcast footage, no new cuts.",
+  "refs": [
+    "../../starts/out/sheet-gpt-image-2.5-sunburst.png",
+    "../../refs/dylan/headshot-suit-768.png",
+    "../../refs/dylan/headshot-smile-768.png",
+    "../../starts/out/fadeaway-end-gpt-image-2.5-sunburst.png",
+    "../../starts/out/celebrate-start-gpt-image-2.5-sunburst.png"
+  ],
+  "prompt": "Edit the reference video. Keep the camera, the fast zoom blurs, the flash, the explosion of fire on the rim, the colour grade and every move exactly as they are. Replace the Lakers player wearing number 6 for the whole clip with the man from the character sheet (first reference image): his face exactly as in the two close-up headshots (second and third reference images): a long narrow face, dark eyebrows, short dark hair with no headband, and a short, neatly trimmed beard, never a full or bushy beard; medium-brown skin; a slimmer build than the original player. He wears the yellow jersey with SemiAnalysis and 67 on the front and PATEL above 67 on the back, in purple. The fourth reference image shows him just before this clip and the fifth shows him just after it. There is never a headband and never the number 6. Every move matches the reference. Photoreal NBA broadcast footage, no new cuts."
+}

@@ -1,0 +1,5 @@
+# Person mattes and eye tracking for the podcast section (shots/fastcuts/lab/matte.py, eyes.py, eyes_mockups.py).
+# MediaPipe's selfie segmentation needs this older NumPy, so it gets its own environment. Python 3.12.
+mediapipe==0.10.21
+numpy==1.26.4
+pillow==12.3.0

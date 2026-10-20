@@ -1,0 +1,468 @@
+{
+  "reel": "dylan-patel-hype-edit",
+  "as_of": "2026-10-18",
+  "intro": [
+    "This reel remakes a 30 s basketball edit with Dylan Patel in the player's place. Most of the picture is generated. A still model makes start and end frames and a character sheet, then a video model swaps him into each shot of the original clip. The rest is code and found footage.",
+    "Every row below is a model or tool that ran, or one that was weighed and not run. Runs and costs come from the per-run logs the scripts wrote. A run is one request, including the refused and failed ones."
+  ],
+  "aimv_first": {
+    "url": "https://aimv.gg/generators",
+    "why": [
+      "The first image model was the convenient one. FLUX.2 on Workers AI gave generic faces, and Zeal said \"these image edits suck dog\". Zeal then named the two image models to test, GPT Image and Nano Banana. GPT Image 2.5 Sunburst made every frame in the reel after that.",
+      "For video, two Artificial Analysis leaderboards read on 2026-10-17 put Wan 3.0 first for video editing and MiniMax H3 first for image to video. Both were tested, plus Seedance 2.5."
+    ]
+  },
+  "rows": [
+    {
+      "name": "Claude Opus 5.5",
+      "aimv_id": "claude-opus-5-5",
+      "layer": "agent",
+      "job": "Study the reference, write every prompt and script, run the tests, assemble the cut",
+      "provider": "Anthropic",
+      "endpoint": "Claude Code",
+      "runs": null,
+      "cost_usd": null,
+      "outcome": "used",
+      "evidence": {
+        "log": "The agent read frames itself to study the reference, with no video model in the loop. It wrote the image and video prompts, the look-match, the newspaper renderer and the final assembly."
+      },
+      "verdict": "The agent for the whole reel. Its tokens, and what they would cost at Claude API list prices, are in `08-chat.md`.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No ranking was checked for the agent model.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "GPT Image 2.5 Sunburst",
+      "proposed_id": "gpt-image-2-5-sunburst",
+      "proposed_as": "model",
+      "layer": "image",
+      "job": "Character sheet, start and end frames, clean plates",
+      "provider": "OpenRouter",
+      "endpoint": "openai/gpt-image-2.5-sunburst on POST /api/v1/images with input_references",
+      "runs": 51,
+      "cost_usd": 2.45,
+      "outcome": "won",
+      "evidence": {
+        "log": "37 of 51 requests returned an image, at about $0.06 an image and $0.04 a plate. The order that worked was a six-view character sheet first, then the jersey, the numbers and the face on each frame. Width and height must both divide by 16, so 16:9 is 1792x1008. The model refused 11 frames that still showed the original player's face. Masking his head with a grey box removed him from the input before the edit, and the frames then went through.",
+        "error": "Your request was rejected by the safety system."
+      },
+      "verdict": "The image model for every frame in the reel.",
+      "sota": {
+        "is_sota": true,
+        "basis": "Zeal named GPT Image as one of the two SOTA image models on 2026-10-17, and the AIMV catalog that day listed GPT Image 2 and 2.5 as the most used keyframe models.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "GPT Image 2",
+      "aimv_id": "gpt-image-2",
+      "layer": "image",
+      "job": "Character sheet",
+      "provider": "OpenRouter",
+      "endpoint": "openai/gpt-image-2 on POST /api/v1/images",
+      "runs": 2,
+      "cost_usd": 0.2,
+      "outcome": "lost",
+      "evidence": {
+        "log": "One character sheet for $0.20, after one request sent to the chat endpoint by mistake."
+      },
+      "verdict": "Sunburst made the sheet the reel used.",
+      "sota": {
+        "is_sota": false,
+        "basis": "GPT Image 2.5 had replaced it as the newer model.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "FLUX.2 dev",
+      "proposed_id": "flux-2-dev",
+      "proposed_as": "model",
+      "layer": "image",
+      "job": "Swap the face, jersey and numbers on start frames",
+      "provider": "Cloudflare Workers AI",
+      "endpoint": "@cf/black-forest-labs/flux-2-dev",
+      "runs": 6,
+      "cost_usd": null,
+      "outcome": "lost",
+      "evidence": {
+        "log": "5 of 6 edits came back, with generic faces that did not look like Dylan. One was flagged.",
+        "quote": "these image edits suck dog we should not be using workers ai for this"
+      },
+      "verdict": "Do not use it for likeness edits.",
+      "sota": {
+        "is_sota": false,
+        "basis": "Picked because Workers AI hosts it, not for its rank.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "FLUX.2 klein 9B",
+      "proposed_id": "flux-2-klein-9b",
+      "proposed_as": "model",
+      "layer": "image",
+      "job": "Swap the face and jersey on start frames",
+      "provider": "Cloudflare Workers AI",
+      "endpoint": "@cf/black-forest-labs/flux-2-klein-9b",
+      "runs": 2,
+      "cost_usd": null,
+      "outcome": "refused",
+      "evidence": {
+        "log": "Both edits were refused on output.",
+        "error": "Your output has been flagged. Please choose another prompt / input image combination"
+      },
+      "verdict": "Refuses frames of the original player.",
+      "sota": {
+        "is_sota": false,
+        "basis": "Picked because Workers AI hosts it, not for its rank.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Nano Banana 2.1",
+      "aimv_id": "nano-banana-2-1",
+      "layer": "image",
+      "job": "Character sheet",
+      "provider": "OpenRouter",
+      "endpoint": "google/gemini-nano-banana-2.1",
+      "runs": 2,
+      "cost_usd": null,
+      "outcome": "blocked",
+      "evidence": {
+        "log": "Both requests were blocked for this account by the provider."
+      },
+      "verdict": "Not tested. Try it through another provider before you rule it out.",
+      "sota": {
+        "is_sota": true,
+        "basis": "Zeal named Nano Banana as one of the two SOTA image models on 2026-10-17.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Wan 3.0",
+      "aimv_id": "wan-3-0",
+      "layer": "video",
+      "job": "Swap Dylan into each shot of the original clip (video to video)",
+      "provider": "OpenRouter",
+      "endpoint": "alibaba/wan-3.0 on POST /api/v1/videos",
+      "runs": 29,
+      "cost_usd": 18.24,
+      "outcome": "won",
+      "evidence": {
+        "log": "27 of 29 runs completed; the other 2 failed before starting and were not billed. The working request sends the source span as an HTTPS video_url plus the character sheet, the headshots and the Sunburst start and end frames as images, with frame_images left empty. Pinning frame_images makes Wan drop the video reference, and the price is the tell. Frames only cost $0.43, against $0.88 for the same intro with the clip. Wan fills its whole duration and invents motion past the end of the source, so each span is slowed 2x to a whole number of seconds and sped back up after. A typical shot cost $0.50 to $0.90. On the celebration, frames only won, because the clip-driven runs copied the gold digits from the source and patched over them. Short video-to-video passes of about half a second fixed leftover pieces of the original player, for about $0.50 each.",
+        "quote": "why is it $0.88 vs $0.43?"
+      },
+      "verdict": "The video model for every generated shot. Send the clip without frame_images, slow it first, and write the beard into the prompt.",
+      "sota": {
+        "is_sota": true,
+        "basis": "First on the Artificial Analysis video editing leaderboard, fourth for image to video.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "MiniMax Hailuo 3",
+      "aimv_id": "minimax-hailuo-3",
+      "layer": "video",
+      "job": "Intro shot from start and end frames (the control with no source clip)",
+      "provider": "OpenRouter",
+      "endpoint": "minimax/hailuo-3 on POST /api/v1/videos",
+      "runs": 2,
+      "cost_usd": 0.65,
+      "outcome": "lost",
+      "evidence": {
+        "log": "The first request was rejected because it sent frames and reference images together. The frames-only run completed for $0.65, but the jersey number drifted from 67 to 97.",
+        "error": "MiniMax Hailuo video generations do not support frame_images and input_references in the same request"
+      },
+      "verdict": "It cannot take frames and references at once, and without the references the details drift.",
+      "sota": {
+        "is_sota": true,
+        "basis": "First on the Artificial Analysis image to video leaderboard, as MiniMax H3.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Seedance 2.5",
+      "aimv_id": "seedance-2-5",
+      "layer": "video",
+      "job": "Intro shot from the source clip, the sheet and an end frame",
+      "provider": "OpenRouter",
+      "endpoint": "bytedance/seedance-2.5 on POST /api/v1/videos",
+      "runs": 4,
+      "cost_usd": null,
+      "outcome": "refused",
+      "evidence": {
+        "log": "One request failed because the video reference was not an HTTPS URL. The other three were refused on output, including a run with no video and one with the broadcast graphics redacted.",
+        "error": "The request failed because the output video may be related to copyright restrictions.",
+        "quote": "seedance is fuckin trippin lmao"
+      },
+      "verdict": "It refuses sports broadcast footage on output. It stays a good pick for footage you own.",
+      "sota": {
+        "is_sota": false,
+        "basis": "Second or third on the Artificial Analysis video editing leaderboard and second for image to video. It is the most used video model in the AIMV catalog.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Veo 3.1",
+      "proposed_id": "veo-3-1",
+      "proposed_as": "model",
+      "layer": "video",
+      "job": "Generate between a start and an end frame",
+      "provider": "OpenRouter",
+      "endpoint": "not called",
+      "runs": 0,
+      "cost_usd": null,
+      "outcome": "not-tried",
+      "evidence": {
+        "log": "Weighed and dropped before the test. It ranked 13th for image to video, and it invents the motion instead of copying the clip."
+      },
+      "verdict": "Not tested.",
+      "sota": {
+        "is_sota": false,
+        "basis": "13th on the Artificial Analysis image to video leaderboard.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Runway Aleph 2",
+      "proposed_id": "runway-aleph-2",
+      "proposed_as": "model",
+      "layer": "video",
+      "job": "Re-skin the original clip from a prompt and a keyframe",
+      "provider": "OpenRouter",
+      "endpoint": "not called",
+      "runs": 0,
+      "cost_usd": null,
+      "outcome": "not-tried",
+      "evidence": {
+        "log": "Weighed and dropped before the test.",
+        "quote": "oh nm no aleph"
+      },
+      "verdict": "Not tested.",
+      "sota": {
+        "is_sota": false,
+        "basis": "Eighth on the Artificial Analysis video editing leaderboard.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "SeedVR2 7B",
+      "proposed_id": "seedvr2-7b",
+      "proposed_as": "model",
+      "layer": "upscale",
+      "job": "Upscale the 1280x720 Wan shots",
+      "provider": "Modal",
+      "endpoint": "H100, H200 and B200 GPUs",
+      "runs": 21,
+      "cost_usd": 10.73,
+      "outcome": "won",
+      "evidence": {
+        "log": "A first test ran 3B and 7B on three shots for $1.51 of GPU time, about $1.01 of it 7B by GPU seconds. 7B kept the beard, skin, piping and lettering and still looked like Dylan. The sweep then ran four variants on the soft shots for $9.72: 7B and the 7B sharp checkpoint at 1080, sharp with input noise, and sharp at 1440. Every 1080 run padded to 1088 and left a seam in the bottom row. Sharp at 1440 with a Lanczos resize to 1080 won every scene, for example Laplacian sharpness 39 to 101 on the alley-oop."
+      },
+      "verdict": "Use the 7B sharp checkpoint at 1440, then resize to 1080.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No upscaler ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "SeedVR2 3B",
+      "proposed_id": "seedvr2-3b",
+      "proposed_as": "model",
+      "layer": "upscale",
+      "job": "Upscale the 1280x720 Wan shots",
+      "provider": "Modal",
+      "endpoint": "one H100",
+      "runs": 3,
+      "cost_usd": 0.5,
+      "outcome": "lost",
+      "evidence": {
+        "log": "It ran in the same test as 7B, about $0.50 of the $1.51 by GPU seconds. It sharpened, but it pinched Dylan's features on the celebration, smeared the gold numbers, and let the face drift on the datacenter shot. Run locally at 1080p, it ran a Mac out of GPU memory."
+      },
+      "verdict": "Faster, but it bends faces.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No upscaler ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "RIFE",
+      "proposed_id": "rife",
+      "proposed_as": "tool",
+      "layer": "interpolation",
+      "job": "In-between frames for a 60 fps master",
+      "provider": "rife-ncnn-vulkan locally, Practical-RIFE on Modal",
+      "endpoint": "RIFE v4.6",
+      "runs": null,
+      "cost_usd": 0.71,
+      "outcome": "lost",
+      "evidence": {
+        "log": "The in-betweens had half the detail at whip pans, morphed across cuts (a doubled channel tag), and melted the white flashes. The cut detector also read whips as cuts.",
+        "quote": "30 is goated"
+      },
+      "verdict": "Ship 30 fps. Do not interpolate an edit full of whips, flashes and text.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No interpolation ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Demucs",
+      "aimv_id": "demucs",
+      "layer": "stems",
+      "job": "Split the reference audio to mute the announcer",
+      "provider": "local",
+      "endpoint": "htdemucs, then htdemucs_ft four-stem",
+      "runs": null,
+      "cost_usd": 0,
+      "outcome": "used",
+      "evidence": {
+        "log": "The announcer sat only in the vocal stem, and muting two windows of it removed his words. A later audit found the stems do not sum back to the original. The residual was 19 dB down, the build at 9 to 10 s lost 3 dB, and muting killed a held sung note, the hook, the width and the reverb."
+      },
+      "verdict": "Use stems to find words, not to rebuild the mix. The reel keeps the original mix everywhere except the announcer's words.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No stem separation ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Deepgram Nova-3",
+      "proposed_id": "deepgram-nova-3",
+      "proposed_as": "model",
+      "layer": "asr",
+      "job": "Transcribe the announcer over the music, with word times",
+      "provider": "Cloudflare Workers AI",
+      "endpoint": "@cf/deepgram/nova-3",
+      "runs": 2,
+      "cost_usd": null,
+      "outcome": "won",
+      "evidence": {
+        "log": "Run on the full mix and on the vocal stem. 1.2 s for the 30 s clip, the right line, and clean word times (looking 1.36 s, james 1.84 s)."
+      },
+      "verdict": "Fastest and the only one with no invented text. Use it for spoken lines over music.",
+      "sota": {
+        "is_sota": false,
+        "basis": "Won the three-way test; no public ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "faster-whisper small.en",
+      "proposed_id": "faster-whisper",
+      "proposed_as": "tool",
+      "layer": "asr",
+      "job": "Transcribe the announcer over the music",
+      "provider": "local CPU",
+      "endpoint": "small.en, int8",
+      "runs": 1,
+      "cost_usd": 0,
+      "outcome": "lost",
+      "evidence": {
+        "log": "2.4 s and the right line, then the classic invented \"Thanks for watching!\" over the silence at the end."
+      },
+      "verdict": "Good and free, but drop any segment that falls in a quiet stretch.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No public ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "faster-whisper medium.en",
+      "proposed_id": "faster-whisper",
+      "proposed_as": "tool",
+      "layer": "asr",
+      "job": "Find the takes in Zeal's voice memos",
+      "provider": "local CPU",
+      "endpoint": "medium.en, vad_filter off",
+      "runs": null,
+      "cost_usd": 0,
+      "outcome": "used",
+      "evidence": {
+        "log": "Whisper transcribed only the first take of a memo, so each memo was split at pauses of 0.8 s or more first (0.5 s split words)."
+      },
+      "verdict": "Split long recordings at pauses before you transcribe them.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No public ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Whisper large-v3 turbo",
+      "aimv_id": "whisper",
+      "layer": "asr",
+      "job": "Transcribe the announcer over the music",
+      "provider": "Cloudflare Workers AI",
+      "endpoint": "@cf/openai/whisper-large-v3-turbo",
+      "runs": 2,
+      "cost_usd": null,
+      "outcome": "lost",
+      "evidence": {
+        "log": "5.9 s, the right line, plus an invented second \"He's got it.\" at 30.0 s."
+      },
+      "verdict": "Slowest of the three, and it also invents text in silence.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No public ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "MediaPipe person segmentation",
+      "proposed_id": "mediapipe",
+      "proposed_as": "tool",
+      "layer": "matting",
+      "job": "Matte the person holding Dylan's face so he pops in the podcast fast cuts",
+      "provider": "local",
+      "endpoint": "Image Segmenter",
+      "runs": null,
+      "cost_usd": 0,
+      "outcome": "used",
+      "evidence": {
+        "log": "The matte drove four pop treatments, a print room, a halation wrap (a soft glow around his outline), burn hits and a mix of the three. The original's face-to-room brightness was 2.18 and the raw podcast frame 1.0; the halation wrap reached 1.89. Claude's ranking picked the mix, and Zeal overruled it.",
+        "quote": "b2b p2 is goated"
+      },
+      "verdict": "Good enough for a fast cut, where each matte is on screen for a few frames.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No matting ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    },
+    {
+      "name": "Apple Vision foreground mask",
+      "proposed_id": "apple-vision",
+      "proposed_as": "tool",
+      "layer": "matting",
+      "job": "Matte the generated profile shot over the original plate in the ending",
+      "provider": "macOS",
+      "endpoint": "VNGenerateForegroundInstanceMaskRequest",
+      "runs": null,
+      "cost_usd": 0,
+      "outcome": "used",
+      "evidence": {
+        "log": "The Sunburst side frames were made on a keyable background, which gave Vision an easy edge."
+      },
+      "verdict": "Clean on a plain background. macOS only.",
+      "sota": {
+        "is_sota": false,
+        "basis": "No matting ranking was checked.",
+        "as_of": "2026-10-17"
+      }
+    }
+  ],
+  "cost_notes": [
+    "The per-run logs kept with the code add up to $21.54 of image and video generation, the cost each request reported. The short fix-up passes have no log rows, so the real figure is a little higher.",
+    "GPU time on Modal came to $11.95 on the billing report. The SeedVR2 sweep was $9.72, the first 3B and 7B test $1.51 (split between the two SeedVR2 rows by GPU seconds), and RIFE $0.71, each rounded to the cent.",
+    "One experiment is out of this guide's scope. Zeal ran [TRIBE v2](https://github.com/facebookresearch/tribev2), Meta's model that predicts how a brain responds to video, over some of the cuts on Modal. The signals were weak and it decided no pick. Right now it feels closer to pseudoscience than to a ruler, though with a couple of dollars it is fun to fiddle with. Its GPU time is not in the $11.95. Opus 5.5 and Modal are enough to try it, since few readers have a GPU big enough at home. A write-up is coming, so follow Zeal ([@zealcaiden](https://x.com/zealcaiden) on X, [zealous1](https://github.com/zealous1) on GitHub) and AIMV ([@aimvgg](https://x.com/aimvgg), [aimvgg](https://github.com/aimvgg)) to catch it."
+  ],
+  "notes": [
+    "The overlays (scorebug, banner, name, newspaper) are drawn in code, not generated. Zeal's rule was to get the clip right in the video model and add everything else with software, to keep random generated detail to a minimum."
+  ]
+}

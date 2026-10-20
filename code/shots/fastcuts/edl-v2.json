@@ -1,0 +1,226 @@
+{
+  "section": {
+    "t0": 13.2,
+    "t1": 20.8,
+    "fps": 30,
+    "frames": 228,
+    "output": "fastcuts-v2.mp4",
+    "open": "whip"
+  },
+  "note": "slot_in and slot_out are seconds from the section start (13.20 s on the reel), cut on the beats in analysis/audio.json. src_in is seconds into the local file; source_offset is where that file starts in the YouTube video, so the YouTube time is source_offset + src_in. cx, cy, zoom frame the punch-in on Dylan (fractions of the frame). A hero clip maps slot time to source time through the ramp knots [slot seconds from its slot_in, source seconds], blending neighbouring source frames.",
+  "sources": {
+    "lex-schizo": {
+      "url": "https://www.youtube.com/watch?v=_1f-o0nqpEI",
+      "file": "footage/_1f-o0nqpEI/lex-schizo.mp4",
+      "source_offset": 17270,
+      "title": "Lex Fridman #459"
+    },
+    "iltb-900": {
+      "url": "https://www.youtube.com/watch?v=LF3aUIM57uw",
+      "file": "footage/LF3aUIM57uw/iltb-900.mp4",
+      "source_offset": 900,
+      "title": "Invest Like The Best, The Supply and Demand of AI Tokens"
+    },
+    "labs-credit": {
+      "url": "https://www.youtube.com/watch?v=aV26V1UvkJw",
+      "file": "footage/aV26V1UvkJw/labs-credit.mp4",
+      "source_offset": 3276,
+      "title": "Dwarkesh, Two labs will soon control most of the world's workforce"
+    },
+    "labs-compute": {
+      "url": "https://www.youtube.com/watch?v=aV26V1UvkJw",
+      "file": "footage/aV26V1UvkJw/labs-compute.mp4",
+      "source_offset": 240,
+      "title": "Dwarkesh, Two labs will soon control most of the world's workforce"
+    },
+    "asia-huawei": {
+      "url": "https://www.youtube.com/watch?v=pE3KKUKXcTM",
+      "file": "footage/pE3KKUKXcTM/asia-huawei.mp4",
+      "source_offset": 2030,
+      "title": "Dwarkesh, Asianometry and Dylan Patel"
+    },
+    "asia-gigawatt": {
+      "url": "https://www.youtube.com/watch?v=pE3KKUKXcTM",
+      "file": "footage/pE3KKUKXcTM/asia-gigawatt.mp4",
+      "source_offset": 1112,
+      "title": "Dwarkesh, Asianometry and Dylan Patel"
+    },
+    "bneck-huawei": {
+      "url": "https://www.youtube.com/watch?v=mDG_Hx3BSUE",
+      "file": "footage/mDG_Hx3BSUE/bneck-huawei.mp4",
+      "source_offset": 8576,
+      "title": "Dwarkesh, The single biggest bottleneck to scaling AI compute"
+    },
+    "bneck-euv": {
+      "url": "https://www.youtube.com/watch?v=mDG_Hx3BSUE",
+      "file": "footage/mDG_Hx3BSUE/bneck-euv.mp4",
+      "source_offset": 2410,
+      "title": "Dwarkesh, The single biggest bottleneck to scaling AI compute"
+    },
+    "berman-600": {
+      "url": "https://www.youtube.com/watch?v=cHgCbDWejIs",
+      "file": "footage/cHgCbDWejIs/berman-600.mp4",
+      "source_offset": 600,
+      "title": "Matthew Berman, Dylan Patel: GPT4.5's Flop, Grok 4"
+    },
+    "bg2-1200": {
+      "url": "https://www.youtube.com/watch?v=QVcSBHhcFbg",
+      "file": "footage/QVcSBHhcFbg/bg2-1200.mp4",
+      "source_offset": 1200,
+      "title": "BG2, AI Semiconductor Landscape"
+    },
+    "gtc": {
+      "url": "https://www.youtube.com/watch?v=jw_o0xr8MWU",
+      "file": "footage/jw_o0xr8MWU/gtc-3900-3922.mp4",
+      "source_offset": 3900,
+      "title": "NVIDIA GTC 2026 keynote"
+    },
+    "datacenter": {
+      "url": null,
+      "file": "shots/datacenter/out/wan-3.0-novideo-min.mp4",
+      "source_offset": 0,
+      "title": "Generated: Dylan in the 67 jersey in the Colossus aisle (Wan 3.0)"
+    }
+  },
+  "clips": [
+    {
+      "src": "lex-schizo",
+      "src_in": 12.0,
+      "slot_in": 0.0,
+      "slot_out": 0.64,
+      "cx": 0.48,
+      "cy": 0.4,
+      "zoom": 1.25
+    },
+    {
+      "src": "iltb-900",
+      "src_in": 10.0,
+      "slot_in": 0.64,
+      "slot_out": 1.03,
+      "cx": 0.64,
+      "cy": 0.42,
+      "zoom": 1.7
+    },
+    {
+      "src": "labs-credit",
+      "src_in": 10.3,
+      "slot_in": 1.03,
+      "slot_out": 1.45,
+      "cx": 0.38,
+      "cy": 0.42,
+      "zoom": 1.35
+    },
+    {
+      "src": "asia-gigawatt",
+      "src_in": 11.0,
+      "slot_in": 1.45,
+      "slot_out": 1.87,
+      "cx": 0.42,
+      "cy": 0.4,
+      "zoom": 1.3
+    },
+    {
+      "src": "bneck-huawei",
+      "src_in": 6.5,
+      "slot_in": 1.87,
+      "slot_out": 2.26,
+      "cx": 0.42,
+      "cy": 0.4,
+      "zoom": 1.3
+    },
+    {
+      "src": "gtc",
+      "kind": "jensen-zoom",
+      "src_in": 8.0,
+      "slot_in": 2.26,
+      "slot_out": 3.52,
+      "hit": 2.68,
+      "beat2": 3.1
+    },
+    {
+      "src": "bg2-1200",
+      "src_in": 0.3,
+      "slot_in": 3.52,
+      "slot_out": 3.94,
+      "cx": 0.5,
+      "cy": 0.45,
+      "zoom": 1.15
+    },
+    {
+      "src": "lex-schizo",
+      "src_in": 14.0,
+      "slot_in": 3.94,
+      "slot_out": 4.33,
+      "cx": 0.5,
+      "cy": 0.4,
+      "zoom": 1.25
+    },
+    {
+      "src": "berman-600",
+      "src_in": 10.2,
+      "slot_in": 4.33,
+      "slot_out": 4.75,
+      "cx": 0.36,
+      "cy": 0.45,
+      "zoom": 1.2
+    },
+    {
+      "src": "asia-huawei",
+      "src_in": 6.6,
+      "slot_in": 4.75,
+      "slot_out": 5.14,
+      "cx": 0.45,
+      "cy": 0.4,
+      "zoom": 1.3
+    },
+    {
+      "src": "bneck-euv",
+      "src_in": 8.0,
+      "slot_in": 5.14,
+      "slot_out": 5.56,
+      "cx": 0.38,
+      "cy": 0.4,
+      "zoom": 1.3
+    },
+    {
+      "src": "iltb-900",
+      "src_in": 8.0,
+      "slot_in": 5.56,
+      "slot_out": 5.98,
+      "cx": 0.62,
+      "cy": 0.42,
+      "zoom": 1.7
+    },
+    {
+      "src": "datacenter",
+      "kind": "hero",
+      "slot_in": 5.98,
+      "slot_out": 7.6,
+      "ramp": [
+        [
+          0.0,
+          0.3
+        ],
+        [
+          0.39,
+          0.95
+        ],
+        [
+          0.81,
+          2.35
+        ],
+        [
+          1.62,
+          3.0
+        ]
+      ],
+      "cx": 0.5,
+      "cy": 0.33,
+      "zoom": [
+        1.0,
+        1.4
+      ],
+      "kick": 7.21
+    }
+  ]
+}

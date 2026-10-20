@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Upscale Reels</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--accent:#2f6f3a;--win:#e7f3e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111114;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--accent:#8fd19a;--win:#1d2d1d}}
+:root[data-theme="dark"]{--bg:#111114;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--accent:#8fd19a;--win:#1d2d1d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Helvetica,Arial,sans-serif}
+main{max-width:1600px;margin:0 auto;padding:24px 16px 60px}h1{margin:0 0 8px}h2{font-size:18px;margin:28px 0 8px}
+.note{color:var(--muted)}dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:6px 16px;margin:12px 0;max-width:1100px}
+dt{font-weight:bold}dd{margin:0}@media (max-width:640px){dl{grid-template-columns:1fr}dd{margin-bottom:8px}}
+.bar{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar input[type=range]{flex:1;min-width:180px}
+button,select{font:inherit;padding:5px 10px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px;cursor:pointer}
+button.on{border-color:var(--accent);color:var(--accent)}
+.jumps{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.grid{display:grid;gap:8px;margin-top:10px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.four{grid-template-columns:repeat(2,1fr)}
+@media (max-width:760px){.grid.two,.grid.four{grid-template-columns:1fr}}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px}figure[hidden]{display:none}
+figcaption{font-size:13px;margin-bottom:4px}figcaption span{color:var(--muted)}
+video{width:100%;display:block;background:#000;border-radius:4px}
+code{font-size:13px}
+</style></head><body><main>
+<h1>Upscale options, full reels</h1>
+<p>Four renders of the Worn 30 edit, 902 frames each. They differ only in how the shots that came from 720p AI video were brought up to 1080p. Every other scene, the newspaper (paper-v5, built from the C celebrate) and the mix are the same in all four.</p>
+<dl>
+<dt>Lanczos</dt><dd>The plain resize, the no-AI baseline. It scales the 1280x720 pixels up with a standard filter and invents no detail, so it is faithful but soft. These are the takes the reel used before the upscale work.</dd>
+<dt>A, B, C</dt><dd>SeedVR2, an AI upscaler that redraws the frame at the higher size. A is its 7B model at 1080. B is the 7B "sharp" model at 1080. C is the 7B sharp model at 1440, then scaled down to 1080. C is what the v2 reel uses.</dd>
+<dt>Sharpness</dt><dd>The number in the tables is Laplacian variance, a measure of fine edge energy. Higher means more fine detail in the frame. It also rises with noise and grain, so a higher number is not automatically better; it has to be read next to shimmer and checked by eye.</dd>
+<dt>Shimmer</dt><dd>How much the fine texture changes from one frame to the next in parts of the picture that are not moving. An upscaler that redraws detail slightly differently each frame makes still areas crawl or boil. "Shimmer per detail" divides that by how much detail there is, so a sharper result with steady texture scores the same as the baseline, and one that boils scores higher.</dd>
+<dt>The green row</dt><dd>In the per-shot tables on the <a href="index.html">sweep page</a>, the green row is my pick for that shot, weighing detail, shimmer, faithfulness and defects together. It is not simply the highest number. For example the 1080 runs (A, B) leave a dark line along the bottom edge of every frame, which no score shows, and that is a large part of why C was picked.</dd>
+</dl>
+<p class="note">Backdown and fadeaway were only upscaled with C, so the A and B reels use their Lanczos takes for those two shots. In the A and B reels only rim, celebrate, alleyoop and fadeout change.</p>
+
+<div class="bar">
+  <button id="play">Play</button><button id="back">-1 frame</button><button id="fwd">+1 frame</button>
+  <label>speed <select id="speed"><option>0.25</option><option>0.5</option><option selected>1</option></select></label>
+  <button id="mode">Show all four</button>
+  <label id="pick">compare <select id="left"></select> with <select id="right"></select></label>
+  <input id="seek" type="range" min="0" max="901" value="0"><span id="t">frame 0</span>
+</div>
+<div class="jumps" id="jumps"></div>
+<div class="grid two" id="grid"></div>
+</main><script>
+const FPS = 30, N = 902;
+const REELS = [
+  ['lanczos', 'Lanczos', 'the plain resize, original takes', '../../master/out/final-up-lanczos-worn-30-master.mp4'],
+  ['a', 'A 7B 1080', 'backdown and fadeaway are Lanczos', '../../master/out/final-up-a-worn-30-master.mp4'],
+  ['b', 'B 7B sharp 1080', 'backdown and fadeaway are Lanczos', '../../master/out/final-up-b-worn-30-master.mp4'],
+  ['c', 'C 7B sharp 1440', 'the v2 reel', '../../master/out/final-v2-worn-30-master.mp4'],
+];
+// First frame and length of each upscaled shot in the 30 fps reel (master/render.py SCENES).
+const SHOTS = [['backdown', 188, 69], ['fadeaway', 257, 43], ['rim', 300, 24], ['celebrate', 324, 36], ['alleyoop', 624, 71], ['fadeout', 695, 28]];
+const grid = document.getElementById('grid'), left = document.getElementById('left'), right = document.getElementById('right');
+const figs = REELS.map(([id, name, note, src]) => {
+  const f = document.createElement('figure');
+  f.innerHTML = `<figcaption><b>${name}</b> <span>${note}</span></figcaption><video muted playsinline preload="auto" src="${src}"></video>`;
+  grid.append(f);
+  for (const sel of [left, right]) sel.add(new Option(name, id));
+  return f;
+});
+const vids = figs.map(f => f.querySelector('video'));
+left.value = 'lanczos'; right.value = 'c';
+let four = false;
+const shown = () => vids.filter((v, i) => !figs[i].hidden);
+function layout() {
+  figs.forEach((f, i) => { f.hidden = !four && ![left.value, right.value].includes(REELS[i][0]); });
+  if (!four && left.value === right.value) figs.forEach((f, i) => { f.hidden = REELS[i][0] !== left.value; });
+  grid.className = 'grid ' + (four ? 'four' : 'two');
+  document.getElementById('mode').textContent = four ? 'Compare two' : 'Show all four';
+  document.getElementById('pick').style.display = four ? 'none' : '';
+  seek(frame());
+}
+const lead = () => shown()[0] || vids[0];
+const frame = () => Math.floor(lead().currentTime * FPS + 1e-3);
+function seek(n) { n = Math.max(0, Math.min(N - 1, n)); vids.forEach(v => { v.currentTime = (n + 0.5) / FPS; }); show(n); }
+function show(n) { document.getElementById('seek').value = n; const s = SHOTS.find(([, a, k]) => n >= a && n < a + k); document.getElementById('t').textContent = `frame ${n}` + (s ? ` (${s[0]})` : ''); }
+function pause() { vids.forEach(v => v.pause()); document.getElementById('play').textContent = 'Play'; }
+document.getElementById('play').onclick = () => {
+  if (lead().paused) { seek(frame()); shown().forEach(v => v.play()); document.getElementById('play').textContent = 'Pause'; }
+  else { pause(); seek(frame()); }
+};
+document.getElementById('back').onclick = () => { pause(); seek(frame() - 1); };
+document.getElementById('fwd').onclick = () => { pause(); seek(frame() + 1); };
+document.getElementById('speed').onchange = e => vids.forEach(v => v.playbackRate = +e.target.value);
+document.getElementById('seek').oninput = e => { pause(); seek(+e.target.value); };
+document.getElementById('mode').onclick = () => { pause(); four = !four; layout(); };
+left.onchange = right.onchange = () => { pause(); layout(); };
+const jumps = document.getElementById('jumps');
+for (const [name, a, k] of SHOTS) {
+  const b = document.createElement('button');
+  b.textContent = `${name} (${a} to ${a + k - 1})`;
+  b.onclick = () => { pause(); seek(a); };
+  jumps.append(b);
+}
+setInterval(() => {
+  const l = lead();
+  if (l.paused) return;
+  show(frame());
+  shown().slice(1).forEach(v => { if (Math.abs(v.currentTime - l.currentTime) > 0.05) v.currentTime = l.currentTime; });
+  if (l.ended) pause();
+}, 100);
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowLeft') { e.preventDefault(); document.getElementById('back').click(); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); document.getElementById('fwd').click(); }
+  if (e.key === ' ') { e.preventDefault(); document.getElementById('play').click(); }
+});
+layout();
+</script></body></html>

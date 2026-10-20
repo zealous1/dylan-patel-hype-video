@@ -1,0 +1,35 @@
+{
+  "status": "done",
+  "takes": [
+    {
+      "label": "Profile + logo v13",
+      "src": "shots/profile/out/profile-v13-from804.mp4",
+      "note": "Slot 26.80 to 30.07 (frames 804 to 901, 98 frames). No turn: Dylan holds a level side profile facing right the whole time, jaw set, steady level stare, almost still, with a slight forward weight shift. The clip is an 8 s Wan 3.0 i2v from the level still gen/vid-end-level.png alone (gen-video-v13, contact sheet out/v13-candidates.png). The span used is clip frames 158 to 238. It has the hardest look in the clip, with brows down, eyes narrowed and lips pressed, and no chin dip, so its drift is as low as the steadiest window. It is laid over 806 to 901 at 0.84x speed. He is framed about 1.2 times tighter than v12, still left of frame, and sits fixed from his first visible frame. The crossfade uses the clean jersey take. The jersey scene's mentions line (shots/jersey/out/mentions-layer.png) is drawn last from 804 at full strength and eases out with a smoothstep from 833 to 851, five frames ahead of the jersey's own fade (838 to 856). It is at zero from 851 on. The logo, its fade-in and the dim to 65%, the grade, the plate and the flare are as in v12. The profile's own mentions line is gone."
+    },
+    {
+      "label": "Profile + logo v12",
+      "src": "shots/profile/out/profile-v12-from804.mp4",
+      "note": "Slot 26.80 to 30.07 (frames 804 to 901, 98 frames). Dylan never looks up. He starts turned away in a three-quarter back view and turns into a level side profile facing right, chin and gaze level, and holds it to the end. The clip is a new Wan 3.0 first/last-frame take (gen-video-v12) from gen/vid-start-away.png to a new level-gaze end still, gen/vid-end-level.png, run over frames 834 to 915 so the turn plays from about 840 to 862. He sits at his final position and size from his first visible frame. The crossfade now uses the deghosted jersey take (shots/jersey/out/final-realtime-clean.mp4), the same clean source as jersey Fade-in v2, and the plate and flare keep the Apple Vision LeBron masks from v11. The end logo is the plain SemiAnalysis mark and wordmark, with no hand or bag, colour-matched into the duotone as before. It fades in with an ease-in-out from 840 to 856, holds steady with no pulse, flicker or bloom, and dims to 65% from 893 to 901. The line arcmira.mentions(entity: \"Dylan Patel\") in Inter Display Display Medium at 36 px, graded with the logo's duotone, fades in near the bottom a little right of centre from 866 to 872 and fades out from 886 to 892. Plate, flare, duotone grade, the colour hold to the last frame and matte averaging are as in v11."
+    },
+    {
+      "label": "Profile + logo v11",
+      "src": "shots/profile/out/profile-v11-from804.mp4",
+      "note": "Slot 26.80 to 30.07 (frames 804 to 901, 98 frames). Dylan now starts turned away from camera in a three-quarter back view and turns into the same side profile as v10. The turn is a new 3 s Wan 3.0 clip pinned on a new Sunburst start still (gen/vid-start-away.png) and the v10 end still (gen/vid-end.png), matted the same way. The clip runs over frames 822 to 892, so the turn plays from about 835 to 866 and the last frame holds. He no longer rises in, pushes or drifts: he sits at his final position and size from his first visible frame, and only the crossfade, the turn and the grade change. LeBron is gone from every layer. The jersey take's last ten frames carried a ghost of his profile; that area is replaced by the take's own stadium from frame 33, aligned to each frame (shots/profile/clean.py). The plate's LeBron mask now adds an Apple Vision matte of each original frame, and the lifted flare keeps him out. The logo follows the Nike swoosh's measured brightness (out/logo-curve-original.json): it climbs in pulses to a peak at 877 about 1.29 times its settle level, with a soft warm bloom at the peak, then settles and flickers with the picture. From 888 it holds at the settle level. Plate, flare, duotone, the colour hold to the last frame and matte averaging are as in v10."
+    },
+    {
+      "label": "Profile + logo v10",
+      "src": "shots/profile/out/profile-v10-from804.mp4",
+      "note": "Slot 26.80 to 30.07 (frames 804 to 901, 98 frames). Dylan is now a real video: a 3 s Wan 3.0 i2v clip pinned on two Sunburst frames (head slightly lower, then looking up) on flat grey. He breathes and slowly lifts his gaze. Every frame is matted with Apple Vision, the edge comes from a grey key so hair and beard strands survive, and the matte is averaged over 5 frames so it holds still. The clip is stretched over the profile's time on screen (806 to 901) with the same plate, flare, timing, duotone grade and v9 colour hold to the last frame. The logo is colour-matched into the duotone: tone curve from the profile, yellows to the jersey yellow, cream whites, the blue desaturated and warmed but still apart from the yellow; crisp on the last frame."
+    },
+    {
+      "label": "Profile + logo v9",
+      "src": "shots/profile/out/profile-v9-from804.mp4",
+      "note": "Slot 26.80 to 30.07 (frames 804 to 901, 98 frames). Same as v8 up to frame 887. After that, nothing fades to black: the duotone, glow, flare and flicker on Dylan's profile and the plate hold to the last frame, with a slight settle (about 6% darker, eased) and the logo crisp at full strength."
+    },
+    {
+      "label": "Profile + logo v8 (fade to black)",
+      "src": "shots/profile/out/profile-v8-from804.mp4",
+      "note": "Jersey crossfades out under a cut-out Sunburst Dylan profile on the original plate and flare. The money-bag logo wipes in where the swoosh did and stays crisp to the last frame. The slot now starts at 26.80 so the crossfade sits inside this scene."
+    }
+  ]
+}

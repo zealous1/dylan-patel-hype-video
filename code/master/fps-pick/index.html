@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Worn 30 vs 60</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#16161a;--muted:#5d5d66;--card:#fff;--line:#dedbd3;--on:#b8501c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}}
+:root[data-theme="dark"]{--bg:#0e0e11;--fg:#ececf0;--muted:#a0a0aa;--card:#1a1a20;--line:#2d2d36;--on:#f08a4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Helvetica,Arial,sans-serif}
+main{max-width:1500px;margin:0 auto;padding:20px 16px 60px}h1{font-size:24px;margin:0 0 4px}.note{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;align-items:center}
+button,select{font:inherit;padding:7px 12px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:800px){.grid{grid-template-columns:1fr}}
+video{width:100%;background:#000;border-radius:8px;display:block}
+input[type=range]{flex:1;min-width:200px}#t{font-variant-numeric:tabular-nums;min-width:150px}
+</style></head><body><main>
+<h1>Worn at 30 fps vs 60 fps</h1>
+<p class="note">Same cut, same Worn film pass, full-quality masters. The 60 fps in-betweens are still the old RIFE ones. The better 60 fps routes are being built now and will show up in these menus when they land.</p>
+<div class="grid">
+<div><select id="sa"></select><video id="a" playsinline></video></div>
+<div><select id="sb"></select><video id="b" playsinline muted></video></div>
+</div>
+<div class="row"><button id="play">Play</button><button id="half">Half speed</button>
+<button data-t="0">Start</button><button data-t="12">Newspaper 12.0 s</button><button data-t="13.4">Fastcuts 13.4 s</button><button data-t="23">Ending 23.0 s</button>
+<input type="range" id="seek" min="0" max="30.07" step="0.001" value="12"><span id="t"></span></div>
+<p class="note">Space plays and pauses. The left and right arrows step 1/60 s, so the 60 fps side shows every frame while the 30 fps side holds each frame for two steps. Sound comes from the left player.</p>
+</main><script>
+const V={
+ 'v2 Worn 30 fps (audio C)':'../out/final-v2-worn-30-master.mp4','Worn 30 fps':'../out/final-worn-30-master.mp4','Worn 60 fps':'../out/final-worn-60-master.mp4',
+ 'Classic 30 fps':'../out/final-classic-30-master.mp4','Classic 60 fps':'../out/final-classic-60-master.mp4',
+ 'Match 30 fps':'../out/final-30-master.mp4','Match 60 fps':'../out/final-60-master.mp4',
+};
+const a=document.getElementById('a'),b=document.getElementById('b'),seek=document.getElementById('seek'),T=document.getElementById('t');
+let rate=1;
+for(const [id,v,def] of [['sa',a,'Worn 30 fps'],['sb',b,'Worn 60 fps']]){
+ const s=document.getElementById(id);
+ Object.keys(V).forEach(k=>s.add(new Option(k,k,false,k===def)));
+ s.onchange=()=>{const t=a.currentTime||12,p=!a.paused;v.src=V[s.value];v.onloadedmetadata=()=>{v.currentTime=t;v.playbackRate=rate;if(p)v.play();};};
+ s.onchange();
+}
+const set=t=>{a.pause();b.pause();a.currentTime=b.currentTime=Math.max(0,t);};
+document.getElementById('play').onclick=()=>{if(a.paused){b.currentTime=a.currentTime;a.play();b.play();}else{a.pause();b.pause();}};
+document.getElementById('half').onclick=e=>{rate=rate===1?0.5:1;a.playbackRate=b.playbackRate=rate;e.target.textContent=rate===1?'Half speed':'Full speed';};
+document.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>set(+x.dataset.t));
+seek.oninput=()=>set(+seek.value);
+setInterval(()=>{if(!a.paused&&Math.abs(a.currentTime-b.currentTime)>0.04)b.currentTime=a.currentTime;seek.value=a.currentTime;
+ T.textContent=`${a.currentTime.toFixed(3)} s · 60f ${Math.round(a.currentTime*60)}`;},100);
+document.addEventListener('keydown',e=>{if(e.target.tagName==='SELECT')return;
+ if(e.code==='Space'){e.preventDefault();document.getElementById('play').click();}
+ if(e.code==='ArrowRight'||e.code==='ArrowLeft'){e.preventDefault();const f=Math.round(a.currentTime*60)+(e.code==='ArrowRight'?1:-1);set((f+0.5)/60);}});
+</script></body></html>

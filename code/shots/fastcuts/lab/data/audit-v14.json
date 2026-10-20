@@ -1,0 +1,307 @@
+{
+ "name": "v14",
+ "video": "master/out/final-v3-worn-30-master.mp4",
+ "first": 415,
+ "transitions": [
+  {
+   "frame": 12,
+   "move": null,
+   "out": {
+    "dx": -171.6,
+    "dy": 0.5,
+    "zoom": 0.9988,
+    "dir": "left"
+   },
+   "in": {
+    "dx": -40.4,
+    "dy": 2.8,
+    "zoom": 1.0,
+    "dir": "left"
+   },
+   "ok": true
+  },
+  {
+   "frame": 24,
+   "move": null,
+   "out": {
+    "dx": 184.6,
+    "dy": -0.2,
+    "zoom": 0.9968,
+    "dir": "right"
+   },
+   "in": {
+    "dx": 92.5,
+    "dy": -3.8,
+    "zoom": 1.0,
+    "dir": "right"
+   },
+   "ok": false
+  },
+  {
+   "frame": 37,
+   "move": null,
+   "out": {
+    "dx": 2.4,
+    "dy": -92.9,
+    "zoom": 1.0014,
+    "dir": "up"
+   },
+   "in": {
+    "dx": 4.7,
+    "dy": -8.1,
+    "zoom": 0.9998,
+    "dir": "up"
+   },
+   "ok": true
+  },
+  {
+   "frame": 49,
+   "move": null,
+   "out": {
+    "dx": -151.5,
+    "dy": 1.1,
+    "zoom": 1.0049,
+    "dir": "left"
+   },
+   "in": {
+    "dx": 0.3,
+    "dy": 2.9,
+    "zoom": 1.0056,
+    "dir": "still"
+   },
+   "ok": true
+  },
+  {
+   "frame": 86,
+   "move": null,
+   "out": {
+    "dx": 171.9,
+    "dy": -0.6,
+    "zoom": 0.9946,
+    "dir": "right"
+   },
+   "in": {
+    "dx": 0.0,
+    "dy": -4.0,
+    "zoom": 1.0,
+    "dir": "up"
+   },
+   "ok": false
+  },
+  {
+   "frame": 99,
+   "move": null,
+   "out": {
+    "dx": -0.8,
+    "dy": 88.3,
+    "zoom": 1.0026,
+    "dir": "down"
+   },
+   "in": {
+    "dx": 0.5,
+    "dy": 14.8,
+    "zoom": 1.0016,
+    "dir": "down"
+   },
+   "ok": true
+  },
+  {
+   "frame": 111,
+   "move": null,
+   "out": {
+    "dx": -144.4,
+    "dy": -0.3,
+    "zoom": 1.0052,
+    "dir": "left"
+   },
+   "in": {
+    "dx": -74.6,
+    "dy": -3.7,
+    "zoom": 1.0,
+    "dir": "left"
+   },
+   "ok": true
+  },
+  {
+   "frame": 123,
+   "move": null,
+   "out": {
+    "dx": 166.1,
+    "dy": -1.5,
+    "zoom": 1.0008,
+    "dir": "right"
+   },
+   "in": {
+    "dx": 115.6,
+    "dy": 6.5,
+    "zoom": 1.0,
+    "dir": "right"
+   },
+   "ok": false
+  },
+  {
+   "frame": 148,
+   "move": null,
+   "out": {
+    "dx": -0.1,
+    "dy": -76.4,
+    "zoom": 1.0008,
+    "dir": "up"
+   },
+   "in": {
+    "dx": -7.0,
+    "dy": -24.8,
+    "zoom": 1.0038,
+    "dir": "up"
+   },
+   "ok": true
+  },
+  {
+   "frame": 160,
+   "move": null,
+   "out": {
+    "dx": -166.4,
+    "dy": -0.4,
+    "zoom": 1.0027,
+    "dir": "left"
+   },
+   "in": {
+    "dx": -65.0,
+    "dy": 7.7,
+    "zoom": 1.0,
+    "dir": "left"
+   },
+   "ok": true
+  }
+ ],
+ "right_frames": [
+  {
+   "frame": 20,
+   "dx": 10.0,
+   "dy": 1.1,
+   "r": 1.0,
+   "z": 0.9956,
+   "how": "orb"
+  },
+  {
+   "frame": 21,
+   "dx": 53.0,
+   "dy": -0.4,
+   "r": 1.0,
+   "z": 0.9903,
+   "how": "orb"
+  },
+  {
+   "frame": 22,
+   "dx": 160.0,
+   "dy": 0.0,
+   "r": 0.724,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 23,
+   "dx": 452.0,
+   "dy": 0.0,
+   "r": 0.559,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 25,
+   "dx": 188.0,
+   "dy": -8.0,
+   "r": 0.873,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 26,
+   "dx": 88.0,
+   "dy": -4.0,
+   "r": 0.938,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 27,
+   "dx": 12.0,
+   "dy": 0.0,
+   "r": 0.984,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 83,
+   "dx": 43.4,
+   "dy": -1.5,
+   "r": 1.0,
+   "z": 0.984,
+   "how": "orb"
+  },
+  {
+   "frame": 84,
+   "dx": 140.0,
+   "dy": 0.0,
+   "r": 0.815,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 85,
+   "dx": 348.0,
+   "dy": 0.0,
+   "r": 0.877,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 120,
+   "dx": 44.3,
+   "dy": -0.5,
+   "r": 1.0,
+   "z": 1.0023,
+   "how": "orb"
+  },
+  {
+   "frame": 121,
+   "dx": 144.0,
+   "dy": 0.0,
+   "r": 0.885,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 122,
+   "dx": 320.0,
+   "dy": -4.0,
+   "r": 0.918,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 124,
+   "dx": 232.0,
+   "dy": 20.0,
+   "r": 0.914,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 125,
+   "dx": 100.0,
+   "dy": 0.0,
+   "r": 0.959,
+   "z": 1.0,
+   "how": "profile"
+  },
+  {
+   "frame": 126,
+   "dx": 20.0,
+   "dy": 0.0,
+   "r": 0.956,
+   "z": 1.0,
+   "how": "profile"
+  }
+ ]
+}
