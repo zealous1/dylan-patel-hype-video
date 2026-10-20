@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| Video | VIDEO_POST_URL, 30.07 s, 16:9, 1920x1080, 30 fps, 902 frames |
+| Video | https://x.com/zealcaiden/status/2112239444040499475, 30.07 s, 16:9, 1920x1080, 30 fps, 902 frames |
 | Artist | Zeal Caiden |
 | Kind | hype-edit |
 | Method | hybrid: generated shots, code-rendered graphics, edited footage |

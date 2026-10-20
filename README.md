@@ -4,7 +4,7 @@ A remake of a viral 30-second LeBron edit, with Dylan Patel of SemiAnalysis in L
 
 <p align="center"><img src="assets/newspaper-to-podcast.gif" width="520" alt="The SemiAnalysis $100 million newspaper cuts into the podcast section, where each clip shows the Arcmira search behind it"></p>
 
-**[Watch the reel](VIDEO_POST_URL)** · [How it was made](#how-it-was-made) · [Recipe](RECIPE.md) · [Get the skills](https://github.com/zealous1/claude-video-editing-skills)
+**[Watch the reel](https://x.com/zealcaiden/status/2112239444040499475)** · [How it was made](#how-it-was-made) · [Recipe](RECIPE.md) · [Get the skills](https://github.com/zealous1/claude-video-editing-skills)
 
 - Every basketball shot keeps the original's cut, timing and camera move. Wan 3.0 swapped Dylan in by video-to-video.
 - The podcast section is ten clips in seven seconds, nine of Dylan and one of Jensen Huang talking about him. [Arcmira](https://arcmira.com) is a search engine for what people say in podcasts and videos. It knows who is speaking, so a search can ask for one person's own words, and it returns the second each line starts. Each clip shows the search behind it.
