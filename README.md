@@ -89,7 +89,7 @@ Every guide in [the family](#the-family) has the same eight sections.
 
 ## Reuse it
 
-- **On AIMV.** [AIMV](https://aimv.gg) is a public catalog of AI music videos that lists each video with the recipe behind it. This repo is the AIMV recipe for the video, laid out as an AIMV recipe folder (`recipe.yml`, `prompts/`, `code/`).
+- **On AIMV.** [This reel's recipe on AIMV](https://aimv.gg/v/zealcaiden--dylan-patel-hype-reel). AIMV is a public catalog of AI music videos that lists each video with the recipe behind it. This repo is the AIMV recipe for the video, laid out as an AIMV recipe folder (`recipe.yml`, `prompts/`, `code/`).
 - **Made with** Claude Code. The workflow then became [claude-video-editing-skills](https://github.com/zealous1/claude-video-editing-skills), which you can install. One skill finds the second someone said a line and cuts it. One remakes a reference edit shot for shot.
 
 ## Rerun it
