@@ -4,11 +4,11 @@ This is the story page. It lists every version good enough to post, why each one
 
 ## The path to each publishable checkpoint
 
-A checkpoint is a full 902-frame render that passes the automatic checks (902 frames, audio to the last frame, loudness, true peak; see the `aimv-checks` skill). The first full render, C0, landed on the morning of 10-17. Everything after it was last-mile direction, eleven checkpoints over nine hours.
+A checkpoint is a full 902-frame render that passes the automatic checks (902 frames, audio to the last frame, loudness, true peak; see the `check-video-render` skill). The first full render, C0, landed on the morning of 10-17. Everything after it was last-mile direction, eleven checkpoints over nine hours.
 
 | Checkpoint | When | What changed | Why it was not the last |
 | --- | --- | --- | --- |
-| Swaps | 10-16, 23:35 | First Wan 3.0 take for every swapped shot, at real time | Takes only, no reel yet |
+| Swaps | 10-16, 23:35 | First Wan 3.0 take for every swapped shot, at real time | Takes only, no video yet |
 | C0 | 10-17, 10:14 | First full render, at 30 and 60 fps. Every scene, with the original audio and the announcer muted. **The first usable cut** | Muting a stem lost music. No film look yet, and the podcast section was still hand-picked |
 | C1 | 12:41 | Worn film pass at 30 fps | Soft generated shots |
 | C2 | 14:32 | The six softest shots upscaled with SeedVR2 | Audio still muted, not replaced |
@@ -44,7 +44,7 @@ Zeal's calls, in Zeal's own words where the chat has them.
 
 | Call | Why | Replaced |
 | --- | --- | --- |
-| "keep most of the basketball (make it dylan)" | The original works; change the person, keep the craft | A from-scratch edit |
+| "keep most of the basketball (make it dylan)" | The original works; change the person, keep the craft | A from-scratch video |
 | Overlays "after the fact with software overlay. we just need to get clip right" | Text and graphics from a model are random; software is exact | Generated scorebugs and banners |
 | "rly important to get that light beard right" | The likeness lives in the beard | Full, bushy beards in early takes |
 | "all patel frames will be 67" | One jersey number everywhere | Mixed numbers |

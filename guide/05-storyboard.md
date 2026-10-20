@@ -2,7 +2,7 @@
 
 The storyboard lays every take of every shot on the reference's clock, so you can see what was tried for each second and what won. The [storyboard page](storyboard/index.html) loads [`storyboard/storyboard.json`](storyboard/storyboard.json). The clock is the reference's audio, 30.07 s. Each of the slots below it is one shot, with every take tried for it in the order it was made, its model and cost, the verdict, and the pick at each checkpoint in [`04-checkpoints.md`](04-checkpoints.md).
 
-The component is the same one every guide uses. It grew out of the cut player that made the reel (`code/index.html` with `takes.json`), where each scene could swap takes against the mix.
+The component is the same one every guide uses. It grew out of the cut player that made the video (`code/index.html` with `takes.json`), where each scene could swap takes against the mix.
 
 ## Reading it
 

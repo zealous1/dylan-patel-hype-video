@@ -2,9 +2,9 @@
 
 ## The brief
 
-[Arcmira](https://arcmira.com) is a search engine for what people say in podcasts and videos. It knows who is speaking, so a search can ask for one person's own words, and it returns the second each line starts. This page is every Arcmira call behind the reel's podcast section.
+[Arcmira](https://arcmira.com) is a search engine for what people say in podcasts and videos. It knows who is speaking, so a search can ask for one person's own words, and it returns the second each line starts. This page is every Arcmira call behind the video's podcast section.
 
-Seven seconds in the middle of the reel (13.84 to 20.80 s) had to prove that Dylan Patel is everywhere the AI hardware story is told. The brief was his biggest appearances, cut "fast as fuck", one episode per beat, and every on-screen tag had to be the real search that found the clip. So the research was not "find good Dylan clips". It was "find a clip for each beat with one search a viewer can read and rerun". A tag must be literally true. Late in the edit, an audit found three beats that had been picked by hand at round timestamps. Their tags were not true, so all three were re-sourced through search before the reel shipped.
+Seven seconds in the middle of the hype video (13.84 to 20.80 s) had to prove that Dylan Patel is everywhere the AI hardware story is told. The brief was his biggest appearances, cut "fast as fuck", one episode per beat, and every on-screen tag had to be the real search that found the clip. So the research was not "find good Dylan clips". It was "find a clip for each beat with one search a viewer can read and rerun". A tag must be literally true. Late in the build, an audit found three beats that had been picked by hand at round timestamps. Their tags were not true, so all three were re-sourced through search before the video shipped.
 
 The full call log is [`research-calls.json`](research-calls.json). The tag on each shot comes from the `found_with` field of that beat in [`../sources.json`](../sources.json), which the edit list (`code/shots/fastcuts/edl-v18-s2.json`) carries into the render.
 
@@ -12,7 +12,7 @@ The full call log is [`research-calls.json`](research-calls.json). The tag on ea
 
 Every call ran on the Arcmira MCP's `arcmira_execute_read` tool. Each person has one id, so a search can be filtered to what they said and not to what others said about them. Dylan is `ent_140776` and Jensen Huang is `ent_122115`. To run these yourself, connect the MCP as the [README](../README.md#run-one-yourself) shows. A Free account works.
 
-| Reel slot (s) | Program | Inputs | Why this filter | What came back | Used |
+| Video slot (s) | Program | Inputs | Why this filter | What came back | Used |
 | --- | --- | --- | --- | --- | --- |
 | setup | `arcmira.resolve("Dylan Patel", { context: "SemiAnalysis" })` | name plus context | one id for every later call, so a namesake never leaks in | `ent_140776` | yes |
 | setup | `arcmira.mentions` with `is_appearance` | Dylan's id | where he speaks, not where he is mentioned | 38 appearances of 188 mentions, ranked by views with yt-dlp metadata | the episode pool |

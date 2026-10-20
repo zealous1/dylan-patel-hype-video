@@ -1,6 +1,6 @@
 # Front page research
 
-The reel whips into a newspaper front page, so a helper agent researched SemiAnalysis first. These are the moments it scored and the headlines it wrote, and the page Zeal picked from. Generated from the picker section of [code/index.html](../code/index.html).
+The video whips into a newspaper front page, so a helper agent researched SemiAnalysis first. These are the moments it scored and the headlines it wrote, and the page Zeal picked from. Generated from the picker section of [code/index.html](../code/index.html).
 
 ## 38 company moments
 

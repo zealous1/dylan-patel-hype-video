@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "reel-storyboard/1",
-  "title": "Reel storyboard",
-  "description": "A reel as a clock, slots on that clock, every take made for each slot, and the picks at each checkpoint. Paths that start with media/ point into a folder that is not shipped; the page plays them only when the viewer supplies that folder. Any other relative path ships beside the page.",
+  "title": "Video storyboard",
+  "description": "A video as a clock, slots on that clock, every take made for each slot, and the picks at each checkpoint. Paths that start with media/ point into a folder that is not shipped; the page plays them only when the viewer supplies that folder. Any other relative path ships beside the page.",
   "type": "object",
   "required": ["schema", "title", "clock", "slots", "checkpoints"],
   "additionalProperties": false,
@@ -10,7 +10,7 @@
     "schema": { "const": "reel-storyboard/1" },
     "title": { "type": "string" },
     "summary": { "type": "string" },
-    "aspect": { "type": "string", "pattern": "^\\d+:\\d+$", "description": "Frame shape of the reel, such as 16:9 or 9:16." },
+    "aspect": { "type": "string", "pattern": "^\\d+:\\d+$", "description": "Frame shape of the video, such as 16:9 or 9:16." },
     "clock": { "$ref": "#/$defs/clock" },
     "slots": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/slot" } },
     "assets": {
@@ -59,7 +59,7 @@
       "properties": {
         "kind": {
           "enum": ["reference", "song", "voiceover"],
-          "description": "reference: a remade edit's own audio is the clock. song: a song's beat grid is. voiceover: a spoken track is, and its lines are the landmarks."
+          "description": "reference: a remade video's own audio is the clock. song: a song's beat grid is. voiceover: a spoken track is, and its lines are the landmarks."
         },
         "duration_s": { "type": "number", "exclusiveMinimum": 0 },
         "fps": { "type": "number", "exclusiveMinimum": 0 },
@@ -67,7 +67,7 @@
         "beat_offset_s": { "type": "number", "description": "Clock time of beat 0." },
         "beats_per_bar": { "type": "integer", "minimum": 1, "description": "Default 4." },
         "reference": {
-          "description": "What the clock follows: the remade edit, the song, or the voiceover. Required when kind is reference.",
+          "description": "What the clock follows: the remade video, the song, or the voiceover. Required when kind is reference.",
           "type": "object",
           "required": ["title"],
           "additionalProperties": false,
@@ -253,7 +253,7 @@
         },
         "duration_s": { "type": "number", "exclusiveMinimum": 0, "description": "This checkpoint's length when it differs from the clock's." },
         "sections": {
-          "description": "This checkpoint's own sections, when the clock was rebuilt for it (an original edit re-cuts its song).",
+          "description": "This checkpoint's own sections, when the clock was rebuilt for it (an original video re-cuts its song).",
           "type": "array",
           "items": { "$ref": "#/$defs/section" }
         },

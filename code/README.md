@@ -1,6 +1,6 @@
 # Code
 
-The scripts that made the Dylan Patel hype edit, in the order they ran. Step numbers match [`../RECIPE.md`](../RECIPE.md), and [`../guide/03-software.md`](../guide/03-software.md) says what each file decided. Run every command from this folder.
+The scripts that made the Dylan Patel hype video, in the order they ran. Step numbers match [`../RECIPE.md`](../RECIPE.md), and [`../guide/03-software.md`](../guide/03-software.md) says what each file decided. Run every command from this folder.
 
 There is no media here. You download the reference edit and the podcast clips yourself, and you bring your own photos, logo and voice memos.
 
@@ -53,11 +53,11 @@ Add your own inputs:
 | 3 | Place the outro line | `audio/outro/build.py` | First `ffmpeg -i audio/outro/memo.m4a audio/outro/memo.wav` and `ffmpeg -i audio/outro/memo.m4a -ac 1 -ar 16000 audio/outro/memo-16k.wav`. `TAKES` in the script holds where each take sits in the run's memo, so set it for yours. Then `python -I audio/outro/build.py`. For each take it prints `OUTRO_CUT = ...` and `OUTRO_AT_MS = ...`. Copy `audio/outro/work/take3-g0.wav`, or your pick, to `audio/voice/outro-take3-g0.wav` |
 | 3 | Split the announcer from the song | `audio/audit/restore.py` | `python -I audio/audit/restore.py` |
 | 3 | Render the final mix (mix D) | `audio/audit/build.py` | Paste the `INTRO_CUT`, `OUTRO_CUT` and `OUTRO_AT_MS` lines the two build scripts printed over the run's values near the top of `audio/audit/build.py`. Then `python -I audio/audit/build.py` writes `audio/audit/out/d-hotter-voices.wav` |
-| 4 | Character sheet and start frames | `starts/gen.mjs` | `node starts/gen.mjs sheet`, then `node starts/gen.mjs frames`. With no names, `frames` makes the 16 edits behind the reel's start and end frames, in an order where each edit's input exists first. It tries an edit up to four times when the safety filter refuses it. `dcplate` waits for step 5 |
+| 4 | Character sheet and start frames | `starts/gen.mjs` | `node starts/gen.mjs sheet`, then `node starts/gen.mjs frames`. With no names, `frames` makes the 16 edits behind the video's start and end frames, in an order where each edit's input exists first. It tries an edit up to four times when the safety filter refuses it. `dcplate` waits for step 5 |
 | 5 | Upload the source spans | `setup/spans.py` (run by `setup/prep.sh`) | Upload `shots/<shot>/src-720.mp4` and `src-720-slow.mp4` to `$SOURCE_BASE_URL/<shot>/` |
 | 5 | Swap each shot by video-to-video | `shots/vid.mjs`, `shots/<shot>/job.json` | The run used four flag sets. See [the shot table](#the-wan-30-runs) below |
 | 5 | The datacenter clean plate | `starts/gen.mjs` | `ffmpeg -i shots/datacenter/out/wan-3.0-novideo-min.mp4 -frames:v 1 shots/datacenter/post/f01.png`, then `node starts/gen.mjs frames dcplate` |
-| 5 | Speed a slowed take back up | `setup/realtime.py` | `for s in intro backdown celebrate fadeaway rim jersey alleyoop; do python3 -I setup/realtime.py shots/upscale-sweep/picks/$s.json; done` rebuilds each take from the frames the reel used. Skip `jersey-timeline.json`. `shots/jersey/timeline.py` makes that take in step 9, and its picks repeat frames, which `realtime.py` refuses |
+| 5 | Speed a slowed take back up | `setup/realtime.py` | `for s in intro backdown celebrate fadeaway rim jersey alleyoop; do python3 -I setup/realtime.py shots/upscale-sweep/picks/$s.json; done` rebuilds each take from the frames the video used. Skip `jersey-timeline.json`. `shots/jersey/timeline.py` makes that take in step 9, and its picks repeat frames, which `realtime.py` refuses |
 | 6 | Grade each take to the reference, redraw the scorebug and banner, add the wafer | `shots/lookmatch.py`, `shots/intro/graphics.py`, `shots/fadeaway/wafer.py`, `shots/<shot>/post.sh` | `sh shots/intro/post.sh`, and the same for backdown, fadeaway, rim and fadeout, plus `sh shots/celebrate/post-look.sh`. The jersey's post runs in step 9 |
 | 6 | Retime the fade-in and the intro | `shots/fadein/v3.sh` | `sh shots/fadein/v3.sh`, after `shots/intro/post.sh` |
 | 6 | Paint out the datacenter sign | `shots/datacenter/post/designify.py` | `(cd shots/datacenter && uv run --no-project --python 3.12 --with-requirements ../../requirements.txt python -I post/designify.py)`. The parentheses keep the `cd` out of your shell. It writes `shots/datacenter/out/clean-v1.mp4` |
@@ -72,7 +72,7 @@ Add your own inputs:
 | 11 | Film look | `shots/film/film.py` | `BASE=v4 MIX=audio/audit/out/d-hotter-voices.wav python -I shots/film/film.py --final worn 30` |
 | 11 | Name-burn opener | `shots/opener/build.py` | `OPENER_BASE=master/out/final-v4-worn-30-master.mp4 python -I shots/opener/build.py face2 name2`, then `cp shots/opener/out/opener-name2.mp4 master/out/final-v5-worn-30-master.mp4` |
 | 11 | Splice in the podcast section | `shots/fastcuts/lab/splice.sh` | `BASE=v5 sh shots/fastcuts/lab/splice.sh final-v6-S2=v18-s2` writes `master/out/final-v6-S2-master.mp4` |
-| 12 | Check the candidate | `shots/fastcuts/lab/splice.sh`, the `aimv-checks` skill | The splice asserts 902 frames. Then run the `aimv-checks` skill on the result, which checks audio to the last frame, loudness and true peak |
+| 12 | Check the candidate | `shots/fastcuts/lab/splice.sh`, the `check-video-render` skill | The splice asserts 902 frames. Then run the `check-video-render` skill on the result, which checks audio to the last frame, loudness and true peak |
 
 Run any Python stage with `--help` to print its header, which lists its options and the file it writes. Outputs land in an `out/` folder beside the script, which the repo's `.gitignore` keeps out of git.
 
@@ -125,7 +125,7 @@ Then open `http://localhost:8000/guide/storyboard/index.html?media=../../code/`.
 
 ## Fonts
 
-`setup/fonts.sh` downloads every font from a fixed release or commit and checks its sha256. The reel's tags and name burn were set in a commercial font. This code uses Inter Display (SIL OFL 1.1) in the same weights, from `FONT_DIR`. Its widths differ a little from the original, so check the longest channel names on the podcast lab page. The broadcast graphics use Barlow Condensed, Barlow and Inter (all SIL OFL 1.1) in place of the macOS system fonts DIN Condensed, Futura and Arial. The newspaper masthead uses UnifrakturMaguntia (SIL OFL 1.1). To match the original look with a font you licence yourself, put it in `FONT_DIR` under the same file names.
+`setup/fonts.sh` downloads every font from a fixed release or commit and checks its sha256. The video's tags and name burn were set in a commercial font. This code uses Inter Display (SIL OFL 1.1) in the same weights, from `FONT_DIR`. Its widths differ a little from the original, so check the longest channel names on the podcast lab page. The broadcast graphics use Barlow Condensed, Barlow and Inter (all SIL OFL 1.1) in place of the macOS system fonts DIN Condensed, Futura and Arial. The newspaper masthead uses UnifrakturMaguntia (SIL OFL 1.1). To match the original look with a font you licence yourself, put it in `FONT_DIR` under the same file names.
 
 ## Environment
 

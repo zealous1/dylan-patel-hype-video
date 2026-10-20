@@ -1,12 +1,12 @@
 # 6. Model tests
 
-This reel remakes a 30 s basketball edit with Dylan Patel in the player's place. Most of the picture is generated. A still model makes start and end frames and a character sheet, then a video model swaps him into each shot of the original clip. The rest is code and found footage.
+This video remakes a 30 s basketball hype video with Dylan Patel in the player's place. Most of the picture is generated. A still model makes start and end frames and a character sheet, then a video model swaps him into each shot of the original clip. The rest is code and found footage.
 
 Every row below is a model or tool that ran, or one that was weighed and not run. Runs and costs come from the per-run logs the scripts wrote. A run is one request, including the refused and failed ones.
 
 ## How the models were picked
 
-The first image model was the convenient one. FLUX.2 on Workers AI gave generic faces, and Zeal said "these image edits suck dog". Zeal then named the two image models to test, GPT Image and Nano Banana. GPT Image 2.5 Sunburst made every frame in the reel after that.
+The first image model was the convenient one. FLUX.2 on Workers AI gave generic faces, and Zeal said "these image edits suck dog". Zeal then named the two image models to test, GPT Image and Nano Banana. GPT Image 2.5 Sunburst made every frame in the video after that.
 
 For video, two Artificial Analysis leaderboards read on 2026-10-17 put Wan 3.0 first for video editing and MiniMax H3 first for image to video. Both were tested, plus Seedance 2.5.
 
@@ -22,7 +22,7 @@ A row is marked SOTA only when a dated public ranking or a named source backs it
 | --- | --- | --- | --- | --- | --- | --- |
 | Claude Opus 5.5 | Study the reference, write every prompt and script, run the tests, assemble the cut | Anthropic, Claude Code | n/a | not logged | used | no |
 
-- **Claude Opus 5.5.** The agent read frames itself to study the reference, with no video model in the loop. It wrote the image and video prompts, the look-match, the newspaper renderer and the final assembly. Verdict: The agent for the whole reel. Its tokens, and what they would cost at Claude API list prices, are in `08-chat.md`.
+- **Claude Opus 5.5.** The agent read frames itself to study the reference, with no video model in the loop. It wrote the image and video prompts, the look-match, the newspaper renderer and the final assembly. Verdict: The agent for the whole video. Its tokens, and what they would cost at Claude API list prices, are in `08-chat.md`.
 
 ### Image generation and edits
 
@@ -34,8 +34,8 @@ A row is marked SOTA only when a dated public ranking or a named source backs it
 | FLUX.2 klein 9B | Swap the face and jersey on start frames | Cloudflare Workers AI, @cf/black-forest-labs/flux-2-klein-9b | 2 | not logged | refused | no |
 | Nano Banana 2.1 | Character sheet | OpenRouter, google/gemini-nano-banana-2.1 | 2 | not logged | blocked | yes |
 
-- **GPT Image 2.5 Sunburst.** 37 of 51 requests returned an image, at about $0.06 an image and $0.04 a plate. The order that worked was a six-view character sheet first, then the jersey, the numbers and the face on each frame. Width and height must both divide by 16, so 16:9 is 1792x1008. The model refused 11 frames that still showed the original player's face. Masking his head with a grey box removed him from the input before the edit, and the frames then went through. The error read `Your request was rejected by the safety system.` SOTA as of 2026-10-17. Zeal named GPT Image as one of the two SOTA image models on 2026-10-17, and the AIMV catalog that day listed GPT Image 2 and 2.5 as the most used keyframe models. Verdict: The image model for every frame in the reel.
-- **GPT Image 2.** One character sheet for $0.20, after one request sent to the chat endpoint by mistake. Verdict: Sunburst made the sheet the reel used.
+- **GPT Image 2.5 Sunburst.** 37 of 51 requests returned an image, at about $0.06 an image and $0.04 a plate. The order that worked was a six-view character sheet first, then the jersey, the numbers and the face on each frame. Width and height must both divide by 16, so 16:9 is 1792x1008. The model refused 11 frames that still showed the original player's face. Masking his head with a grey box removed him from the input before the edit, and the frames then went through. The error read `Your request was rejected by the safety system.` SOTA as of 2026-10-17. Zeal named GPT Image as one of the two SOTA image models on 2026-10-17, and the AIMV catalog that day listed GPT Image 2 and 2.5 as the most used keyframe models. Verdict: The image model for every frame in the video.
+- **GPT Image 2.** One character sheet for $0.20, after one request sent to the chat endpoint by mistake. Verdict: Sunburst made the sheet the video used.
 - **FLUX.2 dev.** 5 of 6 edits came back, with generic faces that did not look like Dylan. One was flagged. Zeal said "these image edits suck dog we should not be using workers ai for this". Verdict: Do not use it for likeness edits.
 - **FLUX.2 klein 9B.** Both edits were refused on output. The error read `Your output has been flagged. Please choose another prompt / input image combination`. Verdict: Refuses frames of the original player.
 - **Nano Banana 2.1.** Both requests were blocked for this account by the provider. SOTA as of 2026-10-17. Zeal named Nano Banana as one of the two SOTA image models on 2026-10-17. Verdict: Not tested. Try it through another provider before you rule it out.
@@ -72,7 +72,7 @@ A row is marked SOTA only when a dated public ranking or a named source backs it
 | --- | --- | --- | --- | --- | --- | --- |
 | RIFE | In-between frames for a 60 fps master | rife-ncnn-vulkan locally, Practical-RIFE on Modal, RIFE v4.6 | n/a | $0.71 | lost | no |
 
-- **RIFE.** The in-betweens had half the detail at whip pans, morphed across cuts (a doubled channel tag), and melted the white flashes. The cut detector also read whips as cuts. Zeal said "30 is goated". Verdict: Ship 30 fps. Do not interpolate an edit full of whips, flashes and text.
+- **RIFE.** The in-betweens had half the detail at whip pans, morphed across cuts (a doubled channel tag), and melted the white flashes. The cut detector also read whips as cuts. Zeal said "30 is goated". Verdict: Ship 30 fps. Do not interpolate a video full of whips, flashes and text.
 
 ### Stem separation
 
@@ -80,7 +80,7 @@ A row is marked SOTA only when a dated public ranking or a named source backs it
 | --- | --- | --- | --- | --- | --- | --- |
 | Demucs | Split the reference audio to mute the announcer | local, htdemucs, then htdemucs_ft four-stem | n/a | $0.00 | used | no |
 
-- **Demucs.** The announcer sat only in the vocal stem, and muting two windows of it removed his words. A later audit found the stems do not sum back to the original. The residual was 19 dB down, the build at 9 to 10 s lost 3 dB, and muting killed a held sung note, the hook, the width and the reverb. Verdict: Use stems to find words, not to rebuild the mix. The reel keeps the original mix everywhere except the announcer's words.
+- **Demucs.** The announcer sat only in the vocal stem, and muting two windows of it removed his words. A later audit found the stems do not sum back to the original. The residual was 19 dB down, the build at 9 to 10 s lost 3 dB, and muting killed a held sung note, the hook, the width and the reverb. Verdict: Use stems to find words, not to rebuild the mix. The video keeps the original mix everywhere except the announcer's words.
 
 ### Speech to text
 
@@ -116,4 +116,4 @@ One experiment is out of this guide's scope. Zeal ran [TRIBE v2](https://github.
 
 The overlays (scorebug, banner, name, newspaper) are drawn in code, not generated. Zeal's rule was to get the clip right in the video model and add everything else with software, to keep random generated detail to a minimum.
 
-This page is generated from `models.json` by `render_models.py`, which ships in the `aimv-recipe` skill of [claude-video-editing-skills](https://github.com/zealous1/claude-video-editing-skills) (`skills/aimv-recipe/template/tools/`). Edit the JSON and rerun it. The JSON also holds each row's AIMV id.
+This page is generated from `models.json` by `render_models.py`, which ships in the `write-aimv-recipe` skill of [claude-video-editing-skills](https://github.com/aimvgg/claude-video-editing-skills) (`skills/write-aimv-recipe/template/tools/`). Edit the JSON and rerun it. The JSON also holds each row's AIMV id.

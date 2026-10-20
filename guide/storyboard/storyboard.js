@@ -1,4 +1,4 @@
-// Reel storyboard: plays every take of every slot on the reel's clock, and replays the picks of each checkpoint.
+// Video storyboard: plays every take of every slot on the video's clock, and replays the picks of each checkpoint.
 // Everything comes from storyboard.json (see schema.json). Paths under media/ resolve only against a folder the
 // viewer supplies (?media=<folder> or "Load my media folder"); without one the page shows data and placeholders.
 'use strict';

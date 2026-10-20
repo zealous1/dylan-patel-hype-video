@@ -1,6 +1,6 @@
 {
  "schema": "reel-storyboard/1",
- "title": "Dylan Patel hype reel",
+ "title": "Dylan Patel hype video",
  "summary": "A shot-for-shot remake of a 30 s basketball edit with Dylan Patel swapped in, podcast hype cuts after the newspaper, and a new ending. The reference edit's audio is the clock; each slot lists every take made for it and the picks at each checkpoint.",
  "clock": {
   "kind": "reference",
@@ -15,7 +15,7 @@
   "audio": [
    {
     "id": "mix-final",
-    "label": "The reel's final mix",
+    "label": "The video's final mix",
     "media": "media/audio/audit/out/d-hotter-voices.wav"
    },
    {
@@ -44,7 +44,7 @@
       "tool": "opener build.py (NumPy, OpenCV)"
      },
      "status": "rejected",
-     "why": "A whole-reel file with only the first 0.6 s changed; this slot plays its first second.",
+     "why": "A whole-video file with only the first 0.6 s changed; this slot plays its first second.",
      "made_at": "2026-10-17T22:29Z",
      "media": {
       "video": "media/shots/opener/out/opener-face2.mp4",
@@ -63,7 +63,7 @@
       "tool": "opener build.py (NumPy, OpenCV)"
      },
      "status": "rejected",
-     "why": "A whole-reel file with only the first 0.6 s changed; this slot plays its first second.",
+     "why": "A whole-video file with only the first 0.6 s changed; this slot plays its first second.",
      "made_at": "2026-10-17T22:29Z",
      "media": {
       "video": "media/shots/opener/out/opener-logo.mp4",
@@ -82,7 +82,7 @@
       "tool": "opener build.py (NumPy, OpenCV)"
      },
      "status": "picked",
-     "why": "A whole-reel file with only the first 0.6 s changed; this slot plays its first second.",
+     "why": "A whole-video file with only the first 0.6 s changed; this slot plays its first second.",
      "made_at": "2026-10-17T22:29Z",
      "media": {
       "video": "media/shots/opener/out/opener-name2.mp4",
@@ -101,7 +101,7 @@
       "tool": "opener build.py (NumPy, OpenCV)"
      },
      "status": "rejected",
-     "why": "A whole-reel file with only the first 0.6 s changed; this slot plays its first second.",
+     "why": "A whole-video file with only the first 0.6 s changed; this slot plays its first second.",
      "made_at": "2026-10-17T22:26Z",
      "media": {
       "video": "media/shots/opener/out/opener-broadcast.mp4",
@@ -120,7 +120,7 @@
       "tool": "opener build.py (NumPy, OpenCV)"
      },
      "status": "rejected",
-     "why": "A whole-reel file with only the first 0.6 s changed; this slot plays its first second.",
+     "why": "A whole-video file with only the first 0.6 s changed; this slot plays its first second.",
      "made_at": "2026-10-17T21:39Z",
      "media": {
       "video": "media/shots/opener/out/opener-name.mp4",
@@ -139,7 +139,7 @@
       "tool": "opener build.py (NumPy, OpenCV)"
      },
      "status": "rejected",
-     "why": "A whole-reel file with only the first 0.6 s changed; this slot plays its first second.",
+     "why": "A whole-video file with only the first 0.6 s changed; this slot plays its first second.",
      "made_at": "2026-10-17T21:38Z",
      "media": {
       "video": "media/shots/opener/out/opener-face.mp4",

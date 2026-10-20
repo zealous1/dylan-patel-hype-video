@@ -1,5 +1,5 @@
 {
-  "reel": "dylan-patel-hype-edit",
+  "reel": "dylan-patel-hype-video",
   "note": "Every Arcmira call made while the reel was built. Credit figures are estimates computed from passage counts. top_hit_in_cut marks a search whose first result is a video somewhere in the final cut, even when a later search is the one a beat cites. guide/chat.json counts these 20 rows as used_in_reel_searches. cited_by_beat gives the reel second of each beat a call backs in ../sources.json. Inputs shown as <q>, <e.id>, <ch> or <arcmira.daysAgo> were variables inside a program. The log kept their names, not their values.",
   "calls": [
     {

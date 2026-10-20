@@ -8,7 +8,7 @@ Before any shot was generated, the reference was measured and the review tools w
 | `analysis/flicker/measure.py` | How does the end flicker? | A 15 Hz strobe at ±13%, 2 to 10% end flicker and a black floor of 22 to 25, which the film look borrows |
 | librosa beat grid and the 9.0 s dropout | What is everything timed to? | Every slot snaps to the song |
 | ASR bake-off | Which word times can be trusted? | faster-whisper for the memos; Whisper invents text over silence, so memos were split at pauses first |
-| Cut player with `takes.json` | Does this take work in the reel, not alone? | Every swap was heard against the mix |
+| Cut player with `takes.json` | Does this take work in the video, not alone? | Every swap was heard against the mix |
 | `shots/lookmatch.py` | Does a generated take measure like the reference? | Grade, gain and blur matched by numbers |
 | The Arcmira search log | Is each on-screen tag literally true? | Three hand-picked beats re-sourced |
 

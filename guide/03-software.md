@@ -1,17 +1,17 @@
 # 3. Purpose-built software
 
-Everything written for this reel, by job. Paths are under `code/`. The clever part is small. One edit list carries each clip's search, and the tag on screen is printed from that record.
+Everything written for this video, by job. Paths are under `code/`. The clever part is small. One edit list carries each clip's search, and the tag on screen is printed from that record.
 
 ## By kind
 
 | Kind | Files | What it decided or made | Reusable as is |
 | --- | --- | --- | --- |
-| Render scripts | `master/render.py`, `shots/opener/build.py`, `shots/fastcuts/build.py`, `shots/fastcuts/lab/splice.sh` | Assembles takes into a master and a share copy, adds the film look and the opener, splices in the podcast section | `render.py` and `splice.sh` yes; the rest are this reel's look |
+| Render scripts | `master/render.py`, `shots/opener/build.py`, `shots/fastcuts/build.py`, `shots/fastcuts/lab/splice.sh` | Assembles takes into a master and a share copy, adds the film look and the opener, splices in the podcast section | `render.py` and `splice.sh` yes; the rest are this video's look |
 | Generation clients | `starts/gen.mjs`, `shots/vid.mjs`, `shots/<shot>/job.json` | Image and video calls with references, polling, resume and a cost log per run | yes |
 | Cut player | `index.html`, `player.js`, `takes.json` | One take per scene, the mix as the clock, so a swap is heard in context | yes; it became the storyboard component |
 | Look and film pass | `shots/lookmatch.py`, `shots/film/film.py`, `analysis/flicker/measure.py` | Grades a generated take until it measures like the reference, then borrows the reference's own flicker | `lookmatch.py` yes |
 | Lab pages | `shots/fastcuts/lab/index.html`, `shots/upscale-sweep/index.html`, `audio/audit/index.html`, `master/fps-pick/index.html`, `master/film-pick/index.html` | Side-by-side candidates with their numbers, one page per decision | the pattern, yes |
-| Check tools | `analysis/transitions/measure.py`, `audio/audit/lib.py`, the frame-count asserts in `splice.sh` | Every candidate measured before anyone watched it | see the `aimv-checks` skill |
+| Check tools | `analysis/transitions/measure.py`, `audio/audit/lib.py`, the frame-count asserts in `splice.sh` | Every candidate measured before anyone watched it | see the `check-video-render` skill |
 
 ## Every script, in run order
 
@@ -19,7 +19,7 @@ Every script, with its command, is in [`code/README.md`](../code/README.md), in 
 
 ## One beat of the edit list, explained
 
-The podcast section is built from one file, `shots/fastcuts/edl-v18-s2.json`. This is its seventh beat, the Dwarkesh Patel clip at 17.14 s on the reel, with the passage text trimmed.
+The podcast section is built from one file, `shots/fastcuts/edl-v18-s2.json`. This is its seventh beat, the Dwarkesh Patel clip at 17.14 s on the video, with the passage text trimmed.
 
 ```json
 {

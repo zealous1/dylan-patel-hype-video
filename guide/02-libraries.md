@@ -2,7 +2,7 @@
 
 The open-source libraries that touched a frame or a sample, what each did here, and its licence. Hosted models (Wan 3.0, GPT Image 2.5 Sunburst) and paid services are in [`06-models.md`](06-models.md).
 
-| Layer | Library | What it did in this reel | Licence |
+| Layer | Library | What it did in this video | Licence |
 | --- | --- | --- | --- |
 | Research | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Downloaded the reference and every podcast span, run through `uvx` with `curl-cffi` | Unlicense |
 | Research | [shazamio](https://github.com/shazamio/shazamio) | Named the song in the reference | MIT |
@@ -21,6 +21,6 @@ The open-source libraries that touched a frame or a sample, what each did here, 
 
 Apple Vision made the still mattes for the profile. It ships with macOS and is not open source. MediaPipe or a matting model replaces it elsewhere.
 
-The posted reel's type was a commercial face that is not in this repo. Inter Display is the free substitute the code points at through `FONT_DIR`.
+The posted video's type was a commercial face that is not in this repo. Inter Display is the free substitute the code points at through `FONT_DIR`.
 
-**Next.** [3. Software](03-software.md) shows the scripts written for this reel, and one beat of the edit list explained.
+**Next.** [3. Software](03-software.md) shows the scripts written for this video, and one beat of the edit list explained.

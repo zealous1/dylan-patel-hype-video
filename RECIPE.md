@@ -1,4 +1,4 @@
-# Recipe: Dylan Patel hype edit
+# Recipe: Dylan Patel hype video
 
 | | |
 | --- | --- |
@@ -13,7 +13,7 @@
 | Cost | $21.54 of logged image and video generation (Wan 3.0 $18.24, GPT Image 2.5 Sunburst $2.45, and in tests Hailuo 3 $0.65 and GPT Image 2 $0.20), plus $11.95 of Modal GPU time (SeedVR2 $11.24, RIFE $0.71). The half-second fix-up passes have no log rows. Details in `guide/06-models.md` |
 | People | Dylan Patel. Jensen Huang appears in one keynote clip |
 
-The reference is a 30 s basketball edit (see `sources.json`). Its cuts, timing, camera moves, flicker and audio bed are the spec. Everything that named or showed the original player was swapped or redrawn, and everything else was kept.
+The reference is a 30 s basketball hype video (see `sources.json`). Its cuts, timing, camera moves, flicker and audio bed are the spec. Everything that named or showed the original player was swapped or redrawn, and everything else was kept.
 
 ## Steps
 
@@ -31,7 +31,7 @@ Commands run from `code/`. `python -I` is short for `uv run --no-project --with-
 
 **With the Arcmira MCP.** Found each podcast beat with one `arcmira.search`, most of them filtered to Dylan's speaker id, one episode per beat, and printed each search on screen.
 
-Resolve the name once (`arcmira.resolve("Dylan Patel", { context: "SemiAnalysis" })`), then search one word per call: nvidia, trillion, stargate, huawei, insane. `arcmira.transcript` with a 30-second window gives the lines around each hit. Transcript times are not cut points; the cut lands in a silence that `silencedetect` reports. The Jensen beat came from a web search for SemiAnalysis news, done for the newspaper headlines. Zeal builds Arcmira, so Zeal added the keynote to the index with a Premium transcript that labels Jensen. Its search on screen, Jensen Huang's speaker id and the query "semianalysis", ran after that and returns another upload of the keynote. The reel cuts NVIDIA's own upload, which has captions only. If a video you need is not in the index, have your agent ask for it with `arcmira_feedback`. `arcmira.mentions` on Dylan gives the closing line. The exact inputs are in `sources.json`. A tag has to be literally true, so three early beats picked by hand were re-sourced through search.
+Resolve the name once (`arcmira.resolve("Dylan Patel", { context: "SemiAnalysis" })`), then search one word per call: nvidia, trillion, stargate, huawei, insane. `arcmira.transcript` with a 30-second window gives the lines around each hit. Transcript times are not cut points; the cut lands in a silence that `silencedetect` reports. The Jensen beat came from a web search for SemiAnalysis news, done for the newspaper headlines. Zeal builds Arcmira, so Zeal added the keynote to the index with a Premium transcript that labels Jensen. Its search on screen, Jensen Huang's speaker id and the query "semianalysis", ran after that and returns another upload of the keynote. The video cuts NVIDIA's own upload, which has captions only. If a video you need is not in the index, have your agent ask for it with `arcmira_feedback`. `arcmira.mentions` on Dylan gives the closing line. The exact inputs are in `sources.json`. A tag has to be literally true, so three early beats picked by hand were re-sourced through search.
 
 ### 3. Swap only the announcer's words
 
@@ -99,9 +99,9 @@ Run the opener as `face2 name2` so the random burn pattern matches. Its `face2` 
 
 ### 12. Check every candidate
 
-**With FFmpeg and the `aimv-checks` skill.** Checked every candidate before anyone watched it, for 902 frames, audio to the last frame, loudness, true peak, and a share copy that plays in a browser.
+**With FFmpeg and the `check-video-render` skill.** Checked every candidate before anyone watched it, for 902 frames, audio to the last frame, loudness, true peak, and a share copy that plays in a browser.
 
-The splice asserts 902 frames. The other checks come from the `aimv-checks` skill in [claude-video-editing-skills](https://github.com/zealous1/claude-video-editing-skills). The CRF 8 master is H.264 level 6.2, which Chrome cannot decode, so the share copy is level 4.2. An earlier mix went silent for its last second; the silent-tail check catches that now.
+The splice asserts 902 frames. The other checks come from the `check-video-render` skill in [claude-video-editing-skills](https://github.com/aimvgg/claude-video-editing-skills). The CRF 8 master is H.264 level 6.2, which Chrome cannot decode, so the share copy is level 4.2. An earlier mix went silent for its last second; the silent-tail check catches that now.
 
 ## Taste calls that shaped it
 

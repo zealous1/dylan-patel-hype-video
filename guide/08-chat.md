@@ -1,6 +1,6 @@
-# 8. The chat behind the reel
+# 8. The chat behind the video
 
-Zeal made this reel by talking to Claude Code. This page sums up that chat: how Zeal directed, a few of Zeal's own messages, the calls that turned around, what the tokens and media cost, and when each checkpoint landed.
+Zeal made this hype video by talking to Claude Code. This page sums up that chat: how Zeal directed, a few of Zeal's own messages, the calls that turned around, what the tokens and media cost, and when each checkpoint landed.
 
 ## How Zeal directed
 
@@ -12,12 +12,12 @@ Zeal sent 167 messages. Half of them are 29 words or fewer. The first message an
 
 Picked by hand and copied exactly, typos kept. The turn is the message's number in the chat.
 
-- "honestly i think we can do that and the score box after the fact with software overlay. we just need to get clip right." (turn 28). The rule for the whole reel. The video model only swaps the person, and every score box, banner and tag is drawn in code.
+- "honestly i think we can do that and the score box after the fact with software overlay. we just need to get clip right." (turn 28). The rule for the whole video. The video model only swaps the person, and every score box, banner and tag is drawn in code.
 - "why is it $0.88 vs $0.43?" (turn 28). The bill gave it away. Pinned start frames made Wan 3.0 skip the source clip, and the cheaper run was the one that ignored it.
 - "rly important to get that light beard right with the face matching" (turn 32). The likeness lives in the beard. Early takes gave him a full one.
 - "also maybe we put speaker first bc changing query by deleting everything is weird" (turn 70). Why each on-screen search tag names the speaker before the words.
 - "brilliant can you push this somewhere i can lowkey access it on mobile" (turn 122). The first version Zeal treated as done, 10.7 hours before the one that shipped. Everything after it was polish.
-- "Some of the newspaper stuff is remarkably clear on the 30, so that's why I'm going with that" (turn 132). Why the reel ships at 30 fps. The 60 fps in-betweens smeared the newspaper.
+- "Some of the newspaper stuff is remarkably clear on the 30, so that's why I'm going with that" (turn 132). Why the video ships at 30 fps. The 60 fps in-betweens smeared the newspaper.
 - "honestly, I love audio D. I thought that sounded cooler on my laptop speakers." (turn 136). Mix D keeps the original song whole and swaps only the announcer's words for Zeal's takes.
 - "I think I just want to go with the Super Saiyan one, man." (turn 167). The last pick, the aura on the hero's final frames.
 
@@ -61,7 +61,7 @@ The rates, in dollars per million tokens. A cache write costs more for the 1-hou
 | Modal GPU time | $11.95 | measured | 3 apps from the Modal billing report |
 | Arcmira credits | 1,000 credits | estimated | 51 searches in 34 calls |
 
-OpenRouter amounts are the cost each generation reported. Modal is the billing report for the GPU apps used on the reel, and the per-run table is the upscale sweep's own estimate of the same work.
+OpenRouter amounts are the cost each generation reported. Modal is the billing report for the GPU apps used on the video, and the per-run table is the upscale sweep's own estimate of the same work.
 
 The Arcmira figure is an estimate. A search costs 4 credits for each passage past the fifth, and a captions window costs 4 credits for each started 15 minutes. Where the printed result showed no passage count, the request's limit stands in for it. It covers the agent's calls only, so it leaves out the Premium transcript Zeal ran on the NVIDIA keynote to give Jensen Huang his speaker label.
 
@@ -87,4 +87,4 @@ The Arcmira figure is an estimate. A search costs 4 credits for each passage pas
 
 A script read the Claude Code chat logs and counted the messages, replies, tool calls and tokens. The counts, the token table, the costs, the research tables and the timeline are its output, and `chat.json` holds the same numbers. The quotes and reversals were picked by hand from the same logs. The script checks each quote word for word against the message it cites, and refuses to write the page when one does not match.
 
-The script and its config stay private, because they read local chat logs. To make this page for your own reel, see `skills/aimv-recipe/template/guide/08-chat.md` in [claude-video-editing-skills](https://github.com/zealous1/claude-video-editing-skills).
+The script and its config stay private, because they read local chat logs. To make this page for your own video, see `skills/write-aimv-recipe/template/guide/08-chat.md` in [claude-video-editing-skills](https://github.com/aimvgg/claude-video-editing-skills).

@@ -1,6 +1,6 @@
 {
-  "reel": "dylan-patel-hype-edit",
-  "what": "Statistics from the chat in which Zeal and Claude Code made the Dylan Patel hype reel.",
+  "reel": "dylan-patel-hype-video",
+  "what": "Statistics from the chat in which Zeal and Claude Code made the Dylan Patel hype video.",
   "zeal_turns": 167,
   "median_words": 29,
   "assistant_turns": {
@@ -30,7 +30,7 @@
       "turn": 28,
       "at": "2026-10-17T06:25:00.411Z",
       "text": "honestly i think we can do that and the score box after the fact with software overlay. we just need to get clip right.",
-      "context": "The rule for the whole reel. The video model only swaps the person, and every score box, banner and tag is drawn in code."
+      "context": "The rule for the whole video. The video model only swaps the person, and every score box, banner and tag is drawn in code."
     },
     {
       "turn": 28,
@@ -60,7 +60,7 @@
       "turn": 132,
       "at": "2026-10-17T20:37:07.898Z",
       "text": "Some of the newspaper stuff is remarkably clear on the 30, so that's why I'm going with that",
-      "context": "Why the reel ships at 30 fps. The 60 fps in-betweens smeared the newspaper."
+      "context": "Why the video ships at 30 fps. The 60 fps in-betweens smeared the newspaper."
     },
     {
       "turn": 136,
@@ -196,7 +196,7 @@
       "per_run_table_usd": 14.69
     },
     "notes": [
-      "OpenRouter amounts are the cost each generation reported. Modal is the billing report for the GPU apps used on the reel, and the per-run table is the upscale sweep's own estimate of the same work."
+      "OpenRouter amounts are the cost each generation reported. Modal is the billing report for the GPU apps used on the video, and the per-run table is the upscale sweep's own estimate of the same work."
     ]
   },
   "arcmira": {
