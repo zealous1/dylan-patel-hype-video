@@ -120,7 +120,7 @@ Claude Code with Claude Opus 5.5 wrote and ran every script. Clips were found wi
 
 ## Why we remix
 
-Zeal is a digital art enthusiast, and the videos in this family are remixes. Remixing and sampling are a lot of the fun of making music and DJing. You flip a sample, cut an edit to someone else's track, or recut a famous clip around a new face. Most of that culture runs on a tacit understanding that it's all good. Sometimes labels get weird, and in some cases a rights holder can take a video down. We think people should be free to make art out of the culture around them, as long as nobody is printing money off someone else's work. None of these videos is sold, and the sources are credited by link, not shipped.
+Zeal is a digital art enthusiast, and the videos in this family are remixes. Remixing and sampling are a lot of the fun of making music and DJing. You flip a sample, cut an edit to someone else's track, or recut a famous clip around a new face. Most of that culture runs on a tacit understanding that it's all good. Sometimes music labels get weird, and in some cases a rights holder can take a video down. We think people should be free to make art out of the culture around them, as long as nobody is printing money off someone else's work. None of these videos is sold, and the sources are credited by link, not shipped.
 
 ## The family
 
