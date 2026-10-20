@@ -84,6 +84,7 @@ That is the search behind the first four beats, `arcmira.search({ query: "nvidia
 | 6 | [Models](guide/06-models.md) | Which image and video models were tried, which won, and which refused |
 | 7 | [Scaffolding](guide/07-scaffolding.md) | The measuring and review tools built first, and what they made possible |
 | 8 | [Chat](guide/08-chat.md) | Zeal's asks by theme, the reversals, tokens and cost, turn by turn |
+| 9 | [Front page](guide/front-page.md) | The 38 SemiAnalysis moments and 40 headlines the newspaper front page was picked from |
 
 Every guide in [the family](#the-family) has the same eight sections.
 
