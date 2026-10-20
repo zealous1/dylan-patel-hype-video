@@ -4,7 +4,9 @@ The reel whips into a newspaper front page, so a helper agent researched SemiAna
 
 ## 38 company moments
 
-Here are 38 SemiAnalysis company moments with a Moment Score out of 100. The score is company impact 40, public reach 30, how personal it is to SemiAnalysis or Dylan 20, and recency 10. Research ran 2026-10-16 across Exa, Google News, the full Substack archive (340 posts) and the press. Each row links its source. The run's fuller research notes are not in this repo. The status column reads V for verified first-hand, P for press only and U for unverified. X posts are not in this table.
+Here are 38 SemiAnalysis company moments with a Moment Score out of 100. The score is company impact 40, public reach 30, how personal it is to SemiAnalysis or Dylan 20, and recency 10. Research ran 2026-10-16 across Exa, Google News, the full Substack archive (340 posts) and the press. Each row links its source. The run's fuller research notes are not in this repo.
+
+The status column reads V for verified first-hand, P for press only and U for unverified. X posts are not in this table.
 
 | # | Score | Date | Moment | Source | Status |
 |---|---|---|---|---|---|
