@@ -1,4 +1,4 @@
-# AIMV recipe folder file. The video id is zealcaiden--dylan-patel-hype-reel.
+# AIMV recipe folder file. The video id is zealcaiden--dylan-patel-hype-video.
 # Every model and tool id exists in the AIMV generators repo. Sunburst, SeedVR2, OpenCV, MediaPipe,
 # Modal and headless Chrome have proposed ids and are named in each step's `did` until those merge.
 made_with:
